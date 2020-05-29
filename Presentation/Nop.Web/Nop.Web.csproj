@@ -38,6 +38,9 @@
 
     <!-- We copy the \Logs directory -->
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
+    <Content Remove="compilerconfig.json" />
+    <None Remove="Themes\Sinswap\Content\css\styles.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\_global.scss" />
 
     <None Update="Areas\Admin\sitemap.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -46,6 +49,11 @@
 
   <ItemGroup>
     <Folder Include="Plugins\" />
+    <Folder Include="Themes\Sinswap\Views\Home\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
   </ItemGroup>
 
   <!-- This target execute after "Build" target.

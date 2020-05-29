@@ -1,0 +1,81 @@
+﻿// Header
+header {
+    position: relative;
+    color: $white;
+    min-height: 400px;
+    background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
+    background-size: 300% 300%;
+    -webkit-animation: MoveBG 60s ease infinite;
+    -moz-animation: MoveBG 60s ease infinite;
+    -o-animation: MoveBG 60s ease infinite;
+    animation: MoveBG 60s ease infinite;
+
+    h1 {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .logo {
+        margin-top: 15px;
+        height: 75px;
+    }
+
+    nav {
+        padding-top: 30px;
+
+        &.service {
+            margin-right: 15px;
+        }
+
+        a.menuLink {
+            margin-right: 15px;
+            font-size: 16px;
+            font-weight: 400;
+            color: $white;
+            opacity: 0.8;
+            transition: opacity 0.15s;
+
+            &:hover {
+                opacity: 1;
+                text-decoration: none;
+                transition: opacity 0.15s;
+            }
+
+            &:last-of-type {
+                margin-right: 0px;
+            }
+        }
+
+        .btn {
+            margin-top: -4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            float: right;
+            margin-left: 10px;
+            font-size: 14px;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+
+    .payoffContainer {
+        .payoff {
+            display: table-cell;
+            vertical-align: middle;
+            width: 100vw;
+            font-weight: 700;
+            font-size: 80px;
+            line-height: 80px;
+            text-align: center;
+            height: 265px;
+        }
+    }
+}
