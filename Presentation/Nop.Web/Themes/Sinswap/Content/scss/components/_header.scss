@@ -29,12 +29,18 @@ header {
     nav {
         padding-top: 30px;
 
+        &.main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         &.service {
             margin-right: 15px;
         }
 
         a.menuLink {
-            margin-right: 15px;
+            margin: 0px 7px;
             font-size: 16px;
             font-weight: 400;
             color: $white;
@@ -45,10 +51,6 @@ header {
                 opacity: 1;
                 text-decoration: none;
                 transition: opacity 0.15s;
-            }
-
-            &:last-of-type {
-                margin-right: 0px;
             }
         }
 
@@ -78,4 +80,57 @@ header {
             height: 265px;
         }
     }
+}
+
+
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+    header {
+        nav {
+            &.service {
+                .btn {
+                    margin-bottom: 14px;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    header {
+        height: 300px;
+        min-height: 300px;
+
+        .row {
+            .logoContainer,
+            nav {
+                display: flex;
+                justify-content: center;
+                margin-right: 0px;
+
+                .btn {
+                    margin: 0px 5px;
+                }
+            }
+        }
+
+        .payoffContainer {
+            display: none;
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 576px) {
 }
