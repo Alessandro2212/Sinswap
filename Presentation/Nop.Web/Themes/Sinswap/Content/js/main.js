@@ -40,26 +40,50 @@ $(function () {
                         arrows: false
                     }
                 },
-                //{
-                //    breakpoint: 576,
-                //    settings: {
-                //        slidesToShow: 1.5,
-                //        slidesToScroll: 1,
-                //        infinite: true,
-                //        dots: true,
-                //        arrows: false
-                //    }
-                //},
-                //{
-                //    breakpoint: ,
-                //    settings: {
-                //        slidesToShow: 2.1,
-                //        slidesToScroll: 2,
-                //        infinite: true,
-                //        dots: true,
-                //        arrows: false
-                //    }
-                //}
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1.5,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false,
+                        arrows: false,
+                        centerMode: true
+                    }
+                },
+                {
+                    breakpoint: 475,
+                    settings: {
+                        slidesToShow: 1.4,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false,
+                        arrows: false,
+                        centerMode: false
+                    }
+                },
+                {
+                    breakpoint: 375,
+                    settings: {
+                        slidesToShow: 1.2,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false,
+                        arrows: false,
+                        centerMode: false
+                    }
+                },
+                {
+                    breakpoint: 300,
+                    settings: {
+                        slidesToShow: 1.1,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false,
+                        arrows: false,
+                        centerMode: false
+                    }
+                }
             ]
         });
     }

@@ -4,6 +4,32 @@ body {
     font-family: $fontBody;
 }
 
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+
+    > .col,
+    > [class*="col-"] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+.flex-row.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-row.row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row.row:after,
+.flex-row.row:before {
+    display: flex;
+}
+
 // Slick
 .slick-prev,
 .slick-next {
