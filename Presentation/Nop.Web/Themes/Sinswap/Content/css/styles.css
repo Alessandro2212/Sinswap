@@ -361,6 +361,53 @@ a.more {
     color: #2d7de4;
     transition: color 0.15s; }
 
+.categoryCard {
+  border-radius: 5px;
+  color: #fff;
+  font-size: 20px;
+  margin: 5px;
+  height: 150px;
+  position: relative;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  box-shadow: none;
+  transition: box-shadow 0.15s; }
+  .categoryCard .category {
+    font-size: 16px;
+    font-weight: 600;
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    width: 100%;
+    text-align: center; }
+    .categoryCard .category a {
+      color: #fff;
+      opacity: 1;
+      transition: opacity 0.15s, color 0.15s; }
+      .categoryCard .category a:hover {
+        text-decoration: none; }
+  .categoryCard:hover {
+    cursor: pointer;
+    box-shadow: 0px 4px 15px -5px black;
+    transition: box-shadow 0.15s; }
+    .categoryCard:hover .category a {
+      color: #171717;
+      opacity: 0.5;
+      transition: opacity 0.15s, color 0.15s; }
+  .categoryCard.clothing {
+    background-color: #53e3c5; }
+  .categoryCard.food {
+    background-color: #46c7ac; }
+  .categoryCard.media {
+    background-color: #36ae94; }
+  .categoryCard.service {
+    background-color: #3eb5b0; }
+  .categoryCard.body {
+    background-color: #4fe9a7; }
+  .categoryCard.object {
+    background-color: #4adfd0; }
+
 header {
   position: relative;
   color: #fff;
@@ -485,6 +532,10 @@ header {
   .topSellersContainer {
     margin-top: -50px; } }
 
+@media (max-width: 768px) {
+  .topSellersContainer h2 {
+    font-size: 18px; } }
+
 @media (max-width: 576px) {
   .topSellersContainer {
     border-radius: 0px; } }
@@ -523,3 +574,226 @@ header {
         background: #2d7de4; }
       .newsContainer .container .newsCard.news {
         background: #e4007c; }
+
+@media (max-width: 768px) {
+  .newsContainer .container .newsCard {
+    font-size: 14px; } }
+
+.featuredContainer {
+  background-color: #f5f5f5;
+  padding-top: 50px;
+  padding-bottom: 50px; }
+  .featuredContainer .container {
+    padding: 0 25px; }
+    .featuredContainer .container h2 {
+      font-size: 28px;
+      padding: 20px 0 10px 5px;
+      margin: 0px; }
+    .featuredContainer .container .featuredCard {
+      border-radius: 5px;
+      color: #fff;
+      font-size: 20px;
+      margin: 5px;
+      height: 350px;
+      padding-bottom: 30px;
+      position: relative;
+      background-size: cover; }
+      .featuredContainer .container .featuredCard:after {
+        content: '';
+        width: 100%;
+        height: 100px;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        z-index: 1;
+        border-radius: 0 0 5px 5px;
+        background: -moz-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+        background: -webkit-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+        background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); }
+      .featuredContainer .container .featuredCard .content {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        padding: 20px 30px;
+        z-index: 2; }
+      .featuredContainer .container .featuredCard blockquote {
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: 700; }
+      .featuredContainer .container .featuredCard .location {
+        margin-top: 5px;
+        font-size: 12px;
+        color: #fff;
+        transition: color 0.15s; }
+        .featuredContainer .container .featuredCard .location .country {
+          text-transform: uppercase; }
+      .featuredContainer .container .featuredCard a, .featuredContainer .container .featuredCard .nameAge {
+        font-size: 16px;
+        color: #fff;
+        transition: color 0.15s; }
+        .featuredContainer .container .featuredCard a:hover, .featuredContainer .container .featuredCard .nameAge:hover {
+          text-decoration: none; }
+      .featuredContainer .container .featuredCard .label {
+        font-size: 14px; }
+      .featuredContainer .container .featuredCard .title {
+        font-size: 20px;
+        line-height: 20px;
+        font-weight: 700; }
+      .featuredContainer .container .featuredCard .btn {
+        position: absolute;
+        right: 30px;
+        bottom: 25px;
+        background-color: #fff;
+        color: #171717;
+        font-size: 12px; }
+
+@media (max-width: 992px) {
+  .featuredContainer .featuredCard {
+    height: 250px; } }
+
+@media (max-width: 768px) {
+  .featuredContainer h2 {
+    font-size: 18px; } }
+
+.popularCategoriesContainer {
+  padding: 50px 30px; }
+  .popularCategoriesContainer h2 {
+    font-size: 28px;
+    padding: 20px 0 10px 5px;
+    margin: 0px; }
+  .popularCategoriesContainer a.more {
+    margin-left: 5px; }
+
+@media (max-width: 768px) {
+  .popularCategoriesContainer h2 {
+    font-size: 18px; } }
+
+.popularMembersContainer {
+  padding: 50px 30px; }
+  .popularMembersContainer h2 {
+    font-size: 28px;
+    padding: 20px 0 10px 5px;
+    margin: 0px; }
+  .popularMembersContainer .popularMemberCard {
+    margin: 5px 5px 15px 5px; }
+    .popularMembersContainer .popularMemberCard img {
+      width: 100%;
+      border-radius: 5px;
+      box-shadow: none;
+      transition: box-shadow 0.15s; }
+    .popularMembersContainer .popularMemberCard .followers {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      width: 100%;
+      text-align: center;
+      margin-top: -35px;
+      line-height: 14px; }
+      .popularMembersContainer .popularMemberCard .followers div {
+        font-size: 10px;
+        font-weight: 300; }
+    .popularMembersContainer .popularMemberCard .location {
+      margin-top: 15px;
+      font-size: 10px;
+      color: #757575;
+      transition: color 0.15s; }
+      .popularMembersContainer .popularMemberCard .location .country {
+        text-transform: uppercase; }
+    .popularMembersContainer .popularMemberCard a, .popularMembersContainer .popularMemberCard .nameAge {
+      font-size: 14px;
+      color: #242424;
+      transition: color 0.15s; }
+      .popularMembersContainer .popularMemberCard a:hover, .popularMembersContainer .popularMemberCard .nameAge:hover {
+        text-decoration: none; }
+    .popularMembersContainer .popularMemberCard:hover {
+      cursor: pointer; }
+      .popularMembersContainer .popularMemberCard:hover img {
+        box-shadow: 0px 4px 15px -5px black;
+        transition: box-shadow 0.15s; }
+      .popularMembersContainer .popularMemberCard:hover .location,
+      .popularMembersContainer .popularMemberCard:hover .nameAge, .popularMembersContainer .popularMemberCard:hover a {
+        color: #2d7de4;
+        transition: color 0.15s; }
+
+@media (max-width: 768px) {
+  .popularMembersContainer h2 {
+    font-size: 18px; } }
+
+.promoContainer {
+  padding: 50px 30px;
+  background-color: #171717; }
+  .promoContainer h2 {
+    font-size: 32px;
+    font-weight: 600;
+    padding: 0 0 50px 0;
+    margin: 0px;
+    width: 100%;
+    text-align: center;
+    color: #fff; }
+  .promoContainer .promoCard {
+    margin: 0px auto;
+    text-align: center;
+    color: #fff;
+    height: 100%;
+    width: 80%;
+    padding: 50px 30px 30px 30px; }
+    .promoContainer .promoCard.seller {
+      background-color: #2d7de4; }
+    .promoContainer .promoCard.buyer {
+      background-color: #fd6721; }
+    .promoContainer .promoCard h3 {
+      font-size: 20px;
+      margin-bottom: 2px; }
+    .promoContainer .promoCard p {
+      font-size: 18px;
+      line-height: 22px;
+      font-weight: 300; }
+    .promoContainer .promoCard .btn {
+      font-size: 12px;
+      background-color: rgba(255, 255, 255, 0.3);
+      transition: background-color 0.15s;
+      color: #fff;
+      border: none; }
+      .promoContainer .promoCard .btn:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+        transition: background-color 0.15s; }
+    .promoContainer .promoCard .footnote {
+      font-size: 10px;
+      opacity: 0.5;
+      margin-top: 10px;
+      margin-bottom: -20px; }
+
+@media (max-width: 768px) {
+  .promoContainer h2 {
+    font-size: 24px; } }
+
+@media (max-width: 576px) {
+  .promoContainer h2 {
+    font-size: 18px; } }
+
+.trendingCategoriesContainer {
+  padding: 50px 30px; }
+  .trendingCategoriesContainer h2 {
+    font-size: 28px;
+    padding: 20px 0 10px 5px;
+    margin: 0px; }
+  .trendingCategoriesContainer .categoryCard {
+    height: 300px; }
+  .trendingCategoriesContainer a.more {
+    margin-left: 5px; }
+
+@media (max-width: 992px) {
+  .trendingCategoriesContainer .categoryCard {
+    height: 250px; } }
+
+@media (max-width: 768px) {
+  .trendingCategoriesContainer h2 {
+    font-size: 18px; }
+  .trendingCategoriesContainer .categoryCard {
+    height: 200px; } }
+
+@media (max-width: 576px) {
+  .trendingCategoriesContainer .categoryCard {
+    height: 150px; } }
