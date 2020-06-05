@@ -3,21 +3,25 @@ $(function () {
         $('.topSellersSlide').slick({
             prevArrow: "<button type='button' class='slick-prev'><i class='las la-angle-left'></i></button>",
             nextArrow: "<button type='button' class='slick-next'><i class='las la-angle-right'></i></button>",
-            dots: true,
-            infinite: true,
             speed: 300,
             slidesToShow: 5,
             slidesToScroll: 5,
+            dots: false,
             arrows: true,
+            infinite: true,
+            centerMode: true,
+            centerPadding: '10px',
             responsive: [
                 {
                     breakpoint: 1200,
                     settings: {
                         slidesToShow: 4,
                         slidesToScroll: 4,
+                        dots: false,
+                        arrows: true,
                         infinite: true,
-                        dots: true,
-                        arrows: true
+                        centerMode: true,
+                        centerPadding: '10px'
                     }
                 },
                 {
@@ -25,9 +29,11 @@ $(function () {
                     settings: {
                         slidesToShow: 3.1,
                         slidesToScroll: 3,
+                        dots: false,
+                        arrows: false,
                         infinite: true,
-                        dots: true,
-                        arrows: false
+                        centerMode: true,
+                        centerPadding: '10px'
                     }
                 },
                 {
@@ -35,20 +41,23 @@ $(function () {
                     settings: {
                         slidesToShow: 2.1,
                         slidesToScroll: 2,
+                        dots: false,
+                        arrows: false,
                         infinite: true,
-                        dots: true,
-                        arrows: false
+                        centerMode: true,
+                        centerPadding: '10px'
                     }
                 },
                 {
                     breakpoint: 576,
                     settings: {
-                        slidesToShow: 1.5,
+                        slidesToShow: 1.7,
                         slidesToScroll: 1,
-                        infinite: true,
                         dots: false,
                         arrows: false,
-                        centerMode: true
+                        infinite: true,
+                        centerMode: true,
+                        centerPadding: '10px'
                     }
                 },
                 {
@@ -56,10 +65,11 @@ $(function () {
                     settings: {
                         slidesToShow: 1.4,
                         slidesToScroll: 1,
-                        infinite: true,
                         dots: false,
                         arrows: false,
-                        centerMode: false
+                        infinite: true,
+                        centerMode: true,
+                        centerPadding: '10px'
                     }
                 },
                 {
@@ -67,10 +77,11 @@ $(function () {
                     settings: {
                         slidesToShow: 1.2,
                         slidesToScroll: 1,
-                        infinite: true,
                         dots: false,
                         arrows: false,
-                        centerMode: false
+                        infinite: true,
+                        centerMode: true,
+                        centerPadding: '10px'
                     }
                 },
                 {
@@ -81,7 +92,7 @@ $(function () {
                         infinite: true,
                         dots: false,
                         arrows: false,
-                        centerMode: false
+                        centerMode: true
                     }
                 }
             ]

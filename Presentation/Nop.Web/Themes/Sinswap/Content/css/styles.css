@@ -542,10 +542,10 @@ header {
 
 .newsContainer {
   background: #171717;
-  margin-top: 180px; }
+  margin-top: 145px; }
   .newsContainer .container {
-    margin-top: -120px;
-    margin-bottom: 70px;
+    margin-top: -110px;
+    margin-bottom: 55px;
     padding: 0 25px; }
     .newsContainer .container .newsCard {
       border-radius: 5px;
@@ -581,13 +581,13 @@ header {
 
 .featuredContainer {
   background-color: #f5f5f5;
-  padding-top: 50px;
-  padding-bottom: 50px; }
+  padding-top: 35px;
+  padding-bottom: 55px; }
   .featuredContainer .container {
     padding: 0 25px; }
     .featuredContainer .container h2 {
       font-size: 28px;
-      padding: 20px 0 10px 5px;
+      padding: 20px 0 15px 5px;
       margin: 0px; }
     .featuredContainer .container .featuredCard {
       border-radius: 5px;
@@ -658,10 +658,10 @@ header {
     font-size: 18px; } }
 
 .popularCategoriesContainer {
-  padding: 50px 30px; }
+  padding: 35px 25px 0px 25px; }
   .popularCategoriesContainer h2 {
     font-size: 28px;
-    padding: 20px 0 10px 5px;
+    padding: 20px 0 15px 5px;
     margin: 0px; }
   .popularCategoriesContainer a.more {
     margin-left: 5px; }
@@ -671,10 +671,10 @@ header {
     font-size: 18px; } }
 
 .popularMembersContainer {
-  padding: 50px 30px; }
+  padding: 15px 25px 40px 25px; }
   .popularMembersContainer h2 {
     font-size: 28px;
-    padding: 20px 0 10px 5px;
+    padding: 20px 0 15px 5px;
     margin: 0px; }
   .popularMembersContainer .popularMemberCard {
     margin: 5px 5px 15px 5px; }
@@ -722,7 +722,7 @@ header {
     font-size: 18px; } }
 
 .promoContainer {
-  padding: 50px 30px;
+  padding: 55px 30px 60px 30px;
   background-color: #171717; }
   .promoContainer h2 {
     font-size: 32px;
@@ -738,7 +738,8 @@ header {
     color: #fff;
     height: 100%;
     width: 80%;
-    padding: 50px 30px 30px 30px; }
+    padding: 50px 30px 30px 30px;
+    border-radius: 5px; }
     .promoContainer .promoCard.seller {
       background-color: #2d7de4; }
     .promoContainer .promoCard.buyer {
@@ -774,10 +775,10 @@ header {
     font-size: 18px; } }
 
 .trendingCategoriesContainer {
-  padding: 50px 30px; }
+  padding: 35px 25px 0px 25px; }
   .trendingCategoriesContainer h2 {
     font-size: 28px;
-    padding: 20px 0 10px 5px;
+    padding: 20px 0 15px 5px;
     margin: 0px; }
   .trendingCategoriesContainer .categoryCard {
     height: 300px; }
@@ -797,3 +798,41 @@ header {
 @media (max-width: 576px) {
   .trendingCategoriesContainer .categoryCard {
     height: 150px; } }
+
+.aboutUsContainer {
+  padding: 40px 30px 60px 30px; }
+  .aboutUsContainer .container {
+    padding: 80px 100px;
+    background-color: #f5f5f5;
+    border-radius: 5px; }
+    .aboutUsContainer .container h2 {
+      font-size: 32px;
+      font-weight: 600;
+      padding: 0 0 50px 0;
+      margin: 0px;
+      width: 100%;
+      text-align: center; }
+    .aboutUsContainer .container h3 {
+      font-size: 16px;
+      font-weight: 500; }
+    .aboutUsContainer .container p {
+      font-size: 12px; }
+    .aboutUsContainer .container .btn {
+      margin: 0px auto;
+      display: block;
+      width: 50%; }
+
+@media (max-width: 768px) {
+  .aboutUsContainer h2 {
+    font-size: 24px; } }
+
+@media (max-width: 576px) {
+  .aboutUsContainer h2 {
+    font-size: 18px; } }
+
+footer {
+  color: #fff;
+  background-color: #171717;
+  min-height: 400px; }
+  footer .container {
+    padding: 60px 30px; }

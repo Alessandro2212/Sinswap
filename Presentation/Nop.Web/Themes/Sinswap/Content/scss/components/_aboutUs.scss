@@ -1,0 +1,65 @@
+﻿// About us
+.aboutUsContainer {
+    padding: 40px 30px 60px 30px;
+
+    .container {
+        padding: 80px 100px;
+        background-color: $grey2;
+        border-radius: 5px;
+
+        h2 {
+            font-size: 32px;
+            font-weight: 600;
+            padding: 0 0 50px 0;
+            margin: 0px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 12px;
+        }
+
+        .btn {
+            margin: 0px auto;
+            display: block;
+            width: 50%;
+        }
+    }
+}
+
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    .aboutUsContainer {
+        h2 {
+            font-size: 24px;
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+    .aboutUsContainer {
+        h2 {
+            font-size: 18px;
+        }
+    }
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (min-width: 576px) {
+}

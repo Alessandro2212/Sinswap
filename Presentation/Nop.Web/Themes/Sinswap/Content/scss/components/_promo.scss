@@ -1,6 +1,6 @@
 ﻿// Promo
 .promoContainer {
-    padding: 50px 30px;
+    padding: 55px 30px 60px 30px;
     background-color: $black;
 
     h2 {
@@ -20,6 +20,7 @@
         height: 100%;
         width: 80%;
         padding: 50px 30px 30px 30px;
+        border-radius: 5px;
 
         &.seller {
             background-color: $seller;
