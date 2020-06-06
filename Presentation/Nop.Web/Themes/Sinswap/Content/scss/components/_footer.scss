@@ -4,8 +4,122 @@ footer {
     background-color: $black;
     min-height: 400px;
 
-    .container {
+    .allCatagoryContainer {
         padding: 60px 30px;
+        border-bottom: 1px solid $grey29;
+
+        h2 {
+            font-size: 28px;
+            padding: 20px 0 15px 5px;
+            margin: 0px;
+        }
+
+        .row {
+            .label {
+                font-size: 14px;
+                font-weight: 600;
+                margin-top: 2px;
+            }
+
+            a {
+                font-size: 10px;
+                color: $grey17;
+                text-decoration: none;
+                padding: 0px 5px;
+                font-weight: 600;
+                transition: color 0.15s;
+                white-space: nowrap;
+
+                &:hover {
+                    transition: color 0.15s;
+                    text-decoration: none;
+                }
+            }
+
+            &.clothing {
+                .label, a:hover {
+                    color: $catClothing;
+                }
+            }
+
+            &.food {
+                .label, a:hover {
+                    color: $catFood;
+                }
+            }
+
+            &.media {
+                .label, a:hover {
+                    color: $catMedia;
+                }
+            }
+
+            &.service {
+                .label, a:hover {
+                    color: $catService;
+                }
+            }
+
+            &.body {
+                .label, a:hover {
+                    color: $catBody;
+                }
+            }
+
+            &.object {
+                .label, a:hover {
+                    color: $catObject;
+                }
+            }
+        }
+    }
+
+    .footerMenu {
+        padding: 30px 15px 20px 15px;
+        position: relative;
+
+        img {
+            position: absolute;
+            top: 15px;
+            right: 0px;
+            width: 50px;
+        }
+
+        a {
+            font-size: 18px;
+            font-weight: 500;
+            text-decoration: none;
+            color: $white;
+            opacity: 1;
+            transition: opacity 0.15s;
+            padding: 0 20px;
+
+            &:hover {
+                opacity: 0.8;
+                transition: opacity 0.15s;
+            }
+        }
+    }
+
+    .bottomline {
+        font-size: 10px;
+        color: $grey25;
+        padding: 20px 15px 10px 15px;
+
+        p {
+            margin: 0px;
+        }
+
+        a {
+            color: $grey25;
+            text-decoration: none;
+            transition: color 0.15s;
+
+            &:hover {
+                color: $grey15;
+                transition: color 0.15s;
+            }
+        }
     }
 }
 
@@ -21,10 +135,24 @@ footer {
 
 // Medium devices (tablets, 768px and up)
 @media (max-width: 768px) {
+    footer {
+        .allCatagoryContainer {
+            h2 {
+                font-size: 18px;
+            }
+        }
+    }
 }
 
 // Small devices (landscape phones, 576px and up)
 @media (max-width: 576px) {
+    footer {
+        .footerMenu {
+            img {
+                right: 10px;
+            }
+        }
+    }
 }
 
 // Extra small devices (portrait phones, less than 576px)

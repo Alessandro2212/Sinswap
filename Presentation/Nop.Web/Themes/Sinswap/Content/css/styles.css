@@ -834,5 +834,77 @@ footer {
   color: #fff;
   background-color: #171717;
   min-height: 400px; }
-  footer .container {
-    padding: 60px 30px; }
+  footer .allCatagoryContainer {
+    padding: 60px 30px;
+    border-bottom: 1px solid #333333; }
+    footer .allCatagoryContainer h2 {
+      font-size: 28px;
+      padding: 20px 0 15px 5px;
+      margin: 0px; }
+    footer .allCatagoryContainer .row .label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 2px; }
+    footer .allCatagoryContainer .row a {
+      font-size: 10px;
+      color: #8a8a8a;
+      text-decoration: none;
+      padding: 0px 5px;
+      font-weight: 600;
+      transition: color 0.15s;
+      white-space: nowrap; }
+      footer .allCatagoryContainer .row a:hover {
+        transition: color 0.15s;
+        text-decoration: none; }
+    footer .allCatagoryContainer .row.clothing .label, footer .allCatagoryContainer .row.clothing a:hover {
+      color: #53e3c5; }
+    footer .allCatagoryContainer .row.food .label, footer .allCatagoryContainer .row.food a:hover {
+      color: #46c7ac; }
+    footer .allCatagoryContainer .row.media .label, footer .allCatagoryContainer .row.media a:hover {
+      color: #36ae94; }
+    footer .allCatagoryContainer .row.service .label, footer .allCatagoryContainer .row.service a:hover {
+      color: #3eb5b0; }
+    footer .allCatagoryContainer .row.body .label, footer .allCatagoryContainer .row.body a:hover {
+      color: #4fe9a7; }
+    footer .allCatagoryContainer .row.object .label, footer .allCatagoryContainer .row.object a:hover {
+      color: #4adfd0; }
+  footer .footerMenu {
+    padding: 30px 15px 20px 15px;
+    position: relative; }
+    footer .footerMenu img {
+      position: absolute;
+      top: 15px;
+      right: 0px;
+      width: 50px; }
+    footer .footerMenu a {
+      font-size: 18px;
+      font-weight: 500;
+      text-decoration: none;
+      color: #fff;
+      opacity: 1;
+      transition: opacity 0.15s;
+      padding: 0 20px; }
+      footer .footerMenu a:hover {
+        opacity: 0.8;
+        transition: opacity 0.15s; }
+  footer .bottomline {
+    font-size: 10px;
+    color: #4f4f4f;
+    padding: 20px 15px 10px 15px; }
+    footer .bottomline p {
+      margin: 0px; }
+    footer .bottomline a {
+      color: #4f4f4f;
+      text-decoration: none;
+      transition: color 0.15s; }
+      footer .bottomline a:hover {
+        color: #999999;
+        transition: color 0.15s; }
+
+@media (max-width: 768px) {
+  footer .allCatagoryContainer h2 {
+    font-size: 18px; } }
+
+@media (max-width: 576px) {
+  footer .footerMenu img {
+    right: 10px; } }
