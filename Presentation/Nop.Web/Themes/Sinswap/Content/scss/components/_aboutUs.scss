@@ -40,13 +40,20 @@
 
 // Large devices (desktops, 992px and up)
 @media (max-width: 992px) {
+    .aboutUsContainer {
+        .container {
+            padding: 40px 50px;
+        }
+    }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (max-width: 768px) {
     .aboutUsContainer {
-        h2 {
-            font-size: 24px;
+        .container {
+            h2 {
+                font-size: 24px;
+            }
         }
     }
 }

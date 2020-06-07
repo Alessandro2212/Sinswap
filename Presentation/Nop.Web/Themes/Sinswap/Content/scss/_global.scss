@@ -89,12 +89,9 @@ a.more {
 
         a {
             color: $white;
+            text-decoration: none;
             opacity: 1;
-            transition: opacity 0.15s, color 0.15s;
-
-            &:hover {
-                text-decoration: none;
-            }
+            transition: opacity 0.15s;
         }
     }
 
@@ -104,9 +101,8 @@ a.more {
         transition: box-shadow 0.15s;
 
         .category a {
-            color: $black;
-            opacity: 0.5;
-            transition: opacity 0.15s, color 0.15s;
+            opacity: 0.8;
+            transition: opacity 0.15s;
         }
     }
 
