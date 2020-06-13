@@ -26,9 +26,18 @@
         }
 
         .btn {
-            margin: 0px auto;
-            display: block;
-            width: 50%;
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: $white;
+            border: none;
+            transition: background-color 0.15s;
+
+            &:hover {
+                background-color: $grey8;
+                transition: background-color 0.15s;
+            }
         }
     }
 }

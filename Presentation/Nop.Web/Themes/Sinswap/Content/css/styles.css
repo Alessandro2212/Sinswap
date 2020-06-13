@@ -416,6 +416,20 @@ header {
   -moz-animation: MoveBG 60s ease infinite;
   -o-animation: MoveBG 60s ease infinite;
   animation: MoveBG 60s ease infinite; }
+  header .floatingObj1 {
+    position: absolute;
+    top: 8%;
+    right: 20%; }
+    header .floatingObj1 img {
+      width: 200px;
+      transform: rotate(15deg); }
+  header .floatingObj2 {
+    position: absolute;
+    top: 20%;
+    left: 10%; }
+    header .floatingObj2 img {
+      width: 200px;
+      transform: rotate(-10deg); }
   header h1 {
     border: 0;
     clip: rect(0 0 0 0);
@@ -473,16 +487,22 @@ header {
 
 @media (max-width: 768px) {
   header {
-    height: 300px;
-    min-height: 300px; }
-    header .row .logoContainer,
+    height: 250px;
+    min-height: 250px; }
+    header .row .logoContainer .logo {
+      height: 60px; }
     header .row nav {
-      display: flex;
-      justify-content: center;
+      padding-top: 15px;
       margin-right: 0px; }
-      header .row .logoContainer .btn,
+      header .row nav a.menuLink {
+        font-size: 18px;
+        margin: 0px 10px; }
       header .row nav .btn {
         margin: 0px 5px; }
+    header .row .main {
+      padding-top: 30px; }
+    header .row .serviceMenu {
+      position: absolute; }
     header .payoffContainer {
       display: none; } }
 
@@ -709,14 +729,14 @@ header {
       transition: box-shadow 0.15s; }
     .popularMembersContainer .popularMemberCard .followers {
       color: #fff;
-      font-size: 16px;
+      font-size: 24px;
       font-weight: 600;
       width: 100%;
       text-align: center;
-      margin-top: -35px;
-      line-height: 14px; }
+      margin-top: -50px;
+      line-height: 20px; }
       .popularMembersContainer .popularMemberCard .followers div {
-        font-size: 10px;
+        font-size: 14px;
         font-weight: 300; }
     .popularMembersContainer .popularMemberCard .location {
       margin-top: 15px;
@@ -764,6 +784,11 @@ header {
     width: 80%;
     padding: 50px 30px 30px 30px;
     border-radius: 5px; }
+    .promoContainer .promoCard:hover {
+      cursor: pointer; }
+      .promoContainer .promoCard:hover .btn {
+        background-color: rgba(255, 255, 255, 0.5);
+        transition: background-color 0.15s; }
     .promoContainer .promoCard.seller {
       background-color: #2d7de4; }
     .promoContainer .promoCard.buyer {
@@ -846,9 +871,16 @@ header {
     .aboutUsContainer .container p {
       font-size: 12px; }
     .aboutUsContainer .container .btn {
-      margin: 0px auto;
-      display: block;
-      width: 50%; }
+      display: inline-block;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fff;
+      border: none;
+      transition: background-color 0.15s; }
+      .aboutUsContainer .container .btn:hover {
+        background-color: #cccccc;
+        transition: background-color 0.15s; }
 
 @media (max-width: 992px) {
   .aboutUsContainer .container {
@@ -921,12 +953,12 @@ footer {
         transition: opacity 0.15s; }
   footer .bottomline {
     font-size: 10px;
-    color: #4f4f4f;
+    color: #666666;
     padding: 20px 15px 10px 15px; }
     footer .bottomline p {
       margin: 0px; }
     footer .bottomline a {
-      color: #4f4f4f;
+      color: #666666;
       text-decoration: none;
       transition: color 0.15s; }
       footer .bottomline a:hover {

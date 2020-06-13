@@ -10,6 +10,28 @@ header {
     -o-animation: MoveBG 60s ease infinite;
     animation: MoveBG 60s ease infinite;
 
+    .floatingObj1 {
+        position: absolute;
+        top: 8%;
+        right: 20%;
+
+        img {
+            width: 200px;
+            transform: rotate(15deg);
+        }
+    }
+
+    .floatingObj2 {
+        position: absolute;
+        top: 20%;
+        left: 10%;
+
+        img {
+            width: 200px;
+            transform: rotate(-10deg);
+        }
+    }
+
     h1 {
         border: 0;
         clip: rect(0 0 0 0);
@@ -105,19 +127,36 @@ header {
 // Medium devices (tablets, 768px and up)
 @media (max-width: 768px) {
     header {
-        height: 300px;
-        min-height: 300px;
+        height: 250px;
+        min-height: 250px;
 
         .row {
-            .logoContainer,
+            .logoContainer {
+                .logo {
+                    height: 60px;
+                }
+            }
+            
             nav {
-                display: flex;
-                justify-content: center;
+                padding-top: 15px;
                 margin-right: 0px;
+
+                a.menuLink {
+                    font-size: 18px;
+                    margin: 0px 10px;
+                }
 
                 .btn {
                     margin: 0px 5px;
                 }
+            }
+
+            .main {
+                padding-top: 30px;
+            }
+
+            .serviceMenu {
+                position: absolute;
             }
         }
 

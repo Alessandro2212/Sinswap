@@ -110,4 +110,6 @@ $(function () {
             $(elem).removeClass("hover");
         }
     );
+
+    $.stellar();
 });
