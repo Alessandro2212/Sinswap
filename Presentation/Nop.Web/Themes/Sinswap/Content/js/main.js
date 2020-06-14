@@ -9,32 +9,32 @@ $(function () {
             dots: false,
             arrows: true,
             infinite: true,
-            centerMode: true,
-            centerPadding: '10px',
             responsive: [
                 {
                     breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 4,
-                        dots: false,
-                        arrows: true,
-                        infinite: true,
-                        centerMode: true,
-                        centerPadding: '10px'
-                    }
+                    settings: "unslick"
+                    //settings: {
+                    //    slidesToShow: 4,
+                    //    slidesToScroll: 4,
+                    //    dots: false,
+                    //    arrows: true,
+                    //    infinite: true,
+                    //    centerMode: true,
+                    //    centerPadding: '10px'
+                    //}
                 },
                 {
                     breakpoint: 992,
-                    settings: {
-                        slidesToShow: 3.1,
-                        slidesToScroll: 3,
-                        dots: false,
-                        arrows: false,
-                        infinite: true,
-                        centerMode: true,
-                        centerPadding: '10px'
-                    }
+                    settings: "unslick"
+                    //settings: {
+                    //    slidesToShow: 3.1,
+                    //    slidesToScroll: 3,
+                    //    dots: false,
+                    //    arrows: false,
+                    //    infinite: true,
+                    //    centerMode: true,
+                    //    centerPadding: '10px'
+                    //}
                 },
                 {
                     breakpoint: 768,
@@ -43,9 +43,7 @@ $(function () {
                         slidesToScroll: 2,
                         dots: false,
                         arrows: false,
-                        infinite: true,
-                        centerMode: true,
-                        centerPadding: '10px'
+                        infinite: true
                     }
                 },
                 {
@@ -55,9 +53,7 @@ $(function () {
                         slidesToScroll: 1,
                         dots: false,
                         arrows: false,
-                        infinite: true,
-                        centerMode: true,
-                        centerPadding: '10px'
+                        infinite: true
                     }
                 },
                 {
@@ -67,9 +63,7 @@ $(function () {
                         slidesToScroll: 1,
                         dots: false,
                         arrows: false,
-                        infinite: true,
-                        centerMode: true,
-                        centerPadding: '10px'
+                        infinite: true
                     }
                 },
                 {
@@ -79,9 +73,7 @@ $(function () {
                         slidesToScroll: 1,
                         dots: false,
                         arrows: false,
-                        infinite: true,
-                        centerMode: true,
-                        centerPadding: '10px'
+                        infinite: true
                     }
                 },
                 {
@@ -91,14 +83,22 @@ $(function () {
                         slidesToScroll: 1,
                         infinite: true,
                         dots: false,
-                        arrows: false,
-                        centerMode: true
+                        arrows: false
                     }
                 }
             ]
         });
     }
 
+    if ($('.featuredContainer').length) {
+        $('.featuredCard').hover(
+            function () {
+                $(this).closest('.featuredContainer').find('.featuredCard').addClass('hover');
+            }, function () {
+                $(this).closest('.featuredContainer').find('.featuredCard').removeClass('hover');
+            }
+        );
+    }
 
     $(".h-card").hover(
         function (e) {

@@ -12,6 +12,14 @@
         margin: 0px;
     }
 
+    .slick-initialized .slick-slide {
+        padding: 0 5px;
+    }
+
+    .slick-next {
+        right: -20px;
+    }
+        
     .topSellerCard {
         margin-top: 10px;
 
