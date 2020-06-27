@@ -406,6 +406,12 @@ a.more {
   .categoryCard.object {
     background-color: #4adfd0; }
 
+@media (min-width: 1660px) {
+  .container {
+    max-width: 1640px; }
+  .categoryCard {
+    height: 250px; } }
+
 header {
   position: relative;
   color: #fff;
@@ -523,7 +529,7 @@ header {
   .topSellersContainer .topSellerCard {
     margin-top: 10px; }
     .topSellersContainer .topSellerCard img {
-      width: 205px;
+      width: 100%;
       border-radius: 5px;
       box-shadow: none;
       transition: box-shadow 0.15s; }
@@ -697,6 +703,10 @@ header {
           opacity: 0.8;
           transition: opacity 0.15s; }
 
+@media (min-width: 1660px) {
+  .featuredContainer .container .featuredCard {
+    height: 450px; } }
+
 @media (max-width: 992px) {
   .featuredContainer .featuredCard {
     height: 250px; } }
@@ -819,6 +829,10 @@ header {
       margin-top: 10px;
       margin-bottom: -20px; }
 
+@media (min-width: 1660px) {
+  .promoContainer .promoCard {
+    padding: 80px 60px 60px 60px; } }
+
 @media (max-width: 992px) {
   .promoContainer .promoCard.seller {
     margin-bottom: 10px; } }
@@ -885,6 +899,10 @@ header {
       .aboutUsContainer .container .btn:hover {
         background-color: #cccccc;
         transition: background-color 0.15s; }
+
+@media (min-width: 1660px) {
+  .aboutUsContainer .container {
+    padding: 80px 300px; } }
 
 @media (max-width: 992px) {
   .aboutUsContainer .container {

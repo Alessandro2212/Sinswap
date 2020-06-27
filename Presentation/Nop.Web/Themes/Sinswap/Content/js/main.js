@@ -7,34 +7,32 @@ $(function () {
             slidesToShow: 5,
             slidesToScroll: 5,
             dots: false,
-            arrows: true,
+            arrows: false,
             infinite: true,
             responsive: [
                 {
                     breakpoint: 1200,
-                    settings: "unslick"
-                    //settings: {
-                    //    slidesToShow: 4,
-                    //    slidesToScroll: 4,
-                    //    dots: false,
-                    //    arrows: true,
-                    //    infinite: true,
-                    //    centerMode: true,
-                    //    centerPadding: '10px'
-                    //}
+                    settings: {
+                        slidesToShow: 5,
+                        slidesToScroll: 5,
+                        dots: false,
+                        arrows: false,
+                        infinite: true,
+                        centerMode: true,
+                        centerPadding: '10px'
+                    }
                 },
                 {
                     breakpoint: 992,
-                    settings: "unslick"
-                    //settings: {
-                    //    slidesToShow: 3.1,
-                    //    slidesToScroll: 3,
-                    //    dots: false,
-                    //    arrows: false,
-                    //    infinite: true,
-                    //    centerMode: true,
-                    //    centerPadding: '10px'
-                    //}
+                    settings: {
+                        slidesToShow: 3.1,
+                        slidesToScroll: 3,
+                        dots: false,
+                        arrows: true,
+                        infinite: true,
+                        centerMode: true,
+                        centerPadding: '10px'
+                    }
                 },
                 {
                     breakpoint: 768,
@@ -42,7 +40,7 @@ $(function () {
                         slidesToShow: 2.1,
                         slidesToScroll: 2,
                         dots: false,
-                        arrows: false,
+                        arrows: true,
                         infinite: true
                     }
                 },
@@ -111,5 +109,7 @@ $(function () {
         }
     );
 
-    $.stellar();
+    $.stellar({
+        horizontalScrolling: false
+    });
 });
