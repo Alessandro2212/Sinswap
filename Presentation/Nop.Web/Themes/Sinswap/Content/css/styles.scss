@@ -1,0 +1,22 @@
+﻿// Genral imports
+@import "../scss/_normalize";
+@import "../scss/_variables";
+@import "../scss/_animations";
+@import "../scss/_global";
+@import "../scss/_forms";
+
+// Component imports: header
+@import "../scss/components/_header";
+
+// Component imports: homepage
+@import "../scss/components/_topsellers";
+@import "../scss/components/_news";
+@import "../scss/components/_featured";
+@import "../scss/components/_popularCategories";
+@import "../scss/components/_popularMembers";
+@import "../scss/components/_promo";
+@import "../scss/components/_trendingCategories";
+@import "../scss/components/_aboutUs";
+
+// Component imports: footer
+@import "../scss/components/_footer";

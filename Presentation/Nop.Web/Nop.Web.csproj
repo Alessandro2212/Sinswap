@@ -38,6 +38,18 @@
 
     <!-- We copy the \Logs directory -->
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
+    <Content Remove="compilerconfig.json" />
+    <None Remove="Themes\Sinswap\Content\css\styles.scss" />
+    <None Remove="Themes\Sinswap\Content\js\vendor\stellar\stellar.js" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_aboutUs.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_featured.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_footer.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_news.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_popularCategories.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_popularMembers.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_promo.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_trendingCategories.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\_global.scss" />
 
     <None Update="Areas\Admin\sitemap.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -46,6 +58,11 @@
 
   <ItemGroup>
     <Folder Include="Plugins\" />
+    <Folder Include="Themes\Sinswap\Views\Home\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
   </ItemGroup>
 
   <!-- This target execute after "Build" target.

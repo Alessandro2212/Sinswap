@@ -1,0 +1,118 @@
+﻿// Promo
+.promoContainer {
+    padding: 55px 30px 60px 30px;
+    background-color: $black;
+
+    h2 {
+        font-size: 32px;
+        font-weight: 600;
+        padding: 0 0 50px 0;
+        margin: 0px;
+        width: 100%;
+        text-align: center;
+        color: $white;
+    }
+
+    .promoCard {
+        margin: 0px auto;
+        text-align: center;
+        color: $white;
+        height: 100%;
+        width: 80%;
+        padding: 50px 30px 30px 30px;
+        border-radius: 5px;
+
+        &:hover {
+            cursor: pointer;
+
+            .btn {
+                background-color: rgba(255,255,255,0.5);
+                transition: background-color 0.15s;
+            }
+        }
+
+        &.seller {
+            background-color: $seller;
+        }
+
+        &.buyer {
+            background-color: $buyer;
+        }
+
+        h3 {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 22px;
+            font-weight: 300;
+        }
+
+        .btn {
+            font-size: 12px;
+            background-color: rgba(255,255,255,0.3);
+            transition: background-color 0.15s;
+            color: $white;
+            border: none;
+
+            &:hover {
+                background-color: rgba(255,255,255,0.5);
+                transition: background-color 0.15s;
+            }
+        }
+
+        .footnote {
+            font-size: 10px;
+            opacity: 0.5;
+            margin-top: 10px;
+            margin-bottom: -20px;
+        }
+    }
+}
+
+
+// Extra extra large devices (large desktops, 1200px and up)
+@media (min-width: 1660px) {
+    .promoContainer {
+        .promoCard {
+            padding: 80px 60px 60px 60px;
+        }
+    }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+    .promoContainer {
+        .promoCard.seller {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    .promoContainer {
+        h2 {
+            font-size: 24px;
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+    .promoContainer {
+        h2 {
+            font-size: 18px;
+        }
+    }
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (min-width: 576px) {
+}

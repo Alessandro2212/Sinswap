@@ -1,0 +1,90 @@
+﻿// About us
+.aboutUsContainer {
+    padding: 40px 30px 60px 30px;
+
+    .container {
+        padding: 80px 100px;
+        background-color: $grey2;
+        border-radius: 5px;
+
+        h2 {
+            font-size: 32px;
+            font-weight: 600;
+            padding: 0 0 50px 0;
+            margin: 0px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: $white;
+            border: none;
+            transition: background-color 0.15s;
+
+            &:hover {
+                background-color: $grey8;
+                transition: background-color 0.15s;
+            }
+        }
+    }
+}
+
+
+// Extra extra large devices (large desktops, 1200px and up)
+@media (min-width: 1660px) {
+    .aboutUsContainer {
+        .container {
+            padding: 80px 300px;
+        }
+    }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+    .aboutUsContainer {
+        .container {
+            padding: 40px 50px;
+        }
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    .aboutUsContainer {
+        .container {
+            h2 {
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+    .aboutUsContainer {
+        h2 {
+            font-size: 18px;
+        }
+    }
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (min-width: 576px) {
+}

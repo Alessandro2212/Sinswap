@@ -1,0 +1,14 @@
+﻿// Animations
+@keyframes MoveBG {
+    0% {
+        background-position: 0% 84%;
+    }
+
+    50% {
+        background-position: 100% 16%;
+    }
+
+    100% {
+        background-position: 0% 84%;
+    }
+}

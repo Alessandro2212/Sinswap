@@ -1,0 +1,43 @@
+﻿// Popular categories
+.popularCategoriesContainer {
+    padding: 35px 25px 0px 25px;
+
+    h2 {
+        font-size: 28px;
+        padding: 20px 0 15px 5px;
+        margin: 0px;
+    }
+    
+    // .categoryCard is in _global.scss
+
+    a.more {
+        margin-left: 5px;
+    }
+}
+
+
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    .popularCategoriesContainer {
+        h2 {
+            font-size: 18px;
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (min-width: 576px) {
+}

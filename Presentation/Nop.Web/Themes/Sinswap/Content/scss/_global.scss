@@ -1,0 +1,164 @@
+﻿// Global
+html,
+body {
+    font-family: $fontBody;
+}
+
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+
+    > .col,
+    > [class*="col-"] {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+.flex-row.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-row.row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row.row:after,
+.flex-row.row:before {
+    display: flex;
+}
+
+// Slick
+.slick-prev,
+.slick-next {
+    color: $black;
+    font-size: 24px;
+    transition: color 0.15s;
+
+    &:before {
+        display: none;
+    }
+
+    &:hover {
+        color: $grey22;
+        transition: color 0.15s;
+    }
+}
+
+// Links
+a.more {
+    display: block;
+    float: left;
+    margin: 20px 0;
+    font-size: 12px;
+    color: $grey31;
+    text-decoration: underline;
+    transition: color 0.15s;
+
+    &:hover {
+        text-decoration: none;
+        color: $seller;
+        transition: color 0.15s;
+    }
+}
+
+// Category card
+.categoryCard {
+    border-radius: 5px;
+    color: $white;
+    font-size: 20px;
+    margin: 5px;
+    height: 150px;
+    position: relative;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    box-shadow: none;
+    transition: box-shadow 0.15s;
+
+    .category {
+        font-size: 16px;
+        font-weight: 600;
+        position: absolute;
+        bottom: 10px;
+        left: 0px;
+        width: 100%;
+        text-align: center;
+
+        a {
+            color: $white;
+            text-decoration: none;
+            opacity: 1;
+            transition: opacity 0.15s;
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 4px 15px -5px rgba(0,0,0,1);
+        transition: box-shadow 0.15s;
+
+        .category a {
+            opacity: 0.8;
+            transition: opacity 0.15s;
+        }
+    }
+
+    &.clothing {
+        background-color: $catClothing;
+    }
+
+    &.food {
+        background-color: $catFood;
+    }
+
+    &.media {
+        background-color: $catMedia;
+    }
+
+    &.service {
+        background-color: $catService;
+    }
+
+    &.body {
+        background-color: $catBody;
+    }
+
+    &.object {
+        background-color: $catObject;
+    }
+}
+
+
+// Extra extra large devices (large desktops, 1200px and up)
+@media (min-width: 1660px) {
+    .container {
+        max-width: 1640px;
+    }
+
+    .categoryCard {
+        height: 250px;
+    }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 576px) {
+}

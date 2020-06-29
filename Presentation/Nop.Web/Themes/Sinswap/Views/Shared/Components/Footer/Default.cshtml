@@ -1,0 +1,234 @@
+﻿@model FooterModel
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@inject IWorkContext workContext;
+
+<footer>
+    <div class="container allCatagoryContainer">
+        <div class="row">
+            <div class="col">
+                <h2>All categories</h2>
+            </div>
+        </div>
+
+        <div class="row service">
+            <div class="col-2 col-lg-1 label">Service</div>
+            <div class="col-10 col-lg-11">
+                <a href="#">Chat</a> <a href="#">KIK/Whatsapp</a> <a href="#">Cam session</a> <a href="#">Skype call</a> <a href="#">GFE</a> <a href="#">Penis rating</a> <a href="#">Pussy rating</a> <a href="#">Boob rating</a> <a href="#">Face rating</a> <a href="#">Tasks</a> <a href="#">Pay pig</a> <a href="#">Gift pig</a> <a href="#">Pay for pedicure</a> <a href="#">Pay for manicure</a> <a href="#">Gaming</a>
+            </div>
+        </div>
+
+        <div class="row object">
+            <div class="col-2 col-lg-1 label">Object</div>
+            <div class="col-10 col-lg-11">
+                <a href="#">Pillowcase</a> <a href="#">Ribbon</a> <a href="#">Rope</a> <a href="#">Dildo</a> <a href="#">Vibrator</a> <a href="#">Sex toy</a> <a href="#">Cock ring plain</a> <a href="#">Cock ring vibrating</a> <a href="#">Buttplug</a>
+            </div>
+        </div>
+
+        <div class="row clothing">
+            <div class="col-2 col-lg-1 label">Clothing</div>
+            <div class="col-10 col-lg-11">
+                <a href="#">Panties</a> <a href="#">Long socks</a> <a href="#">Slippers</a> <a href="#">Bra</a> <a href="#">Bikini</a> <a href="#">Tights</a> <a href="#">Bodysuit</a> <a href="#">Flat shoe</a> <a href="#">Pumps</a> <a href="#">Sneakers</a> <a href="#">Gym clothing</a> <a href="#">Yoga pants</a> <a href="#">Latex/rubber/silk gloves</a>
+            </div>
+        </div>
+
+        <div class="row body">
+            <div class="col-2 col-lg-1 label">Body</div>
+            <div class="col-10 col-lg-11">
+                <a href="#">Dust</a> <a href="#">Nail clipping</a> <a href="#">Fluids</a> <a href="#">Gas</a> <a href="#">Hair</a> <a href="#">Bath water</a> <a href="#">Silicone mold</a>
+            </div>
+        </div>
+
+        <div class="row food">
+            <div class="col-2 col-lg-1 label">Food</div>
+            <div class="col-10 col-lg-11">
+                <a href="#">Ramen</a> <a href="#">Cake</a> <a href="#">Sandwich</a> <a href="#">Pizza</a> <a href="#">Grapes</a> <a href="#">Banana</a> <a href="#">Various fruit</a> <a href="#">Zucchini</a> <a href="#">Eggplant</a> <a href="#">Carrot</a> <a href="#">Corn on the cob</a> <a href="#">Cucumber</a> <a href="#">Cherry</a> <a href="#">Tomato</a> <a href="#">Radish</a> <a href="#">Various vegetables</a> <a href="#">Boiled egg</a> <a href="#">Sausage</a> <a href="#">Pickle</a> <a href="#">Lollypop</a>
+            </div>
+        </div>
+
+        <div class="row media">
+            <div class="col-2 col-lg-1 label">Media</div>
+            <div class="col-10 col-lg-11">
+                <a href="#">Photos</a> <a href="#">Polaroid</a> <a href="#">Video</a> <a href="#">Audio</a> <a href="#">Erotic story</a> <a href="#">Drawing</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container footerMenu">
+        <div class="row">
+            <img src="/Themes/Sinswap/content/images/18plus.svg" />
+
+            <div class="col-12 d-flex justify-content-center">
+                <a href="#">Customer service</a>
+                <a href="#">F.A.Q.</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container bottomline">
+        <div class="row">
+            <div class="col-12 col-md-3 d-flex justify-content-center justify-content-md-start">
+                <p>&copy; 2020 <strong>sinswap</strong>. All rights reserved.</p>
+            </div>
+
+            <div class="col-12 col-md-6 d-flex justify-content-center text-center">
+                <p><strong>sinswap</strong> is a free platform for men, women and furries. Got a question ? Feel free to <a href="#"><u>contact us</u></a>.</p>
+            </div>
+
+            <div class="col-12 col-md-3 d-flex justify-content-center justify-content-md-end">
+                <p><a href="#">Privacy policy</a>&nbsp;&nbsp;&nbsp;<a href="#">Terms of use</a></p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+@*<strong>@T("Footer.Information")</strong>
+<ul class="list">
+    @if (Model.SitemapEnabled && Model.DisplaySitemapFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("Sitemap")">@T("Sitemap")</a></li>
+    }
+    @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
+    {
+        <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
+    }
+    @if (Model.DisplayContactUsFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+    }
+</ul>*@
+
+@*<strong>@T("Footer.CustomerService")</strong>
+<ul class="list">
+    @if (Model.DisplayProductSearchFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("ProductSearch")">@T("Search")</a> </li>
+    }
+    @if (Model.NewsEnabled && Model.DisplayNewsFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("NewsArchive")">@T("News")</a></li>
+    }
+    @if (Model.BlogEnabled && Model.DisplayBlogFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+    }
+    @if (Model.ForumEnabled && Model.DisplayForumsFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+    }
+    @if (Model.RecentlyViewedProductsEnabled && Model.DisplayRecentlyViewedProductsFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("RecentlyViewedProducts")">@T("Products.RecentlyViewedProducts")</a></li>
+    }
+    @if (Model.CompareProductsEnabled && Model.DisplayCompareProductsFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("CompareProducts")">@T("Products.Compare.List")</a></li>
+    }
+    @if (Model.NewProductsEnabled && Model.DisplayNewProductsFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("NewProducts")">@T("Products.NewProducts")</a></li>
+    }
+    @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn2).ToList())
+    {
+        <li><a href="@Url.RouteUrl("Topic", new {SeName = topic.SeName})">@topic.Name</a></li>
+    }
+    @if (Model.AllowCustomersToCheckGiftCardBalance)
+    {
+        <li><a href="@Url.RouteUrl("CheckGiftCardBalance")">@T("CheckGiftCardBalance")</a></li>
+    }
+</ul>*@
+
+@*<strong>@T("Footer.MyAccount")</strong>
+<ul class="list">
+    @if (Model.DisplayCustomerInfoFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("CustomerInfo")">@T("Account.MyAccount")</a></li>
+    }
+    @if (Model.DisplayCustomerOrdersFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a></li>
+    }
+    @if (Model.DisplayCustomerAddressesFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("CustomerAddresses")">@T("Account.CustomerAddresses")</a></li>
+    }
+    @if (Model.ShoppingCartEnabled && Model.DisplayShoppingCartFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("ShoppingCart")">@T("ShoppingCart")</a></li>
+    }
+    @if (Model.WishlistEnabled && Model.DisplayWishlistFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("Wishlist")">@T("Wishlist")</a></li>
+    }
+    @if (Model.AllowCustomersToApplyForVendorAccount && Model.DisplayApplyVendorAccountFooterItem)
+    {
+        <li><a href="@Url.RouteUrl("ApplyVendorAccount")">@T("Vendors.ApplyAccount")</a></li>
+    }
+    @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn3).ToList())
+    {
+        <li><a href="@Url.RouteUrl("Topic", new {SeName = topic.SeName})">@topic.Name</a></li>
+    }
+</ul>*@
+
+@*<strong>@T("Footer.FollowUs")</strong>
+@await Component.InvokeAsync("SocialButtons")*@
+
+@*@await Component.InvokeAsync("NewsletterBox")*@
+
+@*<span class="footer-disclaimer">@T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)</span>*@
+@*@if (Model.DisplayTaxShippingInfoFooter)
+{
+    var inclTax = workContext.TaxDisplayType == TaxDisplayType.IncludingTax;
+    <span class="footer-tax-shipping">
+        @T(inclTax ? "Footer.TaxShipping.InclTax" : "Footer.TaxShipping.ExclTax", Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("shippinginfo")}))
+    </span>
+}*@
+
+@if (!Model.HidePoweredByNopCommerce)
+{
+    @*<div class="footer-powered-by">*@
+        @*Would you like to remove the "Powered by nopCommerce" link in the bottom of the footer?
+            Please find more info at https://www.nopcommerce.com/copyrightremoval.aspx*@
+    //Powered by <a href="https://www.nopcommerce.com/">nopCommerce</a>
+    @*</div>*@
+}
+
+@*@await Component.InvokeAsync("StoreThemeSelector")*@
+
+@*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.Footer })*@
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+        $('.footer-block .title').on('click', function () {
+            var e = window, a = 'inner';
+            if (!('innerWidth' in window)) {
+                a = 'client';
+                e = document.documentElement || document.body;
+            }
+            var result = { width: e[a + 'Width'], height: e[a + 'Height'] };
+            if (result.width < 769) {
+                $(this).siblings('.list').slideToggle('slow');
+            }
+        });
+    });
+</script>
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+        $('.block .title').on('click', function () {
+            var e = window, a = 'inner';
+            if (!('innerWidth' in window)) {
+                a = 'client';
+                e = document.documentElement || document.body;
+            }
+            var result = { width: e[a + 'Width'], height: e[a + 'Height'] };
+            if (result.width < 1001) {
+                $(this).siblings('.listbox').slideToggle('slow');
+            }
+        });
+    });
+</script>

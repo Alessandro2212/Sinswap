@@ -1,0 +1,175 @@
+﻿// Header
+header {
+    position: relative;
+    color: $white;
+    min-height: 400px;
+    background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
+    background-size: 300% 300%;
+    -webkit-animation: MoveBG 60s ease infinite;
+    -moz-animation: MoveBG 60s ease infinite;
+    -o-animation: MoveBG 60s ease infinite;
+    animation: MoveBG 60s ease infinite;
+
+    .floatingObj1 {
+        position: absolute;
+        top: 8%;
+        right: 20%;
+
+        img {
+            width: 200px;
+            transform: rotate(15deg);
+        }
+    }
+
+    .floatingObj2 {
+        position: absolute;
+        top: 20%;
+        left: 10%;
+
+        img {
+            width: 200px;
+            transform: rotate(-10deg);
+        }
+    }
+
+    h1 {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .logo {
+        margin-top: 15px;
+        height: 75px;
+    }
+
+    nav {
+        padding-top: 30px;
+
+        &.main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        &.service {
+            margin-right: 15px;
+        }
+
+        a.menuLink {
+            margin: 0px 7px;
+            font-size: 16px;
+            font-weight: 400;
+            color: $white;
+            opacity: 0.8;
+            transition: opacity 0.15s;
+
+            &:hover {
+                opacity: 1;
+                text-decoration: none;
+                transition: opacity 0.15s;
+            }
+        }
+
+        .btn {
+            margin-top: -4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            float: right;
+            margin-left: 10px;
+            font-size: 14px;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+
+    .payoffContainer {
+        .payoff {
+            display: table-cell;
+            vertical-align: middle;
+            width: 100vw;
+            font-weight: 700;
+            font-size: 80px;
+            line-height: 80px;
+            text-align: center;
+            height: 200px;
+        }
+    }
+}
+
+
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+    header {
+        nav {
+            &.service {
+                .btn {
+                    margin-bottom: 14px;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    header {
+        height: 250px;
+        min-height: 250px;
+
+        .row {
+            .logoContainer {
+                .logo {
+                    height: 60px;
+                }
+            }
+            
+            nav {
+                padding-top: 15px;
+                margin-right: 0px;
+
+                a.menuLink {
+                    font-size: 18px;
+                    margin: 0px 10px;
+                }
+
+                .btn {
+                    margin: 0px 5px;
+                }
+            }
+
+            .main {
+                padding-top: 30px;
+            }
+
+            .serviceMenu {
+                position: absolute;
+            }
+        }
+
+        .payoffContainer {
+            display: none;
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 576px) {
+}
