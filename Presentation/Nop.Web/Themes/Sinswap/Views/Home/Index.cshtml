@@ -5,73 +5,75 @@
     Html.AppendPageCssClassParts("homepage");
 }
 
-<div class="container topSellersContainer">
-    <div class="row">
-        <div class="col-12">
-            <h2>Top sellers!</h2>
+@await Component.InvokeAsync("TopVendor")
 
-            <div class="topSellersSlide">
-                <div class="topSellerCard">
-                    <img src="/Themes/Sinswap/content/images/dummyTopSeller.jpg" />
-                    <div class="location">
-                        <span class="city">Sydney</span>, <span class="country">Australia</span>
+@*<div class="container topSellersContainer">
+        <div class="row">
+            <div class="col-12">
+                <h2>Top sellers!</h2>
+
+                <div class="topSellersSlide">
+                    <div class="topSellerCard">
+                        <img src="/Themes/Sinswap/content/images/dummyTopSeller.jpg" />
+                        <div class="location">
+                            <span class="city">Sydney</span>, <span class="country">Australia</span>
+                        </div>
+                        <div class="nameAge">
+                            <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
+                        </div>
                     </div>
-                    <div class="nameAge">
-                        <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
+                    <div class="topSellerCard">
+                        <img src="/Themes/Sinswap/content/images/dummyTopSeller.jpg" />
+                        <div class="location">
+                            <span class="city">Sydney</span>, <span class="country">Australia</span>
+                        </div>
+                        <div class="nameAge">
+                            <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
+                        </div>
+                    </div>
+                    <div class="topSellerCard">
+                        <img src="/Themes/Sinswap/content/images/dummyTopSeller.jpg" />
+                        <div class="location">
+                            <span class="city">Sydney</span>, <span class="country">Australia</span>
+                        </div>
+                        <div class="nameAge">
+                            <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
+                        </div>
+                    </div>
+                    <div class="topSellerCard">
+                        <img src="/Themes/Sinswap/content/images/dummyTopSeller.jpg" />
+                        <div class="location">
+                            <span class="city">Sydney</span>, <span class="country">Australia</span>
+                        </div>
+                        <div class="nameAge">
+                            <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
+                        </div>
+                    </div>
+                    <div class="topSellerCard">
+                        <img src="/Themes/Sinswap/content/images/dummyTopSeller.jpg" />
+                        <div class="location">
+                            <span class="city">Sydney</span>, <span class="country">Australia</span>
+                        </div>
+                        <div class="nameAge">
+                            <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
+                        </div>
+                    </div>
+                    <div class="topSellerCard">
+                        <img src="/Themes/Sinswap/content/images/dummyTopSeller.jpg" />
+                        <div class="location">
+                            <span class="city">Sydney</span>, <span class="country">Australia</span>
+                        </div>
+                        <div class="nameAge">
+                            <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
+                        </div>
                     </div>
                 </div>
-                <div class="topSellerCard">
-                    <img src="/Themes/Sinswap/content/images/dummyTopSeller.jpg" />
-                    <div class="location">
-                        <span class="city">Sydney</span>, <span class="country">Australia</span>
-                    </div>
-                    <div class="nameAge">
-                        <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
-                    </div>
-                </div>
-                <div class="topSellerCard">
-                    <img src="/Themes/Sinswap/content/images/dummyTopSeller.jpg" />
-                    <div class="location">
-                        <span class="city">Sydney</span>, <span class="country">Australia</span>
-                    </div>
-                    <div class="nameAge">
-                        <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
-                    </div>
-                </div>
-                <div class="topSellerCard">
-                    <img src="/Themes/Sinswap/content/images/dummyTopSeller.jpg" />
-                    <div class="location">
-                        <span class="city">Sydney</span>, <span class="country">Australia</span>
-                    </div>
-                    <div class="nameAge">
-                        <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
-                    </div>
-                </div>
-                <div class="topSellerCard">
-                    <img src="/Themes/Sinswap/content/images/dummyTopSeller.jpg" />
-                    <div class="location">
-                        <span class="city">Sydney</span>, <span class="country">Australia</span>
-                    </div>
-                    <div class="nameAge">
-                        <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
-                    </div>
-                </div>
-                <div class="topSellerCard">
-                    <img src="/Themes/Sinswap/content/images/dummyTopSeller.jpg" />
-                    <div class="location">
-                        <span class="city">Sydney</span>, <span class="country">Australia</span>
-                    </div>
-                    <div class="nameAge">
-                        <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
-                    </div>
-                </div>
+
+                <a href="#" class="more">Check out our best sellers...</a>
+
             </div>
-
-            <a href="#" class="more">Check out our best sellers...</a>
-
         </div>
-    </div>
-</div>
+    </div>*@
 
 <div class="container-fluid newsContainer">
     <div class="row">
@@ -237,7 +239,9 @@
     </div>
 </div>
 
-<div class="container popularCategoriesContainer">
+@await Component.InvokeAsync("HomepageCategories", new { showMostPopular = true})
+
+@*<div class="container popularCategoriesContainer">
     <div class="row">
         <div class="col-12">
             <h2>Popular categories</h2>
@@ -298,7 +302,7 @@
 
         </div>
     </div>
-</div>
+</div>*@
 
 <div class="container popularMembersContainer">
     <div class="row">

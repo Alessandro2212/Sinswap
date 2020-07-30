@@ -20,10 +20,14 @@ namespace Nop.Web.Models.MiniVendors
         public string Name { get; set; }
 
         [NopResourceDisplayName("Account.VendorInfo.Age")]
-        public string Age { get; set; }
+        public int Age { get; set; }
 
         [NopResourceDisplayName("Account.VendorInfo.City")]
         public string City { get; set; }
+
+        public string Country { get; set; }
+
+        public int? FollowersNumber { get; set; }
 
         [NopResourceDisplayName("Account.VendorInfo.Picture")]
         public string PictureUrl { get; set; }

@@ -24,12 +24,10 @@ namespace Nop.Web.Factories
     /// </summary>
     public partial class MiniVendorModelFactory : IMiniVendorModelFactory
     {
-
         private readonly IPictureService _pictureService;
         private readonly IVendorService _vendorService;
         private readonly IRepository<VendorPictureRecord> _vendorPictureRecordRepository;
         private readonly IUrlRecordService _urlRecordService;
-
 
         public MiniVendorModelFactory(
            IPictureService pictureService,
@@ -57,9 +55,7 @@ namespace Nop.Web.Factories
         public TopMiniVendorModel PrepareTopMiniVendorModel(int amount)
         {
             //get top X vendors basing on the reviews
-            //var vendors = _vendorService.GetAllVendors();
-            var vendors = _vendorService.GetAllTopXVendors(5);
-
+            var vendors = _vendorService.GetAllTopXVendors(amount);
 
             if (!vendors.Any())
                 return new TopMiniVendorModel();
@@ -79,11 +75,22 @@ namespace Nop.Web.Factories
                 if (vendorPictures != null)
                     picture = _pictureService.GetPictureById(vendorPictures.PictureId);
 
+                int age = 18;
+                if (vendor.BirthDate != null)
+                {
+                    age = DateTime.Today.Year - vendor.BirthDate.Year;
+                    // Go back to the year the person was born in case of a leap year
+                    if (vendor.BirthDate.Date > DateTime.Today.AddYears(-age)) age--;
+                }
+
                 miniVendors.Add(new MiniVendorModel
                 {
                     Id = vendor.Id,
                     Name = vendor.Name,
                     City = vendor.City,
+                    Country = vendor.Country,
+                    FollowersNumber = vendor.FollowersNumber,
+                    Age = age,
                     PictureUrl = _pictureService.GetPictureUrl(picture),
                     SeName = _urlRecordService.GetSeName(vendor)
                 });

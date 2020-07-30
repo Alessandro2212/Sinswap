@@ -81,6 +81,13 @@ namespace Nop.Web.Factories
         List<CategorySimpleModel> PrepareCategorySimpleModels();
 
         /// <summary>
+        /// Get (amount of) Popular HomePage Categories
+        /// </summary>
+        /// <param name="amount">the amount of popular categories to retrieve</param>
+        /// <returns></returns>
+        List<CategorySimpleModel> GetPopularHomePageCategories(int amount);
+
+        /// <summary>
         /// Prepare category (simple) models
         /// </summary>
         /// <param name="rootCategoryId">Root category identifier</param>

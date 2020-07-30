@@ -4,19 +4,27 @@
 }
 @if (Model.MiniVendors.Count > 0)
 {
-    <div class="block block-vendor-navigation">
-        <div class="title">
-            <strong>Our Top Sellers</strong>
-        </div>
-        <div>
-            @foreach (var vendor in Model.MiniVendors)
-            {
-                <div class="miniVendorContainer">
-                    <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><img src="@Url.Content(vendor.PictureUrl)" alt="Image" class="miniVendorImg" style="width:90%;" /></a>
-                    <span class="miniVendorText">@vendor.Name</span>
-                    <span class="miniVendorText">@vendor.City</span>
+    <div class="container topSellersContainer">
+        <div class="row">
+            <div class="col-12">
+                <h2>Top sellers!</h2>
+
+                <div class="topSellersSlide">
+                    @foreach (var vendor in Model.MiniVendors)
+                    {
+                        <div class="topSellerCard">
+                            <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><img src="@Url.Content(vendor.PictureUrl)" alt="Image" class="miniVendorImg" style="width:90%;" /></a>
+                            <div class="location">
+                                <span class="city">@vendor.City</span>, <span class="country">@vendor.Country</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><span class="name">@vendor.Name</span>, <span class="age">@vendor.Age</span></a>
+                            </div>
+                        </div>
+                    }     
                 </div>
-            }
+                <a href="#" class="more">Check out our best sellers...</a>
+            </div>
         </div>
-    </div>
+    </div>  
 }
