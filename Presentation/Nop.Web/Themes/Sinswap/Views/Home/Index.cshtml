@@ -239,72 +239,73 @@
     </div>
 </div>
 
-@await Component.InvokeAsync("HomepageCategories", new { showMostPopular = true})
+@await Component.InvokeAsync("HomepageCategories", new { showMostPopular = true })
 
 @*<div class="container popularCategoriesContainer">
-    <div class="row">
-        <div class="col-12">
-            <h2>Popular categories</h2>
+        <div class="row">
+            <div class="col-12">
+                <h2>Popular categories</h2>
 
-            <div class="flex-row row no-gutters">
+                <div class="flex-row row no-gutters">
 
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
-                        <div class="category"><a href="#">High heels</a></div>
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
+                            <div class="category"><a href="#">High heels</a></div>
+                        </div>
                     </div>
+
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard food" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
+                            <div class="category"><a href="#">Cucumbers</a></div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard body" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
+                            <div class="category"><a href="#">Bath water</a></div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
+                            <div class="category"><a href="#">Yogapants</a></div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
+                            <div class="category"><a href="#">Sports bras</a></div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard service" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
+                            <div class="category"><a href="#">GFE</a></div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
+                            <div class="category"><a href="#">Panties</a></div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard object" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
+                            <div class="category"><a href="#">Vibrators</a></div>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard food" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
-                        <div class="category"><a href="#">Cucumbers</a></div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard body" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
-                        <div class="category"><a href="#">Bath water</a></div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
-                        <div class="category"><a href="#">Yogapants</a></div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
-                        <div class="category"><a href="#">Sports bras</a></div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard service" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
-                        <div class="category"><a href="#">GFE</a></div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
-                        <div class="category"><a href="#">Panties</a></div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard object" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
-                        <div class="category"><a href="#">Vibrators</a></div>
-                    </div>
-                </div>
+                <a href="#" class="more">Check out our 500+ categories...</a>
 
             </div>
-
-            <a href="#" class="more">Check out our 500+ categories...</a>
-
         </div>
-    </div>
-</div>*@
+    </div>*@
 
-<div class="container popularMembersContainer">
+@await Component.InvokeAsync("MostPopularVendor")
+@*<div class="container popularMembersContainer">
     <div class="row">
         <div class="col-12">
             <h2>Our most popular members</h2>
@@ -367,7 +368,7 @@
 
         </div>
     </div>
-</div>
+</div>*@
 
 <div class="container-fluid promoContainer">
     <div class="row">

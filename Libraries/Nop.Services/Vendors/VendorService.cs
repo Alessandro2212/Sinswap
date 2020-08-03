@@ -105,6 +105,17 @@ namespace Nop.Services.Vendors
         }
 
         /// <summary>
+        /// Get Most Popular 'amount' Vendors (vendors having the highes number of followers)
+        /// </summary>
+        /// <param name="amount">the amount of vendors to return</param>
+        /// <returns></returns>
+        public virtual List<Vendor> GetMostPopularVendors(int amount)
+        {
+            var vendors = _dbContext.EntityFromSql<Vendor>("GetMostPopularVendors", amount).ToList();
+            return vendors;
+        }
+
+        /// <summary>
         /// Gets vendors
         /// </summary>
         /// <param name="vendorIds">Vendor identifiers</param>

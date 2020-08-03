@@ -1,0 +1,32 @@
+﻿@model Nop.Web.Models.MiniVendors.TopMiniVendorModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+@if (Model.MiniVendors.Count > 0)
+{
+    <div class="container popularMembersContainer">
+        <div class="row">
+            <div class="col-12">
+                <h2>Our most popular members</h2>
+                <div class="flex-row row no-gutters">
+                    @foreach (var vendor in Model.MiniVendors)
+                    {
+                        <div class="col-6 col-lg-4 col-xl-3">
+                            <div class="popularMemberCard">
+                                <img src="@Url.Content(vendor.PictureUrl)" />
+                                <div class="followers">@vendor.FollowersNumber<div>followers</div></div>
+                                <div class="location">
+                                    <span class="city">@vendor.City</span>, <span class="country">@vendor.Country</span>
+                                </div>
+                                <div class="nameAge">
+                                    <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><span class="name">@vendor.Name</span>, <span class="age">@vendor.Age</span></a>
+                                </div>                              
+                            </div>                      
+                        </div>
+                    }
+                    </div>
+                <a href="#" class="more">Check out our best sellers...</a>
+            </div>
+        </div>
+    </div>  
+}
