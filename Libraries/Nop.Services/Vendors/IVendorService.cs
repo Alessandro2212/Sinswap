@@ -74,8 +74,11 @@ namespace Nop.Services.Vendors
         /// <summary>
         /// Get All Top 'amount' Vendors (vendors having the highes average reviews)
         /// </summary>
-        /// <param name="amount"></param>
-        /// <returns></returns>
         List<Vendor> GetAllTopXVendors(int amount);
+
+        /// <summary>
+        /// Get Most Popular 'amount' of Vendors (vendors having the highes number of followers)
+        /// </summary>
+        List<Vendor> GetMostPopularVendors(int amount);
     }
 }

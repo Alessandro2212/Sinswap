@@ -638,10 +638,9 @@ namespace Nop.Web.Factories
             List<CategorySimpleModel> allCategories = new List<CategorySimpleModel>();
             foreach(var category in categoriesWithSubCategories)
             {
-                if (category.SubCategories.Any()) 
+                if (category.SubCategories != null && category.SubCategories.Any()) 
                 {
                     allCategories.AddRange(category.SubCategories);
-                    category.SubCategories = null;
                 }
                 allCategories.Add(category);
             }

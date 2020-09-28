@@ -101,5 +101,56 @@ namespace Nop.Web.Factories
 
             return model;
         }
+
+        public TopMiniVendorModel PrepareMostPopularMiniVendorModel(int amount)
+        {
+            //get top X vendors basing on the reviews
+            var vendors = _vendorService.GetMostPopularVendors(amount);
+
+            if (!vendors.Any())
+                return new TopMiniVendorModel();
+
+            TopMiniVendorModel model = new TopMiniVendorModel();
+            List<MiniVendorModel> miniVendors = new List<MiniVendorModel>();
+
+            foreach (Vendor vendor in vendors.ToList())
+            {
+                var query = from pp in _vendorPictureRecordRepository.Table
+                            where pp.VendorId == vendor.Id
+                            orderby pp.DisplayOrder, pp.Id
+                            select pp;
+
+                var vendorPictures = query.ToList().FirstOrDefault();
+                Picture picture = null;
+                if (vendorPictures != null)
+                    picture = _pictureService.GetPictureById(vendorPictures.PictureId);
+
+                int age = 18;
+                if (vendor.BirthDate != null)
+                {
+                    age = DateTime.Today.Year - vendor.BirthDate.Year;
+                    // Go back to the year the person was born in case of a leap year
+                    if (vendor.BirthDate.Date > DateTime.Today.AddYears(-age)) age--;
+                }
+
+                miniVendors.Add(new MiniVendorModel
+                {
+                    Id = vendor.Id,
+                    Name = vendor.Name,
+                    City = vendor.City,
+                    Country = vendor.Country,
+                    FollowersNumber = vendor.FollowersNumber,
+                    Age = age,
+                    PictureUrl = _pictureService.GetPictureUrl(picture),
+                    SeName = _urlRecordService.GetSeName(vendor)
+                });
+            }
+
+            if (miniVendors.Any())
+                model.MiniVendors = new List<MiniVendorModel>(miniVendors);
+
+            return model;
+        }
+
     }
 }
