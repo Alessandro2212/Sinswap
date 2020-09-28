@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Nop.Core;
 using Nop.Core.Data;
+using Nop.Core.Data.Extensions;
 using Nop.Core.Domain.Vendors;
 using Nop.Core.Html;
 using Nop.Data;
@@ -21,6 +22,7 @@ namespace Nop.Services.Vendors
         private readonly IRepository<Vendor> _vendorRepository;
         private readonly IRepository<VendorNote> _vendorNoteRepository;
         private readonly IDbContext _dbContext;
+        private readonly IDataProvider _dataProvider;
 
         #endregion
 
@@ -29,12 +31,14 @@ namespace Nop.Services.Vendors
         public VendorService(IEventPublisher eventPublisher,
             IRepository<Vendor> vendorRepository,
             IRepository<VendorNote> vendorNoteRepository,
-            IDbContext dbContext)
+            IDbContext dbContext,
+            IDataProvider dataProvider)
         {
             this._eventPublisher = eventPublisher;
             this._vendorRepository = vendorRepository;
             this._vendorNoteRepository = vendorNoteRepository;
             this._dbContext = dbContext;
+            this._dataProvider = dataProvider;
         }
 
         #endregion
@@ -111,7 +115,8 @@ namespace Nop.Services.Vendors
         /// <returns></returns>
         public virtual List<Vendor> GetMostPopularVendors(int amount)
         {
-            var vendors = _dbContext.EntityFromSql<Vendor>("GetMostPopularVendors", amount).ToList();
+            var amountParameter = _dataProvider.GetInt32Parameter("Amount", amount);
+            var vendors = _dbContext.EntityFromSql<Vendor>("GetMostPopularVendors", amountParameter).ToList();
             return vendors;
         }
 
