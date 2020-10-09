@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Nop.Core;
 using Nop.Core.Data;
+using Nop.Core.Data.Extensions;
 using Nop.Core.Domain.Vendors;
 using Nop.Core.Html;
+using Nop.Data;
 using Nop.Services.Events;
 
 namespace Nop.Services.Vendors
@@ -19,6 +21,8 @@ namespace Nop.Services.Vendors
         private readonly IEventPublisher _eventPublisher;
         private readonly IRepository<Vendor> _vendorRepository;
         private readonly IRepository<VendorNote> _vendorNoteRepository;
+        private readonly IDbContext _dbContext;
+        private readonly IDataProvider _dataProvider;
 
         #endregion
 
@@ -26,11 +30,15 @@ namespace Nop.Services.Vendors
 
         public VendorService(IEventPublisher eventPublisher,
             IRepository<Vendor> vendorRepository,
-            IRepository<VendorNote> vendorNoteRepository)
+            IRepository<VendorNote> vendorNoteRepository,
+            IDbContext dbContext,
+            IDataProvider dataProvider)
         {
             this._eventPublisher = eventPublisher;
             this._vendorRepository = vendorRepository;
             this._vendorNoteRepository = vendorNoteRepository;
+            this._dbContext = dbContext;
+            this._dataProvider = dataProvider;
         }
 
         #endregion
@@ -86,6 +94,29 @@ namespace Nop.Services.Vendors
             query = query.OrderBy(v => v.DisplayOrder).ThenBy(v => v.Name);
 
             var vendors = new PagedList<Vendor>(query, pageIndex, pageSize);
+            return vendors;
+        }
+
+        /// <summary>
+        /// Get All Top 'amount' Vendors (vendors having the highes average reviews)
+        /// </summary>
+        /// <param name="amount">the amount of vendors to return</param>
+        /// <returns></returns>
+        public virtual List<Vendor> GetAllTopXVendors(int amount)
+        {
+            var vendors = _dbContext.EntityFromSql<Vendor>("GetTopXVendors", amount).ToList();
+            return vendors;
+        }
+
+        /// <summary>
+        /// Get Most Popular 'amount' Vendors (vendors having the highes number of followers)
+        /// </summary>
+        /// <param name="amount">the amount of vendors to return</param>
+        /// <returns></returns>
+        public virtual List<Vendor> GetMostPopularVendors(int amount)
+        {
+            var amountParameter = _dataProvider.GetInt32Parameter("Amount", amount);
+            var vendors = _dbContext.EntityFromSql<Vendor>("GetMostPopularVendors", amountParameter).ToList();
             return vendors;
         }
 

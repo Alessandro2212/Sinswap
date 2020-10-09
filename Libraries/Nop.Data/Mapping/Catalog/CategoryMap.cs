@@ -25,7 +25,9 @@ namespace Nop.Data.Mapping.Catalog
             builder.Property(category => category.MetaTitle).HasMaxLength(400);
             builder.Property(category => category.PriceRanges).HasMaxLength(400);
             builder.Property(category => category.PageSizeOptions).HasMaxLength(200);
-            
+            builder.Property(category => category.SoldItems);
+
+
             builder.Ignore(category => category.AppliedDiscounts);
 
             base.Configure(builder);

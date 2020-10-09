@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using iTextSharp.text;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Web.Factories;
 using Nop.Web.Framework.Components;
+using Nop.Web.Models.Catalog;
 
 namespace Nop.Web.Components
 {
@@ -14,9 +17,15 @@ namespace Nop.Web.Components
             this._catalogModelFactory = catalogModelFactory;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(bool showMostPopular = false)
         {
-            var model = _catalogModelFactory.PrepareHomepageCategoryModels();
+            List<CategorySimpleModel> model;
+
+            if(showMostPopular)
+                model = _catalogModelFactory.GetPopularHomePageCategories(8);
+            else
+                model = _catalogModelFactory.PrepareCategorySimpleModels();
+
             if (!model.Any())
                 return Content("");
 

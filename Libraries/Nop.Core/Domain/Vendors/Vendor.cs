@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Nop.Core.Domain.Localization;
 using Nop.Core.Domain.Seo;
 
@@ -85,6 +87,23 @@ namespace Nop.Core.Domain.Vendors
         /// Gets or sets the available customer selectable page size options
         /// </summary>
         public string PageSizeOptions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the vendor city
+        /// </summary>
+        public string City { get; set; }
+
+        /// <summary>
+        /// Gets or sets the vendor country
+        /// </summary>
+        public string Country { get; set; }
+
+        /// <summary>
+        /// Gets or sets the vendor birthdate
+        /// </summary>
+        public DateTime BirthDate { get; set; }
+
+        public int? FollowersNumber { get; set; }
 
         /// <summary>
         /// Gets or sets vendor notes
