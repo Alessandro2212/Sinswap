@@ -48,48 +48,6 @@ header {
         height: 75px;
     }
 
-    nav {
-        padding-top: 30px;
-
-        &.main {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        &.service {
-            margin-right: 15px;
-        }
-
-        a.menuLink {
-            margin: 0px 7px;
-            font-size: 16px;
-            font-weight: 400;
-            color: $white;
-            opacity: 0.8;
-            transition: opacity 0.15s;
-
-            &:hover {
-                opacity: 1;
-                text-decoration: none;
-                transition: opacity 0.15s;
-            }
-        }
-
-        .btn {
-            margin-top: -4px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: none;
-            float: right;
-            margin-left: 10px;
-            font-size: 14px;
-
-            &:hover {
-                background-color: rgba(0, 0, 0, 0.1);
-            }
-        }
-    }
-
     .payoffContainer {
         .payoff {
             display: table-cell;
@@ -100,6 +58,51 @@ header {
             line-height: 80px;
             text-align: center;
             height: 200px;
+        }
+    }
+}
+
+nav {
+    padding-top: 35px;
+
+    &.main,
+    &.vendorMenu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &.service {
+        margin-right: 20px;
+    }
+
+    a.menuLink {
+        margin: 0px 7px;
+        font-size: 16px;
+        font-weight: 400;
+        color: $white;
+        opacity: 0.8;
+        transition: opacity 0.15s;
+
+        &:hover {
+            opacity: 1;
+            text-decoration: none;
+            transition: opacity 0.15s;
+        }
+    }
+
+    .btn {
+        margin-top: -4px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        float: right;
+        margin-left: 10px;
+        font-size: 14px;
+        transition: background-color 0.15s;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            transition: background-color 0.15s;
         }
     }
 }

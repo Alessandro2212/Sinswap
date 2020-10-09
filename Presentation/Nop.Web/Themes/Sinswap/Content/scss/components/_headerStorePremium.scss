@@ -1,0 +1,85 @@
+﻿// Header Premium vendor
+.vendorPremium header {
+    color: $grey33;
+    background: none;
+
+    .floatingObj1,
+    .floatingObj2 {
+        display: none !important;
+    }
+
+    .logoContainer {
+        a {
+            padding: 20px 30px;
+            display: inline-block;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1;
+            background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
+            background-size: 300% 300%;
+            -webkit-animation: MoveBG 60s ease infinite;
+            -moz-animation: MoveBG 60s ease infinite;
+            -o-animation: MoveBG 60s ease infinite;
+            animation: MoveBG 60s ease infinite;
+
+            .logo {
+                margin-top: 0px;
+                width: 213px;
+                height: 57px;
+            }
+        }
+    }
+
+    nav {
+        padding-bottom: 35px;
+
+        a.menuLink {
+            color: $grey33;
+        }
+
+        .btn {
+            color: $grey33;
+            background-color: rgba(255, 255, 255, 0.1);
+
+            &:hover {
+                background-color: rgba(17, 17, 17, 0.1);
+            }
+        }
+    }
+
+    .payoffContainer {
+        background-image: url('/Themes/Sinswap/Content/images/vendorBackground.jpg'); // move to html
+        background-repeat: no-repeat;
+        background-position: bottom center;
+        background-color: $grey6;
+        background-size: cover;
+        height: 310px;
+
+        .payoff {
+            display: none;
+        }
+    }
+}
+
+
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 576px) {
+}

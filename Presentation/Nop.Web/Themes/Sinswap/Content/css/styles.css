@@ -406,6 +406,46 @@ a.more {
   .categoryCard.object {
     background-color: #4adfd0; }
 
+.vendorCategoriesContainer .categoryCard {
+  background-size: cover; }
+  .vendorCategoriesContainer .categoryCard:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #171717;
+    opacity: 0.85;
+    border-radius: 5px;
+    transition: opacity 0.15s; }
+  .vendorCategoriesContainer .categoryCard .category {
+    color: #fff;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: top 0.15s, opacity 0.15s; }
+    .vendorCategoriesContainer .categoryCard .category a {
+      display: block;
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 7px; }
+    .vendorCategoriesContainer .categoryCard .category .priceLabel {
+      font-size: 6px;
+      line-height: 2px; }
+    .vendorCategoriesContainer .categoryCard .category .price {
+      font-size: 16px;
+      font-weight: 500; }
+      .vendorCategoriesContainer .categoryCard .category .price sup {
+        font-size: 9px; }
+  .vendorCategoriesContainer .categoryCard:hover .category {
+    top: 60%;
+    opacity: 0;
+    transition: top 0.15s, opacity 0.15s; }
+  .vendorCategoriesContainer .categoryCard:hover:before {
+    opacity: 0;
+    transition: opacity 0.15s; }
+
 @media (min-width: 1660px) {
   .container {
     max-width: 1640px; }
@@ -448,34 +488,6 @@ header {
   header .logo {
     margin-top: 15px;
     height: 75px; }
-  header nav {
-    padding-top: 30px; }
-    header nav.main {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center; }
-    header nav.service {
-      margin-right: 15px; }
-    header nav a.menuLink {
-      margin: 0px 7px;
-      font-size: 16px;
-      font-weight: 400;
-      color: #fff;
-      opacity: 0.8;
-      transition: opacity 0.15s; }
-      header nav a.menuLink:hover {
-        opacity: 1;
-        text-decoration: none;
-        transition: opacity 0.15s; }
-    header nav .btn {
-      margin-top: -4px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border: none;
-      float: right;
-      margin-left: 10px;
-      font-size: 14px; }
-      header nav .btn:hover {
-        background-color: rgba(0, 0, 0, 0.1); }
   header .payoffContainer .payoff {
     display: table-cell;
     vertical-align: middle;
@@ -485,6 +497,37 @@ header {
     line-height: 80px;
     text-align: center;
     height: 200px; }
+
+nav {
+  padding-top: 35px; }
+  nav.main, nav.vendorMenu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; }
+  nav.service {
+    margin-right: 20px; }
+  nav a.menuLink {
+    margin: 0px 7px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    opacity: 0.8;
+    transition: opacity 0.15s; }
+    nav a.menuLink:hover {
+      opacity: 1;
+      text-decoration: none;
+      transition: opacity 0.15s; }
+  nav .btn {
+    margin-top: -4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    float: right;
+    margin-left: 10px;
+    font-size: 14px;
+    transition: background-color 0.15s; }
+    nav .btn:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      transition: background-color 0.15s; }
 
 @media (max-width: 992px) {
   header nav.service .btn {
@@ -511,6 +554,48 @@ header {
       position: absolute; }
     header .payoffContainer {
       display: none; } }
+
+.vendorPremium header {
+  color: #171717;
+  background: none; }
+  .vendorPremium header .floatingObj1,
+  .vendorPremium header .floatingObj2 {
+    display: none !important; }
+  .vendorPremium header .logoContainer a {
+    padding: 20px 30px;
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1;
+    background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
+    background-size: 300% 300%;
+    -webkit-animation: MoveBG 60s ease infinite;
+    -moz-animation: MoveBG 60s ease infinite;
+    -o-animation: MoveBG 60s ease infinite;
+    animation: MoveBG 60s ease infinite; }
+    .vendorPremium header .logoContainer a .logo {
+      margin-top: 0px;
+      width: 213px;
+      height: 57px; }
+  .vendorPremium header nav {
+    padding-bottom: 35px; }
+    .vendorPremium header nav a.menuLink {
+      color: #171717; }
+    .vendorPremium header nav .btn {
+      color: #171717;
+      background-color: rgba(255, 255, 255, 0.1); }
+      .vendorPremium header nav .btn:hover {
+        background-color: rgba(17, 17, 17, 0.1); }
+  .vendorPremium header .payoffContainer {
+    background-image: url("/Themes/Sinswap/Content/images/vendorBackground.jpg");
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-color: #d9d9d9;
+    background-size: cover;
+    height: 310px; }
+    .vendorPremium header .payoffContainer .payoff {
+      display: none; }
 
 .topSellersContainer {
   position: relative;
@@ -915,6 +1000,295 @@ header {
 @media (max-width: 576px) {
   .aboutUsContainer h2 {
     font-size: 18px; } }
+
+.vendorInfoContainer {
+  position: relative;
+  background-color: #fff;
+  border-radius: 5px 5px 0 0;
+  margin-top: -100px;
+  padding: 0 30px; }
+  .vendorInfoContainer .starsContainer {
+    padding: 30px 0 0 20px; }
+    .vendorInfoContainer .starsContainer .ratingStars {
+      float: left; }
+      .vendorInfoContainer .starsContainer .ratingStars .fas {
+        color: #feb32b;
+        font-size: 30px; }
+    .vendorInfoContainer .starsContainer .ratingStats {
+      padding-left: 15px;
+      float: left; }
+      .vendorInfoContainer .starsContainer .ratingStats a {
+        font-size: 12px;
+        color: #919191;
+        transition: color .15s ease-in-out;
+        display: block;
+        margin-top: -1px; }
+        .vendorInfoContainer .starsContainer .ratingStats a:hover {
+          color: #171717;
+          text-decoration: none;
+          transition: color .15s ease-in-out; }
+  .vendorInfoContainer .avatarContainer .avatar {
+    position: absolute;
+    top: -180px;
+    left: 50%;
+    transform: translateX(-50%); }
+    .vendorInfoContainer .avatarContainer .avatar:before {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      width: 100%;
+      height: 50px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 95%, white 100%); }
+    .vendorInfoContainer .avatarContainer .avatar img {
+      width: 180px;
+      border-radius: 5px 5px 0 0;
+      box-shadow: 0px -10px 15px -5px rgba(0, 0, 0, 0.75); }
+  .vendorInfoContainer .avatarContainer h1 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 100;
+    font-size: 60px;
+    margin: 15px 0;
+    z-index: 1;
+    position: relative; }
+    .vendorInfoContainer .avatarContainer h1 span {
+      display: none; }
+  .vendorInfoContainer .metaContainer {
+    padding: 40px 20px 0 0;
+    font-size: 20px;
+    color: #919191; }
+    .vendorInfoContainer .metaContainer .country {
+      text-transform: uppercase; }
+
+@media (max-width: 1660px) {
+  .vendorInfoContainer .starsContainer .ratingStars .fas {
+    font-size: 25px; }
+  .vendorInfoContainer .starsContainer .ratingStats {
+    padding-left: 0px; }
+    .vendorInfoContainer .starsContainer .ratingStats a {
+      display: inline;
+      margin-right: 10px; }
+  .vendorInfoContainer .avatarContainer h1 {
+    font-size: 50px; }
+  .vendorInfoContainer .metaContainer {
+    font-size: 16px; } }
+
+@media (max-width: 992px) {
+  .vendorInfoContainer .starsContainer {
+    padding-top: 0px; }
+  .vendorInfoContainer .metaContainer {
+    padding-top: 5px; } }
+
+@media (max-width: 576px) {
+  .vendorInfoContainer .starsContainer .ratingStars .fas {
+    font-size: 20px; }
+  .vendorInfoContainer .avatarContainer h1 {
+    font-size: 40px; }
+  .vendorInfoContainer .metaContainer {
+    font-size: 14px; } }
+
+.vendorMenuContainer {
+  position: relative; }
+  .vendorMenuContainer:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 1px;
+    width: 90%;
+    border: 1px solid #dedede;
+    z-index: 0; }
+  .vendorMenuContainer .donationContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; }
+    .vendorMenuContainer .donationContainer .donationBtn {
+      display: inline-block;
+      background-color: #fff;
+      padding-left: 20px;
+      padding-right: 20px; }
+      .vendorMenuContainer .donationContainer .donationBtn .btn-primary {
+        border: none;
+        font-size: 14px;
+        background-color: #dedede;
+        transition: background-color 0.15s ease-in-out; }
+        .vendorMenuContainer .donationContainer .donationBtn .btn-primary:hover {
+          background-color: #171717;
+          transition: background-color 0.15s ease-in-out; }
+  .vendorMenuContainer .submenuContainer .vendorMenu {
+    padding-top: 0px;
+    height: 100%;
+    align-items: center; }
+    .vendorMenuContainer .submenuContainer .vendorMenu .menuLink {
+      color: #171717;
+      background-color: #fff;
+      padding: 0 7px;
+      margin: 0;
+      opacity: 1;
+      transition: color 0.15s ease-in-out; }
+      .vendorMenuContainer .submenuContainer .vendorMenu .menuLink:hover {
+        color: #666666;
+        transition: color 0.15s ease-in-out; }
+      .vendorMenuContainer .submenuContainer .vendorMenu .menuLink:first-of-type {
+        padding-left: 25px; }
+      .vendorMenuContainer .submenuContainer .vendorMenu .menuLink:last-of-type {
+        padding-right: 25px; }
+  .vendorMenuContainer .socialContainer {
+    padding-right: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 100%;
+    align-items: center; }
+    .vendorMenuContainer .socialContainer .socialLink {
+      color: #dedede;
+      font-size: 25px;
+      padding: 5px;
+      background-color: #fff;
+      transition: color 0.15s ease-in-out; }
+      .vendorMenuContainer .socialContainer .socialLink:hover {
+        color: #171717;
+        transition: color 0.15s ease-in-out; }
+      .vendorMenuContainer .socialContainer .socialLink:first-of-type {
+        padding-left: 20px; }
+      .vendorMenuContainer .socialContainer .socialLink:last-of-type {
+        padding-right: 20px; }
+    .vendorMenuContainer .socialContainer .followBtn {
+      margin-right: -40px; }
+      .vendorMenuContainer .socialContainer .followBtn a {
+        font-size: 14px; }
+
+@media (max-width: 1660px) {
+  .vendorMenuContainer > .row {
+    background-color: #fff; }
+  .vendorMenuContainer .socialContainer {
+    top: 20px;
+    justify-content: flex-end; }
+    .vendorMenuContainer .socialContainer .followBtn {
+      margin-right: 20px; } }
+
+@media (max-width: 1200px) {
+  .vendorMenuContainer > .row {
+    background-color: #fff; }
+  .vendorMenuContainer .socialContainer {
+    top: 20px;
+    justify-content: flex-end; }
+    .vendorMenuContainer .socialContainer .socialLink {
+      font-size: 15px;
+      padding: 3px; }
+      .vendorMenuContainer .socialContainer .socialLink:first-of-type {
+        padding-left: 10px; }
+    .vendorMenuContainer .socialContainer .followBtn {
+      margin-right: 20px; } }
+
+@media (max-width: 992px) {
+  .vendorMenuContainer {
+    margin-top: 20px; }
+    .vendorMenuContainer:before {
+      top: auto;
+      bottom: 8.5%; }
+    .vendorMenuContainer .submenuContainer {
+      margin-top: 60px; }
+    .vendorMenuContainer .socialContainer {
+      top: 0px; } }
+
+.vendorCategoriesContainer {
+  padding: 35px 25px 0px 25px;
+  margin-bottom: 55px; }
+  .vendorCategoriesContainer h2 {
+    font-size: 28px;
+    padding: 20px 0 15px 5px;
+    margin: 0px; }
+  .vendorCategoriesContainer a.more {
+    margin-left: 5px; }
+
+@media (max-width: 768px) {
+  .vendorCategoriesContainer h2 {
+    font-size: 18px; } }
+
+.vendorPersonalQuoteContainer {
+  background-color: #f5f5f5;
+  padding: 90px 25px; }
+  .vendorPersonalQuoteContainer .personalContainer {
+    padding: 0 120px; }
+    .vendorPersonalQuoteContainer .personalContainer p {
+      font-family: 'Caveat', cursive;
+      font-size: 30px;
+      line-height: 35px;
+      color: #2c4b83;
+      margin-bottom: 0px; }
+  .vendorPersonalQuoteContainer .quoteContainer {
+    padding: 0 120px; }
+    .vendorPersonalQuoteContainer .quoteContainer blockquote {
+      font-size: 55px;
+      font-weight: 600;
+      text-align: center;
+      line-height: 65px;
+      padding-top: 60px; }
+      .vendorPersonalQuoteContainer .quoteContainer blockquote:before {
+        font-family: "Montserrat", sans-serif;
+        content: '"';
+        font-size: 120px;
+        font-weight: 600;
+        color: #dedede;
+        position: absolute;
+        top: 40px;
+        left: 85px; }
+      .vendorPersonalQuoteContainer .quoteContainer blockquote:after {
+        font-family: "Montserrat", sans-serif;
+        content: '"';
+        font-size: 120px;
+        font-weight: 600;
+        color: #dedede;
+        position: absolute;
+        bottom: 60px;
+        right: 85px; }
+    .vendorPersonalQuoteContainer .quoteContainer .quoteAuthor {
+      font-size: 40px;
+      font-weight: 100;
+      text-align: center;
+      width: 100%;
+      margin-top: 30px; }
+
+@media (max-width: 1660px) {
+  .vendorPersonalQuoteContainer .personalContainer {
+    padding: 0 90px; }
+    .vendorPersonalQuoteContainer .personalContainer p {
+      font-size: 25px;
+      line-height: 25px; }
+  .vendorPersonalQuoteContainer .quoteContainer {
+    padding: 0 90px; }
+    .vendorPersonalQuoteContainer .quoteContainer blockquote {
+      font-size: 45px;
+      line-height: 55px; }
+      .vendorPersonalQuoteContainer .quoteContainer blockquote:before {
+        font-size: 60px;
+        left: 55px; }
+      .vendorPersonalQuoteContainer .quoteContainer blockquote:after {
+        font-size: 60px;
+        right: 55px; }
+    .vendorPersonalQuoteContainer .quoteContainer .quoteAuthor {
+      font-size: 30px; } }
+
+@media (max-width: 1200px) {
+  .vendorPersonalQuoteContainer .personalContainer {
+    padding: 0 60px; }
+    .vendorPersonalQuoteContainer .personalContainer p {
+      font-size: 20px;
+      line-height: 25px; } }
+
+@media (max-width: 992px) {
+  .vendorPersonalQuoteContainer .quoteContainer {
+    margin-top: 60px; } }
+
+@media (max-width: 576px) {
+  .vendorPersonalQuoteContainer .quoteContainer blockquote {
+    font-size: 25px;
+    line-height: 35px; }
+  .vendorPersonalQuoteContainer .quoteAuthor {
+    font-size: 20px; } }
 
 footer {
   color: #fff;

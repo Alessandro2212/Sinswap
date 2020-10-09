@@ -1,0 +1,189 @@
+﻿// Vendor Menu
+.vendorMenuContainer {
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        height: 1px;
+        width: 90%;
+        border: 1px solid $grey5;
+        z-index: 0;
+    }
+
+    .donationContainer {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        .donationBtn {
+            display: inline-block;
+            background-color: $white;
+            padding-left: 20px;
+            padding-right: 20px;
+
+            .btn-primary {
+                border: none;
+                font-size: 14px;
+                background-color: $grey5;
+                transition: background-color 0.15s ease-in-out;
+
+                &:hover {
+                    background-color: $black;
+                    transition: background-color 0.15s ease-in-out;
+                }
+            }
+        }
+    }
+
+    .submenuContainer {
+        .vendorMenu {
+            padding-top: 0px;
+            height: 100%;
+            align-items: center;
+
+            .menuLink {
+                color: $black;
+                background-color: $white;
+                padding: 0 7px;
+                margin: 0;
+                opacity: 1;
+                transition: color 0.15s ease-in-out;
+
+                &:hover {
+                    color: $grey22;
+                    transition: color 0.15s ease-in-out;
+                }
+
+                &:first-of-type {
+                    padding-left: 25px;
+                }
+
+                &:last-of-type {
+                    padding-right: 25px;
+                }
+            }
+        }
+    }
+
+    .socialContainer {
+        padding-right: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: 100%;
+        align-items: center;
+
+        .socialLink {
+            color: $grey5;
+            font-size: 25px;
+            padding: 5px;
+            background-color: $white;
+            transition: color 0.15s ease-in-out;
+
+            &:hover {
+                color: $black;
+                transition: color 0.15s ease-in-out;
+            }
+
+            &:first-of-type {
+                padding-left: 20px;
+            }
+
+            &:last-of-type {
+                padding-right: 20px;
+            }
+        }
+
+        .followBtn {
+            margin-right: -40px;
+
+            a {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+
+
+// Extra Super large devices (large desktops, 1660px and up)
+@media (max-width: 1660px) {
+    .vendorMenuContainer {
+        > .row {
+            background-color: $white;
+        }
+
+        .socialContainer {
+            top: 20px;
+            justify-content: flex-end;
+
+            .followBtn {
+                margin-right: 20px;
+            }
+        }
+    }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+    .vendorMenuContainer {
+        > .row {
+            background-color: $white;
+        }
+
+        .socialContainer {
+            top: 20px;
+            justify-content: flex-end;
+
+            .socialLink {
+                font-size: 15px;
+                padding: 3px;
+
+                &:first-of-type {
+                    padding-left: 10px;
+                }
+            }
+
+            .followBtn {
+                margin-right: 20px;
+            }
+        }
+    }
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+    .vendorMenuContainer {
+        margin-top: 20px;
+
+        &:before {
+            top: auto;
+            bottom: 8.5%;
+        }
+
+        .submenuContainer {
+            margin-top: 60px;
+        }
+           
+        .socialContainer {
+            top: 0px;
+        }
+    }
+   }
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 576px) {
+}

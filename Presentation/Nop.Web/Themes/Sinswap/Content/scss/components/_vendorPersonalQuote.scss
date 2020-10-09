@@ -1,0 +1,145 @@
+﻿// Popular categories
+.vendorPersonalQuoteContainer {
+    background-color: $grey2;
+    padding: 90px 25px;
+
+    .personalContainer {
+        padding: 0 120px;
+
+        p {
+            font-family: 'Caveat', cursive;
+            font-size: 30px;
+            line-height: 35px;
+            color: #2c4b83;
+            margin-bottom: 0px;
+        }
+    }
+
+    .quoteContainer {
+        padding: 0 120px;
+
+        blockquote {
+            font-size: 55px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 65px;
+            padding-top: 60px;
+
+            &:before {
+                font-family: $fontBody;
+                content: '"';
+                font-size: 120px;
+                font-weight: 600;
+                color: $grey5;
+                position: absolute;
+                top: 40px;
+                left: 85px;
+            }
+
+            &:after {
+                font-family: $fontBody;
+                content: '"';
+                font-size: 120px;
+                font-weight: 600;
+                color: $grey5;
+                position: absolute;
+                bottom: 60px;
+                right: 85px;
+            }
+        }
+
+        .quoteAuthor {
+            font-size: 40px;
+            font-weight: 100;
+            text-align: center;
+            width: 100%;
+            margin-top: 30px;
+        }
+    }
+}
+
+
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1660px) {
+    .vendorPersonalQuoteContainer {
+        .personalContainer {
+            padding: 0 90px;
+
+            p {
+                font-size: 25px;
+                line-height: 25px;
+            }
+        }
+
+        .quoteContainer {
+            padding: 0 90px;
+
+            blockquote {
+                font-size: 45px;
+                line-height: 55px;
+
+                &:before {
+                    font-size: 60px;
+                    left: 55px;
+                }
+
+                &:after {
+                    font-size: 60px;
+                    right: 55px;
+                }
+            }
+
+            .quoteAuthor {
+                font-size: 30px;
+            }
+        }
+    }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+    .vendorPersonalQuoteContainer {
+        .personalContainer {
+            padding: 0 60px;
+
+            p {
+                font-size: 20px;
+                line-height: 25px;
+            }
+        }
+    }
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+    .vendorPersonalQuoteContainer {
+        .quoteContainer {
+            margin-top: 60px;
+        }
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+    .vendorPersonalQuoteContainer {
+        .quoteContainer {
+            blockquote {
+                font-size: 25px;
+                line-height: 35px;
+            }
+        }
+
+        .quoteAuthor {
+            font-size: 20px;
+        }
+    }
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (min-width: 576px) {
+}

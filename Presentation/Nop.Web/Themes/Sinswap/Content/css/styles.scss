@@ -7,6 +7,8 @@
 
 // Component imports: header
 @import "../scss/components/_header";
+@import "../scss/components/_headerStoreBasic";
+@import "../scss/components/_headerStorePremium";
 
 // Component imports: homepage
 @import "../scss/components/_topsellers";
@@ -17,6 +19,12 @@
 @import "../scss/components/_promo";
 @import "../scss/components/_trendingCategories";
 @import "../scss/components/_aboutUs";
+
+// Component imports: Vendor
+@import "../scss/components/_vendorInfo";
+@import "../scss/components/_vendorMenu";
+@import "../scss/components/_vendorCategories";
+@import "../scss/components/_vendorPersonalQuote";
 
 // Component imports: footer
 @import "../scss/components/_footer";

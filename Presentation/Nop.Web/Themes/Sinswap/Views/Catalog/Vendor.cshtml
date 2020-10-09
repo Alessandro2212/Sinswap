@@ -1,0 +1,265 @@
+﻿@model VendorModel
+@using Nop.Core.Domain.Seo
+@inject Nop.Core.IWebHelper webHelper
+@inject SeoSettings seoSettings
+
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+
+    //meta
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+
+    //page class
+    Html.AppendPageCssClassParts("vendorPremium");
+
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        var vendorUrl = Url.RouteUrl("Vendor", new { SeName = Model.SeName }, webHelper.CurrentRequestProtocol).ToLowerInvariant();
+        Html.AddCanonicalUrlParts(vendorUrl, seoSettings.QueryStringInCanonicalUrlsEnabled);
+    }
+}
+
+
+
+<div class="container vendorInfoContainer">
+    <div class="row">
+
+        <div class="col-6 order-2 order-lg-1 col-lg-3 text-left starsContainer">
+            <div class="ratingStars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+
+            <div class="ratingStats">
+                <a href="#">36 Reviews</a>
+                <a href="#">42 items sold</a>
+            </div>
+        </div>
+
+        <div class="col-12 order-1 order-lg-2 col-lg-6 text-center avatarContainer">
+            <h1><span>Sinswap store: </span>@Model.Name</h1>
+            <div class="avatar"><img src="/Themes/Sinswap/Content/images/vendorAvatar.jpg" /></div>
+        </div>
+
+        <div class="col-6 order-3 order-lg-3 col-lg-3 text-right metaContainer">
+            <p><span class="age">24</span>, <span class="city">Kaapstad</span>, <span class="country">South Africa</span></p>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="container vendorMenuContainer">
+    <div class="row">
+
+        <div class="col-6 order-1 order-lg-1 col-lg-2 col-xl-3 text-left donationContainer">
+            <div class="donationBtn">
+                <a href="#" class="btn btn-primary">Donate</a>
+            </div>
+        </div>
+
+        <div class="col-12 order-3 order-lg-2 col-lg-8 col-xl-6 text-center submenuContainer">
+            <nav class="vendorMenu">
+                <a href="#" class="menuLink">About me</a>
+                <a href="#" class="menuLink">Media</a>
+                <a href="#" class="menuLink">Show</a>
+                <a href="#" class="menuLink">Message board</a>
+                <a href="#" class="menuLink">Contact</a>
+            </nav>
+        </div>
+
+        <div class="col-6 order-2 order-lg-3 col-lg-2 col-xl-3 text-right socialContainer">
+            <a href="#" class="socialLink"><i class="fab fa-twitch"></i></a>
+            <a href="#" class="socialLink"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="socialLink"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="socialLink"><i class="fab fa-facebook-square"></i></a>
+            <a href="#" class="socialLink"><i class="fab fa-twitter"></i></a>
+            <div class="followBtn">
+                <a href="#" class="btn btn-primary">Follow me</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="container vendorCategoriesContainer">
+    <div class="row">
+        <div class="col-12">
+            <h2>You can buy all of these from me</h2>
+
+            <div class="flex-row row no-gutters">
+
+                <div class="col-6 col-lg-3">
+                    <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="category">
+                            <a href="#">High heels</a>
+                            <div class="priceLabel">from</div>
+                            <div class="price">&euro;70<sup>.00</sup></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="categoryCard food" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="category">
+                            <a href="#">Cucumbers</a>
+                            <div class="priceLabel">from</div>
+                            <div class="price">&euro;70<sup>.00</sup></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="categoryCard body" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="category">
+                            <a href="#">Bath water</a>
+                            <div class="priceLabel">from</div>
+                            <div class="price">&euro;70<sup>.00</sup></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="category">
+                            <a href="#">Yogapants</a>
+                            <div class="priceLabel">from</div>
+                            <div class="price">&euro;70<sup>.00</sup></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="category">
+                            <a href="#">Sports bras</a>
+                            <div class="priceLabel">from</div>
+                            <div class="price">&euro;70<sup>.00</sup></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="categoryCard service" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="category">
+                            <a href="#">GFE</a>
+                            <div class="priceLabel">from</div>
+                            <div class="price">&euro;70<sup>.00</sup></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="category">
+                            <a href="#">Panties</a>
+                            <div class="priceLabel">from</div>
+                            <div class="price">&euro;70<sup>.00</sup></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="categoryCard object" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="category">
+                            <a href="#">Vibrators</a>
+                            <div class="priceLabel">from</div>
+                            <div class="price">&euro;70<sup>.00</sup></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid vendorPersonalQuoteContainer">
+    <div class="row">
+        <div class="col-12">
+
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-12 col-lg-6 personalContainer">
+                        <p>
+                            Hi there,<br /><br />
+
+                            Mauris placerat congue dui sit amet blandit. Phasellus condimentum libero vel velit auctor, sit amet tincidunt velit varius. Mauris lacinia porta faucibus. Fusce eu est ac eros vulputate mollis in ac felis. Aenean commodo scelerisque mi sed imperdiet.<br /><br />
+
+                            Donec at hendrerit nisi, eget vestibulum nisi. Sed sit amet magna luctus, facilisis erat quis, sagittis ligula. Aenean dignissim velit quis leo consequat ultricies. Proin quis pretium justo. Vestibulum at eros nisl. P lacus dictum vel. Phasellus vitae sollicitudin mi.<br /><br />
+
+                            XOXO, Katee
+                        </p>
+                    </div>
+
+                    <div class="col-12 col-lg-6 quoteContainer">
+                        <blockquote>
+                            I love it when men and women tell me what they want.
+                            So what can I do for you?
+                        </blockquote>
+                        <div class="quoteAuthor">- Katee -</div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!--<div class="page vendor-page">
+    <div class="page-title">
+        <h1>@Model.Name</h1>
+    </div>
+    <div class="page-body">-->
+@*description*@
+<!--@if (!string.IsNullOrWhiteSpace(Model.Description))
+{
+    <div class="vendor-description">
+        @Html.Raw(Model.Description)
+    </div>
+}-->
+@*contact vendor*@
+<!--@if (Model.AllowCustomersToContactVendors)
+{
+    <div class="contact-vendor">
+        <input type="button" value="@T("ContactVendor")" class="button-2 contact-vendor-button" onclick="setLocation('@Url.RouteUrl("ContactVendor", new { vendorId = Model.Id })')" />
+    </div>
+}
+
+@if (Model.Products.Count > 0)
+{
+    @await Html.PartialAsync("_CatalogSelectors", Model.PagingFilteringContext)
+}-->
+@*product list*@
+<!--@if (Model.Products.Count > 0)
+        {
+            <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
+                <div class="item-grid">
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="item-box">
+                            @await Html.PartialAsync("_ProductBox", product)
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>-->
