@@ -169,7 +169,7 @@
         .submenuContainer {
             margin-top: 60px;
         }
-           
+
         .socialContainer {
             top: 0px;
         }
@@ -178,10 +178,28 @@
 
 // Medium devices (tablets, 768px and up)
 @media (max-width: 768px) {
+    .vendorMenuContainer {
+        .donationContainer {
+           align-items: flex-end;
+        }
+
+        .submenuContainer {
+            .vendorMenu {
+                .menuLink:first-of-type,
+                .menuLink:last-of-type {
+                    padding-left: 7px;
+                    padding-right: 7px;
+                }
+            }
+        }
+    }
 }
 
 // Small devices (landscape phones, 576px and up)
 @media (max-width: 576px) {
+    .vendorMenuContainer {
+        margin-top: 0px;
+    }
 }
 
 // Extra small devices (portrait phones, less than 576px)

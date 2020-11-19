@@ -1,6 +1,5 @@
-﻿// Popular categories
+﻿// Vendor personal message and quote
 .vendorPersonalQuoteContainer {
-    background-color: $grey2;
     padding: 90px 25px;
 
     .personalContainer {
@@ -10,7 +9,7 @@
             font-family: 'Caveat', cursive;
             font-size: 30px;
             line-height: 35px;
-            color: #2c4b83;
+            color: $personal;
             margin-bottom: 0px;
         }
     }
@@ -122,6 +121,14 @@
 
 // Medium devices (tablets, 768px and up)
 @media (max-width: 768px) {
+    .vendorPersonalQuoteContainer {
+        .quoteContainer {
+            blockquote {
+                font-size: 35px;
+                line-height: 45px;
+            }
+        }
+    }
 }
 
 // Small devices (landscape phones, 576px and up)

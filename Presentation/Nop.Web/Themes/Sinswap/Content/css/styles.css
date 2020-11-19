@@ -315,6 +315,9 @@ html,
 body {
   font-family: "Montserrat", sans-serif; }
 
+:focus {
+  outline: none; }
+
 .no-gutters {
   margin-right: 0;
   margin-left: 0; }
@@ -334,6 +337,22 @@ body {
 .flex-row.row:after,
 .flex-row.row:before {
   display: flex; }
+
+.dividerContainer {
+  padding: 0px 15px 90px 15px; }
+  .dividerContainer .divider:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 1px;
+    width: 90%;
+    border: 1px solid #dedede;
+    z-index: 0; }
+
+.bgGrey2 {
+  background-color: #f5f5f5; }
 
 .slick-prev,
 .slick-next {
@@ -558,9 +577,6 @@ nav {
 .vendorPremium header {
   color: #171717;
   background: none; }
-  .vendorPremium header .floatingObj1,
-  .vendorPremium header .floatingObj2 {
-    display: none !important; }
   .vendorPremium header .logoContainer a {
     padding: 20px 30px;
     display: inline-block;
@@ -594,8 +610,50 @@ nav {
     background-color: #d9d9d9;
     background-size: cover;
     height: 310px; }
-    .vendorPremium header .payoffContainer .payoff {
-      display: none; }
+
+@media (max-width: 1350px) {
+  .vendorPremium header nav.service .btn {
+    margin-bottom: 14px;
+    font-size: 12px;
+    margin-left: 0px; } }
+
+@media (max-width: 992px) {
+  .vendorPremium header .logoContainer a {
+    padding: 15px 20px;
+    top: 70px; }
+    .vendorPremium header .logoContainer a .logo {
+      width: 106.5px;
+      height: 28.5px; }
+  .vendorPremium header nav.main {
+    justify-content: start; }
+    .vendorPremium header nav.main a.menuLink {
+      font-size: 14px; } }
+
+@media (max-width: 768px) {
+  .vendorPremium header {
+    height: auto;
+    min-height: 400px; }
+    .vendorPremium header .payoffContainer {
+      display: block;
+      height: 210px; }
+    .vendorPremium header .row nav.service {
+      padding-top: 5px; }
+      .vendorPremium header .row nav.service .btn {
+        margin: 0px; } }
+
+@media (max-width: 576px) {
+  .vendorPremium header .row nav.main {
+    padding-top: 50px;
+    padding-bottom: 60px;
+    justify-content: center; }
+    .vendorPremium header .row nav.main a.menuLink {
+      margin: 0 5px; }
+  .vendorPremium header .row .logoContainer a {
+    top: 95px;
+    left: 50%;
+    transform: translateX(-50%); }
+  .vendorPremium header .row .payoffContainer {
+    height: 310px; } }
 
 .topSellersContainer {
   position: relative;
@@ -1080,11 +1138,19 @@ nav {
   .vendorInfoContainer .metaContainer {
     padding-top: 5px; } }
 
+@media (max-width: 768px) {
+  .vendorInfoContainer {
+    margin-top: -150px; }
+    .vendorInfoContainer .avatarContainer .avatar {
+      top: -120px; }
+      .vendorInfoContainer .avatarContainer .avatar img {
+        width: 120px; }
+    .vendorInfoContainer .avatarContainer h1 {
+      font-size: 30px; } }
+
 @media (max-width: 576px) {
   .vendorInfoContainer .starsContainer .ratingStars .fas {
     font-size: 20px; }
-  .vendorInfoContainer .avatarContainer h1 {
-    font-size: 40px; }
   .vendorInfoContainer .metaContainer {
     font-size: 14px; } }
 
@@ -1194,6 +1260,18 @@ nav {
     .vendorMenuContainer .socialContainer {
       top: 0px; } }
 
+@media (max-width: 768px) {
+  .vendorMenuContainer .donationContainer {
+    align-items: flex-end; }
+  .vendorMenuContainer .submenuContainer .vendorMenu .menuLink:first-of-type,
+  .vendorMenuContainer .submenuContainer .vendorMenu .menuLink:last-of-type {
+    padding-left: 7px;
+    padding-right: 7px; } }
+
+@media (max-width: 576px) {
+  .vendorMenuContainer {
+    margin-top: 0px; } }
+
 .vendorCategoriesContainer {
   padding: 35px 25px 0px 25px;
   margin-bottom: 55px; }
@@ -1209,7 +1287,6 @@ nav {
     font-size: 18px; } }
 
 .vendorPersonalQuoteContainer {
-  background-color: #f5f5f5;
   padding: 90px 25px; }
   .vendorPersonalQuoteContainer .personalContainer {
     padding: 0 120px; }
@@ -1283,12 +1360,475 @@ nav {
   .vendorPersonalQuoteContainer .quoteContainer {
     margin-top: 60px; } }
 
+@media (max-width: 768px) {
+  .vendorPersonalQuoteContainer .quoteContainer blockquote {
+    font-size: 35px;
+    line-height: 45px; } }
+
 @media (max-width: 576px) {
   .vendorPersonalQuoteContainer .quoteContainer blockquote {
     font-size: 25px;
     line-height: 35px; }
   .vendorPersonalQuoteContainer .quoteAuthor {
     font-size: 20px; } }
+
+.vendorMediaContainer {
+  position: relative;
+  padding: 0 30px 90px 30px; }
+  .vendorMediaContainer .slick-loading .slick-list {
+    border-radius: 5px; }
+  .vendorMediaContainer .slick-initialized .slick-slide {
+    padding: 0 5px; }
+  .vendorMediaContainer .slick-next {
+    right: -20px; }
+  .vendorMediaContainer .vendorMediaCard {
+    margin-top: 10px;
+    position: relative;
+    margin-right: 10px; }
+    .vendorMediaContainer .vendorMediaCard a {
+      display: block;
+      margin-right: -10px; }
+      .vendorMediaContainer .vendorMediaCard a:before {
+        content: "\f002";
+        font-family: 'FontAwesome';
+        color: #fff;
+        font-size: 40px;
+        text-align: center;
+        line-height: 170px;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #171717;
+        opacity: 0;
+        border-radius: 5px;
+        transition: opacity 0.15s; }
+      .vendorMediaContainer .vendorMediaCard a img {
+        border-radius: 5px;
+        height: 170px; }
+      .vendorMediaContainer .vendorMediaCard a:hover {
+        cursor: pointer; }
+        .vendorMediaContainer .vendorMediaCard a:hover:before {
+          opacity: .85;
+          transition: opacity 0.15s; }
+
+.vendorPremiumContentContainer {
+  position: relative;
+  padding: 0 30px 90px 30px; }
+  .vendorPremiumContentContainer .vendorSmallTalkContainer {
+    text-align: center;
+    margin-bottom: 60px; }
+    .vendorPremiumContentContainer .vendorSmallTalkContainer .smallTalkHeader h2 {
+      font-weight: 900;
+      font-size: 60px;
+      text-transform: uppercase; }
+    .vendorPremiumContentContainer .vendorSmallTalkContainer .smallTalkHeader h3 {
+      font-weight: 100;
+      font-size: 22px; }
+      .vendorPremiumContentContainer .vendorSmallTalkContainer .smallTalkHeader h3 span {
+        font-size: 34px;
+        display: block; }
+    .vendorPremiumContentContainer .vendorSmallTalkContainer .smallTalkHeader img {
+      border-radius: 5px;
+      width: 80px;
+      position: absolute;
+      right: 100px;
+      top: 15px;
+      transform: rotate(5deg); }
+  .vendorPremiumContentContainer .qaContainer {
+    margin-top: 60px;
+    padding: 0 30px;
+    max-height: 1000px;
+    overflow-y: auto; }
+    .vendorPremiumContentContainer .qaContainer .bubble {
+      width: 100%;
+      position: relative; }
+      .vendorPremiumContentContainer .qaContainer .bubble p {
+        padding: 5px 10px;
+        font-size: 18px;
+        font-weight: 100;
+        max-width: 80%;
+        margin-bottom: 15px;
+        position: relative; }
+      .vendorPremiumContentContainer .qaContainer .bubble.question {
+        text-align: left;
+        margin-top: 10px; }
+        .vendorPremiumContentContainer .qaContainer .bubble.question p {
+          display: inline-block;
+          color: #333333;
+          background-color: #ededed;
+          text-align: left;
+          border-radius: 5px 5px 5px 0px; }
+          .vendorPremiumContentContainer .qaContainer .bubble.question p:after {
+            position: absolute;
+            bottom: -10px;
+            left: 0px;
+            content: '';
+            width: 0;
+            height: 0;
+            border-width: 10px 10px 0 0;
+            border-color: #ededed transparent transparent transparent;
+            border-style: solid; }
+      .vendorPremiumContentContainer .qaContainer .bubble.answer {
+        text-align: right; }
+        .vendorPremiumContentContainer .qaContainer .bubble.answer p {
+          display: inline-block;
+          color: #fff;
+          background-color: #2d7de4;
+          text-align: right;
+          border-radius: 5px 5px 0px 5px; }
+          .vendorPremiumContentContainer .qaContainer .bubble.answer p:after {
+            position: absolute;
+            bottom: -10px;
+            right: 0px;
+            content: '';
+            width: 0;
+            height: 0;
+            border-width: 0 10px 10px 0;
+            border-color: transparent #2d7de4 transparent transparent;
+            border-style: solid; }
+  .vendorPremiumContentContainer .vendorReviewFavoriteContainer {
+    padding: 0px 30px; }
+    .vendorPremiumContentContainer .vendorReviewFavoriteContainer h2 {
+      text-align: center;
+      font-size: 34px;
+      margin: 45px 0px;
+      font-weight: 100; }
+    .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer {
+      margin: 0 30px 90px 30px;
+      background-color: #fff;
+      box-shadow: 0 4px 15px -5px #171717; }
+      .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList {
+        max-height: 400px;
+        overflow-y: auto;
+        margin: 0px;
+        padding: 0px 30px; }
+        .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem {
+          list-style: none;
+          border-bottom: 1px solid #dedede;
+          padding-bottom: 30px;
+          margin-bottom: 30px;
+          font-size: 16px;
+          color: #999999; }
+          .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0px; }
+          .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .reviewMeta {
+            margin-bottom: 5px;
+            font-weight: 100; }
+            .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .reviewMeta .ratingStars {
+              color: #feb32b;
+              display: inline-block; }
+            .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .reviewMeta .username {
+              color: #333333; }
+            .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .reviewMeta .usercountry {
+              text-transform: uppercase; }
+            .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .reviewMeta .tag {
+              padding-left: 10px; }
+              .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .reviewMeta .tag.kickstarter {
+                color: #05ce78; }
+              .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .reviewMeta .tag.bigspender {
+                color: #daab5f; }
+              .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .reviewMeta .tag span {
+                opacity: 0;
+                padding-left: 10px;
+                font-size: 12px;
+                color: #999999;
+                transition: opacity .25s ease-in-out; }
+              .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .reviewMeta .tag:hover span {
+                opacity: 1;
+                transition: opacity .25s ease-in-out; }
+          .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem blockquote {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 0px;
+            color: #333333; }
+          .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .publishdate {
+            font-size: 14px;
+            color: #c4c4c4; }
+    .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer {
+      margin: 0 30px;
+      padding-bottom: 30px;
+      background-color: #fff;
+      color: #171717;
+      box-shadow: 0 4px 15px -5px #171717;
+      font-size: 20px;
+      font-weight: 100; }
+      .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer span {
+        color: #fd6721; }
+      .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer .top3 {
+        padding: 0 15px;
+        font-size: 30px;
+        font-weight: 700;
+        opacity: 1; }
+      .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer .top5 {
+        padding: 0 15px;
+        font-size: 24px;
+        font-weight: 700;
+        opacity: 0.8; }
+      .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer .top10 {
+        padding: 0 15px;
+        opacity: 0.6; }
+      .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer img {
+        margin-top: 60px;
+        width: 100%;
+        max-width: 205px; }
+
+@media (max-width: 1660px) {
+  .vendorPremiumContentContainer .vendorSmallTalkContainer {
+    padding-top: 120px; }
+    .vendorPremiumContentContainer .vendorSmallTalkContainer .smallTalkHeader img {
+      right: auto;
+      left: 50%;
+      transform: translateX(-50%) rotate(5deg); }
+  .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer {
+    font-size: 14px; }
+    .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer .top3 {
+      font-size: 20px; }
+    .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer .top5 {
+      font-size: 16px; } }
+
+@media (max-width: 1200px) {
+  .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem blockquote {
+    font-size: 18px; } }
+
+@media (max-width: 992px) {
+  .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem {
+    font-size: 12px; }
+    .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .publishdate {
+      font-size: 10px; } }
+
+@media (max-width: 768px) {
+  .vendorPremiumContentContainer .qaContainer .bubble p {
+    font-size: 14px; }
+  .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer {
+    font-size: 14px; }
+    .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer .top3 {
+      font-size: 20px; }
+    .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer .top5 {
+      font-size: 16px; } }
+
+@media (max-width: 576px) {
+  .vendorPremiumContentContainer .vendorSmallTalkContainer .smallTalkHeader h2 {
+    font-size: 40px; }
+  .vendorPremiumContentContainer .vendorReviewFavoriteContainer {
+    padding: 0px; }
+    .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer {
+      margin: 0 0 90px 0; }
+    .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer {
+      margin: 0px; } }
+
+.vendorBlogContainer {
+  position: relative;
+  padding: 90px 30px; }
+  .vendorBlogContainer .blogHeader {
+    text-align: center;
+    margin-bottom: 60px; }
+    .vendorBlogContainer .blogHeader h2 {
+      font-weight: 900;
+      font-size: 60px;
+      text-transform: uppercase; }
+    .vendorBlogContainer .blogHeader p {
+      font-family: 'Caveat',cursive;
+      font-size: 30px;
+      line-height: 35px;
+      color: #2c4b83;
+      margin-bottom: 0px; }
+  .vendorBlogContainer .blogListContainer {
+    margin-top: 30px; }
+    .vendorBlogContainer .blogListContainer:after {
+      content: '';
+      display: block;
+      clear: both; }
+    .vendorBlogContainer .blogListContainer .questionFormContainer {
+      position: absolute;
+      background: #fff;
+      padding-bottom: 30px;
+      margin-bottom: 15px;
+      left: 25%;
+      top: 0px;
+      width: 50%;
+      min-height: 200px; }
+      .vendorBlogContainer .blogListContainer .questionFormContainer .form-control,
+      .vendorBlogContainer .blogListContainer .questionFormContainer .form-check {
+        margin: 7.5px 0; }
+      .vendorBlogContainer .blogListContainer .questionFormContainer textarea {
+        resize: none;
+        overflow-x: auto; }
+      .vendorBlogContainer .blogListContainer .questionFormContainer .submitContainer {
+        text-align: center; }
+    .vendorBlogContainer .blogListContainer .blogItem {
+      width: 25%;
+      margin-bottom: 15px;
+      background-color: #fff; }
+      .vendorBlogContainer .blogListContainer .blogItem .body {
+        background: #f5f5f5;
+        border-radius: 5px;
+        margin: 0 7.5px;
+        padding: 45px 30px;
+        height: 100%; }
+        .vendorBlogContainer .blogListContainer .blogItem .body p {
+          text-align: left;
+          font-size: 18px;
+          font-weight: 100;
+          color: #2c4b83;
+          margin: 0px; }
+        .vendorBlogContainer .blogListContainer .blogItem .body .divider {
+          margin-top: 35px; }
+        .vendorBlogContainer .blogListContainer .blogItem .body img {
+          border-radius: 5px;
+          width: 100%; }
+        .vendorBlogContainer .blogListContainer .blogItem .body .title {
+          text-align: center;
+          font-size: 30px;
+          font-weight: 900; }
+          .vendorBlogContainer .blogListContainer .blogItem .body .title span {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 0 15px 0; }
+        .vendorBlogContainer .blogListContainer .blogItem .body .qaContainer .bubble {
+          width: 100%;
+          position: relative; }
+          .vendorBlogContainer .blogListContainer .blogItem .body .qaContainer .bubble p {
+            padding: 5px 10px;
+            font-size: 18px;
+            font-weight: 100;
+            max-width: 80%;
+            margin-bottom: 15px;
+            position: relative; }
+          .vendorBlogContainer .blogListContainer .blogItem .body .qaContainer .bubble.question {
+            text-align: left;
+            margin-top: 10px; }
+            .vendorBlogContainer .blogListContainer .blogItem .body .qaContainer .bubble.question p {
+              display: inline-block;
+              color: #fff;
+              background-color: #fd6721;
+              text-align: left;
+              border-radius: 5px 5px 5px 0px; }
+              .vendorBlogContainer .blogListContainer .blogItem .body .qaContainer .bubble.question p:after {
+                position: absolute;
+                bottom: -10px;
+                left: 0px;
+                content: '';
+                width: 0;
+                height: 0;
+                border-width: 10px 10px 0 0;
+                border-color: #fd6721 transparent transparent transparent;
+                border-style: solid; }
+          .vendorBlogContainer .blogListContainer .blogItem .body .qaContainer .bubble.answer {
+            text-align: right; }
+            .vendorBlogContainer .blogListContainer .blogItem .body .qaContainer .bubble.answer p {
+              display: inline-block;
+              color: #fff;
+              background-color: #2d7de4;
+              text-align: right;
+              border-radius: 5px 5px 0px 5px; }
+              .vendorBlogContainer .blogListContainer .blogItem .body .qaContainer .bubble.answer p:after {
+                position: absolute;
+                bottom: -10px;
+                right: 0px;
+                content: '';
+                width: 0;
+                height: 0;
+                border-width: 0 10px 10px 0;
+                border-color: transparent #2d7de4 transparent transparent;
+                border-style: solid; }
+        .vendorBlogContainer .blogListContainer .blogItem .body .publishdate {
+          position: absolute;
+          bottom: 12px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 12px;
+          color: #c4c4c4; }
+
+@media (max-width: 1660px) {
+  .vendorBlogContainer .blogListContainer .blogItem .body .title {
+    font-size: 20px; }
+  .vendorBlogContainer .blogListContainer .blogItem .body p {
+    font-size: 14px; }
+  .vendorBlogContainer .blogListContainer .blogItem .body .qaContainer .bubble p {
+    font-size: 14px; }
+  .vendorBlogContainer .blogListContainer .blogItem .body .publishdate {
+    font-size: 10px; } }
+
+@media (max-width: 1200px) {
+  .vendorBlogContainer .blogListContainer .questionFormContainer {
+    left: 10%;
+    width: 80%; }
+  .vendorBlogContainer .blogListContainer .blogItem {
+    width: 50%; }
+    .vendorBlogContainer .blogListContainer .blogItem .body .title {
+      font-size: 30px; }
+    .vendorBlogContainer .blogListContainer .blogItem .body p {
+      font-size: 18px; }
+    .vendorBlogContainer .blogListContainer .blogItem .body .qaContainer .bubble p {
+      font-size: 18px; }
+    .vendorBlogContainer .blogListContainer .blogItem .body .publishdate {
+      font-size: 12px; } }
+
+@media (max-width: 768px) {
+  .vendorBlogContainer .blogListContainer .questionFormContainer {
+    left: 0px;
+    width: 100%; }
+  .vendorBlogContainer .blogListContainer .blogItem .body .title {
+    font-size: 20px; }
+  .vendorBlogContainer .blogListContainer .blogItem .body p {
+    font-size: 14px; }
+  .vendorBlogContainer .blogListContainer .blogItem .body .qaContainer .bubble p {
+    font-size: 14px; }
+  .vendorBlogContainer .blogListContainer .blogItem .body .publishdate {
+    font-size: 10px; } }
+
+@media (max-width: 576px) {
+  .vendorBlogContainer .blogHeader h2 {
+    font-size: 40px; }
+  .vendorBlogContainer .blogListContainer .questionFormContainer {
+    font-size: 14px; }
+    .vendorBlogContainer .blogListContainer .questionFormContainer .form-control {
+      font-size: 14px; }
+  .vendorBlogContainer .blogListContainer .blogItem {
+    width: 100%; } }
+
+.vendorFaqContainer {
+  position: relative;
+  padding: 90px 30px; }
+  .vendorFaqContainer h2 {
+    font-size: 28px;
+    padding: 20px 0 30px 5px;
+    margin: 0px; }
+  .vendorFaqContainer #accordionFaq a.question {
+    padding: 5px 0 5px 10px;
+    display: block;
+    color: #171717;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none; }
+    .vendorFaqContainer #accordionFaq a.question .fas {
+      color: #00e39a;
+      padding-right: 10px; }
+  .vendorFaqContainer #accordionFaq .collapse,
+  .vendorFaqContainer #accordionFaq .collapsing {
+    font-size: 18px;
+    font-weight: 100;
+    padding-left: 34px;
+    padding-bottom: 15px;
+    transition: all .5s ease-in-out; }
+
+@media (max-width: 1200px) {
+  .vendorFaqContainer #accordionFaq a.question {
+    font-size: 18px; }
+  .vendorFaqContainer #accordionFaq .collapse,
+  .vendorFaqContainer #accordionFaq .collapsing {
+    font-size: 16px; } }
+
+@media (max-width: 768px) {
+  .vendorFaqContainer h2 {
+    font-size: 18px; }
+  .vendorFaqContainer #accordionFaq a.question {
+    font-size: 16px; }
+  .vendorFaqContainer #accordionFaq .collapse,
+  .vendorFaqContainer #accordionFaq .collapsing {
+    font-size: 14px; } }
 
 footer {
   color: #fff;

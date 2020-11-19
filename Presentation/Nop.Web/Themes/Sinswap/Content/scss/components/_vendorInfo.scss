@@ -139,6 +139,23 @@
 
 // Medium devices (tablets, 768px and up)
 @media (max-width: 768px) {
+    .vendorInfoContainer {
+        margin-top: -150px;
+
+        .avatarContainer {
+            .avatar {
+                top: -120px;
+
+                img {
+                    width: 120px;
+                }
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+        }
+    }
 }
 
 // Small devices (landscape phones, 576px and up)
@@ -149,12 +166,6 @@
                 .fas {
                     font-size: 20px;
                 }
-            }
-        }
-
-        .avatarContainer {
-            h1 {
-                font-size: 40px;
             }
         }
 

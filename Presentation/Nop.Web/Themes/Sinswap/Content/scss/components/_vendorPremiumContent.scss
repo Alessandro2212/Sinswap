@@ -1,0 +1,366 @@
+﻿// Vendor media slider
+.vendorPremiumContentContainer {
+    position: relative;
+    padding: 0 30px 90px 30px;
+
+    .vendorSmallTalkContainer {
+        text-align: center;
+        margin-bottom: 60px;
+
+        .smallTalkHeader {
+            h2 {
+                font-weight: 900;
+                font-size: 60px;
+                text-transform: uppercase;
+            }
+
+            h3 {
+                font-weight: 100;
+                font-size: 22px;
+
+                span {
+                    font-size: 34px;
+                    display: block;
+                }
+            }
+
+            img {
+                border-radius: 5px;
+                width: 80px;
+                position: absolute;
+                right: 100px;
+                top: 15px;
+                transform: rotate(5deg);
+            }
+        }
+    }
+
+    .qaContainer {
+        margin-top: 60px;
+        padding: 0 30px;
+        max-height: 1000px;
+        overflow-y: auto;
+
+        .bubble {
+            width: 100%;
+            position: relative;
+
+            p {
+                padding: 5px 10px;
+                font-size: 18px;
+                font-weight: 100;
+                max-width: 80%;
+                margin-bottom: 15px;
+                position: relative;
+            }
+
+            &.question {
+                text-align: left;
+                margin-top: 10px;
+
+                p {
+                    display: inline-block;
+                    color: $grey29;
+                    background-color: $grey3;
+                    text-align: left;
+                    border-radius: 5px 5px 5px 0px;
+
+                    &:after {
+                        position: absolute;
+                        bottom: -10px;
+                        left: 0px;
+                        content: '';
+                        width: 0;
+                        height: 0;
+                        border-width: 10px 10px 0 0;
+                        border-color: $grey3 transparent transparent transparent;
+                        border-style: solid;
+                    }
+                }
+            }
+
+            &.answer {
+                text-align: right;
+
+                p {
+                    display: inline-block;
+                    color: $white;
+                    background-color: $seller;
+                    text-align: right;
+                    border-radius: 5px 5px 0px 5px;
+
+                    &:after {
+                        position: absolute;
+                        bottom: -10px;
+                        right: 0px;
+                        content: '';
+                        width: 0;
+                        height: 0;
+                        border-width: 0 10px 10px 0;
+                        border-color: transparent $seller transparent transparent;
+                        border-style: solid;
+                    }
+                }
+            }
+        }
+    }
+
+    .vendorReviewFavoriteContainer {
+        padding: 0px 30px;
+
+        h2 {
+            text-align: center;
+            font-size: 34px;
+            margin: 45px 0px;
+            font-weight: 100;
+        }
+
+        .vendorReviewsContainer {
+            margin: 0 30px 90px 30px;
+            background-color: $white;
+            box-shadow: 0 4px 15px -5px $black;
+
+            .reviewList {
+                max-height: 400px;
+                overflow-y: auto;
+                margin: 0px;
+                padding: 0px 30px;
+
+                .reviewListItem {
+                    list-style: none;
+                    border-bottom: 1px solid $grey5;
+                    padding-bottom: 30px;
+                    margin-bottom: 30px;
+                    font-size: 16px;
+                    color: $grey15;
+
+                    &:last-of-type {
+                        border-bottom: none;
+                        margin-bottom: 0px;
+                    }
+
+                    .reviewMeta {
+                        margin-bottom: 5px;
+                        font-weight: 100;
+
+                        .ratingStars {
+                            color: $gold;
+                            display: inline-block;
+                        }
+
+                        .username {
+                            color: $grey29;
+                        }
+
+                        .usercountry {
+                            text-transform: uppercase;
+                        }
+
+                        .tag {
+                            padding-left: 10px;
+
+                            &.kickstarter {
+                                color: #05ce78;
+                            }
+
+                            &.bigspender {
+                                color: #daab5f;
+                            }
+
+                            span {
+                                opacity: 0;
+                                padding-left: 10px;
+                                font-size: 12px;
+                                color: $grey15;
+                                transition: opacity .25s ease-in-out
+                            }
+
+                            &:hover {
+                                span {
+                                    opacity: 1;
+                                    transition: opacity .25s ease-in-out
+                                }
+                            }
+                        }
+                    }
+
+                    blockquote {
+                        font-size: 22px;
+                        font-weight: 600;
+                        margin-bottom: 0px;
+                        color: $grey29;
+                    }
+
+                    .publishdate {
+                        font-size: 14px;
+                        color: $grey9;
+                    }
+                }
+            }
+        }
+
+        .vendorFavouritesContainer {
+            margin: 0 30px;
+            padding-bottom: 30px;
+            background-color: $white;
+            color: $black;
+            box-shadow: 0 4px 15px -5px $black;
+            font-size: 20px;
+            font-weight: 100;
+
+            span {
+                color: $buyer;
+            }
+
+            .top3 {
+                padding: 0 15px;
+                font-size: 30px;
+                font-weight: 700;
+                opacity: 1;
+            }
+
+            .top5 {
+                padding: 0 15px;
+                font-size: 24px;
+                font-weight: 700;
+                opacity: 0.8;
+            }
+
+            .top10 {
+                padding: 0 15px;
+                opacity: 0.6;
+            }
+
+            img {
+                margin-top: 60px;
+                width: 100%;
+                max-width: 205px;
+            }
+        }
+    }
+}
+
+
+
+// Extra extra large devices (large desktops, 1660px and up)
+@media (max-width: 1660px) {
+    .vendorPremiumContentContainer {
+        .vendorSmallTalkContainer {
+            padding-top: 120px;
+
+            .smallTalkHeader {
+                img {
+                    right: auto;
+                    left: 50%;
+                    transform: translateX(-50%) rotate(5deg);
+                }
+            }
+        }
+
+        .vendorReviewFavoriteContainer {
+            .vendorFavouritesContainer {
+                font-size: 14px;
+
+                .top3 {
+                    font-size: 20px;
+                }
+
+                .top5 {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+    .vendorPremiumContentContainer {
+        .vendorReviewFavoriteContainer {
+            .vendorReviewsContainer {
+                .reviewList {
+                    .reviewListItem {
+                        blockquote {
+                            font-size: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+    .vendorPremiumContentContainer {
+        .vendorReviewFavoriteContainer {
+            .vendorReviewsContainer {
+                .reviewList {
+                    .reviewListItem {
+                        font-size: 12px;
+
+                        .publishdate {
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    .vendorPremiumContentContainer {
+        .qaContainer {
+            .bubble {
+                p {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .vendorReviewFavoriteContainer {
+            .vendorFavouritesContainer {
+                font-size: 14px;
+
+                .top3 {
+                    font-size: 20px;
+                }
+
+                .top5 {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+    .vendorPremiumContentContainer {
+        .vendorSmallTalkContainer {
+            .smallTalkHeader {
+                h2 {
+                    font-size: 40px;
+                }
+            }
+        }
+
+        .vendorReviewFavoriteContainer {
+            padding: 0px;
+
+            .vendorReviewsContainer {
+                margin: 0 0 90px 0;
+            }
+
+            .vendorFavouritesContainer {
+                margin: 0px;
+            }
+        }
+    }
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (min-width: 576px) {
+}

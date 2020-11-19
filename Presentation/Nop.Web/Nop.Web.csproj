@@ -49,6 +49,10 @@
     <None Remove="Themes\Sinswap\Content\scss\components\_popularMembers.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_promo.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_trendingCategories.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_vendorBlog.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_vendorFaq.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_vendorMedia.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_vendorPremiumContent.scss" />
     <None Remove="Themes\Sinswap\Content\scss\_global.scss" />
 
     <None Update="Areas\Admin\sitemap.config">

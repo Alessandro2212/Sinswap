@@ -3,11 +3,6 @@
     color: $grey33;
     background: none;
 
-    .floatingObj1,
-    .floatingObj2 {
-        display: none !important;
-    }
-
     .logoContainer {
         a {
             padding: 20px 30px;
@@ -55,14 +50,21 @@
         background-color: $grey6;
         background-size: cover;
         height: 310px;
-
-        .payoff {
-            display: none;
-        }
     }
 }
 
 
+
+// Extra large devices (large desktops, 1350px and up)
+@media (max-width: 1350px) {
+    .vendorPremium header {
+        nav.service .btn {
+            margin-bottom: 14px;
+            font-size: 12px;
+            margin-left: 0px;
+        }
+    }
+}
 
 // Extra large devices (large desktops, 1200px and up)
 @media (max-width: 1200px) {
@@ -70,16 +72,81 @@
 
 // Large devices (desktops, 992px and up)
 @media (max-width: 992px) {
+    .vendorPremium header {
+        .logoContainer {
+            a {
+                padding: 15px 20px;
+                top: 70px;
+
+                .logo {
+                    width: 106.5px;
+                    height: 28.5px;
+                }
+            }
+        }
+
+        nav.main {
+            justify-content: start;
+
+            a.menuLink {
+                font-size: 14px;
+            }
+        }
+    }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (max-width: 768px) {
+    .vendorPremium header {
+        height: auto;
+        min-height: 400px;
+
+        .payoffContainer {
+            display: block;
+            height: 210px;
+        }
+
+        .row {
+            nav.service {
+                padding-top: 5px;
+
+                .btn {
+                    margin: 0px;
+                }
+            }
+        }
+    }
 }
 
 // Small devices (landscape phones, 576px and up)
 @media (max-width: 576px) {
+    .vendorPremium header {
+        .row {
+            nav.main {
+                padding-top: 50px;
+                padding-bottom: 60px;
+                justify-content: center;
+
+                a.menuLink {
+                    margin: 0 5px;
+                }
+            }
+
+            .logoContainer {
+                a {
+                    top: 95px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+
+            .payoffContainer {
+                height: 310px;
+            }
+        }
+    }
 }
 
 // Extra small devices (portrait phones, less than 576px)
-@media (max-width: 576px) {
+@media (min-width: 576px) {
 }

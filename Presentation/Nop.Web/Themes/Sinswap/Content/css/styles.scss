@@ -1,4 +1,4 @@
-﻿// Genral imports
+﻿// General imports
 @import "../scss/_normalize";
 @import "../scss/_variables";
 @import "../scss/_animations";
@@ -25,6 +25,10 @@
 @import "../scss/components/_vendorMenu";
 @import "../scss/components/_vendorCategories";
 @import "../scss/components/_vendorPersonalQuote";
+@import "../scss/components/_vendorMedia";
+@import "../scss/components/_vendorPremiumContent";
+@import "../scss/components/_vendorBlog";
+@import "../scss/components/_vendorFaq";
 
 // Component imports: footer
 @import "../scss/components/_footer";

@@ -1,0 +1,317 @@
+﻿// Vendor Stories and answers
+.vendorBlogContainer {
+    position: relative;
+    padding: 90px 30px;
+
+    .blogHeader {
+        text-align: center;
+        margin-bottom: 60px;
+
+        h2 {
+            font-weight: 900;
+            font-size: 60px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-family: 'Caveat',cursive;
+            font-size: 30px;
+            line-height: 35px;
+            color: $personal;
+            margin-bottom: 0px;
+        }
+    }
+
+    .blogListContainer {
+        margin-top: 30px;
+
+        &:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .questionFormContainer {
+            position: absolute;
+            background: $white;
+            padding-bottom: 30px;
+            margin-bottom: 15px;
+            left: 25%;
+            top: 0px;
+            width: 50%;
+            min-height: 200px;
+
+            .form-control,
+            .form-check {
+                margin: 7.5px 0;
+            }
+
+            textarea {
+                resize: none;
+                overflow-x: auto;
+            }
+
+            .submitContainer {
+                text-align: center;
+            }
+        }
+
+        .blogItem {
+            width: 25%;
+            margin-bottom: 15px;
+            background-color: $white;
+
+            .body {
+                background: $grey4;
+                border-radius: 5px;
+                margin: 0 7.5px;
+                padding: 45px 30px;
+                height: 100%;
+
+                p {
+                    text-align: left;
+                    font-size: 18px;
+                    font-weight: 100;
+                    color: $personal;
+                    margin: 0px;
+                }
+
+                .divider {
+                    margin-top: 35px;
+                }
+
+                img {
+                    border-radius: 5px;
+                    width: 100%;
+                }
+
+                .title {
+                    text-align: center;
+                    font-size: 30px;
+                    font-weight: 900;
+
+                    span {
+                        display: block;
+                        font-size: 16px;
+                        font-weight: 600;
+                        padding: 10px 0 15px 0;
+                    }
+                }
+
+                .qaContainer {
+                    .bubble {
+                        width: 100%;
+                        position: relative;
+
+                        p {
+                            padding: 5px 10px;
+                            font-size: 18px;
+                            font-weight: 100;
+                            max-width: 80%;
+                            margin-bottom: 15px;
+                            position: relative;
+                        }
+
+                        &.question {
+                            text-align: left;
+                            margin-top: 10px;
+
+                            p {
+                                display: inline-block;
+                                color: $white;
+                                background-color: $buyer;
+                                text-align: left;
+                                border-radius: 5px 5px 5px 0px;
+
+                                &:after {
+                                    position: absolute;
+                                    bottom: -10px;
+                                    left: 0px;
+                                    content: '';
+                                    width: 0;
+                                    height: 0;
+                                    border-width: 10px 10px 0 0;
+                                    border-color: $buyer transparent transparent transparent;
+                                    border-style: solid;
+                                }
+                            }
+                        }
+
+                        &.answer {
+                            text-align: right;
+
+                            p {
+                                display: inline-block;
+                                color: $white;
+                                background-color: $seller;
+                                text-align: right;
+                                border-radius: 5px 5px 0px 5px;
+
+                                &:after {
+                                    position: absolute;
+                                    bottom: -10px;
+                                    right: 0px;
+                                    content: '';
+                                    width: 0;
+                                    height: 0;
+                                    border-width: 0 10px 10px 0;
+                                    border-color: transparent $seller transparent transparent;
+                                    border-style: solid;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .publishdate {
+                    position: absolute;
+                    bottom: 12px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    font-size: 12px;
+                    color: $grey9;
+                }
+            }
+        }
+    }
+}
+
+
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1660px) {
+    .vendorBlogContainer {
+        .blogListContainer {
+            .blogItem {
+                .body {
+                    .title {
+                        font-size: 20px;
+                    }
+
+                    p {
+                        font-size: 14px;
+                    }
+
+                    .qaContainer {
+                        .bubble {
+                            p {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+
+                    .publishdate {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+    .vendorBlogContainer {
+        .blogListContainer {
+            .questionFormContainer {
+                left: 10%;
+                width: 80%;
+            }
+
+            .blogItem {
+                width: 50%;
+
+                .body {
+                    .title {
+                        font-size: 30px;
+                    }
+
+                    p {
+                        font-size: 18px;
+                    }
+
+                    .qaContainer {
+                        .bubble {
+                            p {
+                                font-size: 18px;
+                            }
+                        }
+                    }
+
+                    .publishdate {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    .vendorBlogContainer {
+        .blogListContainer {
+            .questionFormContainer {
+                left: 0px;
+                width: 100%;
+            }
+
+            .blogItem {
+                .body {
+                    .title {
+                        font-size: 20px;
+                    }
+
+                    p {
+                        font-size: 14px;
+                    }
+
+                    .qaContainer {
+                        .bubble {
+                            p {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+
+                    .publishdate {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+    .vendorBlogContainer {
+        .blogHeader {
+            h2 {
+                font-size: 40px;
+            }
+        }
+
+        .blogListContainer {
+            .questionFormContainer {
+                font-size: 14px;
+
+                .form-control {
+                    font-size: 14px;
+                }
+            }
+
+            .blogItem {
+                width: 100%;
+            }
+        }
+    }
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (min-width: 576px) {
+}

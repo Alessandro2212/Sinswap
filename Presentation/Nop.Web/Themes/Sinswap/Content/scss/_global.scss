@@ -4,6 +4,10 @@ body {
     font-family: $fontBody;
 }
 
+:focus {
+    outline: none;
+}
+
 .no-gutters {
     margin-right: 0;
     margin-left: 0;
@@ -28,6 +32,28 @@ body {
 .flex-row.row:after,
 .flex-row.row:before {
     display: flex;
+}
+
+.dividerContainer {
+    padding: 0px 15px 90px 15px;
+
+    .divider {
+        &:after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            height: 1px;
+            width: 90%;
+            border: 1px solid $grey5;
+            z-index: 0;
+        }
+    }
+}
+
+.bgGrey2 {
+    background-color: $grey2;
 }
 
 

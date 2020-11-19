@@ -1,0 +1,86 @@
+﻿// Vendor FAQ
+.vendorFaqContainer {
+    position: relative;
+    padding: 90px 30px;
+
+    h2 {
+        font-size: 28px;
+        padding: 20px 0 30px 5px;
+        margin: 0px;
+    }
+
+    #accordionFaq {
+        a.question {
+            padding: 5px 0 5px 10px;
+            display: block;
+            color: $black;
+            font-size: 20px;
+            font-weight: 600;
+            text-decoration: none;
+
+            .fas {
+                color: $products;
+                padding-right: 10px;
+            }
+        }
+
+        .collapse,
+        .collapsing {
+            font-size: 18px;
+            font-weight: 100;
+            padding-left: 34px;
+            padding-bottom: 15px;
+            transition: all .5s ease-in-out;
+        }
+    }
+}
+
+
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+    .vendorFaqContainer {
+        #accordionFaq {
+            a.question {
+                font-size: 18px;
+            }
+
+            .collapse,
+            .collapsing {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    .vendorFaqContainer {
+        h2 {
+            font-size: 18px;
+        }
+
+        #accordionFaq {
+            a.question {
+                font-size: 16px;
+            }
+
+            .collapse,
+            .collapsing {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (min-width: 576px) {
+}

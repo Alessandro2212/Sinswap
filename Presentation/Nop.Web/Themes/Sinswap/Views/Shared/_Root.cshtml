@@ -2,33 +2,53 @@
     Layout = "_Root.Head";
 }
 
+
 @*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.BodyStartHtmlTagAfter })
-@await Html.PartialAsync("_Notifications")
-@await Html.PartialAsync("_JavaScriptDisabledWarning")
-@await Html.PartialAsync("_OldInternetExplorerWarning")*@
+    @await Html.PartialAsync("_Notifications")
+    @await Html.PartialAsync("_JavaScriptDisabledWarning")
+    @await Html.PartialAsync("_OldInternetExplorerWarning")*@
 
-    @*@await Component.InvokeAsync("AdminHeaderLinks")*@
-    
-    @await Html.PartialAsync("_Header")
+@*@await Component.InvokeAsync("AdminHeaderLinks")*@
 
-    @*<script asp-location="Footer">
+@{
+    bool isHomePage = false;
+    if (Url.ActionContext.RouteData.Values["controller"].ToString().Equals("home", StringComparison.InvariantCultureIgnoreCase) &&
+        Url.ActionContext.RouteData.Values["action"].ToString().Equals("index", StringComparison.InvariantCultureIgnoreCase))
+    {
+        isHomePage = true;
+    }
+
+    if (isHomePage)
+    {
+        @await Html.PartialAsync("_Header")
+
+    }
+    else
+    {
+        @await Html.PartialAsync("_HeaderVendor")
+
+    }
+}
+
+
+@*<script asp-location="Footer">
         AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart');
     </script>*@
 
-    @*@await Component.InvokeAsync("TopMenu")*@
+@*@await Component.InvokeAsync("TopMenu")*@
 
-    @*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContentBefore })*@
+@*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContentBefore })*@
 
-    @if (IsSectionDefined("Breadcrumb"))
-    {
-        @RenderSection("Breadcrumb") 
-    }
+@if (IsSectionDefined("Breadcrumb"))
+{
+    @RenderSection("Breadcrumb")
+}
 
-    @RenderBody()
+@RenderBody()
 
-    @*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContentAfter })*@
+@*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContentAfter })*@
 
-    @await Component.InvokeAsync("Footer")
+@await Component.InvokeAsync("Footer")
 
-    @*@await Component.InvokeAsync("EuCookieLaw")
+@*@await Component.InvokeAsync("EuCookieLaw")
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.BodyEndHtmlTagBefore })*@
