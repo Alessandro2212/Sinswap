@@ -92,13 +92,19 @@ $(function () {
 
 
     if ($('.vendorMediaSlide').length) {
+        lightGallery(document.getElementById('lg_vendorMedia'), {
+            speed: 500,
+            download: false,
+            counter: false,
+            zoomFromOrigin: true,
+        });
+
         $('.vendorMediaSlide').slick({
             prevArrow: "<button type='button' class='slick-prev'><i class='las la-angle-left'></i></button>",
             nextArrow: "<button type='button' class='slick-next'><i class='las la-angle-right'></i></button>",
             speed: 300,
-            slidesToShow: 5,
-            slidesToScroll: 1,
-            dots: false,
+            slidesToScroll: 3,
+            dots: true,
             arrows: true,
             infinite: true,
             variableWidth: true,

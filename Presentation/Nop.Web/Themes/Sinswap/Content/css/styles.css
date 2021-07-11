@@ -536,7 +536,9 @@ nav {
       opacity: 1;
       text-decoration: none;
       transition: opacity 0.15s; }
-  nav .btn {
+  nav.main .btn,
+  nav.service .btn,
+  nav.vendorMenu .btn {
     margin-top: -4px;
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
@@ -544,7 +546,9 @@ nav {
     margin-left: 10px;
     font-size: 14px;
     transition: background-color 0.15s; }
-    nav .btn:hover {
+    nav.main .btn:hover,
+    nav.service .btn:hover,
+    nav.vendorMenu .btn:hover {
       background-color: rgba(0, 0, 0, 0.1);
       transition: background-color 0.15s; }
 
@@ -609,7 +613,7 @@ nav {
     background-position: bottom center;
     background-color: #d9d9d9;
     background-size: cover;
-    height: 310px; }
+    height: 550px; }
 
 @media (max-width: 1350px) {
   .vendorPremium header nav.service .btn {
@@ -1154,7 +1158,12 @@ nav {
   .vendorInfoContainer .metaContainer {
     font-size: 14px; } }
 
+.sticky-top {
+  background-color: #fff;
+  padding-top: 0px; }
+
 .vendorMenuContainer {
+  display: block;
   position: relative; }
   .vendorMenuContainer:before {
     content: '';
@@ -1178,10 +1187,8 @@ nav {
       .vendorMenuContainer .donationContainer .donationBtn .btn-primary {
         border: none;
         font-size: 14px;
-        background-color: #dedede;
         transition: background-color 0.15s ease-in-out; }
         .vendorMenuContainer .donationContainer .donationBtn .btn-primary:hover {
-          background-color: #171717;
           transition: background-color 0.15s ease-in-out; }
   .vendorMenuContainer .submenuContainer .vendorMenu {
     padding-top: 0px;
@@ -1230,7 +1237,8 @@ nav {
   .vendorMenuContainer > .row {
     background-color: #fff; }
   .vendorMenuContainer .socialContainer {
-    top: 20px;
+    top: 0px;
+    padding: 0 0 10px 0;
     justify-content: flex-end; }
     .vendorMenuContainer .socialContainer .followBtn {
       margin-right: 20px; } }
@@ -1238,8 +1246,10 @@ nav {
 @media (max-width: 1200px) {
   .vendorMenuContainer > .row {
     background-color: #fff; }
+  .vendorMenuContainer .donationBtn a {
+    font-size: 12px !important; }
   .vendorMenuContainer .socialContainer {
-    top: 20px;
+    top: 0px;
     justify-content: flex-end; }
     .vendorMenuContainer .socialContainer .socialLink {
       font-size: 15px;
@@ -1247,22 +1257,27 @@ nav {
       .vendorMenuContainer .socialContainer .socialLink:first-of-type {
         padding-left: 10px; }
     .vendorMenuContainer .socialContainer .followBtn {
-      margin-right: 20px; } }
+      padding-left: 20px;
+      background-color: #fff;
+      margin-right: 20px; }
+      .vendorMenuContainer .socialContainer .followBtn a {
+        font-size: 12px; } }
 
 @media (max-width: 992px) {
   .vendorMenuContainer {
-    margin-top: 20px; }
+    margin-top: 10px; }
     .vendorMenuContainer:before {
       top: auto;
-      bottom: 8.5%; }
+      bottom: 27.5%; }
+    .vendorMenuContainer .donationContainer {
+      align-items: start; }
     .vendorMenuContainer .submenuContainer {
-      margin-top: 60px; }
+      margin-top: 10px;
+      padding-bottom: 10px; }
     .vendorMenuContainer .socialContainer {
       top: 0px; } }
 
 @media (max-width: 768px) {
-  .vendorMenuContainer .donationContainer {
-    align-items: flex-end; }
   .vendorMenuContainer .submenuContainer .vendorMenu .menuLink:first-of-type,
   .vendorMenuContainer .submenuContainer .vendorMenu .menuLink:last-of-type {
     padding-left: 7px;
@@ -1270,7 +1285,12 @@ nav {
 
 @media (max-width: 576px) {
   .vendorMenuContainer {
-    margin-top: 0px; } }
+    margin-top: 0px; }
+    .vendorMenuContainer .donationContainer {
+      padding: 10px 0 0 0;
+      align-items: flex-end; }
+    .vendorMenuContainer .socialContainer {
+      padding: 10px 0 0 0; } }
 
 .vendorCategoriesContainer {
   padding: 35px 25px 0px 25px;

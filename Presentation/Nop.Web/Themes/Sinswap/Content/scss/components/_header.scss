@@ -91,7 +91,9 @@ nav {
         }
     }
 
-    .btn {
+    &.main .btn,
+    &.service .btn,
+    &.vendorMenu .btn {
         margin-top: -4px;
         background-color: rgba(255, 255, 255, 0.1);
         border: none;
@@ -139,7 +141,7 @@ nav {
                     height: 60px;
                 }
             }
-            
+
             nav {
                 padding-top: 15px;
                 margin-right: 0px;
