@@ -134,6 +134,17 @@ namespace Nop.Web.Controllers
             return View(templateViewPath, model);
         }
 
+        public virtual IActionResult Clothing()
+        {
+            return RedirectToAction("Category", new { categoryId = 1 });
+        }
+
+        public virtual IActionResult Food()
+        {
+            return RedirectToAction("Category", new { categoryId = 17 });
+        }
+
+
         #endregion
 
         #region Manufacturers

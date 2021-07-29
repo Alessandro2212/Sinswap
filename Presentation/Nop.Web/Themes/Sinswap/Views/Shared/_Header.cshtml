@@ -17,8 +17,8 @@
 
             <div class="col-12 col-md-4">
                 <nav class="main">
-                    <a href="@Url.RouteUrl("Category", new { categoryId = 1 })" class="menuLink">Clothing</a>
-                    <a href="#" class="menuLink">Food</a>
+                    <a href="/en/clothing" class="menuLink">Clothing</a>
+                    <a href="/en/panties" class="menuLink">Food</a>
                     <a href="#" class="menuLink">Media</a>
                     <a href="#" class="menuLink">Services</a>
                     <a href="#" class="menuLink">Body</a>
@@ -45,8 +45,8 @@
 </header>
 
 @*@await Component.InvokeAsync("TaxTypeSelector")
-@await Component.InvokeAsync("CurrencySelector")
-@await Component.InvokeAsync("LanguageSelector")
-@await Component.InvokeAsync("HeaderLinks")
-@await Component.InvokeAsync("FlyoutShoppingCart")
-@await Component.InvokeAsync("SearchBox")*@
+    @await Component.InvokeAsync("CurrencySelector")
+    @await Component.InvokeAsync("LanguageSelector")
+    @await Component.InvokeAsync("HeaderLinks")
+    @await Component.InvokeAsync("FlyoutShoppingCart")
+    @await Component.InvokeAsync("SearchBox")*@
