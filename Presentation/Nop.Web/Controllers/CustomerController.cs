@@ -601,6 +601,10 @@ namespace Nop.Web.Controllers
 
             if (ModelState.IsValid)
             {
+                //TODO: if RegisterAsVendor is true, map register model to vendor model and redirect to CreateVendorController/Create
+
+
+
                 if (_customerSettings.UsernamesEnabled && model.Username != null)
                 {
                     model.Username = model.Username.Trim();

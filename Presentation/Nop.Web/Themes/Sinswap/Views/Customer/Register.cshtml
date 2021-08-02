@@ -161,11 +161,11 @@
                 </div>
             }
             @if (Model.StreetAddressEnabled ||
-              Model.StreetAddress2Enabled ||
-              Model.ZipPostalCodeEnabled ||
-              Model.CityEnabled ||
-              Model.CountyEnabled ||
-              Model.CountryEnabled)
+             Model.StreetAddress2Enabled ||
+             Model.ZipPostalCodeEnabled ||
+             Model.CityEnabled ||
+             Model.CountyEnabled ||
+             Model.CountryEnabled)
             {
                 <div class="fieldset">
                     <div class="title">
@@ -347,6 +347,10 @@
                         <input asp-for="ConfirmPassword" />
                         <nop-required />
                         <span asp-validation-for="ConfirmPassword"></span>
+                    </div>
+                    <div class="inputs">
+                        <label asp-for="RegisterAsVendor" asp-postfix=":"></label>
+                        @Html.CheckBoxFor(m => m.RegisterAsVendor)
                     </div>
                     @if (Model.DisplayCaptcha)
                     {

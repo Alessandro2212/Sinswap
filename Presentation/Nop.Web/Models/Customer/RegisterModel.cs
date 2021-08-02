@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Nop.Web.Framework.Mvc.ModelBinding;
 using Nop.Web.Framework.Models;
 using Nop.Web.Validators.Customer;
+using System.ComponentModel;
 
 namespace Nop.Web.Models.Customer
 {
@@ -152,6 +153,10 @@ namespace Nop.Web.Models.Customer
 
         public bool HoneypotEnabled { get; set; }
         public bool DisplayCaptcha { get; set; }
+
+        //Vendor registration
+        [DisplayName("Register as Seller")]
+        public bool RegisterAsVendor { get; set; }
 
         public IList<CustomerAttributeModel> CustomerAttributes { get; set; }
 
