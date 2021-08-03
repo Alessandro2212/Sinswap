@@ -23,7 +23,7 @@ using Nop.Web.Framework.Mvc.Filters;
 
 namespace Nop.Web.Controllers
 {
-    public partial class CreateVendorController : BaseAdminController
+    public partial class CreateVendorController : BasePublicController
     {
         #region Fields
 
@@ -239,12 +239,13 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
-        [FormValueRequired("save", "save-continue")]
-        public virtual IActionResult Create(VendorModel model, bool continueEditing)
+        //[HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+        //[FormValueRequired("save", "save-continue")]
+        [HttpPost]
+        public virtual IActionResult CreateVendor(VendorModel model, bool continueEditing)
         {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageVendors))
-                return AccessDeniedView();
+            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageVendors))
+            //    return AccessDeniedView();
 
             //parse vendor attributes
             var vendorAttributesXml = ParseVendorAttributes(model.Form);

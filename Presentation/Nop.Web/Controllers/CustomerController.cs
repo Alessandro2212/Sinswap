@@ -15,6 +15,7 @@ using Nop.Core.Domain.Media;
 using Nop.Core.Domain.Messages;
 using Nop.Core.Domain.Security;
 using Nop.Core.Domain.Tax;
+using Nop.Core.Domain.Vendors;
 using Nop.Services.Authentication;
 using Nop.Services.Authentication.External;
 using Nop.Services.Catalog;
@@ -30,7 +31,11 @@ using Nop.Services.Logging;
 using Nop.Services.Media;
 using Nop.Services.Messages;
 using Nop.Services.Orders;
+using Nop.Services.Seo;
 using Nop.Services.Tax;
+using Nop.Services.Vendors;
+using Nop.Web.Areas.Admin.Infrastructure.Mapper.Extensions;
+using Nop.Web.Areas.Admin.Models.Vendors;
 using Nop.Web.Extensions;
 using Nop.Web.Factories;
 using Nop.Web.Framework;
@@ -87,6 +92,12 @@ namespace Nop.Web.Controllers
         private readonly MediaSettings _mediaSettings;
         private readonly StoreInformationSettings _storeInformationSettings;
         private readonly TaxSettings _taxSettings;
+        private readonly IVendorAttributeParser _vendorAttributeParser;
+        private readonly IVendorAttributeService _vendorAttributeService;
+        private readonly IVendorModelFactory _vendorModelFactory;
+        private readonly IVendorService _vendorService;
+        private readonly ILocalizedEntityService _localizedEntityService;
+        private readonly IUrlRecordService _urlRecordService;
 
         #endregion
 
@@ -131,7 +142,13 @@ namespace Nop.Web.Controllers
             LocalizationSettings localizationSettings,
             MediaSettings mediaSettings,
             StoreInformationSettings storeInformationSettings,
-            TaxSettings taxSettings)
+            TaxSettings taxSettings,
+            IVendorAttributeParser vendorAttributeParser,
+            IVendorAttributeService vendorAttributeService,
+            IVendorModelFactory vendorModelFactory,
+            IVendorService vendorService,
+            ILocalizedEntityService localizedEntityService,
+            IUrlRecordService urlRecordService)
         {
             this._addressSettings = addressSettings;
             this._captchaSettings = captchaSettings;
@@ -173,6 +190,12 @@ namespace Nop.Web.Controllers
             this._mediaSettings = mediaSettings;
             this._storeInformationSettings = storeInformationSettings;
             this._taxSettings = taxSettings;
+            this._vendorAttributeParser = vendorAttributeParser;
+            this._vendorAttributeService = vendorAttributeService;
+            this._vendorModelFactory = vendorModelFactory;
+            this._vendorService = vendorService;
+            this._localizedEntityService = localizedEntityService;
+            this._urlRecordService = urlRecordService;
         }
 
         #endregion
@@ -600,11 +623,7 @@ namespace Nop.Web.Controllers
             }
 
             if (ModelState.IsValid)
-            {
-                //TODO: if RegisterAsVendor is true, map register model to vendor model and redirect to CreateVendorController/Create
-
-
-
+            {             
                 if (_customerSettings.UsernamesEnabled && model.Username != null)
                 {
                     model.Username = model.Username.Trim();
@@ -799,6 +818,36 @@ namespace Nop.Web.Controllers
                     //raise event       
                     _eventPublisher.Publish(new CustomerRegisteredEvent(customer));
 
+                    //If RegisterAsVendor is true, map register model to vendor model and redirect to CreateVendorController/Create
+                    if (model.RegisterAsVendor)
+                    {
+                        VendorModel vendorModel = new VendorModel
+                        {
+                            Name = $"{model.FirstName} {model.LastName}",
+                            Email = model.Email,
+                            Address = new Areas.Admin.Models.Common.AddressModel
+                            {
+                                FirstName = model.FirstName,
+                                LastName = model.LastName,
+                                Email = model.Email,
+                                CountryId = model.CountryId,
+                                StateProvinceId = model.StateProvinceId,
+                                Address1 = model.StreetAddress,
+                                City = model.City,
+                                County = model.County,
+                                Address2 = model.StreetAddress2,
+                                ZipPostalCode = model.ZipPostalCode,
+                                PhoneNumber = model.Phone,
+                                FaxNumber = model.Fax
+                            },
+                            Active = true,
+                            SeName = $"{model.FirstName}-{model.LastName}",
+                            Form = model.Form,
+                            BirthDate = new DateTime(model.DateOfBirthYear.Value, model.DateOfBirthMonth.Value, model.DateOfBirthDay.Value),
+                        };
+                        return CreateVendor(vendorModel, false);
+                    }
+
                     switch (_customerSettings.UserRegistrationType)
                     {
                         case UserRegistrationType.EmailValidation:
@@ -831,6 +880,7 @@ namespace Nop.Web.Controllers
                                 return RedirectToRoute("HomePage");
                             }
                     }
+
                 }
 
                 //errors
@@ -842,6 +892,185 @@ namespace Nop.Web.Controllers
             model = _customerModelFactory.PrepareRegisterModel(model, true, customerAttributesXml);
             return View(model);
         }
+
+        [HttpPost]
+        public virtual IActionResult CreateVendor(VendorModel model, bool continueEditing)
+        {
+            //parse vendor attributes
+            var vendorAttributesXml = ParseVendorAttributes(model.Form);
+            _vendorAttributeParser.GetAttributeWarnings(vendorAttributesXml).ToList()
+                .ForEach(warning => ModelState.AddModelError(string.Empty, warning));
+
+            if (ModelState.IsValid)
+            {
+                var vendor = model.ToEntity<Vendor>();
+                _vendorService.InsertVendor(vendor);
+
+                //activity log
+                _customerActivityService.InsertActivity("AddNewVendor",
+                    string.Format(_localizationService.GetResource("ActivityLog.AddNewVendor"), vendor.Id), vendor);
+
+                //search engine name
+                model.SeName = _urlRecordService.ValidateSeName(vendor, model.SeName, vendor.Name, true);
+                _urlRecordService.SaveSlug(vendor, model.SeName, 0);
+
+                //address
+                var address = model.Address.ToEntity<Address>();
+                address.CreatedOnUtc = DateTime.UtcNow;
+
+                //some validation
+                if (address.CountryId == 0)
+                    address.CountryId = null;
+                if (address.StateProvinceId == 0)
+                    address.StateProvinceId = null;
+                _addressService.InsertAddress(address);
+                vendor.AddressId = address.Id;
+                _vendorService.UpdateVendor(vendor);
+
+                //vendor attributes
+                _genericAttributeService.SaveAttribute(vendor, NopVendorDefaults.VendorAttributes, vendorAttributesXml);
+
+                //locales
+                UpdateLocales(vendor, model);
+
+                //update picture seo file name
+                UpdatePictureSeoNames(vendor);
+
+                SuccessNotification(_localizationService.GetResource("Admin.Vendors.Added"));
+
+                if (!continueEditing)
+                    return Redirect(model.SeName);
+
+                //selected tab
+                SaveSelectedTabName();
+
+                return RedirectToAction("Edit", new { id = vendor.Id });
+            }
+
+            //prepare model
+            //model = _vendorModelFactory.PrepareVendorModel(model, null, true);
+
+            //if we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        protected virtual string ParseVendorAttributes(IFormCollection form)
+        {
+            if (form == null)
+                throw new ArgumentNullException(nameof(form));
+
+            var attributesXml = string.Empty;
+            var vendorAttributes = _vendorAttributeService.GetAllVendorAttributes();
+            foreach (var attribute in vendorAttributes)
+            {
+                var controlId = $"vendor_attribute_{attribute.Id}";
+                StringValues ctrlAttributes;
+                switch (attribute.AttributeControlType)
+                {
+                    case AttributeControlType.DropdownList:
+                    case AttributeControlType.RadioList:
+                        ctrlAttributes = form[controlId];
+                        if (!StringValues.IsNullOrEmpty(ctrlAttributes))
+                        {
+                            var selectedAttributeId = int.Parse(ctrlAttributes);
+                            if (selectedAttributeId > 0)
+                                attributesXml = _vendorAttributeParser.AddVendorAttribute(attributesXml,
+                                    attribute, selectedAttributeId.ToString());
+                        }
+
+                        break;
+                    case AttributeControlType.Checkboxes:
+                        var cblAttributes = form[controlId];
+                        if (!StringValues.IsNullOrEmpty(cblAttributes))
+                        {
+                            foreach (var item in cblAttributes.ToString().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                            {
+                                var selectedAttributeId = int.Parse(item);
+                                if (selectedAttributeId > 0)
+                                    attributesXml = _vendorAttributeParser.AddVendorAttribute(attributesXml,
+                                        attribute, selectedAttributeId.ToString());
+                            }
+                        }
+
+                        break;
+                    case AttributeControlType.ReadonlyCheckboxes:
+                        //load read-only (already server-side selected) values
+                        var attributeValues = _vendorAttributeService.GetVendorAttributeValues(attribute.Id);
+                        foreach (var selectedAttributeId in attributeValues
+                            .Where(v => v.IsPreSelected)
+                            .Select(v => v.Id)
+                            .ToList())
+                        {
+                            attributesXml = _vendorAttributeParser.AddVendorAttribute(attributesXml,
+                                attribute, selectedAttributeId.ToString());
+                        }
+
+                        break;
+                    case AttributeControlType.TextBox:
+                    case AttributeControlType.MultilineTextbox:
+                        ctrlAttributes = form[controlId];
+                        if (!StringValues.IsNullOrEmpty(ctrlAttributes))
+                        {
+                            var enteredText = ctrlAttributes.ToString().Trim();
+                            attributesXml = _vendorAttributeParser.AddVendorAttribute(attributesXml,
+                                attribute, enteredText);
+                        }
+
+                        break;
+                    case AttributeControlType.Datepicker:
+                    case AttributeControlType.ColorSquares:
+                    case AttributeControlType.ImageSquares:
+                    case AttributeControlType.FileUpload:
+                    //not supported vendor attributes
+                    default:
+                        break;
+                }
+            }
+
+            return attributesXml;
+        }
+        protected virtual void UpdatePictureSeoNames(Vendor vendor)
+        {
+            var picture = _pictureService.GetPictureById(vendor.PictureId);
+            if (picture != null)
+                _pictureService.SetSeoFilename(picture.Id, _pictureService.GetPictureSeName(vendor.Name));
+        }
+        protected virtual void UpdateLocales(Vendor vendor, VendorModel model)
+        {
+            foreach (var localized in model.Locales)
+            {
+                _localizedEntityService.SaveLocalizedValue(vendor,
+                    x => x.Name,
+                    localized.Name,
+                    localized.LanguageId);
+
+                _localizedEntityService.SaveLocalizedValue(vendor,
+                    x => x.Description,
+                    localized.Description,
+                    localized.LanguageId);
+
+                _localizedEntityService.SaveLocalizedValue(vendor,
+                    x => x.MetaKeywords,
+                    localized.MetaKeywords,
+                    localized.LanguageId);
+
+                _localizedEntityService.SaveLocalizedValue(vendor,
+                    x => x.MetaDescription,
+                    localized.MetaDescription,
+                    localized.LanguageId);
+
+                _localizedEntityService.SaveLocalizedValue(vendor,
+                    x => x.MetaTitle,
+                    localized.MetaTitle,
+                    localized.LanguageId);
+
+                //search engine name
+                var seName = _urlRecordService.ValidateSeName(vendor, localized.SeName, localized.Name, false);
+                _urlRecordService.SaveSlug(vendor, seName, localized.LanguageId);
+            }
+        }
+
+
 
         //available even when navigation is not allowed
         [CheckAccessPublicStore(true)]
