@@ -155,8 +155,11 @@ namespace Nop.Web.Models.Customer
         public bool DisplayCaptcha { get; set; }
 
         //Vendor registration
-        [DisplayName("Register as Seller")]
-        public bool RegisterAsVendor { get; set; }
+        [DisplayName("Register as Free Seller")]
+        public bool RegisterAsFreeVendor { get; set; }
+
+        [DisplayName("Register as Premium Seller")]
+        public bool RegisterAsPremiumVendor { get; set; }
 
         public IList<CustomerAttributeModel> CustomerAttributes { get; set; }
 

@@ -819,7 +819,7 @@ namespace Nop.Web.Controllers
                     _eventPublisher.Publish(new CustomerRegisteredEvent(customer));
 
                     //If RegisterAsVendor is true, map register model to vendor model and redirect to CreateVendorController/Create
-                    if (model.RegisterAsVendor)
+                    if (model.RegisterAsPremiumVendor || model.RegisterAsFreeVendor)
                     {
                         VendorModel vendorModel = new VendorModel
                         {
@@ -844,6 +844,7 @@ namespace Nop.Web.Controllers
                             SeName = $"{model.FirstName}-{model.LastName}",
                             Form = model.Form,
                             BirthDate = new DateTime(model.DateOfBirthYear.Value, model.DateOfBirthMonth.Value, model.DateOfBirthDay.Value),
+                            IsPremium = model.RegisterAsPremiumVendor
                         };
                         return CreateVendor(vendorModel, false);
                     }

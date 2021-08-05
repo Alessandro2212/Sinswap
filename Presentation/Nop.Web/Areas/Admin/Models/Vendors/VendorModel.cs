@@ -80,7 +80,9 @@ namespace Nop.Web.Areas.Admin.Models.Vendors
         [NopResourceDisplayName("Admin.Vendors.Fields.PageSizeOptions")]
         public string PageSizeOptions { get; set; }
 
-        public DateTime BirthDate { get; set; }     
+        public DateTime BirthDate { get; set; }
+
+        public bool? IsPremium { get; set; }
 
         public List<VendorAttributeModel> VendorAttributes { get; set; }
 

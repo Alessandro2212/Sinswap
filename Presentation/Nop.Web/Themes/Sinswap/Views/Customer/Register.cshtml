@@ -349,8 +349,12 @@
                         <span asp-validation-for="ConfirmPassword"></span>
                     </div>
                     <div class="inputs">
-                        <label asp-for="RegisterAsVendor" asp-postfix=":"></label>
-                        @Html.CheckBoxFor(m => m.RegisterAsVendor)
+                        <label asp-for="RegisterAsFreeVendor" asp-postfix=":"></label>
+                        @Html.CheckBoxFor(m => m.RegisterAsFreeVendor)
+                    </div>
+                    <div class="inputs">
+                        <label asp-for="RegisterAsPremiumVendor" asp-postfix=":"></label>
+                        @Html.CheckBoxFor(m => m.RegisterAsPremiumVendor)
                     </div>
                     @if (Model.DisplayCaptcha)
                     {

@@ -105,6 +105,8 @@ namespace Nop.Core.Domain.Vendors
 
         public int? FollowersNumber { get; set; }
 
+        public bool? IsPremium { get; set; }
+
         /// <summary>
         /// Gets or sets vendor notes
         /// </summary>
