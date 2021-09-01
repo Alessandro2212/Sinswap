@@ -17,6 +17,11 @@ namespace Nop.Data.Mapping
         public static string ProductCategoryTable => "Product_Category_Mapping";
 
         /// <summary>
+        /// Gets a name of the Product-Vendor mapping table
+        /// </summary>
+        public static string ProductVendorTable => "Product_Vendor_Mapping";
+
+        /// <summary>
         /// Gets a name of the Product-Manufacturer mapping table
         /// </summary>
         public static string ProductManufacturerTable => "Product_Manufacturer_Mapping";
