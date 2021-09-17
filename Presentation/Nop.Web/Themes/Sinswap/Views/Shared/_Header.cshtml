@@ -17,8 +17,8 @@
 
             <div class="col-12 col-md-4">
                 <nav class="main">
-                    <a href="#" class="menuLink">Clothing</a>
-                    <a href="#" class="menuLink">Food</a>
+                    <a href="/en/clothing" class="menuLink">Clothing</a>
+                    <a href="/en/food" class="menuLink">Food</a>
                     <a href="#" class="menuLink">Media</a>
                     <a href="#" class="menuLink">Services</a>
                     <a href="#" class="menuLink">Body</a>
@@ -29,8 +29,8 @@
             <div class="col-12 col-md-4 serviceMenu">
                 <nav class="service">
                     <a href="#" class="btn btn-primary d-none d-md-block">Start selling</a>
-                    <a href="#" class="btn btn-primary">Signup</a>
-                    <a href="#" class="btn btn-primary">Login</a>
+                    <a href="@Url.RouteUrl("Register")" class="btn btn-primary">Signup</a>
+                    <a href="@Url.RouteUrl("Login")" class="btn btn-primary">Login</a>
                 </nav>
             </div>
         </div>
@@ -45,8 +45,8 @@
 </header>
 
 @*@await Component.InvokeAsync("TaxTypeSelector")
-@await Component.InvokeAsync("CurrencySelector")
-@await Component.InvokeAsync("LanguageSelector")
-@await Component.InvokeAsync("HeaderLinks")
-@await Component.InvokeAsync("FlyoutShoppingCart")
-@await Component.InvokeAsync("SearchBox")*@
+    @await Component.InvokeAsync("CurrencySelector")
+    @await Component.InvokeAsync("LanguageSelector")
+    @await Component.InvokeAsync("HeaderLinks")
+    @await Component.InvokeAsync("FlyoutShoppingCart")
+    @await Component.InvokeAsync("SearchBox")*@

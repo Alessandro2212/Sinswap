@@ -15,6 +15,7 @@ namespace Nop.Core.Domain.Catalog
     public partial class Product : BaseEntity, ILocalizedEntity, ISlugSupported, IAclSupported, IStoreMappingSupported, IDiscountSupported
     {
         private ICollection<ProductCategory> _productCategories;
+        private ICollection<ProductVendor> _productVendors;
         private ICollection<ProductManufacturer> _productManufacturers;
         private ICollection<ProductPicture> _productPictures;
         private ICollection<ProductReview> _productReviews;
@@ -633,6 +634,15 @@ namespace Nop.Core.Domain.Catalog
         {
             get => _productCategories ?? (_productCategories = new List<ProductCategory>());
             protected set => _productCategories = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the collection of ProductVendor
+        /// </summary>
+        public virtual ICollection<ProductVendor> ProductVendors
+        {
+            get => _productVendors ?? (_productVendors = new List<ProductVendor>());
+            protected set => _productVendors = value;
         }
 
         /// <summary>

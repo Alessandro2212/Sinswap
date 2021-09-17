@@ -23,6 +23,8 @@ namespace Nop.Web.Models.Catalog
 
         public int? SoldItems { get; set; }
 
+        public int? TotalRatings { get; set; }
+
         public PictureModel PictureModel { get; set; }
 
         public List<CategorySimpleModel> SubCategories { get; set; }

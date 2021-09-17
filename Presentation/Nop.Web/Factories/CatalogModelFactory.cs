@@ -648,6 +648,22 @@ namespace Nop.Web.Factories
             return allCategories.OrderByDescending(c => c.SoldItems).Take(amount).ToList();
         }
 
+        public virtual List<CategorySimpleModel> GetTrendyHomePageCategories(int amount)
+        {
+            var categoriesWithSubCategories = PrepareCategorySimpleModels();
+            List<CategorySimpleModel> allCategories = new List<CategorySimpleModel>();
+            foreach (var category in categoriesWithSubCategories)
+            {
+                if (category.SubCategories != null && category.SubCategories.Any())
+                {
+                    allCategories.AddRange(category.SubCategories);
+                }
+                allCategories.Add(category);
+            }
+
+            return allCategories.OrderByDescending(c => c.TotalRatings).Take(amount).ToList();
+        }
+
         /// <summary>
         /// Prepare category (simple) models
         /// </summary>
@@ -691,6 +707,7 @@ namespace Nop.Web.Factories
                     SeName = _urlRecordService.GetSeName(category),
                     IncludeInTopMenu = category.IncludeInTopMenu,
                     SoldItems = category.SoldItems,
+                    TotalRatings = category.TotalRatings,
                     PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
                     {
                         var picture = _pictureService.GetPictureById(category.PictureId);
@@ -966,7 +983,8 @@ namespace Nop.Web.Factories
                 MetaDescription = _localizationService.GetLocalized(vendor, x => x.MetaDescription),
                 MetaTitle = _localizationService.GetLocalized(vendor, x => x.MetaTitle),
                 SeName = _urlRecordService.GetSeName(vendor),
-                AllowCustomersToContactVendors = _vendorSettings.AllowCustomersToContactVendors
+                AllowCustomersToContactVendors = _vendorSettings.AllowCustomersToContactVendors,
+                IsPremium = vendor.IsPremium
             };
 
             //sorting

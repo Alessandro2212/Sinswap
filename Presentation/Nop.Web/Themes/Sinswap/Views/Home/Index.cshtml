@@ -221,7 +221,7 @@
     </div>
 </div>
 
-<div class="container trendingCategoriesContainer">
+@*<div class="container trendingCategoriesContainer">
     <div class="row">
         <div class="col-12">
             <h2>Trending categories</h2>
@@ -252,7 +252,9 @@
 
         </div>
     </div>
-</div>
+</div>*@
+
+@await Component.InvokeAsync("HomepageTrendyCategories", new { amount = 3 })
 
 <div class="container aboutUsContainer">
     <div class="row">

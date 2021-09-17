@@ -21,10 +21,17 @@ namespace Nop.Web.Components
         {
             List<CategorySimpleModel> model;
 
-            if(showMostPopular)
+            if (showMostPopular)
+            {
                 model = _catalogModelFactory.GetPopularHomePageCategories(8);
+            }
             else
+            {
                 model = _catalogModelFactory.PrepareCategorySimpleModels();
+            }
+                
+            //test-to remove this call GetTrendyHomePageCategories
+            //model = _catalogModelFactory.GetTrendyHomePageCategories(8);
 
             if (!model.Any())
                 return Content("");
