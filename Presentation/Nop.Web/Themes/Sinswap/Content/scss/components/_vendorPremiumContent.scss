@@ -195,6 +195,12 @@
                         font-size: 14px;
                         color: $grey9;
                     }
+
+                    .reviewReply {
+                        margin-top: 10px;
+                        font-size: 16px;
+                        color: $grey29;
+                    }
                 }
             }
         }
@@ -298,6 +304,10 @@
                 .reviewList {
                     .reviewListItem {
                         font-size: 12px;
+
+                        .reviewReply {
+                            font-size: 14px;
+                        }
 
                         .publishdate {
                             font-size: 10px;

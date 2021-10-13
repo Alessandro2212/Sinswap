@@ -1565,6 +1565,10 @@ nav {
           .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .publishdate {
             font-size: 14px;
             color: #c4c4c4; }
+          .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .reviewReply {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333333; }
     .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer {
       margin: 0 30px;
       padding-bottom: 30px;
@@ -1614,6 +1618,8 @@ nav {
 @media (max-width: 992px) {
   .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem {
     font-size: 12px; }
+    .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .reviewReply {
+      font-size: 14px; }
     .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorReviewsContainer .reviewList .reviewListItem .publishdate {
       font-size: 10px; } }
 
