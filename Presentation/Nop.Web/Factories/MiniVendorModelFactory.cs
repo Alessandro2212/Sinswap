@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Nop.Core;
-using Nop.Core.Data;
-using Nop.Core.Domain.Catalog;
-using Nop.Core.Domain.Common;
+﻿using Nop.Core.Data;
 using Nop.Core.Domain.Media;
-using Nop.Core.Domain.Security;
 using Nop.Core.Domain.Vendors;
-using Nop.Services.Common;
-using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Services.Seo;
 using Nop.Services.Vendors;
-using Nop.Web.Models.Media;
 using Nop.Web.Models.MiniVendors;
-using Nop.Web.Models.Vendors;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Nop.Web.Factories
 {

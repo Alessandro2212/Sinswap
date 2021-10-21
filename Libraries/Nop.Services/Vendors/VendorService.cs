@@ -4,6 +4,7 @@ using System.Linq;
 using Nop.Core;
 using Nop.Core.Data;
 using Nop.Core.Data.Extensions;
+using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Vendors;
 using Nop.Core.Html;
 using Nop.Data;
@@ -23,6 +24,9 @@ namespace Nop.Services.Vendors
         private readonly IRepository<VendorNote> _vendorNoteRepository;
         private readonly IDbContext _dbContext;
         private readonly IDataProvider _dataProvider;
+        private readonly IRepository<Product> _productRepository;
+        private readonly IRepository<ProductVendor> _productVendorRepository;
+
 
         #endregion
 
@@ -32,13 +36,17 @@ namespace Nop.Services.Vendors
             IRepository<Vendor> vendorRepository,
             IRepository<VendorNote> vendorNoteRepository,
             IDbContext dbContext,
-            IDataProvider dataProvider)
+            IDataProvider dataProvider,
+            IRepository<Product> productRepository,
+            IRepository<ProductVendor> productVendorRepository)
         {
             this._eventPublisher = eventPublisher;
             this._vendorRepository = vendorRepository;
             this._vendorNoteRepository = vendorNoteRepository;
             this._dbContext = dbContext;
             this._dataProvider = dataProvider;
+            this._productRepository = productRepository;
+            this._productVendorRepository = productVendorRepository;
         }
 
         #endregion
@@ -210,6 +218,22 @@ namespace Nop.Services.Vendors
             text = HtmlHelper.FormatText(text, false, true, false, false, false, false);
 
             return text;
+        }
+
+
+        public IEnumerable<Product> GetAllVendorProducts(int vendorId)
+        {
+            //get all product id belonging to that vendor
+            var vendorProducts = _productVendorRepository.Table.Where(v => v.VendorId == vendorId).Select(p => p.ProductId).ToList();
+            List<Product> products = new List<Product>();
+
+            foreach (var pv in vendorProducts)
+            {
+                var product = this._productRepository.GetById(pv);
+                products.Add(product);
+            }
+
+            return products;
         }
 
         #endregion

@@ -1,0 +1,29 @@
+﻿@model Nop.Web.Models.Vendors.PremiumVendorProductModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+@if (Model.VendorProducts.ToList().Count > 0)
+{
+    <a id="shop"></a>
+    <div class="container vendorCategoriesContainer">
+        <div class="row">
+            <div class="col-12">
+                <h2>You can buy all of these from me</h2>
+                <div class="flex-row row no-gutters">
+                    @foreach (var vendorProduct in Model.VendorProducts)
+                    {
+                        <div class="col-6 col-lg-3">
+                            <div class="categoryCard clothing" style="background-image: url('@vendorProduct.DefaultPictureModel.ImageUrl')">
+                                <div class="category">
+                                    <a href="/@vendorProduct.SeName">@vendorProduct.Name</a>
+                                    <div class="priceLabel">from</div>
+                                    <div class="price">@vendorProduct.Price</div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

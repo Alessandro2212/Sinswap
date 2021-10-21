@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Nop.Core;
+using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Vendors;
 
 namespace Nop.Services.Vendors
@@ -80,5 +81,11 @@ namespace Nop.Services.Vendors
         /// Get Most Popular 'amount' of Vendors (vendors having the highes number of followers)
         /// </summary>
         List<Vendor> GetMostPopularVendors(int amount);
+
+        /// <summary>
+        /// Get all products belonging to vendorId
+        /// </summary>
+        /// <param name="vendorId"></param>
+        IEnumerable<Product> GetAllVendorProducts(int vendorId);
     }
 }
