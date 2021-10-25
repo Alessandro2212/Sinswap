@@ -984,7 +984,8 @@ namespace Nop.Web.Factories
                 MetaTitle = _localizationService.GetLocalized(vendor, x => x.MetaTitle),
                 SeName = _urlRecordService.GetSeName(vendor),
                 AllowCustomersToContactVendors = _vendorSettings.AllowCustomersToContactVendors,
-                IsPremium = vendor.IsPremium
+                IsPremium = vendor.IsPremium,
+                VendorNotes = vendor.VendorNotes
             };
 
             //sorting
