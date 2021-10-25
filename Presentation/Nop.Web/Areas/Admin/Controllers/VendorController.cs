@@ -340,6 +340,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             {
                 var prevPictureId = vendor.PictureId;
                 vendor = model.ToEntity(vendor);
+                vendor.BirthDate = DateTime.Today; //TODO: Fix both birthday and ispremium property when mapping and saving a vendor from admin (if you edit it those values get lost)
                 _vendorService.UpdateVendor(vendor);
 
                 //vendor attributes

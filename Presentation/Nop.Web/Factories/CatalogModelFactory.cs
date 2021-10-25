@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Nop.Core;
 using Nop.Core.Caching;
+using Nop.Core.Data;
 using Nop.Core.Domain.Blogs;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
@@ -60,6 +61,7 @@ namespace Nop.Web.Factories
         private readonly IWorkContext _workContext;
         private readonly MediaSettings _mediaSettings;
         private readonly VendorSettings _vendorSettings;
+        private readonly IRepository<VendorPictureRecord> _vendorPictureRecordRepository;
 
         #endregion
 
@@ -92,7 +94,8 @@ namespace Nop.Web.Factories
             IWebHelper webHelper,
             IWorkContext workContext,
             MediaSettings mediaSettings,
-            VendorSettings vendorSettings)
+            VendorSettings vendorSettings,
+            IRepository<VendorPictureRecord> vendorPictureRecordRepository)
         {
             this._blogSettings = blogSettings;
             this._catalogSettings = catalogSettings;
@@ -122,6 +125,7 @@ namespace Nop.Web.Factories
             this._workContext = workContext;
             this._mediaSettings = mediaSettings;
             this._vendorSettings = vendorSettings;
+            this._vendorPictureRecordRepository = vendorPictureRecordRepository;
         }
 
         #endregion
@@ -974,6 +978,22 @@ namespace Nop.Web.Factories
             if (vendor == null)
                 throw new ArgumentNullException(nameof(vendor));
 
+            //get vendor pictures
+            var query = from pp in _vendorPictureRecordRepository.Table
+                        where pp.VendorId == vendor.Id
+                        orderby pp.DisplayOrder, pp.Id
+                        select pp;
+
+            var vendorPictures = query.ToList();
+
+            List<string> pictureUrls = new List<string>();
+
+            foreach(var vp in vendorPictures)
+            {
+                var pictureUrl = _pictureService.GetPictureUrl(vp.PictureId, 500);
+                pictureUrls.Add(pictureUrl);
+            }
+
             var model = new VendorModel
             {
                 Id = vendor.Id,
@@ -985,7 +1005,8 @@ namespace Nop.Web.Factories
                 SeName = _urlRecordService.GetSeName(vendor),
                 AllowCustomersToContactVendors = _vendorSettings.AllowCustomersToContactVendors,
                 IsPremium = vendor.IsPremium,
-                VendorNotes = vendor.VendorNotes
+                VendorNotes = vendor.VendorNotes,
+                VendorPictureUrl = pictureUrls
             };
 
             //sorting

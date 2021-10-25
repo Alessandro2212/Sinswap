@@ -30,5 +30,7 @@ namespace Nop.Web.Models.Catalog
         public IList<ProductOverviewModel> Products { get; set; }
 
         public ICollection<VendorNote> VendorNotes { get; set; }
+
+        public IEnumerable<string> VendorPictureUrl { get; set; }
     }
 }
