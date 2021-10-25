@@ -231,7 +231,7 @@
 </div>
 
 
-@await Component.InvokeAsync("VendorPicture", new { vendorPictureUrls = Model.VendorPictureUrl })
+@await Component.InvokeAsync("VendorPicture", new { vendorId = Model.Id, size = 800 })
 @*<a id="media"></a>
 <div class="container-fluid vendorMediaContainer bgGrey2">
     <div class="row">

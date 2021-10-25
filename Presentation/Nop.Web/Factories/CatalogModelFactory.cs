@@ -978,22 +978,6 @@ namespace Nop.Web.Factories
             if (vendor == null)
                 throw new ArgumentNullException(nameof(vendor));
 
-            //get vendor pictures
-            var query = from pp in _vendorPictureRecordRepository.Table
-                        where pp.VendorId == vendor.Id
-                        orderby pp.DisplayOrder, pp.Id
-                        select pp;
-
-            var vendorPictures = query.ToList();
-
-            List<string> pictureUrls = new List<string>();
-
-            foreach(var vp in vendorPictures)
-            {
-                var pictureUrl = _pictureService.GetPictureUrl(vp.PictureId, 500);
-                pictureUrls.Add(pictureUrl);
-            }
-
             var model = new VendorModel
             {
                 Id = vendor.Id,
@@ -1005,8 +989,7 @@ namespace Nop.Web.Factories
                 SeName = _urlRecordService.GetSeName(vendor),
                 AllowCustomersToContactVendors = _vendorSettings.AllowCustomersToContactVendors,
                 IsPremium = vendor.IsPremium,
-                VendorNotes = vendor.VendorNotes,
-                VendorPictureUrl = pictureUrls
+                VendorNotes = vendor.VendorNotes
             };
 
             //sorting

@@ -9,22 +9,24 @@ namespace Nop.Web.Components
 {
     public class VendorPictureViewComponent : NopViewComponent
     {
-        private readonly IVendorProductModelFactory _vendorProductModelFactory;
+        private readonly IVendorPictureModelFactory _vendorPictureModelFactory;
         private readonly VendorSettings _vendorSettings;
 
-        public VendorPictureViewComponent(IVendorProductModelFactory vendorProductModelFactory,
+        public VendorPictureViewComponent(IVendorPictureModelFactory vendorPictureModelFactory,
             VendorSettings vendorSettings)
         {
-            this._vendorProductModelFactory = vendorProductModelFactory;
+            this._vendorPictureModelFactory = vendorPictureModelFactory;
             this._vendorSettings = vendorSettings;
         }
 
-        public IViewComponentResult Invoke(IEnumerable<string> vendorPictureUrls)
+        public IViewComponentResult Invoke(int vendorId, int size)
         {
             if (_vendorSettings.VendorsBlockItemsToDisplay == 0)
                 return Content("");
 
-            var model = new VendorPictureModel { VendorPictureUrls = vendorPictureUrls };
+            var model = _vendorPictureModelFactory.GetAllVendorPictures(vendorId, size);
+            if (model == null)
+                return Content("");
 
             return View(model);
         }
