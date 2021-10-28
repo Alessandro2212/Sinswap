@@ -204,21 +204,12 @@
 
                     <div class="col-12 col-lg-6 personalContainer">
                         <p>
-                            @*Hi there,<br /><br />
-
-                                Mauris placerat congue dui sit amet blandit. Phasellus condimentum libero vel velit auctor, sit amet tincidunt velit varius. Mauris lacinia porta faucibus. Fusce eu est ac eros vulputate mollis in ac felis. Aenean commodo scelerisque mi sed imperdiet.<br /><br />
-
-                                Donec at hendrerit nisi, eget vestibulum nisi. Sed sit amet magna luctus, facilisis erat quis, sagittis ligula. Aenean dignissim velit quis leo consequat ultricies. Proin quis pretium justo. Vestibulum at eros nisl. P lacus dictum vel. Phasellus vitae sollicitudin mi.<br /><br />
-
-                                XOXO, Katee*@
-                            @Model.VendorNotes.FirstOrDefault()?.Note?.Replace("<br />", "\r\n")
+                            @Model.Description
                         </p>
                     </div>
                     <div class="col-12 col-lg-6 quoteContainer">
                         <blockquote>
-                            @*I love it when men and women tell me what they want.
-                                So what can I do for you?*@
-                            @Model.VendorNotes.LastOrDefault()?.Note
+                            @Model.VendorNotes.FirstOrDefault()?.Note
                         </blockquote>
                         <div class="quoteAuthor">- @Model.Name -</div>
                     </div>

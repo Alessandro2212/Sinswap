@@ -224,16 +224,8 @@ namespace Nop.Services.Vendors
         public IEnumerable<Product> GetAllVendorProducts(int vendorId)
         {
             //get all product id belonging to that vendor
-            var vendorProducts = _productVendorRepository.Table.Where(v => v.VendorId == vendorId).Select(p => p.ProductId).ToList();
-            List<Product> products = new List<Product>();
-
-            foreach (var pv in vendorProducts)
-            {
-                var product = this._productRepository.GetById(pv);
-                products.Add(product);
-            }
-
-            return products;
+            var vendorProducts = _productRepository.Table.Where(v => v.VendorId == vendorId).ToList();
+            return vendorProducts;
         }
 
         #endregion
