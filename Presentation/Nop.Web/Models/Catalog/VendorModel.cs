@@ -22,6 +22,7 @@ namespace Nop.Web.Models.Catalog
         public string SeName { get; set; }
         public bool AllowCustomersToContactVendors { get; set; }
         public bool? IsPremium { get; set; }
+        public string PictureUrl { get; set; }     
 
         public PictureModel PictureModel { get; set; }
 

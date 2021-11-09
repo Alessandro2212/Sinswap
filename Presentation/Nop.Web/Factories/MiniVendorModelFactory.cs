@@ -56,17 +56,7 @@ namespace Nop.Web.Factories
             List<MiniVendorModel> miniVendors = new List<MiniVendorModel>();
 
             foreach (Vendor vendor in vendors.ToList())
-            {
-                var query = from pp in _vendorPictureRecordRepository.Table
-                            where pp.VendorId == vendor.Id
-                            orderby pp.DisplayOrder, pp.Id
-                            select pp;
-
-                var vendorPictures = query.ToList().FirstOrDefault();
-                Picture picture = null;
-                if (vendorPictures != null)
-                    picture = _pictureService.GetPictureById(vendorPictures.PictureId);
-
+            {                
                 int age = 18;
                 if (vendor.BirthDate != null)
                 {
@@ -83,7 +73,7 @@ namespace Nop.Web.Factories
                     Country = vendor.Country,
                     FollowersNumber = vendor.FollowersNumber,
                     Age = age,
-                    PictureUrl = _pictureService.GetPictureUrl(picture),
+                    PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId),
                     SeName = _urlRecordService.GetSeName(vendor)
                 });
             }
@@ -107,16 +97,6 @@ namespace Nop.Web.Factories
 
             foreach (Vendor vendor in vendors.ToList())
             {
-                var query = from pp in _vendorPictureRecordRepository.Table
-                            where pp.VendorId == vendor.Id
-                            orderby pp.DisplayOrder, pp.Id
-                            select pp;
-
-                var vendorPictures = query.ToList().FirstOrDefault();
-                Picture picture = null;
-                if (vendorPictures != null)
-                    picture = _pictureService.GetPictureById(vendorPictures.PictureId);
-
                 int age = 18;
                 if (vendor.BirthDate != null)
                 {
@@ -133,7 +113,7 @@ namespace Nop.Web.Factories
                     Country = vendor.Country,
                     FollowersNumber = vendor.FollowersNumber,
                     Age = age,
-                    PictureUrl = _pictureService.GetPictureUrl(picture),
+                    PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId),
                     SeName = _urlRecordService.GetSeName(vendor)
                 });
             }

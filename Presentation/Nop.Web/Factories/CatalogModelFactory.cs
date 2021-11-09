@@ -989,7 +989,8 @@ namespace Nop.Web.Factories
                 SeName = _urlRecordService.GetSeName(vendor),
                 AllowCustomersToContactVendors = _vendorSettings.AllowCustomersToContactVendors,
                 IsPremium = vendor.IsPremium,
-                VendorNotes = vendor.VendorNotes
+                VendorNotes = vendor.VendorNotes,
+                PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId)
             };
 
             //sorting
