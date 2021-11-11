@@ -5,6 +5,7 @@ using Nop.Core;
 using Nop.Core.Data;
 using Nop.Core.Data.Extensions;
 using Nop.Core.Domain.Catalog;
+using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Vendors;
 using Nop.Core.Html;
 using Nop.Data;
@@ -26,6 +27,7 @@ namespace Nop.Services.Vendors
         private readonly IDataProvider _dataProvider;
         private readonly IRepository<Product> _productRepository;
         private readonly IRepository<ProductVendor> _productVendorRepository;
+        private readonly IRepository<VendorReviewRecord> _vendorReviewRepository;
 
 
         #endregion
@@ -38,7 +40,8 @@ namespace Nop.Services.Vendors
             IDbContext dbContext,
             IDataProvider dataProvider,
             IRepository<Product> productRepository,
-            IRepository<ProductVendor> productVendorRepository)
+            IRepository<ProductVendor> productVendorRepository,
+            IRepository<VendorReviewRecord> vendorReviewRepository)
         {
             this._eventPublisher = eventPublisher;
             this._vendorRepository = vendorRepository;
@@ -47,6 +50,7 @@ namespace Nop.Services.Vendors
             this._dataProvider = dataProvider;
             this._productRepository = productRepository;
             this._productVendorRepository = productVendorRepository;
+            this._vendorReviewRepository = vendorReviewRepository;
         }
 
         #endregion
@@ -226,6 +230,13 @@ namespace Nop.Services.Vendors
             //get all product id belonging to that vendor
             var vendorProducts = _productRepository.Table.Where(v => v.VendorId == vendorId).ToList();
             return vendorProducts;
+        }
+
+        public IEnumerable<VendorReviewRecord> GetVendorReviews(int vendorId)
+        {
+            //get all reviews belonging to that vendor
+            var vendorReviews = _vendorReviewRepository.Table.Where(v => v.VendorId == vendorId && v.IsApproved == true).ToList();
+            return vendorReviews;
         }
 
         #endregion

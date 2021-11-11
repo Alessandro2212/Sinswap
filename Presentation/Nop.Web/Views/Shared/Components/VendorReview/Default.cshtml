@@ -1,0 +1,222 @@
+﻿@model Nop.Web.Models.Vendors.PremiumVendorReviewModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+@if (Model.VendorReviews.ToList().Count > 0)
+{
+    <div class="col-12 vendorReviewsContainer">
+        <h2>Reviews</h2>
+        <ul class="reviewList">
+            @foreach (var vendorProduct in Model.VendorReviews)
+            {
+                <li class="reviewListItem">
+                    <div class="reviewMeta">
+                        <div class="ratingStars">
+                            @{
+                                int i = vendorProduct.Rating;
+                                while (i > 0)
+                                {
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    i--;
+                                }
+                            }
+                            @*<i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star-half-alt" aria-hidden="true"></i>*@
+                        </div>
+                        - <span class="username">@vendorProduct.CustomerName</span>
+                        - <span class="usercountry">@vendorProduct.CustomerCountry</span>
+                        <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                    </div>
+                    <blockquote>@vendorProduct.ReviewText</blockquote>
+                    <div class="publishdate">@vendorProduct.CreatedOn</div>
+                </li>
+            }
+            @*<li class="reviewListItem">
+
+                    <div class="reviewMeta">
+                        <div class="ratingStars">
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                        </div>
+                        - <span class="username">PencilDick420</span>
+                        - <span class="usercountry">Canada</span>
+                        <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                    </div>
+
+                    <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+
+                    <div class="publishdate">04/02/2020</div>
+
+                    <div class="reviewReply">"You're very welcome, doll. Love to add a little bonus for you every time!" - Charlotte the Wet</div>
+                    <div class="publishdate">06/02/2020</div>
+
+                </li>
+                <li class="reviewListItem">
+
+                    <div class="reviewMeta">
+                        <div class="ratingStars">
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                        </div>
+                        - <span class="username">PencilDick420</span>
+                        - <span class="usercountry">Canada</span>
+                        <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                    </div>
+
+                    <blockquote>"She's the best"</blockquote>
+
+                    <div class="publishdate">04/02/2020</div>
+
+                </li>
+                <li class="reviewListItem">
+
+                    <div class="reviewMeta">
+                        <div class="ratingStars">
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                        </div>
+                        - <span class="username">PencilDick420</span>
+                        - <span class="usercountry">Canada</span>
+                        <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                    </div>
+
+                    <blockquote>"I got quick response to my questions. Everything was discretly packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+
+                    <div class="publishdate">04/02/2020</div>
+
+                </li>
+                <li class="reviewListItem">
+
+                    <div class="reviewMeta">
+                        <div class="ratingStars">
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                        </div>
+                        - <span class="username">PencilDick420</span>
+                        - <span class="usercountry">Canada</span>
+                        <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                    </div>
+
+                    <blockquote>"She's the best"</blockquote>
+
+                    <div class="publishdate">04/02/2020</div>
+
+                </li>
+                <li class="reviewListItem">
+
+                    <div class="reviewMeta">
+                        <div class="ratingStars">
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                        </div>
+                        - <span class="username">PencilDick420</span>
+                        - <span class="usercountry">Canada</span>
+                        <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                    </div>
+
+                    <blockquote>"I got quick response to my questions. Everything was discretly packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+
+                    <div class="publishdate">04/02/2020</div>
+
+                </li>
+                <li class="reviewListItem">
+
+                    <div class="reviewMeta">
+                        <div class="ratingStars">
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                        </div>
+                        - <span class="username">PencilDick420</span>
+                        - <span class="usercountry">Canada</span>
+                        <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                    </div>
+
+                    <blockquote>"She's the best"</blockquote>
+
+                    <div class="publishdate">04/02/2020</div>
+
+                </li>
+                <li class="reviewListItem">
+
+                    <div class="reviewMeta">
+                        <div class="ratingStars">
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                        </div>
+                        - <span class="username">PencilDick420</span>
+                        - <span class="usercountry">Canada</span>
+                        <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                    </div>
+
+                    <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+
+                    <div class="publishdate">04/02/2020</div>
+
+                </li>
+                <li class="reviewListItem">
+
+                    <div class="reviewMeta">
+                        <div class="ratingStars">
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                        </div>
+                        - <span class="username">PencilDick420</span>
+                        - <span class="usercountry">Canada</span>
+                        <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                    </div>
+
+                    <blockquote>"She's the best"</blockquote>
+
+                    <div class="publishdate">04/02/2020</div>
+
+                </li>
+                <li class="reviewListItem">
+
+                    <div class="reviewMeta">
+                        <div class="ratingStars">
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                        </div>
+                        - <span class="username">PencilDick420</span>
+                        - <span class="usercountry">Canada</span>
+                        <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                    </div>
+
+                    <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+
+                    <div class="publishdate">04/02/2020</div>
+
+                </li>*@
+        </ul>
+    </div>
+}

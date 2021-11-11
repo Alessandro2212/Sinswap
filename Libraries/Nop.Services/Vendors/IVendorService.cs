@@ -87,5 +87,7 @@ namespace Nop.Services.Vendors
         /// </summary>
         /// <param name="vendorId"></param>
         IEnumerable<Product> GetAllVendorProducts(int vendorId);
+
+        IEnumerable<VendorReviewRecord> GetVendorReviews(int vendorId);
     }
 }
