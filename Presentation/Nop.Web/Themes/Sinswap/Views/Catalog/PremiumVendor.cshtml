@@ -293,11 +293,11 @@
                     <div class="col-12 col-lg-6 vendorSmallTalkContainer">
                         <div class="smallTalkHeader">
                             <h2>Small talk</h2>
-                            <h3>a short interview with <span>Charlotte the Wet</span></h3>
-                            <img src="/Themes/Sinswap/Content/images/vendorAvatar.jpg" />
+                            <h3>a short interview with <span>@Model.Name</span></h3>
+                            <img src="@Model.PictureUrl" />
                         </div>
-
-                        <div class="qaContainer">
+                        @await Component.InvokeAsync("VendorSmallTalk", new { vendorId = Model.Id, amount = 6 })
+                        @*<div class="qaContainer">
                             <div class="bubble question">
                                 <p>Question 1</p>
                             </div>
@@ -358,13 +358,13 @@
                                     I hate temporal mechanics !
                                 </p>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                     <div class="col-12 col-lg-6 vendorReviewFavoriteContainer">
                         <div class="container-fluid">
 
                             <div class="row">
-                                @await Component.InvokeAsync("VendorReview", new { vendorId = Model.Id })                                
+                                @await Component.InvokeAsync("VendorReview", new { vendorId = Model.Id })
                             </div>
 
                             <div class="row">

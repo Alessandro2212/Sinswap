@@ -1,15 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Nop.Core;
 using Nop.Core.Data;
 using Nop.Core.Data.Extensions;
 using Nop.Core.Domain.Catalog;
-using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Vendors;
 using Nop.Core.Html;
 using Nop.Data;
 using Nop.Services.Events;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Nop.Services.Vendors
 {
@@ -235,7 +234,23 @@ namespace Nop.Services.Vendors
         public IEnumerable<VendorReviewRecord> GetVendorReviews(int vendorId)
         {
             //get all reviews belonging to that vendor
-            var vendorReviews = _vendorReviewRepository.Table.Where(v => v.VendorId == vendorId && v.IsApproved == true).ToList();
+            var vendorReviews = _vendorReviewRepository.Table
+                                    .Where(v => v.VendorId == vendorId && 
+                                           v.IsApproved == true &&
+                                           v.IsQuestion == null || v.IsQuestion == false)
+                                    .ToList();
+            return vendorReviews;
+        }
+
+        public IEnumerable<VendorReviewRecord> GetVendorQuestions(int vendorId, int amount)
+        {
+            //get all reviews belonging to that vendor
+            var vendorReviews = _vendorReviewRepository.Table
+                                    .Where(v => v.VendorId == vendorId &&
+                                                v.IsApproved == true &&
+                                                v.IsQuestion == true)
+                                    .Take(amount)
+                                    .ToList();
             return vendorReviews;
         }
 

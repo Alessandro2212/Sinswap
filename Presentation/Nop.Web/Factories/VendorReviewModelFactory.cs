@@ -36,5 +36,26 @@ namespace Nop.Web.Factories
             
             return premiumVendorReviewModel;
         }
+
+        public PremiumVendorSmallTalkModel GetVendorSmallTalk(int vendorId, int amount)
+        {
+            //call the service
+            var vendorQuestions = this._vendorService.GetVendorQuestions(vendorId, amount);
+
+            //prepare model for the view
+            PremiumVendorSmallTalkModel premiumVendorSmallTalkModel = new PremiumVendorSmallTalkModel();
+            List<VendorQuestionModel> vendorQuestionModels = new List<VendorQuestionModel>();
+            foreach (var vq in vendorQuestions)
+            {
+                var vendorQuestion = new VendorQuestionModel();
+                vendorQuestion.Question = vq.ReviewText;
+                vendorQuestion.Answer = vq.ReplyText;
+                vendorQuestionModels.Add(vendorQuestion);
+            }
+
+            premiumVendorSmallTalkModel.VendorQuestions = vendorQuestionModels;
+
+            return premiumVendorSmallTalkModel;
+        }
     }
 }

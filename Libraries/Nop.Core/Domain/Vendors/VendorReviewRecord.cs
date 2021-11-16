@@ -36,6 +36,8 @@ namespace Nop.Core.Domain.Vendors
 
         public int HelpfulNoTotal { get; set; }
 
+        public bool? IsQuestion { get; set; }
+
         /// <summary>
         /// Gets or sets the date and time of vendor note creation
         /// </summary>

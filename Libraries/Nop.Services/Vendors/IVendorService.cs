@@ -89,5 +89,7 @@ namespace Nop.Services.Vendors
         IEnumerable<Product> GetAllVendorProducts(int vendorId);
 
         IEnumerable<VendorReviewRecord> GetVendorReviews(int vendorId);
+
+        IEnumerable<VendorReviewRecord> GetVendorQuestions(int vendorId, int amount);
     }
 }
