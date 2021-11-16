@@ -27,6 +27,7 @@ namespace Nop.Services.Vendors
         private readonly IRepository<Product> _productRepository;
         private readonly IRepository<ProductVendor> _productVendorRepository;
         private readonly IRepository<VendorReviewRecord> _vendorReviewRepository;
+        private readonly IRepository<VendorCustomer> _vendorCustomerRepository;
 
 
         #endregion
@@ -40,7 +41,8 @@ namespace Nop.Services.Vendors
             IDataProvider dataProvider,
             IRepository<Product> productRepository,
             IRepository<ProductVendor> productVendorRepository,
-            IRepository<VendorReviewRecord> vendorReviewRepository)
+            IRepository<VendorReviewRecord> vendorReviewRepository,
+            IRepository<VendorCustomer> vendorCustomerRepository)
         {
             this._eventPublisher = eventPublisher;
             this._vendorRepository = vendorRepository;
@@ -50,6 +52,7 @@ namespace Nop.Services.Vendors
             this._productRepository = productRepository;
             this._productVendorRepository = productVendorRepository;
             this._vendorReviewRepository = vendorReviewRepository;
+            this._vendorCustomerRepository = vendorCustomerRepository;
         }
 
         #endregion
@@ -252,6 +255,17 @@ namespace Nop.Services.Vendors
                                     .Take(amount)
                                     .ToList();
             return vendorReviews;
+        }
+
+        public IEnumerable<VendorCustomer> GetVendorFavouriteCustomers(int vendorId, int amount)
+        {
+            //get all fav. customers belonging to that vendor
+            var vendorCustomers = _vendorCustomerRepository.Table
+                                    .Where(v => v.VendorId == vendorId &&
+                                                v.IsFavourite == true)
+                                    .Take(amount)
+                                    .ToList();
+            return vendorCustomers;
         }
 
         #endregion

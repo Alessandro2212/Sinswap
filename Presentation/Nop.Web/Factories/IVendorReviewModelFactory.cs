@@ -6,5 +6,6 @@ namespace Nop.Web.Factories
     {
         PremiumVendorReviewModel GetVendorReviews(int vendorId);
         PremiumVendorSmallTalkModel GetVendorSmallTalk(int vendorId, int amount);
+        PremiumVendorFavouriteCustomerModel GetVendorFavouriteCustomers(int vendorId, int amount);
     }
 }

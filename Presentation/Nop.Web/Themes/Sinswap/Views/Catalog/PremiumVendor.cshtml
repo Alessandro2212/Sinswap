@@ -368,7 +368,8 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-12 vendorFavouritesContainer">
+                                @await Component.InvokeAsync("VendorFavCustomer", new { vendorId = Model.Id, amount = 10 })
+                                @*<div class="col-12 vendorFavouritesContainer">
                                     <h2>These are my favorite customers</h2>
 
                                     <div class="container-fluid">
@@ -390,7 +391,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
 
                         </div>

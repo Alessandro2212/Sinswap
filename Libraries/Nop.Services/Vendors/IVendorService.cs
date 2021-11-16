@@ -91,5 +91,7 @@ namespace Nop.Services.Vendors
         IEnumerable<VendorReviewRecord> GetVendorReviews(int vendorId);
 
         IEnumerable<VendorReviewRecord> GetVendorQuestions(int vendorId, int amount);
+
+        IEnumerable<VendorCustomer> GetVendorFavouriteCustomers(int vendorId, int amount);
     }
 }
