@@ -28,6 +28,7 @@ namespace Nop.Services.Vendors
         private readonly IRepository<ProductVendor> _productVendorRepository;
         private readonly IRepository<VendorReviewRecord> _vendorReviewRepository;
         private readonly IRepository<VendorCustomer> _vendorCustomerRepository;
+        private readonly IRepository<VendorCustomerStory> _vendorCustomerStoryRepository;
 
 
         #endregion
@@ -42,7 +43,8 @@ namespace Nop.Services.Vendors
             IRepository<Product> productRepository,
             IRepository<ProductVendor> productVendorRepository,
             IRepository<VendorReviewRecord> vendorReviewRepository,
-            IRepository<VendorCustomer> vendorCustomerRepository)
+            IRepository<VendorCustomer> vendorCustomerRepository,
+            IRepository<VendorCustomerStory> vendorCustomerStoryRepository)
         {
             this._eventPublisher = eventPublisher;
             this._vendorRepository = vendorRepository;
@@ -53,6 +55,7 @@ namespace Nop.Services.Vendors
             this._productVendorRepository = productVendorRepository;
             this._vendorReviewRepository = vendorReviewRepository;
             this._vendorCustomerRepository = vendorCustomerRepository;
+            this._vendorCustomerStoryRepository = vendorCustomerStoryRepository;
         }
 
         #endregion
@@ -266,6 +269,33 @@ namespace Nop.Services.Vendors
                                     .Take(amount)
                                     .ToList();
             return vendorCustomers;
+        }
+
+        public IEnumerable<VendorCustomerStory> GetVendorStories(int vendorId, int amount)
+        { 
+            var vendorCustomerStories = _vendorCustomerStoryRepository.Table
+                                    .Where(v => v.VendorId == vendorId &&
+                                                v.IsApproved == true)
+                                    .Take(amount)
+                                    .ToList();
+
+            return vendorCustomerStories;
+        }
+
+        public void SaveVendorStories(int vendorId, int customerId, string questionText, bool isOwnStory)
+        {
+            var vendorCustomerStories = new VendorCustomerStory
+            {
+                VendorId = vendorId,
+                CustomerId = customerId,
+                QuestionText = questionText,
+                IsOwnStory = isOwnStory,
+                StoreId = 1,
+                CreatedOnUtc = DateTime.UtcNow,
+                UpdatedOnUtc = DateTime.UtcNow
+            };
+
+            _vendorCustomerStoryRepository.Insert(vendorCustomerStories); 
         }
 
         #endregion

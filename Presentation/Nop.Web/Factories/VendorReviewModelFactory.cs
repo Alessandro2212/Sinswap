@@ -1,4 +1,5 @@
-﻿using Nop.Services.Vendors;
+﻿using Nop.Services.Media;
+using Nop.Services.Vendors;
 using Nop.Web.Models.Vendors;
 using System.Collections.Generic;
 
@@ -7,10 +8,12 @@ namespace Nop.Web.Factories
     public partial class VendorReviewModelFactory : IVendorReviewModelFactory
     {
         private readonly IVendorService _vendorService;
+        private readonly IPictureService _pictureService;
 
-        public VendorReviewModelFactory(IVendorService vendorService)
+        public VendorReviewModelFactory(IVendorService vendorService, IPictureService pictureService)
         {
             this._vendorService = vendorService;
+            this._pictureService = pictureService;
         }
 
         public PremiumVendorReviewModel GetVendorReviews(int vendorId)
@@ -76,6 +79,32 @@ namespace Nop.Web.Factories
             premiumVendorFavouriteCustomerModel.VendorCustomers = vendorCustomerModels;
 
             return premiumVendorFavouriteCustomerModel;
+        }
+
+        public PremiumVendorStoryModel GetVendorStories(int vendorId, int amount)
+        {
+            //call the service
+            var vendorStories = this._vendorService.GetVendorStories(vendorId, amount);
+
+            //prepare model for the view
+            PremiumVendorStoryModel premiumVendorStoryModel = new PremiumVendorStoryModel();
+            List<VendorStoryModel> vendorCustomerStoryModels = new List<VendorStoryModel>();
+            foreach (var vs in vendorStories)
+            {
+                var vendorStory = new VendorStoryModel();
+                vendorStory.CustomerName = vs.Customer.Username;
+                vendorStory.UpdatedOn = vs.UpdatedOnUtc;
+                vendorStory.QuestionText = vs.QuestionText;
+                vendorStory.ReplyText = vs.QuestionReply;
+                vendorStory.PictureUrl = vs.Picture == null ? string.Empty : this._pictureService.GetPictureUrl(vs.Picture);
+                vendorStory.IsOwnStory = vs.IsOwnStory;
+
+                vendorCustomerStoryModels.Add(vendorStory);
+            }
+
+            premiumVendorStoryModel.VendorStories = vendorCustomerStoryModels;
+
+            return premiumVendorStoryModel;
         }
     }
 }

@@ -391,6 +391,20 @@ namespace Nop.Web.Controllers
             return RedirectToAction("Info");
         }
 
+        [HttpPost, ActionName("customerquestion")]
+        [PublicAntiForgery]
+        public virtual IActionResult CustomerQuestion(string customerQuestion, int vendorId, string vendorSeName)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Challenge();
+
+            var customerId = _workContext.CurrentCustomer.Id;
+
+            this._vendorService.SaveVendorStories(vendorId, customerId, customerQuestion, false);
+
+            return RedirectToRoute("Vendor", new { SeName = vendorSeName });
+        }
+
         #endregion
     }
 }
