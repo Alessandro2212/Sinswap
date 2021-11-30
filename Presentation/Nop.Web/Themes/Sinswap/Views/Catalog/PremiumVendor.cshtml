@@ -6,7 +6,8 @@
 <div class="container vendorInfoContainer">
     <div class="row">
 
-        <div class="col-4 order-2 order-lg-1 col-lg-3 text-left starsContainer">
+        @await Component.InvokeAsync("VendorProductRating", new { vendorId = Model.Id })
+        @*<div class="col-4 order-2 order-lg-1 col-lg-3 text-left starsContainer">
             <div class="ratingStars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -19,7 +20,7 @@
                 <a href="#">36 Reviews</a>
                 <a href="#">42 items sold</a>
             </div>
-        </div>
+        </div>*@
 
         <div class="col-12 order-1 order-lg-2 col-lg-6 text-center avatarContainer">
             <h1><span>Sinswap store: </span>@Model.Name</h1>

@@ -615,6 +615,21 @@ namespace Nop.Services.Orders
             return result;
         }
 
+        public virtual int GetNumberOfSoldProductsByVendor(int vendorId)
+        {
+            var query = from orderItem in _orderItemRepository.Table
+                        join o in _orderRepository.Table on orderItem.OrderId equals o.Id
+                        join p in _productRepository.Table on orderItem.ProductId equals p.Id
+                        where vendorId == p.VendorId &&
+                        o.OrderStatus == OrderStatus.Complete
+                        orderby o.CreatedOnUtc descending, orderItem.Id
+                        select orderItem;
+
+            var soldItems = query.Count();
+
+            return soldItems;
+        }
+
         #endregion
 
         #region Orders notes
