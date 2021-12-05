@@ -11,9 +11,14 @@
     .popularMemberCard {
         margin: 5px 5px 15px 5px;
 
-        img {
+        .miniVendorImg {
             width: 100%;
+            height: 500px;
+            display: block;
             border-radius: 5px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
             box-shadow: none;
             transition: box-shadow 0.15s;
         }
@@ -57,7 +62,7 @@
         &:hover {
             cursor: pointer;
 
-            img {
+            .miniVendorImg {
                 box-shadow: 0px 4px 15px -5px rgba(0,0,0,1);
                 transition: box-shadow 0.15s;
             }
@@ -74,6 +79,11 @@
 
 // Extra extra large devices (large desktops, 1200px and up)
 @media (min-width: 1660px) {
+    .popularMemberCard {
+        .miniVendorImg {
+            height: 400px;
+        }
+    }
 }
 
 // Extra large devices (large desktops, 1200px and up)
@@ -95,6 +105,11 @@
 
 // Small devices (landscape phones, 576px and up)
 @media (max-width: 576px) {
+    .popularMemberCard {
+        .miniVendorImg {
+            height: 300px;
+        }
+    }
 }
 
 // Extra small devices (portrait phones, less than 576px)
