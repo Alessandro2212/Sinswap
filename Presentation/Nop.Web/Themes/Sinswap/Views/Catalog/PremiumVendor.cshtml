@@ -2,12 +2,16 @@
 @using Nop.Core.Domain.Seo
 @inject Nop.Core.IWebHelper webHelper
 @inject SeoSettings seoSettings
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3ec56fb944d8006df08105d9daba19a4c6dae961
 @* Vendor Page == Shop Page *@
 <div class="container vendorInfoContainer">
     <div class="row">
 
-        <div class="col-4 order-2 order-lg-1 col-lg-3 text-left starsContainer">
+        @await Component.InvokeAsync("VendorProductRating", new { vendorId = Model.Id })
+        @*<div class="col-4 order-2 order-lg-1 col-lg-3 text-left starsContainer">
             <div class="ratingStars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -20,11 +24,16 @@
                 <a href="#">36 Reviews</a>
                 <a href="#">42 items sold</a>
             </div>
-        </div>
+        </div>*@
 
         <div class="col-12 order-1 order-lg-2 col-lg-6 text-center avatarContainer">
             <h1><span>Sinswap store: </span>@Model.Name</h1>
+<<<<<<< HEAD
             <div class="avatar"><img src="/Themes/Sinswap/Content/images/vendorAvatar.jpg" /></div>
+=======
+            @*<div class="avatar"><img src="/Themes/Sinswap/Content/images/vendorAvatar.jpg" /></div>*@
+            <div class="avatar"><img src="@Model.PictureUrl" /></div>
+>>>>>>> 3ec56fb944d8006df08105d9daba19a4c6dae961
         </div>
 
         <div class="col-8 order-3 order-lg-3 col-lg-3 text-right metaContainer">
@@ -78,84 +87,87 @@
 
 
 
-<a id="shop"></a>
-<div class="container vendorCategoriesContainer">
-    <div class="row">
-        <div class="col-12">
-            <h2>You can buy all of these from me</h2>
+@await Component.InvokeAsync("VendorProduct", new { vendorId = Model.Id })
 
-            <div class="flex-row row no-gutters">
+@*<a id="shop"></a>
+    <div class="container vendorCategoriesContainer">
+        <div class="row">
+            <div class="col-12">
+                <h2>You can buy all of these from me</h2>
 
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                        <div class="category">
-                            <a href="#">High heels</a>
-                            <div class="priceLabel">from</div>
-                            <div class="price">&euro;70<sup>.00</sup></div>
+                <div class="flex-row row no-gutters">
+
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                            <div class="category">
+                                <a href="#">High heels</a>
+                                <div class="priceLabel">from</div>
+                                <div class="price">&euro;70<sup>.00</sup></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard food" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                        <div class="category">
-                            <a href="#">Cucumbers</a>
-                            <div class="priceLabel">from</div>
-                            <div class="price">&euro;70<sup>.00</sup></div>
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard food" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                            <div class="category">
+                                <a href="#">Cucumbers</a>
+                                <div class="priceLabel">from</div>
+                                <div class="price">&euro;70<sup>.00</sup></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard body" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                        <div class="category">
-                            <a href="#">Bath water</a>
-                            <div class="priceLabel">from</div>
-                            <div class="price">&euro;70<sup>.00</sup></div>
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard body" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                            <div class="category">
+                                <a href="#">Bath water</a>
+                                <div class="priceLabel">from</div>
+                                <div class="price">&euro;70<sup>.00</sup></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                        <div class="category">
-                            <a href="#">Yogapants</a>
-                            <div class="priceLabel">from</div>
-                            <div class="price">&euro;70<sup>.00</sup></div>
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                            <div class="category">
+                                <a href="#">Yogapants</a>
+                                <div class="priceLabel">from</div>
+                                <div class="price">&euro;70<sup>.00</sup></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                        <div class="category">
-                            <a href="#">Sports bras</a>
-                            <div class="priceLabel">from</div>
-                            <div class="price">&euro;70<sup>.00</sup></div>
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                            <div class="category">
+                                <a href="#">Sports bras</a>
+                                <div class="priceLabel">from</div>
+                                <div class="price">&euro;70<sup>.00</sup></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard service" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                        <div class="category">
-                            <a href="#">GFE</a>
-                            <div class="priceLabel">from</div>
-                            <div class="price">&euro;70<sup>.00</sup></div>
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard service" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                            <div class="category">
+                                <a href="#">GFE</a>
+                                <div class="priceLabel">from</div>
+                                <div class="price">&euro;70<sup>.00</sup></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-6 col-lg-3">
-                    <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                        <div class="category">
-                            <a href="#">Panties</a>
-                            <div class="priceLabel">from</div>
-                            <div class="price">&euro;70<sup>.00</sup></div>
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                            <div class="category">
+                                <a href="#">Panties</a>
+                                <div class="priceLabel">from</div>
+                                <div class="price">&euro;70<sup>.00</sup></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+<<<<<<< HEAD
                 <div class="col-6 col-lg-3">
                     <div class="categoryCard food" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
                         <div class="category">
@@ -182,56 +194,73 @@
                             <a href="#">Special request</a>
                             <div class="priceLabel">from</div>
                             <div class="price">&euro;250<sup>.00</sup></div>
+=======
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard food" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                            <div class="category">
+                                <a href="#">Cucumber</a>
+                                <div class="priceLabel">from</div>
+                                <div class="price">&euro;25<sup>.00</sup></div>
+                            </div>
+>>>>>>> 3ec56fb944d8006df08105d9daba19a4c6dae961
                         </div>
                     </div>
+
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                            <div class="category">
+                                <a href="#">Vibrator</a>
+                                <div class="priceLabel">from</div>
+                                <div class="price">&euro;100<sup>.00</sup></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-3">
+                        <div class="categoryCard object" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                            <div class="category">
+                                <a href="#">Special request</a>
+                                <div class="priceLabel">from</div>
+                                <div class="price">&euro;250<sup>.00</sup></div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
-
         </div>
-    </div>
-</div>
-
+    </div>*@
 
 
 <a id="aboutme"></a>
 <div class="container-fluid vendorPersonalQuoteContainer bgGrey2">
     <div class="row">
         <div class="col-12">
-
             <div class="container">
                 <div class="row">
 
                     <div class="col-12 col-lg-6 personalContainer">
                         <p>
-                            Hi there,<br /><br />
-
-                            Mauris placerat congue dui sit amet blandit. Phasellus condimentum libero vel velit auctor, sit amet tincidunt velit varius. Mauris lacinia porta faucibus. Fusce eu est ac eros vulputate mollis in ac felis. Aenean commodo scelerisque mi sed imperdiet.<br /><br />
-
-                            Donec at hendrerit nisi, eget vestibulum nisi. Sed sit amet magna luctus, facilisis erat quis, sagittis ligula. Aenean dignissim velit quis leo consequat ultricies. Proin quis pretium justo. Vestibulum at eros nisl. P lacus dictum vel. Phasellus vitae sollicitudin mi.<br /><br />
-
-                            XOXO, Katee
+                            @Model.Description
                         </p>
                     </div>
-
                     <div class="col-12 col-lg-6 quoteContainer">
                         <blockquote>
-                            I love it when men and women tell me what they want.
-                            So what can I do for you?
+                            @Model.VendorNotes.FirstOrDefault()?.Note
                         </blockquote>
-                        <div class="quoteAuthor">- Katee -</div>
+                        <div class="quoteAuthor">- @Model.Name -</div>
                     </div>
 
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
 
-
-<a id="media"></a>
+@await Component.InvokeAsync("VendorPicture", new { vendorId = Model.Id, size = 800 })
+@*<a id="media"></a>
 <div class="container-fluid vendorMediaContainer bgGrey2">
     <div class="row">
         <div class="col-12">
@@ -275,7 +304,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 
 
@@ -302,11 +331,11 @@
                     <div class="col-12 col-lg-6 vendorSmallTalkContainer">
                         <div class="smallTalkHeader">
                             <h2>Small talk</h2>
-                            <h3>a short interview with <span>Charlotte the Wet</span></h3>
-                            <img src="/Themes/Sinswap/Content/images/vendorAvatar.jpg" />
+                            <h3>a short interview with <span>@Model.Name</span></h3>
+                            <img src="@Model.PictureUrl" />
                         </div>
-
-                        <div class="qaContainer">
+                        @await Component.InvokeAsync("VendorSmallTalk", new { vendorId = Model.Id, amount = 6 })
+                        @*<div class="qaContainer">
                             <div class="bubble question">
                                 <p>Question 1</p>
                             </div>
@@ -367,13 +396,13 @@
                                     I hate temporal mechanics !
                                 </p>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
-
                     <div class="col-12 col-lg-6 vendorReviewFavoriteContainer">
                         <div class="container-fluid">
 
                             <div class="row">
+<<<<<<< HEAD
                                 <div class="col-12 vendorReviewsContainer">
                                     <h2>Reviews</h2>
 
@@ -583,10 +612,14 @@
                                         </li>
                                     </ul>
                                 </div>
+=======
+                                @await Component.InvokeAsync("VendorReview", new { vendorId = Model.Id })
+>>>>>>> 3ec56fb944d8006df08105d9daba19a4c6dae961
                             </div>
 
                             <div class="row">
-                                <div class="col-12 vendorFavouritesContainer">
+                                @await Component.InvokeAsync("VendorFavCustomer", new { vendorId = Model.Id, amount = 10 })
+                                @*<div class="col-12 vendorFavouritesContainer">
                                     <h2>These are my favorite customers</h2>
 
                                     <div class="container-fluid">
@@ -608,7 +641,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
 
                         </div>
@@ -622,7 +655,8 @@
 
 
 <a id="messageboard"></a>
-<div class="container-fluid vendorBlogContainer">
+@await Component.InvokeAsync("VendorStory", new { vendorId = Model.Id, vendorSeName=Model.SeName, amount = 10 })
+@*<div class="container-fluid vendorBlogContainer">
     <div class="row">
         <div class="col-12">
             <div class="container">
@@ -823,7 +857,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 
 
@@ -866,6 +900,30 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

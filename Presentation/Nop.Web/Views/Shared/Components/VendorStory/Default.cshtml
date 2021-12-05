@@ -1,0 +1,99 @@
+﻿@model Nop.Web.Models.Vendors.PremiumVendorStoryModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+<div class="container-fluid vendorBlogContainer">
+    <div class="row">
+        <div class="col-12">
+            <div class="container">
+                <div class="blogHeader">
+                    <h2>Stories &amp; answers</h2>
+                    <p>Get to know me... Ask me anything!</p>
+                </div>
+                <div class="blogListContainer">
+                    <div class="questionFormContainer">
+                        @using (Html.BeginForm("customerquestion", "vendor", FormMethod.Post))
+                        {
+                            @Html.Hidden("vendorId", Model.VendorId)
+                            @Html.Hidden("vendorSeName", Model.VendorSeName)
+                            <div class="form-group">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="question" class="sr-only">Ask me anything!</label>
+                                                @Html.TextAreaFor(Model=>Model.CustomerQuestion, new { @class = "form-control", @placeholder="Ask me anything!" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 submitContainer">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @*<form>
+                            <div class="form-group">
+                            <div class="container-fluid">
+                            <div class="row">
+                            <div class="col-12">
+                            <div class="form-group">
+                            <label for="question" class="sr-only">Ask me anything!</label>
+                            <textarea class="form-control" id="question" rows="6" placeholder="Ask me anything!"></textarea>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-12 submitContainer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </form>*@
+                    </div>
+                    @if (Model.VendorStories.ToList().Count > 0)
+                    {
+                        @foreach (var vendorStory in Model.VendorStories)
+                        {
+                            <div class="blogItem">
+                                <div class="body">
+                                    @if (vendorStory.IsOwnStory)
+                                    {
+                                        <p>
+                                            @vendorStory.ReplyText
+                                        </p>
+
+                                        <div class="divider"></div>
+
+                                        <img src="@vendorStory.PictureUrl" />
+
+                                        <div class="publishdate">@vendorStory.UpdatedOn</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="title">
+                                            @vendorStory.CustomerName
+                                            <span>asked</span>
+                                        </div>
+                                        <div class="qaContainer">
+                                            <div class="bubble question">
+                                                <p>@vendorStory.QuestionText</p>
+                                            </div>
+                                            <div class="bubble answer">
+                                                <p>@vendorStory.ReplyText</p>
+                                            </div>
+                                        </div>
+                                        <div class="publishdate">@vendorStory.UpdatedOn</div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,8 +13,10 @@
                     {
                         <div class="col-6 col-lg-4 col-xl-3">
                             <div class="popularMemberCard">
-                                <div class="miniVendorImg" style="background-image: url('@Url.Content(vendor.PictureUrl)');"></div>
-                                <div class="followers">@vendor.FollowersNumber<div>followers</div></div>
+                                <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })">
+                                    <div class="miniVendorImg" style="background-image: url('@Url.Content(vendor.PictureUrl)');"></div>
+                                </a>
+                                    <div class="followers">@vendor.FollowersNumber<div>followers</div></div>
                                 <div class="location">
                                     <span class="city">@vendor.City</span>, <span class="country">@vendor.Country</span>
                                 </div>

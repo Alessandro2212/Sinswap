@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using FluentValidation.Attributes;
 using Nop.Core.Domain.Catalog;
@@ -80,9 +81,14 @@ namespace Nop.Web.Areas.Admin.Models.Vendors
         [NopResourceDisplayName("Admin.Vendors.Fields.PageSizeOptions")]
         public string PageSizeOptions { get; set; }
 
+        [DisplayName("Birthdate")]
         public DateTime BirthDate { get; set; }
 
+        [DisplayName("Is Premium")]
         public bool? IsPremium { get; set; }
+
+        [DisplayName("Followers")]
+        public int FollowersNumber { get; set; }
 
         public List<VendorAttributeModel> VendorAttributes { get; set; }
 

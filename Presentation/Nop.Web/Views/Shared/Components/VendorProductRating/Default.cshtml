@@ -1,0 +1,26 @@
+﻿@model Nop.Web.Models.Vendors.VendorProductRatingModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+
+<div class="col-4 order-2 order-lg-1 col-lg-3 text-left starsContainer">
+
+    <div class="ratingStars">
+        @{
+            bool hasHalf = @Model.ReviewAvgStars % 1 == 0.5;
+        }
+        @for (int i = 0; i < Math.Truncate(@Model.ReviewAvgStars); i++)
+        {
+            <i class="fas fa-star"></i>
+        }
+        @if (hasHalf)
+        {
+            <i class="fas fa-star-half-alt"></i>
+        }      
+    </div>
+
+    <div class="ratingStats">
+        <a href="#">@Model.NumberOfReviews Reviews</a>
+        <a href="#">@Model.NumberOfSoldProducts items sold</a>
+    </div>
+</div>

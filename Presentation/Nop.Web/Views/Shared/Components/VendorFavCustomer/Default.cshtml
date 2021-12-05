@@ -1,0 +1,30 @@
+﻿@model Nop.Web.Models.Vendors.PremiumVendorFavouriteCustomerModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+@if (Model.VendorCustomers.ToList().Count > 0)
+{
+    <div class="col-12 vendorFavouritesContainer">
+        <h2>These are my favorite customers</h2>
+        <div class="container-fluid">
+            <div class="row">
+                @{ int i = 0; }
+                <div class="col-12 col-md-7">
+                    @foreach (var vc in Model.VendorCustomers.Take(5))
+                    {
+                        <div class="top3">@(i+1). <span>@vc.CustomerName</span></div>
+                        <div style="display: none;">@(i++)</div>                       
+                    }
+                </div>
+                <div class="col-12 col-md-5">
+                    @foreach (var vc in Model.VendorCustomers.Skip(5).Take(5))
+                    {
+                        <div class="top3">@(i+1). <span>@vc.CustomerName</span></div>
+                        <div style="display: none;">@(i++)</div>
+                    }
+                    <img src="/Themes/Sinswap/Content/images/favoriteSignature.gif" />
+                </div>
+            </div>
+        </div>
+    </div>
+}

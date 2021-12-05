@@ -1,0 +1,20 @@
+﻿@model Nop.Web.Models.Vendors.PremiumVendorSmallTalkModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+@if (Model.VendorQuestions.ToList().Count > 0)
+{
+    <div class="qaContainer">
+        @foreach (var vendorQuestion in Model.VendorQuestions)
+        {
+            <div class="bubble question">
+                <p>@vendorQuestion.Question</p>
+            </div>
+            <div class="bubble answer">
+                <p>
+                    @vendorQuestion.Answer
+                </p>
+            </div>
+        }
+    </div>
+}

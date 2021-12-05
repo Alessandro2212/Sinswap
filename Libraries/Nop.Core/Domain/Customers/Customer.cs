@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Nop.Core.Domain.Common;
+using Nop.Core.Domain.Directory;
 using Nop.Core.Domain.Orders;
 
 namespace Nop.Core.Domain.Customers
@@ -142,6 +143,10 @@ namespace Nop.Core.Domain.Customers
         /// Gets or sets the shipping address identifier
         /// </summary>
         public int? ShippingAddressId { get; set; }
+
+        public int? CountryId { get; set; }
+
+        public virtual Country Country { get; set; }
 
         #region Navigation properties
 

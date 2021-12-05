@@ -194,6 +194,8 @@ namespace Nop.Services.Orders
         /// <returns>Total number of already delivered items</returns>
         int GetTotalNumberOfDeliveredItems(OrderItem orderItem);
 
+        int GetNumberOfSoldProductsByVendor(int vendorId);
+
         #endregion
 
         #region Order notes

@@ -1,13 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Nop.Core;
 using Nop.Core.Data;
 using Nop.Core.Data.Extensions;
+using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Vendors;
 using Nop.Core.Html;
 using Nop.Data;
 using Nop.Services.Events;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Nop.Services.Vendors
 {
@@ -23,6 +24,12 @@ namespace Nop.Services.Vendors
         private readonly IRepository<VendorNote> _vendorNoteRepository;
         private readonly IDbContext _dbContext;
         private readonly IDataProvider _dataProvider;
+        private readonly IRepository<Product> _productRepository;
+        private readonly IRepository<ProductVendor> _productVendorRepository;
+        private readonly IRepository<VendorReviewRecord> _vendorReviewRepository;
+        private readonly IRepository<VendorCustomer> _vendorCustomerRepository;
+        private readonly IRepository<VendorCustomerStory> _vendorCustomerStoryRepository;
+
 
         #endregion
 
@@ -32,13 +39,23 @@ namespace Nop.Services.Vendors
             IRepository<Vendor> vendorRepository,
             IRepository<VendorNote> vendorNoteRepository,
             IDbContext dbContext,
-            IDataProvider dataProvider)
+            IDataProvider dataProvider,
+            IRepository<Product> productRepository,
+            IRepository<ProductVendor> productVendorRepository,
+            IRepository<VendorReviewRecord> vendorReviewRepository,
+            IRepository<VendorCustomer> vendorCustomerRepository,
+            IRepository<VendorCustomerStory> vendorCustomerStoryRepository)
         {
             this._eventPublisher = eventPublisher;
             this._vendorRepository = vendorRepository;
             this._vendorNoteRepository = vendorNoteRepository;
             this._dbContext = dbContext;
             this._dataProvider = dataProvider;
+            this._productRepository = productRepository;
+            this._productVendorRepository = productVendorRepository;
+            this._vendorReviewRepository = vendorReviewRepository;
+            this._vendorCustomerRepository = vendorCustomerRepository;
+            this._vendorCustomerStoryRepository = vendorCustomerStoryRepository;
         }
 
         #endregion
@@ -210,6 +227,75 @@ namespace Nop.Services.Vendors
             text = HtmlHelper.FormatText(text, false, true, false, false, false, false);
 
             return text;
+        }
+
+
+        public IEnumerable<Product> GetAllVendorProducts(int vendorId)
+        {
+            //get all product id belonging to that vendor
+            var vendorProducts = _productRepository.Table.Where(v => v.VendorId == vendorId).ToList();
+            return vendorProducts;
+        }
+
+        public IEnumerable<VendorReviewRecord> GetVendorReviews(int vendorId)
+        {
+            //get all reviews belonging to that vendor
+            var vendorReviews = _vendorReviewRepository.Table
+                                    .Where(v => v.VendorId == vendorId && 
+                                           v.IsApproved == true &&
+                                           v.IsQuestion == null || v.IsQuestion == false)
+                                    .ToList();
+            return vendorReviews;
+        }
+
+        public IEnumerable<VendorReviewRecord> GetVendorQuestions(int vendorId, int amount)
+        {
+            //get all reviews belonging to that vendor
+            var vendorReviews = _vendorReviewRepository.Table
+                                    .Where(v => v.VendorId == vendorId &&
+                                                v.IsApproved == true &&
+                                                v.IsQuestion == true)
+                                    .Take(amount)
+                                    .ToList();
+            return vendorReviews;
+        }
+
+        public IEnumerable<VendorCustomer> GetVendorFavouriteCustomers(int vendorId, int amount)
+        {
+            //get all fav. customers belonging to that vendor
+            var vendorCustomers = _vendorCustomerRepository.Table
+                                    .Where(v => v.VendorId == vendorId &&
+                                                v.IsFavourite == true)
+                                    .Take(amount)
+                                    .ToList();
+            return vendorCustomers;
+        }
+
+        public IEnumerable<VendorCustomerStory> GetVendorStories(int vendorId, int amount)
+        { 
+            var vendorCustomerStories = _vendorCustomerStoryRepository.Table
+                                    .Where(v => v.VendorId == vendorId &&
+                                                v.IsApproved == true)
+                                    .Take(amount)
+                                    .ToList();
+
+            return vendorCustomerStories;
+        }
+
+        public void SaveVendorStories(int vendorId, int customerId, string questionText, bool isOwnStory)
+        {
+            var vendorCustomerStories = new VendorCustomerStory
+            {
+                VendorId = vendorId,
+                CustomerId = customerId,
+                QuestionText = questionText,
+                IsOwnStory = isOwnStory,
+                StoreId = 1,
+                CreatedOnUtc = DateTime.UtcNow,
+                UpdatedOnUtc = DateTime.UtcNow
+            };
+
+            _vendorCustomerStoryRepository.Insert(vendorCustomerStories); 
         }
 
         #endregion

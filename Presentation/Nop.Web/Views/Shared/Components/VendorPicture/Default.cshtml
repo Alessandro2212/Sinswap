@@ -1,0 +1,30 @@
+﻿@model Nop.Web.Models.Vendors.VendorPictureModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+@if (Model.VendorPictureUrls?.ToList().Count > 0)
+{   
+    <a id="media"></a>
+    <div class="container-fluid vendorMediaContainer bgGrey2">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="lg_vendorMedia" class="vendorMediaSlide">
+                                @foreach (var vendorPicture in Model.VendorPictureUrls)
+                                {                               
+                                    <div class="vendorMediaCard">
+                                        <a href="@vendorPicture" data-lg-size="1600-800">
+                                            <img src="@vendorPicture" />
+                                        </a>
+                                    </div>
+                                }                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,39 @@
+﻿@model Nop.Web.Models.Vendors.PremiumVendorReviewModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+@if (Model.VendorReviews.ToList().Count > 0)
+{
+    <div class="col-12 vendorReviewsContainer">
+        <h2>Reviews</h2>
+        <ul class="reviewList">
+            @foreach (var vendorReview in Model.VendorReviews)
+            {
+                <li class="reviewListItem">
+                    <div class="reviewMeta">
+                        <div class="ratingStars">
+                            @{
+                                int i = vendorReview.Rating;
+                                while (i > 0)
+                                {
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    i--;
+                                }
+                            }
+                            @*<i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star-half-alt" aria-hidden="true"></i>*@
+                        </div>
+                        - <span class="username">@vendorReview.CustomerName</span>
+                        - <span class="usercountry">@vendorReview.CustomerCountry</span>
+                        <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                    </div>
+                    <blockquote>@vendorReview.ReviewText</blockquote>
+                    <div class="publishdate">@vendorReview.CreatedOn</div>
+                </li>
+            }          
+        </ul>
+    </div>
+}
