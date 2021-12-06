@@ -13,7 +13,7 @@
                     @foreach (var vendor in Model.MiniVendors)
                     {
                         <div class="topSellerCard">
-                            <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><img src="@Url.Content(vendor.PictureUrl)" alt="Image" class="miniVendorImg" style="width:90%;" /></a>
+                            <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })" class="miniVendorImg" style="background-image: url('@Url.Content(vendor.PictureUrl)');"></a>
                             <div class="location">
                                 <span class="city">@vendor.City</span>, <span class="country">@vendor.Country</span>
                             </div>
@@ -21,10 +21,10 @@
                                 <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><span class="name">@vendor.Name</span>, <span class="age">@vendor.Age</span></a>
                             </div>
                         </div>
-                    }     
+                    }
                 </div>
                 <a href="#" class="more">Check out our best sellers...</a>
             </div>
         </div>
-    </div>  
+    </div>
 }

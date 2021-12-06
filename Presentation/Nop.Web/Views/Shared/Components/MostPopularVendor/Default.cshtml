@@ -13,20 +13,22 @@
                     {
                         <div class="col-6 col-lg-4 col-xl-3">
                             <div class="popularMemberCard">
-                                <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><img src="@Url.Content(vendor.PictureUrl)" alt="Image" /></a>
-                                <div class="followers">@vendor.FollowersNumber<div>followers</div></div>
+                                <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })">
+                                    <div class="miniVendorImg" style="background-image: url('@Url.Content(vendor.PictureUrl)');"></div>
+                                </a>
+                                    <div class="followers">@vendor.FollowersNumber<div>followers</div></div>
                                 <div class="location">
                                     <span class="city">@vendor.City</span>, <span class="country">@vendor.Country</span>
                                 </div>
                                 <div class="nameAge">
                                     <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><span class="name">@vendor.Name</span>, <span class="age">@vendor.Age</span></a>
                                 </div>
-                            </div>                      
+                            </div>
                         </div>
                     }
                     </div>
                 <a href="#" class="more">Check out our best sellers...</a>
             </div>
         </div>
-    </div>  
+    </div>
 }

@@ -675,9 +675,14 @@ nav {
     right: -20px; }
   .topSellersContainer .topSellerCard {
     margin-top: 10px; }
-    .topSellersContainer .topSellerCard img {
+    .topSellersContainer .topSellerCard .miniVendorImg {
       width: 100%;
+      height: 375px;
+      display: block;
       border-radius: 5px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
       box-shadow: none;
       transition: box-shadow 0.15s; }
     .topSellersContainer .topSellerCard .location {
@@ -695,7 +700,7 @@ nav {
         text-decoration: none; }
     .topSellersContainer .topSellerCard:hover {
       cursor: pointer; }
-      .topSellersContainer .topSellerCard:hover img {
+      .topSellersContainer .topSellerCard:hover .miniVendorImg {
         box-shadow: 0px 4px 15px -5px black;
         transition: box-shadow 0.15s; }
       .topSellersContainer .topSellerCard:hover .location,
@@ -703,17 +708,27 @@ nav {
         color: #2d7de4;
         transition: color 0.15s; }
 
+@media (max-width: 1200px) {
+  .topSellersContainer .topSellerCard .miniVendorImg {
+    height: 250px; } }
+
 @media (max-width: 992px) {
   .topSellersContainer {
-    margin-top: -50px; } }
+    margin-top: -50px; }
+    .topSellersContainer .topSellerCard .miniVendorImg {
+      height: 250px; } }
 
 @media (max-width: 768px) {
+  .topSellersContainer .topSellerCard .miniVendorImg {
+    height: 200px; }
   .topSellersContainer h2 {
     font-size: 18px; } }
 
 @media (max-width: 576px) {
   .topSellersContainer {
-    border-radius: 0px; } }
+    border-radius: 0px; }
+    .topSellersContainer .topSellerCard .miniVendorImg {
+      height: 150px; } }
 
 .newsContainer {
   background: #171717;
@@ -883,9 +898,14 @@ nav {
     margin: 0px; }
   .popularMembersContainer .popularMemberCard {
     margin: 5px 5px 15px 5px; }
-    .popularMembersContainer .popularMemberCard img {
+    .popularMembersContainer .popularMemberCard .miniVendorImg {
       width: 100%;
+      height: 500px;
+      display: block;
       border-radius: 5px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
       box-shadow: none;
       transition: box-shadow 0.15s; }
     .popularMembersContainer .popularMemberCard .followers {
@@ -914,7 +934,7 @@ nav {
         text-decoration: none; }
     .popularMembersContainer .popularMemberCard:hover {
       cursor: pointer; }
-      .popularMembersContainer .popularMemberCard:hover img {
+      .popularMembersContainer .popularMemberCard:hover .miniVendorImg {
         box-shadow: 0px 4px 15px -5px black;
         transition: box-shadow 0.15s; }
       .popularMembersContainer .popularMemberCard:hover .location,
@@ -922,9 +942,17 @@ nav {
         color: #2d7de4;
         transition: color 0.15s; }
 
+@media (min-width: 1660px) {
+  .popularMemberCard .miniVendorImg {
+    height: 400px; } }
+
 @media (max-width: 768px) {
   .popularMembersContainer h2 {
     font-size: 18px; } }
+
+@media (max-width: 576px) {
+  .popularMemberCard .miniVendorImg {
+    height: 300px; } }
 
 .promoContainer {
   padding: 55px 30px 60px 30px;
