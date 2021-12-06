@@ -434,7 +434,7 @@ namespace Nop.Services.Customers
             //customer.CustomerRoles.Add(guestRole);
             customer.CustomerCustomerRoleMappings.Add(new CustomerCustomerRoleMapping { CustomerRole = guestRole });
 
-            _customerRepository.Insert(customer);
+            //_customerRepository.Insert(customer); strange Nopcommerce behavior
 
             return customer;
         }

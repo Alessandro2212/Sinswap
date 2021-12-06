@@ -846,7 +846,7 @@ namespace Nop.Web.Controllers
                             BirthDate = new DateTime(model.DateOfBirthYear.Value, model.DateOfBirthMonth.Value, model.DateOfBirthDay.Value),
                             IsPremium = model.RegisterAsPremiumVendor
                         };
-                        return CreateVendor(vendorModel, false);
+                        return CreateVendor(vendorModel, false, customer);
                     }
 
                     switch (_customerSettings.UserRegistrationType)
@@ -895,7 +895,7 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
-        public virtual IActionResult CreateVendor(VendorModel model, bool continueEditing)
+        public virtual IActionResult CreateVendor(VendorModel model, bool continueEditing, Customer customer = null)
         {
             //parse vendor attributes
             var vendorAttributesXml = ParseVendorAttributes(model.Form);
@@ -938,6 +938,13 @@ namespace Nop.Web.Controllers
                 UpdatePictureSeoNames(vendor);
 
                 SuccessNotification(_localizationService.GetResource("Admin.Vendors.Added"));
+
+                //update customer(associate vendorId to it)
+                if (customer != null)
+                {
+                    customer.VendorId = vendor.Id;
+                    _customerService.UpdateCustomer(customer);
+                }
 
                 if (!continueEditing)
                     return Redirect(model.SeName);
