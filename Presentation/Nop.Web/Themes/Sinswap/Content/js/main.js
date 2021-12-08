@@ -1,6 +1,12 @@
 $(function () {
 
 
+    if ($('#productModal').length) {
+        $('#productModal').modal({
+            show: false
+        })
+    }
+
     if ($('.topSellersSlide').length) {
         $('.topSellersSlide').slick({
             prevArrow: "<button type='button' class='slick-prev'><i class='las la-angle-left'></i></button>",

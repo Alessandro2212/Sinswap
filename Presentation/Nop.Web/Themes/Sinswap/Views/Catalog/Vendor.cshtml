@@ -113,7 +113,7 @@ else
                 <div class="flex-row row no-gutters">
 
                     <div class="col-6 col-lg-3">
-                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="categoryCard clothing" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
                             <div class="category">
                                 <a href="#">High heels</a>
                                 <div class="priceLabel">from</div>
@@ -123,7 +123,7 @@ else
                     </div>
 
                     <div class="col-6 col-lg-3">
-                        <div class="categoryCard food" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="categoryCard food" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
                             <div class="category">
                                 <a href="#">Cucumbers</a>
                                 <div class="priceLabel">from</div>
@@ -133,7 +133,7 @@ else
                     </div>
 
                     <div class="col-6 col-lg-3">
-                        <div class="categoryCard body" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="categoryCard body" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
                             <div class="category">
                                 <a href="#">Bath water</a>
                                 <div class="priceLabel">from</div>
@@ -143,7 +143,7 @@ else
                     </div>
 
                     <div class="col-6 col-lg-3">
-                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="categoryCard clothing" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
                             <div class="category">
                                 <a href="#">Yogapants</a>
                                 <div class="priceLabel">from</div>
@@ -153,7 +153,7 @@ else
                     </div>
 
                     <div class="col-6 col-lg-3">
-                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="categoryCard clothing" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
                             <div class="category">
                                 <a href="#">Sports bras</a>
                                 <div class="priceLabel">from</div>
@@ -163,7 +163,7 @@ else
                     </div>
 
                     <div class="col-6 col-lg-3">
-                        <div class="categoryCard service" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="categoryCard service" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
                             <div class="category">
                                 <a href="#">GFE</a>
                                 <div class="priceLabel">from</div>
@@ -173,7 +173,7 @@ else
                     </div>
 
                     <div class="col-6 col-lg-3">
-                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="categoryCard clothing" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
                             <div class="category">
                                 <a href="#">Panties</a>
                                 <div class="priceLabel">from</div>
@@ -183,7 +183,7 @@ else
                     </div>
 
                     <div class="col-6 col-lg-3">
-                        <div class="categoryCard food" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="categoryCard food" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
                             <div class="category">
                                 <a href="#">Cucumber</a>
                                 <div class="priceLabel">from</div>
@@ -193,7 +193,7 @@ else
                     </div>
 
                     <div class="col-6 col-lg-3">
-                        <div class="categoryCard clothing" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="categoryCard clothing" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
                             <div class="category">
                                 <a href="#">Vibrator</a>
                                 <div class="priceLabel">from</div>
@@ -203,7 +203,7 @@ else
                     </div>
 
                     <div class="col-6 col-lg-3">
-                        <div class="categoryCard object" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
+                        <div class="categoryCard object" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
                             <div class="category">
                                 <a href="#">Special request</a>
                                 <div class="priceLabel">from</div>
@@ -542,6 +542,94 @@ else
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Product modal -->
+    <div class="modal fade productModal" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                @*<div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>*@
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6 imgColumn" style="background-image: url('https://picsum.photos/500/700') "></div>
+                            <div class="col-6 descColumn">
+                                <div class="closeBtn" data-dismiss="modal" aria-label="Close"></div>
+                                <div class="description">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sollicitudin arcu. Quisque imperdiet scelerisque commodo. Mauris sed interdum quam. In dapibus diam eget interdum congue. Quisque porttitor egestas molestie. Cras at risus sapien. Ut convallis at sapien et sagittis. Vivamus varius facilisis turpis, ut vehicula lectus elementum eu. Vestibulum euismod aliquet sollicitudin. Duis urna massa, tempor vitae viverra id, mattis placerat velit.
+                                    </p>
+                                </div>
+                                <div class="variations">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="amount">
+                                                        <option>- amount -</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                    <select class="form-control" id="size">
+                                                        <option>- size -</option>
+                                                        <option>xs</option>
+                                                        <option>s</option>
+                                                        <option>m</option>
+                                                        <option>l</option>
+                                                        <option>xl</option>
+                                                    </select>
+                                                    <select class="form-control" id="brand">
+                                                        <option>- brand -</option>
+                                                        <option>brand1</option>
+                                                        <option>brand2</option>
+                                                        <option>brand3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="material">
+                                                        <option>- material -</option>
+                                                        <option>cotton</option>
+                                                        <option>velvet</option>
+                                                        <option>polyester</option>
+                                                    </select>
+                                                    <select class="form-control" id="color">
+                                                        <option>- color -</option>
+                                                        <option>white</option>
+                                                        <option>black</option>
+                                                        <option>red</option>
+                                                        <option>blue</option>
+                                                        <option>green</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="orderContainer">
+                                    Order total
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>*@
             </div>
         </div>
     </div>

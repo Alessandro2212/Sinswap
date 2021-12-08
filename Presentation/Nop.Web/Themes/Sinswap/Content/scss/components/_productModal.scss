@@ -1,0 +1,68 @@
+﻿// Product modal
+.productModal {
+    .modal-content {
+        border-radius: 5px;
+
+        .modal-body {
+            padding: 0px;
+        }
+
+        .imgColumn {
+            border-radius: 5px 0 0 5px;
+            min-height: 500px;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        .descColumn {
+            padding: 45px;
+
+            .description {
+                font-size: 14px;
+            }
+
+            .variations {
+                select {
+                    font-size: 14px;
+                    margin-bottom: 5px;
+                }
+            }
+
+            .orderContainer {
+            }
+        }
+    }
+}
+
+
+// Extra Super large devices (large desktops, 1660px and up)
+@media (max-width: 1660px) {
+    .productModal {
+    }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+    .productModal {
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    .productModal {
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+    .productModal {
+    }
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 576px) {
+}

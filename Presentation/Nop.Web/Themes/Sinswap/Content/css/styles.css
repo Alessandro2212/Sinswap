@@ -1884,6 +1884,23 @@ nav {
   .vendorFaqContainer #accordionFaq .collapsing {
     font-size: 14px; } }
 
+.productModal .modal-content {
+  border-radius: 5px; }
+  .productModal .modal-content .modal-body {
+    padding: 0px; }
+  .productModal .modal-content .imgColumn {
+    border-radius: 5px 0 0 5px;
+    min-height: 500px;
+    background-size: cover;
+    background-position: center center; }
+  .productModal .modal-content .descColumn {
+    padding: 45px; }
+    .productModal .modal-content .descColumn .description {
+      font-size: 14px; }
+    .productModal .modal-content .descColumn .variations select {
+      font-size: 14px;
+      margin-bottom: 5px; }
+
 footer {
   color: #fff;
   background-color: #171717;
