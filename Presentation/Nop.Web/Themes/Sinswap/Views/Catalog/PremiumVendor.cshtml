@@ -11,7 +11,7 @@
 
         <div class="col-12 order-1 order-lg-2 col-lg-6 text-center avatarContainer">
             <h1><span>Sinswap store: </span>@Model.Name</h1>
-            <div class="avatar"><img src="@Model.PictureUrl" /></div>
+            <div class="avatar" style="background-image: url('@Model.PictureUrl');"></div>
         </div>
 
         <div class="col-8 order-3 order-lg-3 col-lg-3 text-right metaContainer">
@@ -119,7 +119,7 @@
                         <div class="smallTalkHeader">
                             <h2>Small talk</h2>
                             <h3>a short interview with <span>@Model.Name</span></h3>
-                            <img src="@Model.PictureUrl" />
+                            <div class="headerImg" style="background-image: url('@Model.PictureUrl');"></div>
                         </div>
                         @await Component.InvokeAsync("VendorSmallTalk", new { vendorId = Model.Id, amount = 6 })
                         
