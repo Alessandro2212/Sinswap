@@ -65,12 +65,14 @@ namespace Nop.Web.Factories
                     if (vendor.BirthDate.Date > DateTime.Today.AddYears(-age)) age--;
                 }
 
+                //int followers = _vendorService.GetNumberOfFollowers(vendor.Id);
+
                 miniVendors.Add(new MiniVendorModel
                 {
                     Id = vendor.Id,
                     Name = vendor.Name,
                     City = vendor.City,
-                    Country = vendor.Country,
+                    Country = vendor.Country.Name,
                     FollowersNumber = vendor.FollowersNumber,
                     Age = age,
                     PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId),
@@ -105,12 +107,14 @@ namespace Nop.Web.Factories
                     if (vendor.BirthDate.Date > DateTime.Today.AddYears(-age)) age--;
                 }
 
+                //int followers = _vendorService.GetNumberOfFollowers(vendor.Id);
+
                 miniVendors.Add(new MiniVendorModel
                 {
                     Id = vendor.Id,
                     Name = vendor.Name,
                     City = vendor.City,
-                    Country = vendor.Country,
+                    Country = vendor.Country.Name,
                     FollowersNumber = vendor.FollowersNumber,
                     Age = age,
                     PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId),

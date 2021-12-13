@@ -148,6 +148,16 @@ namespace Nop.Core.Domain.Customers
 
         public virtual Country Country { get; set; }
 
+        /// <summary>
+        /// Gets or sets the vendor city
+        /// </summary>
+        public string City { get; set; }
+
+        /// <summary>
+        /// Gets or sets the vendor birthdate
+        /// </summary>
+        public DateTime? BirthDate { get; set; }
+
         #region Navigation properties
 
         /// <summary>

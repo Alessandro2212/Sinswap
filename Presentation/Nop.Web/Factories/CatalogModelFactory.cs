@@ -978,6 +978,14 @@ namespace Nop.Web.Factories
             if (vendor == null)
                 throw new ArgumentNullException(nameof(vendor));
 
+            int age = 18;
+            if (vendor.BirthDate != null)
+            {
+                age = DateTime.Today.Year - vendor.BirthDate.Year;
+                // Go back to the year the person was born in case of a leap year
+                if (vendor.BirthDate.Date > DateTime.Today.AddYears(-age)) age--;
+            }
+
             var model = new VendorModel
             {
                 Id = vendor.Id,
@@ -990,7 +998,10 @@ namespace Nop.Web.Factories
                 AllowCustomersToContactVendors = _vendorSettings.AllowCustomersToContactVendors,
                 IsPremium = vendor.IsPremium,
                 VendorNotes = vendor.VendorNotes,
-                PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId)
+                PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId),
+                Age = age,
+                City = vendor.City,
+                Country = vendor.Country?.Name
             };
 
             //sorting

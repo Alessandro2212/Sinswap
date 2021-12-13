@@ -23,7 +23,6 @@ namespace Nop.Data.Mapping.Vendors
             builder.Property(vendor => vendor.Name).HasMaxLength(400).IsRequired();
             builder.Property(vendor => vendor.Email).HasMaxLength(400);
             builder.Property(vendor => vendor.City).HasMaxLength(400);
-            builder.Property(vendor => vendor.Country).HasMaxLength(50);
             builder.Property(vendor => vendor.BirthDate);
             builder.Property(vendor => vendor.FollowersNumber);
             builder.Property(vendor => vendor.MetaKeywords).HasMaxLength(400);

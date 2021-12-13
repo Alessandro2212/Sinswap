@@ -7,7 +7,7 @@
 <div class="container vendorInfoContainer">
     <div class="row">
 
-        @await Component.InvokeAsync("VendorProductRating", new { vendorId = Model.Id })       
+        @await Component.InvokeAsync("VendorProductRating", new { vendorId = Model.Id })
 
         <div class="col-12 order-1 order-lg-2 col-lg-6 text-center avatarContainer">
             <h1><span>Sinswap store: </span>@Model.Name</h1>
@@ -15,7 +15,7 @@
         </div>
 
         <div class="col-8 order-3 order-lg-3 col-lg-3 text-right metaContainer">
-            <p><span class="age">24</span>, <span class="city">Kaapstad</span>, <span class="country">South Africa</span></p>
+            <p><span class="age">@Model.Age</span>, <span class="city">@Model.City</span>, <span class="country">@Model.Country</span></p>
         </div>
 
     </div>
@@ -52,9 +52,14 @@
                     <a href="#" class="socialLink"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="socialLink"><i class="fab fa-facebook-square"></i></a>
                     <a href="#" class="socialLink"><i class="fab fa-twitter"></i></a>
-                    <div class="followBtn">
-                        <a href="#" class="btn btn-primary">Follow me</a>
-                    </div>
+                    @using (Html.BeginForm("followme", "vendor", FormMethod.Post))
+                    {
+                        @Html.Hidden("vendorId", Model.Id)
+                        @Html.Hidden("vendorSeName", Model.SeName)
+                        <div class="followBtn">                           
+                            <button type="submit" class="btn btn-primary">Follow me</button>
+                        </div>
+                    }
                 </div>
 
             </div>
@@ -122,226 +127,226 @@
                             <div class="headerImg" style="background-image: url('@Model.PictureUrl');"></div>
                         </div>
                         @await Component.InvokeAsync("VendorSmallTalk", new { vendorId = Model.Id, amount = 6 })
-                        
+
                     </div>
                     <div class="col-12 col-lg-6 vendorReviewFavoriteContainer">
                         <div class="container-fluid">
 
                             <div class="row">
-@*                                <div class="col-12 vendorReviewsContainer">
+                                                                @*                                <div class="col-12 vendorReviewsContainer">
                                     <h2>Reviews</h2>
 
                                     <ul class="reviewList">
-                                        <li class="reviewListItem">
+                                    <li class="reviewListItem">
 
-                                            <div class="reviewMeta">
-                                                <div class="ratingStars">
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                </div>
-                                                - <span class="username">PencilDick420</span>
-                                                - <span class="usercountry">Canada</span>
-                                                <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
-                                            </div>
+                                    <div class="reviewMeta">
+                                    <div class="ratingStars">
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                    </div>
+                                    - <span class="username">PencilDick420</span>
+                                    - <span class="usercountry">Canada</span>
+                                    <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                                    </div>
 
-                                            <blockquote>"She's the best"</blockquote>
+                                    <blockquote>"She's the best"</blockquote>
 
-                                            <div class="publishdate">04/02/2020</div>
+                                    <div class="publishdate">04/02/2020</div>
 
-                                        </li>
-                                        <li class="reviewListItem">
+                                    </li>
+                                    <li class="reviewListItem">
 
-                                            <div class="reviewMeta">
-                                                <div class="ratingStars">
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                </div>
-                                                - <span class="username">PencilDick420</span>
-                                                - <span class="usercountry">Canada</span>
-                                                <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
-                                            </div>
+                                    <div class="reviewMeta">
+                                    <div class="ratingStars">
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                    </div>
+                                    - <span class="username">PencilDick420</span>
+                                    - <span class="usercountry">Canada</span>
+                                    <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                                    </div>
 
-                                            <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+                                    <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
 
-                                            <div class="publishdate">04/02/2020</div>
+                                    <div class="publishdate">04/02/2020</div>
 
-                                            <div class="reviewReply">"You're very welcome, doll. Love to add a little bonus for you every time!" - Charlotte the Wet</div>
-                                            <div class="publishdate">06/02/2020</div>
+                                    <div class="reviewReply">"You're very welcome, doll. Love to add a little bonus for you every time!" - Charlotte the Wet</div>
+                                    <div class="publishdate">06/02/2020</div>
 
-                                        </li>
-                                        <li class="reviewListItem">
+                                    </li>
+                                    <li class="reviewListItem">
 
-                                            <div class="reviewMeta">
-                                                <div class="ratingStars">
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                </div>
-                                                - <span class="username">PencilDick420</span>
-                                                - <span class="usercountry">Canada</span>
-                                                <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
-                                            </div>
+                                    <div class="reviewMeta">
+                                    <div class="ratingStars">
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                    </div>
+                                    - <span class="username">PencilDick420</span>
+                                    - <span class="usercountry">Canada</span>
+                                    <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                                    </div>
 
-                                            <blockquote>"She's the best"</blockquote>
+                                    <blockquote>"She's the best"</blockquote>
 
-                                            <div class="publishdate">04/02/2020</div>
+                                    <div class="publishdate">04/02/2020</div>
 
-                                        </li>
-                                        <li class="reviewListItem">
+                                    </li>
+                                    <li class="reviewListItem">
 
-                                            <div class="reviewMeta">
-                                                <div class="ratingStars">
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                </div>
-                                                - <span class="username">PencilDick420</span>
-                                                - <span class="usercountry">Canada</span>
-                                                <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
-                                            </div>
+                                    <div class="reviewMeta">
+                                    <div class="ratingStars">
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                    </div>
+                                    - <span class="username">PencilDick420</span>
+                                    - <span class="usercountry">Canada</span>
+                                    <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                                    </div>
 
-                                            <blockquote>"I got quick response to my questions. Everything was discretly packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+                                    <blockquote>"I got quick response to my questions. Everything was discretly packed and even had a personal note with something extra. I could really smell her..."</blockquote>
 
-                                            <div class="publishdate">04/02/2020</div>
+                                    <div class="publishdate">04/02/2020</div>
 
-                                        </li>
-                                        <li class="reviewListItem">
+                                    </li>
+                                    <li class="reviewListItem">
 
-                                            <div class="reviewMeta">
-                                                <div class="ratingStars">
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                </div>
-                                                - <span class="username">PencilDick420</span>
-                                                - <span class="usercountry">Canada</span>
-                                                <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
-                                            </div>
+                                    <div class="reviewMeta">
+                                    <div class="ratingStars">
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                    </div>
+                                    - <span class="username">PencilDick420</span>
+                                    - <span class="usercountry">Canada</span>
+                                    <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                                    </div>
 
-                                            <blockquote>"She's the best"</blockquote>
+                                    <blockquote>"She's the best"</blockquote>
 
-                                            <div class="publishdate">04/02/2020</div>
+                                    <div class="publishdate">04/02/2020</div>
 
-                                        </li>
-                                        <li class="reviewListItem">
+                                    </li>
+                                    <li class="reviewListItem">
 
-                                            <div class="reviewMeta">
-                                                <div class="ratingStars">
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                </div>
-                                                - <span class="username">PencilDick420</span>
-                                                - <span class="usercountry">Canada</span>
-                                                <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
-                                            </div>
+                                    <div class="reviewMeta">
+                                    <div class="ratingStars">
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                    </div>
+                                    - <span class="username">PencilDick420</span>
+                                    - <span class="usercountry">Canada</span>
+                                    <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                                    </div>
 
-                                            <blockquote>"I got quick response to my questions. Everything was discretly packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+                                    <blockquote>"I got quick response to my questions. Everything was discretly packed and even had a personal note with something extra. I could really smell her..."</blockquote>
 
-                                            <div class="publishdate">04/02/2020</div>
+                                    <div class="publishdate">04/02/2020</div>
 
-                                        </li>
-                                        <li class="reviewListItem">
+                                    </li>
+                                    <li class="reviewListItem">
 
-                                            <div class="reviewMeta">
-                                                <div class="ratingStars">
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                </div>
-                                                - <span class="username">PencilDick420</span>
-                                                - <span class="usercountry">Canada</span>
-                                                <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
-                                            </div>
+                                    <div class="reviewMeta">
+                                    <div class="ratingStars">
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                    </div>
+                                    - <span class="username">PencilDick420</span>
+                                    - <span class="usercountry">Canada</span>
+                                    <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                                    </div>
 
-                                            <blockquote>"She's the best"</blockquote>
+                                    <blockquote>"She's the best"</blockquote>
 
-                                            <div class="publishdate">04/02/2020</div>
+                                    <div class="publishdate">04/02/2020</div>
 
-                                        </li>
-                                        <li class="reviewListItem">
+                                    </li>
+                                    <li class="reviewListItem">
 
-                                            <div class="reviewMeta">
-                                                <div class="ratingStars">
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                </div>
-                                                - <span class="username">PencilDick420</span>
-                                                - <span class="usercountry">Canada</span>
-                                                <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
-                                            </div>
+                                    <div class="reviewMeta">
+                                    <div class="ratingStars">
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                    </div>
+                                    - <span class="username">PencilDick420</span>
+                                    - <span class="usercountry">Canada</span>
+                                    <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                                    </div>
 
-                                            <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+                                    <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
 
-                                            <div class="publishdate">04/02/2020</div>
+                                    <div class="publishdate">04/02/2020</div>
 
-                                        </li>
-                                        <li class="reviewListItem">
+                                    </li>
+                                    <li class="reviewListItem">
 
-                                            <div class="reviewMeta">
-                                                <div class="ratingStars">
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                </div>
-                                                - <span class="username">PencilDick420</span>
-                                                - <span class="usercountry">Canada</span>
-                                                <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
-                                            </div>
+                                    <div class="reviewMeta">
+                                    <div class="ratingStars">
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                    </div>
+                                    - <span class="username">PencilDick420</span>
+                                    - <span class="usercountry">Canada</span>
+                                    <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                                    </div>
 
-                                            <blockquote>"She's the best"</blockquote>
+                                    <blockquote>"She's the best"</blockquote>
 
-                                            <div class="publishdate">04/02/2020</div>
+                                    <div class="publishdate">04/02/2020</div>
 
-                                        </li>
-                                        <li class="reviewListItem">
+                                    </li>
+                                    <li class="reviewListItem">
 
-                                            <div class="reviewMeta">
-                                                <div class="ratingStars">
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                </div>
-                                                - <span class="username">PencilDick420</span>
-                                                - <span class="usercountry">Canada</span>
-                                                <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
-                                            </div>
+                                    <div class="reviewMeta">
+                                    <div class="ratingStars">
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                    </div>
+                                    - <span class="username">PencilDick420</span>
+                                    - <span class="usercountry">Canada</span>
+                                    <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                                    </div>
 
-                                            <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+                                    <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
 
-                                            <div class="publishdate">04/02/2020</div>
+                                    <div class="publishdate">04/02/2020</div>
 
-                                        </li>
+                                    </li>
                                     </ul>
-                                </div>*@
+                                        </div>*@
                                 @await Component.InvokeAsync("VendorReview", new { vendorId = Model.Id })
                             </div>
 
                             <div class="row">
-                                @await Component.InvokeAsync("VendorFavCustomer", new { vendorId = Model.Id, amount = 10 })                             
+                                @await Component.InvokeAsync("VendorFavCustomer", new { vendorId = Model.Id, amount = 10 })
                             </div>
 
                         </div>
@@ -358,206 +363,206 @@
 @await Component.InvokeAsync("VendorStory", new { vendorId = Model.Id, vendorSeName=Model.SeName, amount = 10 })
 @*<div class="container-fluid vendorBlogContainer">
     <div class="row">
-        <div class="col-12">
-            <div class="container">
-                <div class="blogHeader">
-                    <h2>Stories &amp; answers</h2>
-                    <p>Get to know me... Ask me anything!</p>
-                </div>
-
-                <div class="blogListContainer">
-                    <div class="questionFormContainer">
-                        <form>
-                            <div class="form-group">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-12 col-md-4">
-                                            <label for="username" class="sr-only">Your name</label>
-                                            <input type="text" class="form-control" id="username" placeholder="Your name">
-                                        </div>
-                                        <div class="col-12 col-md-8">
-                                            <label for="email" class="sr-only">Your emailaddress</label>
-                                            <input type="email" class="form-control" id="email" placeholder="Your emailaddress">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="question" class="sr-only">Ask me anything!</label>
-                                                <textarea class="form-control" id="question" rows="6" placeholder="Ask me anything!"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 submitContainer">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="blogItem">
-                        <div class="body">
-                            <p>
-                                Sed ultricies tempus tellus, ultrices imperdiet mi. Maecenas aliquet
-                                metus euismod tellus dignissim sodales. Mauris nec quam vitae arcu
-                                imentum molestie. Sed cursus est vitae velit porttitor sodales.
-                            </p>
-
-                            <div class="divider"></div>
-
-                            <img src="/Themes/Sinswap/Content/images/dummyBlog.jpg" />
-
-                            <div class="publishdate">04/02/20</div>
-                        </div>
-                    </div>
-                    <div class="blogItem">
-                        <div class="body">
-                            <p>
-                                Sed ultricies tempus tellus, ultrices imperdiet mi. Maecenas aliquet
-                                metus euismod tellus dignissim sodales. Mauris nec quam vitae arcu
-                                imentum molestie. Sed cursus est vitae velit porttitor sodales.
-                            </p>
-
-                            <div class="publishdate">04/02/20</div>
-                        </div>
-                    </div>
-                    <div class="blogItem">
-                        <div class="body">
-                            <img src="/Themes/Sinswap/Content/images/dummyBlog.jpg" />
-
-                            <div class="publishdate">04/02/20</div>
-                        </div>
-                    </div>
-                    <div class="blogItem">
-                        <div class="body">
-                            <div class="title">
-                                ThickDaddy69
-                                <span>asked</span>
-                            </div>
-
-                            <div class="qaContainer">
-                                <div class="bubble question">
-                                    <p>Sed ultricies tempus tellus, ultrices imperdiet mi.</p>
-                                </div>
-                                <div class="bubble answer">
-                                    <p>Mauris nec quam vitae arcu imentum molestie.</p>
-                                </div>
-                            </div>
-
-                            <div class="publishdate">04/02/20</div>
-                        </div>
-                    </div>
-                    <div class="blogItem">
-                        <div class="body">
-                            <p>
-                                Sed ultricies tempus tellus, ultrices imperdiet mi. Maecenas aliquet
-                                metus euismod tellus dignissim sodales. Mauris nec quam vitae arcu
-                                imentum molestie. Sed cursus est vitae velit porttitor sodales.
-                            </p>
-
-                            <div class="divider"></div>
-
-                            <img src="/Themes/Sinswap/Content/images/dummyBlog.jpg" />
-
-                            <div class="publishdate">04/02/20</div>
-                        </div>
-                    </div>
-                    <div class="blogItem">
-                        <div class="body">
-                            <p>
-                                Sed ultricies tempus tellus, ultrices imperdiet mi. Maecenas aliquet
-                                metus euismod tellus dignissim sodales. Mauris nec quam vitae arcu
-                                imentum molestie. Sed cursus est vitae velit porttitor sodales.
-                            </p>
-
-                            <div class="publishdate">04/02/20</div>
-                        </div>
-                    </div>
-                    <div class="blogItem">
-                        <div class="body">
-                            <img src="/Themes/Sinswap/Content/images/dummyBlog.jpg" />
-
-                            <div class="publishdate">04/02/20</div>
-                        </div>
-                    </div>
-                    <div class="blogItem">
-                        <div class="body">
-                            <div class="title">
-                                ThickDaddy69
-                                <span>asked</span>
-                            </div>
-
-                            <div class="qaContainer">
-                                <div class="bubble question">
-                                    <p>Sed ultricies tempus tellus, ultrices imperdiet mi.</p>
-                                </div>
-                                <div class="bubble answer">
-                                    <p>Mauris nec quam vitae arcu imentum molestie.</p>
-                                </div>
-                            </div>
-
-                            <div class="publishdate">04/02/20</div>
-                        </div>
-                    </div>                    <div class="blogItem">
-                        <div class="body">
-                            <p>
-                                Sed ultricies tempus tellus, ultrices imperdiet mi. Maecenas aliquet
-                                metus euismod tellus dignissim sodales. Mauris nec quam vitae arcu
-                                imentum molestie. Sed cursus est vitae velit porttitor sodales.
-                            </p>
-
-                            <div class="divider"></div>
-
-                            <img src="/Themes/Sinswap/Content/images/dummyBlog.jpg" />
-
-                            <div class="publishdate">04/02/20</div>
-                        </div>
-                    </div>
-                    <div class="blogItem">
-                        <div class="body">
-                            <p>
-                                Sed ultricies tempus tellus, ultrices imperdiet mi. Maecenas aliquet
-                                metus euismod tellus dignissim sodales. Mauris nec quam vitae arcu
-                                imentum molestie. Sed cursus est vitae velit porttitor sodales.
-                            </p>
-
-                            <div class="publishdate">04/02/20</div>
-                        </div>
-                    </div>
-                    <div class="blogItem">
-                        <div class="body">
-                            <img src="/Themes/Sinswap/Content/images/dummyBlog.jpg" />
-
-                            <div class="publishdate">04/02/20</div>
-                        </div>
-                    </div>
-                    <div class="blogItem">
-                        <div class="body">
-                            <div class="title">
-                                ThickDaddy69
-                                <span>asked</span>
-                            </div>
-
-                            <div class="qaContainer">
-                                <div class="bubble question">
-                                    <p>Sed ultricies tempus tellus, ultrices imperdiet mi.</p>
-                                </div>
-                                <div class="bubble answer">
-                                    <p>Mauris nec quam vitae arcu imentum molestie.</p>
-                                </div>
-                            </div>
-
-                            <div class="publishdate">04/02/20</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="col-12">
+    <div class="container">
+    <div class="blogHeader">
+    <h2>Stories &amp; answers</h2>
+    <p>Get to know me... Ask me anything!</p>
     </div>
-</div>*@
+
+    <div class="blogListContainer">
+    <div class="questionFormContainer">
+    <form>
+    <div class="form-group">
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-12 col-md-4">
+    <label for="username" class="sr-only">Your name</label>
+    <input type="text" class="form-control" id="username" placeholder="Your name">
+    </div>
+    <div class="col-12 col-md-8">
+    <label for="email" class="sr-only">Your emailaddress</label>
+    <input type="email" class="form-control" id="email" placeholder="Your emailaddress">
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-12">
+    <div class="form-group">
+    <label for="question" class="sr-only">Ask me anything!</label>
+    <textarea class="form-control" id="question" rows="6" placeholder="Ask me anything!"></textarea>
+    </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-12 submitContainer">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </div>
+    </div>
+    </div>
+    </form>
+    </div>
+
+    <div class="blogItem">
+    <div class="body">
+    <p>
+    Sed ultricies tempus tellus, ultrices imperdiet mi. Maecenas aliquet
+    metus euismod tellus dignissim sodales. Mauris nec quam vitae arcu
+    imentum molestie. Sed cursus est vitae velit porttitor sodales.
+    </p>
+
+    <div class="divider"></div>
+
+    <img src="/Themes/Sinswap/Content/images/dummyBlog.jpg" />
+
+    <div class="publishdate">04/02/20</div>
+    </div>
+    </div>
+    <div class="blogItem">
+    <div class="body">
+    <p>
+    Sed ultricies tempus tellus, ultrices imperdiet mi. Maecenas aliquet
+    metus euismod tellus dignissim sodales. Mauris nec quam vitae arcu
+    imentum molestie. Sed cursus est vitae velit porttitor sodales.
+    </p>
+
+    <div class="publishdate">04/02/20</div>
+    </div>
+    </div>
+    <div class="blogItem">
+    <div class="body">
+    <img src="/Themes/Sinswap/Content/images/dummyBlog.jpg" />
+
+    <div class="publishdate">04/02/20</div>
+    </div>
+    </div>
+    <div class="blogItem">
+    <div class="body">
+    <div class="title">
+    ThickDaddy69
+    <span>asked</span>
+    </div>
+
+    <div class="qaContainer">
+    <div class="bubble question">
+    <p>Sed ultricies tempus tellus, ultrices imperdiet mi.</p>
+    </div>
+    <div class="bubble answer">
+    <p>Mauris nec quam vitae arcu imentum molestie.</p>
+    </div>
+    </div>
+
+    <div class="publishdate">04/02/20</div>
+    </div>
+    </div>
+    <div class="blogItem">
+    <div class="body">
+    <p>
+    Sed ultricies tempus tellus, ultrices imperdiet mi. Maecenas aliquet
+    metus euismod tellus dignissim sodales. Mauris nec quam vitae arcu
+    imentum molestie. Sed cursus est vitae velit porttitor sodales.
+    </p>
+
+    <div class="divider"></div>
+
+    <img src="/Themes/Sinswap/Content/images/dummyBlog.jpg" />
+
+    <div class="publishdate">04/02/20</div>
+    </div>
+    </div>
+    <div class="blogItem">
+    <div class="body">
+    <p>
+    Sed ultricies tempus tellus, ultrices imperdiet mi. Maecenas aliquet
+    metus euismod tellus dignissim sodales. Mauris nec quam vitae arcu
+    imentum molestie. Sed cursus est vitae velit porttitor sodales.
+    </p>
+
+    <div class="publishdate">04/02/20</div>
+    </div>
+    </div>
+    <div class="blogItem">
+    <div class="body">
+    <img src="/Themes/Sinswap/Content/images/dummyBlog.jpg" />
+
+    <div class="publishdate">04/02/20</div>
+    </div>
+    </div>
+    <div class="blogItem">
+    <div class="body">
+    <div class="title">
+    ThickDaddy69
+    <span>asked</span>
+    </div>
+
+    <div class="qaContainer">
+    <div class="bubble question">
+    <p>Sed ultricies tempus tellus, ultrices imperdiet mi.</p>
+    </div>
+    <div class="bubble answer">
+    <p>Mauris nec quam vitae arcu imentum molestie.</p>
+    </div>
+    </div>
+
+    <div class="publishdate">04/02/20</div>
+    </div>
+    </div>                    <div class="blogItem">
+    <div class="body">
+    <p>
+    Sed ultricies tempus tellus, ultrices imperdiet mi. Maecenas aliquet
+    metus euismod tellus dignissim sodales. Mauris nec quam vitae arcu
+    imentum molestie. Sed cursus est vitae velit porttitor sodales.
+    </p>
+
+    <div class="divider"></div>
+
+    <img src="/Themes/Sinswap/Content/images/dummyBlog.jpg" />
+
+    <div class="publishdate">04/02/20</div>
+    </div>
+    </div>
+    <div class="blogItem">
+    <div class="body">
+    <p>
+    Sed ultricies tempus tellus, ultrices imperdiet mi. Maecenas aliquet
+    metus euismod tellus dignissim sodales. Mauris nec quam vitae arcu
+    imentum molestie. Sed cursus est vitae velit porttitor sodales.
+    </p>
+
+    <div class="publishdate">04/02/20</div>
+    </div>
+    </div>
+    <div class="blogItem">
+    <div class="body">
+    <img src="/Themes/Sinswap/Content/images/dummyBlog.jpg" />
+
+    <div class="publishdate">04/02/20</div>
+    </div>
+    </div>
+    <div class="blogItem">
+    <div class="body">
+    <div class="title">
+    ThickDaddy69
+    <span>asked</span>
+    </div>
+
+    <div class="qaContainer">
+    <div class="bubble question">
+    <p>Sed ultricies tempus tellus, ultrices imperdiet mi.</p>
+    </div>
+    <div class="bubble answer">
+    <p>Mauris nec quam vitae arcu imentum molestie.</p>
+    </div>
+    </div>
+
+    <div class="publishdate">04/02/20</div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+        </div>*@
 
 <a id="faq"></a>
 <div class="container-fluid vendorFaqContainer">
@@ -598,74 +603,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<div class="page vendor-page">
-    <div class="page-title">
-        <h1>@Model.Name</h1>
-    </div>
-    <div class="page-body">-->
-@*description*@
-<!--@if (!string.IsNullOrWhiteSpace(Model.Description))
-{
-    <div class="vendor-description">
-        @Html.Raw(Model.Description)
-    </div>
-}-->
-@*contact vendor*@
-<!--@if (Model.AllowCustomersToContactVendors)
-{
-    <div class="contact-vendor">
-        <input type="button" value="@T("ContactVendor")" class="button-2 contact-vendor-button" onclick="setLocation('@Url.RouteUrl("ContactVendor", new { vendorId = Model.Id })')" />
-    </div>
-}
-
-@if (Model.Products.Count > 0)
-{
-    @await Html.PartialAsync("_CatalogSelectors", Model.PagingFilteringContext)
-}-->
-@*product list*@
-<!--@if (Model.Products.Count > 0)
-        {
-            <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
-                <div class="item-grid">
-                    @foreach (var product in Model.Products)
-                    {
-                        <div class="item-box">
-                            @await Html.PartialAsync("_ProductBox", product)
-                        </div>
-                    }
-                </div>
-            </div>
-        }
-    </div>
-</div>-->

@@ -28,6 +28,8 @@ namespace Nop.Data.Mapping.Customers
             builder.Property(customer => customer.BillingAddressId).HasColumnName("BillingAddress_Id");
             builder.Property(customer => customer.ShippingAddressId).HasColumnName("ShippingAddress_Id");
 
+            builder.Property(customer => customer.City).HasMaxLength(400);
+
             builder.HasOne(customer => customer.BillingAddress)
                 .WithMany()
                 .HasForeignKey(customer => customer.BillingAddressId);
@@ -38,6 +40,8 @@ namespace Nop.Data.Mapping.Customers
 
             builder.Ignore(customer => customer.CustomerRoles);
             builder.Ignore(customer => customer.Addresses);
+
+
 
             base.Configure(builder);
         }

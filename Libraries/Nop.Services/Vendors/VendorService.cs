@@ -29,6 +29,7 @@ namespace Nop.Services.Vendors
         private readonly IRepository<VendorReviewRecord> _vendorReviewRepository;
         private readonly IRepository<VendorCustomer> _vendorCustomerRepository;
         private readonly IRepository<VendorCustomerStory> _vendorCustomerStoryRepository;
+        private readonly IRepository<Follower> _followerRepository;
 
 
         #endregion
@@ -44,7 +45,8 @@ namespace Nop.Services.Vendors
             IRepository<ProductVendor> productVendorRepository,
             IRepository<VendorReviewRecord> vendorReviewRepository,
             IRepository<VendorCustomer> vendorCustomerRepository,
-            IRepository<VendorCustomerStory> vendorCustomerStoryRepository)
+            IRepository<VendorCustomerStory> vendorCustomerStoryRepository,
+            IRepository<Follower> followerRepository)
         {
             this._eventPublisher = eventPublisher;
             this._vendorRepository = vendorRepository;
@@ -56,6 +58,7 @@ namespace Nop.Services.Vendors
             this._vendorReviewRepository = vendorReviewRepository;
             this._vendorCustomerRepository = vendorCustomerRepository;
             this._vendorCustomerStoryRepository = vendorCustomerStoryRepository;
+            this._followerRepository = followerRepository;
         }
 
         #endregion
@@ -241,7 +244,7 @@ namespace Nop.Services.Vendors
         {
             //get all reviews belonging to that vendor
             var vendorReviews = _vendorReviewRepository.Table
-                                    .Where(v => v.VendorId == vendorId && 
+                                    .Where(v => v.VendorId == vendorId &&
                                            v.IsApproved == true &&
                                            v.IsQuestion == null || v.IsQuestion == false)
                                     .ToList();
@@ -272,7 +275,7 @@ namespace Nop.Services.Vendors
         }
 
         public IEnumerable<VendorCustomerStory> GetVendorStories(int vendorId, int amount)
-        { 
+        {
             var vendorCustomerStories = _vendorCustomerStoryRepository.Table
                                     .Where(v => v.VendorId == vendorId &&
                                                 v.IsApproved == true)
@@ -295,7 +298,34 @@ namespace Nop.Services.Vendors
                 UpdatedOnUtc = DateTime.UtcNow
             };
 
-            _vendorCustomerStoryRepository.Insert(vendorCustomerStories); 
+            _vendorCustomerStoryRepository.Insert(vendorCustomerStories);
+        }
+
+        public void SaveFollower(int vendorId, int customerId)
+        {
+            //follower already assigned
+            if (_followerRepository.Table.Any(f => f.VendorId == vendorId && f.CustomerId == customerId))
+                return;
+
+            var follower = new Follower
+            {
+                VendorId = vendorId,
+                CustomerId = customerId
+            };
+
+            _followerRepository.Insert(follower);
+
+            var vendor = _vendorRepository.Table.Where(v => v.Id == vendorId).FirstOrDefault();
+            if (vendor != null)
+            {
+                vendor.FollowersNumber++;
+                _vendorRepository.Update(vendor);
+            }
+        }
+
+        public int GetNumberOfFollowers(int vendorId)
+        {
+            return _followerRepository.Table.Where(vendor => vendor.Id == vendorId).Count();
         }
 
         #endregion
