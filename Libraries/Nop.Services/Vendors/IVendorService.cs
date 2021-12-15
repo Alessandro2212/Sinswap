@@ -98,5 +98,7 @@ namespace Nop.Services.Vendors
         void SaveVendorStories(int vendorId, int customerId, string questionText, bool isOwnStory);
         void SaveFollower(int vendorId, int customerId);
         int GetNumberOfFollowers(int vendorId);
+
+        IEnumerable<VendorFaq> GetVendorFaqs(int vendorId, int amount);
     }
 }

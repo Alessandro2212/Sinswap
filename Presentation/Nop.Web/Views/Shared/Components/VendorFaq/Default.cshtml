@@ -1,0 +1,56 @@
+﻿@model Nop.Web.Models.Vendors.VendorFaqViewModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+<a id="faq"></a>
+<div class="container-fluid vendorFaqContainer">
+    <div class="row">
+        <div class="col-12">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Frequently Asked Store Related Questions</h2>
+                        <div id="accordionFaq">
+                            @if (Model.VendorFaqs.Count > 0)
+                            {
+                                int i = 1;
+                                @foreach (var vendorFaq in Model.VendorFaqs)
+                                {
+                                    string answer = $"answer{i}";
+                                    string answer_data_target = $"#answer{i}";
+                                    <a href="#" class="question collapsed" data-toggle="collapse" data-target=@answer_data_target aria-expanded="false" aria-controls=@answer>
+                                        <i class="fas fa-caret-right"></i> @vendorFaq.Question
+                                    </a>
+                                    <div id=@answer class="collapse" data-parent="#accordionFaq">
+                                        @vendorFaq.Answer
+                                    </div>
+                                    i++;
+                                }
+                            }
+                            @*<a href="#" class="question collapsed" data-toggle="collapse" data-target="#answer1" aria-expanded="false" aria-controls="answer1">
+                                <i class="fas fa-caret-right"></i> Question 1
+                                </a>
+                                <div id="answer1" class="collapse" data-parent="#accordionFaq">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+
+                                <a href="#" class="question collapsed" data-toggle="collapse" data-target="#answer2" aria-expanded="false" aria-controls="answer2">
+                                <i class="fas fa-caret-right"></i> Question 2
+                                </a>
+                                <div id="answer2" class="collapse" data-parent="#accordionFaq">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+
+                                <a href="#" class="question collapsed" data-toggle="collapse" data-target="#answer3" aria-expanded="false" aria-controls="answer3">
+                                <i class="fas fa-caret-right"></i> Question 3
+                                </a>
+                                <div id="answer3" class="collapse" data-parent="#accordionFaq">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

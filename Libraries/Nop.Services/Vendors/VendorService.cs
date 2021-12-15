@@ -30,6 +30,7 @@ namespace Nop.Services.Vendors
         private readonly IRepository<VendorCustomer> _vendorCustomerRepository;
         private readonly IRepository<VendorCustomerStory> _vendorCustomerStoryRepository;
         private readonly IRepository<Follower> _followerRepository;
+        private readonly IRepository<VendorFaq> _vendorFaqRepository;
 
 
         #endregion
@@ -46,7 +47,8 @@ namespace Nop.Services.Vendors
             IRepository<VendorReviewRecord> vendorReviewRepository,
             IRepository<VendorCustomer> vendorCustomerRepository,
             IRepository<VendorCustomerStory> vendorCustomerStoryRepository,
-            IRepository<Follower> followerRepository)
+            IRepository<Follower> followerRepository,
+            IRepository<VendorFaq> vendorFaqRepository)
         {
             this._eventPublisher = eventPublisher;
             this._vendorRepository = vendorRepository;
@@ -59,6 +61,7 @@ namespace Nop.Services.Vendors
             this._vendorCustomerRepository = vendorCustomerRepository;
             this._vendorCustomerStoryRepository = vendorCustomerStoryRepository;
             this._followerRepository = followerRepository;
+            this._vendorFaqRepository = vendorFaqRepository;
         }
 
         #endregion
@@ -318,7 +321,15 @@ namespace Nop.Services.Vendors
             var vendor = _vendorRepository.Table.Where(v => v.Id == vendorId).FirstOrDefault();
             if (vendor != null)
             {
-                vendor.FollowersNumber++;
+                if (vendor.FollowersNumber == null)
+                {
+                    vendor.FollowersNumber = 1;
+                }
+                else
+                {
+                    vendor.FollowersNumber++;
+                }
+
                 _vendorRepository.Update(vendor);
             }
         }
@@ -326,6 +337,16 @@ namespace Nop.Services.Vendors
         public int GetNumberOfFollowers(int vendorId)
         {
             return _followerRepository.Table.Where(vendor => vendor.Id == vendorId).Count();
+        }
+
+        public IEnumerable<VendorFaq> GetVendorFaqs(int vendorId, int amount)
+        {
+            //get all faqs belonging to that vendor shop
+            var vendorFaqs = _vendorFaqRepository.Table
+                                    .Where(v => v.VendorId == vendorId)
+                                    .Take(amount)
+                                    .ToList();
+            return vendorFaqs;
         }
 
         #endregion

@@ -23,45 +23,29 @@
     }
 }
 
-
 @* Vendor Page == Shop Page *@
 @if (Model.IsPremium.HasValue && Model.IsPremium.Value == true)
 {
-    @Html.Partial("PremiumVendor", Model);
+    @Html.Partial("PremiumVendor", Model)
 }
 else
 {
     <div class="container vendorInfoContainer">
         <div class="row">
 
-            <div class="col-4 order-2 order-lg-1 col-lg-3 text-left starsContainer">
-                <div class="ratingStars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-
-                <div class="ratingStats">
-                    <a href="#">36 Reviews</a>
-                    <a href="#">42 items sold</a>
-                </div>
-            </div>
+            @await Component.InvokeAsync("VendorProductRating", new { vendorId = Model.Id })
 
             <div class="col-12 order-1 order-lg-2 col-lg-6 text-center avatarContainer">
                 <h1><span>Sinswap store: </span>@Model.Name</h1>
-                <div class="avatar" style="background-image: url('/Themes/Sinswap/Content/images/vendorAvatar.jpg');"></div>
+                <div class="avatar" style="background-image: url('@Model.PictureUrl');"></div>
             </div>
 
             <div class="col-8 order-3 order-lg-3 col-lg-3 text-right metaContainer">
-                <p><span class="age">24</span>, <span class="city">Kaapstad</span>, <span class="country">South Africa</span></p>
+                <p><span class="age">@Model.Age</span>, <span class="city">@Model.City</span>, <span class="country">@Model.Country</span></p>
             </div>
 
         </div>
     </div>
-
-
 
     <nav class="container-fluid">
         <div class="row">
@@ -92,133 +76,21 @@ else
                         <a href="#" class="socialLink"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="socialLink"><i class="fab fa-facebook-square"></i></a>
                         <a href="#" class="socialLink"><i class="fab fa-twitter"></i></a>
-                        <div class="followBtn">
-                            <a href="#" class="btn btn-primary">Follow me</a>
-                        </div>
+                        @using (Html.BeginForm("followme", "vendor", FormMethod.Post))
+                        {
+                            @Html.Hidden("vendorId", Model.Id)
+                            @Html.Hidden("vendorSeName", Model.SeName)
+                            <div class="followBtn">
+                                <button type="submit" class="btn btn-primary">Follow me</button>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
-
         </div>
     </nav>
 
-
-
-    <a id="shop"></a>
-    <div class="container vendorCategoriesContainer">
-        <div class="row">
-            <div class="col-12">
-                <h2>You can buy all of these from me</h2>
-
-                <div class="flex-row row no-gutters">
-
-                    <div class="col-6 col-lg-3">
-                        <div class="categoryCard clothing" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                            <div class="category">
-                                <a href="#">High heels</a>
-                                <div class="priceLabel">from</div>
-                                <div class="price">&euro;70<sup>.00</sup></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-lg-3">
-                        <div class="categoryCard food" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                            <div class="category">
-                                <a href="#">Cucumbers</a>
-                                <div class="priceLabel">from</div>
-                                <div class="price">&euro;70<sup>.00</sup></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-lg-3">
-                        <div class="categoryCard body" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                            <div class="category">
-                                <a href="#">Bath water</a>
-                                <div class="priceLabel">from</div>
-                                <div class="price">&euro;70<sup>.00</sup></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-lg-3">
-                        <div class="categoryCard clothing" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                            <div class="category">
-                                <a href="#">Yogapants</a>
-                                <div class="priceLabel">from</div>
-                                <div class="price">&euro;70<sup>.00</sup></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-lg-3">
-                        <div class="categoryCard clothing" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                            <div class="category">
-                                <a href="#">Sports bras</a>
-                                <div class="priceLabel">from</div>
-                                <div class="price">&euro;70<sup>.00</sup></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-lg-3">
-                        <div class="categoryCard service" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                            <div class="category">
-                                <a href="#">GFE</a>
-                                <div class="priceLabel">from</div>
-                                <div class="price">&euro;70<sup>.00</sup></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-lg-3">
-                        <div class="categoryCard clothing" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                            <div class="category">
-                                <a href="#">Panties</a>
-                                <div class="priceLabel">from</div>
-                                <div class="price">&euro;70<sup>.00</sup></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-lg-3">
-                        <div class="categoryCard food" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                            <div class="category">
-                                <a href="#">Cucumber</a>
-                                <div class="priceLabel">from</div>
-                                <div class="price">&euro;25<sup>.00</sup></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-lg-3">
-                        <div class="categoryCard clothing" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                            <div class="category">
-                                <a href="#">Vibrator</a>
-                                <div class="priceLabel">from</div>
-                                <div class="price">&euro;100<sup>.00</sup></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-lg-3">
-                        <div class="categoryCard object" data-toggle="modal" data-target="#productModal" style="background-image: url('/Themes/Sinswap/content/images/dummyVendorCategories.png')">
-                            <div class="category">
-                                <a href="#">Special request</a>
-                                <div class="priceLabel">from</div>
-                                <div class="price">&euro;250<sup>.00</sup></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
+    @await Component.InvokeAsync("VendorProduct", new { vendorId = Model.Id })
 
     <a id="aboutme"></a>
     <div class="container-fluid vendorPersonalQuoteContainer bgGrey2">
@@ -227,50 +99,37 @@ else
 
                 <div class="container">
                     <div class="row">
-
                         <div class="col-12 col-lg-6 personalContainer">
                             <p>
-                                Hi there,<br /><br />
-
-                                Mauris placerat congue dui sit amet blandit. Phasellus condimentum libero vel velit auctor, sit amet tincidunt velit varius. Mauris lacinia porta faucibus. Fusce eu est ac eros vulputate mollis in ac felis. Aenean commodo scelerisque mi sed imperdiet.<br /><br />
-
-                                Donec at hendrerit nisi, eget vestibulum nisi. Sed sit amet magna luctus, facilisis erat quis, sagittis ligula. Aenean dignissim velit quis leo consequat ultricies. Proin quis pretium justo. Vestibulum at eros nisl. P lacus dictum vel. Phasellus vitae sollicitudin mi.<br /><br />
-
-                                XOXO, Katee
+                                @Model.Description
                             </p>
                         </div>
-
                         <div class="col-12 col-lg-6 quoteContainer">
                             <blockquote>
-                                I love it when men and women tell me what they want.
-                                So what can I do for you?
+                                @Model.VendorNotes.FirstOrDefault()?.Note
                             </blockquote>
-                            <div class="quoteAuthor">- Katee -</div>
+                            <div class="quoteAuthor">- @Model.Name -</div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 
-
-
-    <div class="container-fluid dividerContainer bgGrey2">
+    @*<div class="container-fluid dividerContainer bgGrey2">
         <div class="row">
-            <div class="col">
-                <div class="container">
-                    <div class="row">
-                        <div class="col divider"></div>
-                        <a id="reviews"></a>
-                    </div>
-                </div>
-            </div>
+        <div class="col">
+        <div class="container">
+        <div class="row">
+        <div class="col divider"></div>
+        <a id="reviews"></a>
         </div>
-    </div>
+        </div>
+        </div>
+        </div>
+        </div>*@
 
-
+    @await Component.InvokeAsync("VendorPicture", new { vendorId = Model.Id, size = 800 })
 
     <div class="container-fluid vendorPremiumContentContainer bgGrey2">
         <div class="row">
@@ -278,224 +137,228 @@ else
                 <div class="container">
                     <div class="flex-row row">
                         <div class="col-12 col-lg-6 vendorSmallTalkContainer">
-                            Banner
+                            @*Banner*@
+                            <div class="smallTalkHeader">
+                                <h2>Small talk</h2>
+                                <h3>a short interview with <span>@Model.Name</span></h3>
+                                <div class="headerImg" style="background-image: url('@Model.PictureUrl');"></div>
+                            </div>
+                            @await Component.InvokeAsync("VendorSmallTalk", new { vendorId = Model.Id, amount = 6 })
                         </div>
-
                         <div class="col-12 col-lg-6 vendorReviewFavoriteContainer">
                             <div class="container-fluid">
-
                                 <div class="row">
-                                    <div class="col-12 vendorReviewsContainer">
+                                    @await Component.InvokeAsync("VendorReview", new { vendorId = Model.Id })
+                                    @*<div class="col-12 vendorReviewsContainer">
                                         <h2>Reviews</h2>
 
                                         <ul class="reviewList">
-                                            <li class="reviewListItem">
+                                        <li class="reviewListItem">
 
-                                                <div class="reviewMeta">
-                                                    <div class="ratingStars">
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                    </div>
-                                                    - <span class="username">PencilDick420</span>
-                                                    - <span class="usercountry">Canada</span>
-                                                    <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
-                                                </div>
+                                        <div class="reviewMeta">
+                                        <div class="ratingStars">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                        </div>
+                                        - <span class="username">PencilDick420</span>
+                                        - <span class="usercountry">Canada</span>
+                                        <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                                        </div>
 
-                                                <blockquote>"She's the best"</blockquote>
+                                        <blockquote>"She's the best"</blockquote>
 
-                                                <div class="publishdate">04/02/2020</div>
+                                        <div class="publishdate">04/02/2020</div>
 
-                                            </li>
-                                            <li class="reviewListItem">
+                                        </li>
+                                        <li class="reviewListItem">
 
-                                                <div class="reviewMeta">
-                                                    <div class="ratingStars">
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                    </div>
-                                                    - <span class="username">PencilDick420</span>
-                                                    - <span class="usercountry">Canada</span>
-                                                    <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
-                                                </div>
+                                        <div class="reviewMeta">
+                                        <div class="ratingStars">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                        </div>
+                                        - <span class="username">PencilDick420</span>
+                                        - <span class="usercountry">Canada</span>
+                                        <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                                        </div>
 
-                                                <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+                                        <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
 
-                                                <div class="publishdate">04/02/2020</div>
+                                        <div class="publishdate">04/02/2020</div>
 
-                                                <div class="reviewReply">"You're very welcome, doll. Love to add a little bonus for you every time!" - Charlotte the Wet</div>
-                                                <div class="publishdate">06/02/2020</div>
+                                        <div class="reviewReply">"You're very welcome, doll. Love to add a little bonus for you every time!" - Charlotte the Wet</div>
+                                        <div class="publishdate">06/02/2020</div>
 
-                                            </li>
-                                            <li class="reviewListItem">
+                                        </li>
+                                        <li class="reviewListItem">
 
-                                                <div class="reviewMeta">
-                                                    <div class="ratingStars">
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                    </div>
-                                                    - <span class="username">PencilDick420</span>
-                                                    - <span class="usercountry">Canada</span>
-                                                    <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
-                                                </div>
+                                        <div class="reviewMeta">
+                                        <div class="ratingStars">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                        </div>
+                                        - <span class="username">PencilDick420</span>
+                                        - <span class="usercountry">Canada</span>
+                                        <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                                        </div>
 
-                                                <blockquote>"She's the best"</blockquote>
+                                        <blockquote>"She's the best"</blockquote>
 
-                                                <div class="publishdate">04/02/2020</div>
+                                        <div class="publishdate">04/02/2020</div>
 
-                                            </li>
-                                            <li class="reviewListItem">
+                                        </li>
+                                        <li class="reviewListItem">
 
-                                                <div class="reviewMeta">
-                                                    <div class="ratingStars">
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                    </div>
-                                                    - <span class="username">PencilDick420</span>
-                                                    - <span class="usercountry">Canada</span>
-                                                    <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
-                                                </div>
+                                        <div class="reviewMeta">
+                                        <div class="ratingStars">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                        </div>
+                                        - <span class="username">PencilDick420</span>
+                                        - <span class="usercountry">Canada</span>
+                                        <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                                        </div>
 
-                                                <blockquote>"I got quick response to my questions. Everything was discretly packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+                                        <blockquote>"I got quick response to my questions. Everything was discretly packed and even had a personal note with something extra. I could really smell her..."</blockquote>
 
-                                                <div class="publishdate">04/02/2020</div>
+                                        <div class="publishdate">04/02/2020</div>
 
-                                            </li>
-                                            <li class="reviewListItem">
+                                        </li>
+                                        <li class="reviewListItem">
 
-                                                <div class="reviewMeta">
-                                                    <div class="ratingStars">
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                    </div>
-                                                    - <span class="username">PencilDick420</span>
-                                                    - <span class="usercountry">Canada</span>
-                                                    <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
-                                                </div>
+                                        <div class="reviewMeta">
+                                        <div class="ratingStars">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                        </div>
+                                        - <span class="username">PencilDick420</span>
+                                        - <span class="usercountry">Canada</span>
+                                        <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                                        </div>
 
-                                                <blockquote>"She's the best"</blockquote>
+                                        <blockquote>"She's the best"</blockquote>
 
-                                                <div class="publishdate">04/02/2020</div>
+                                        <div class="publishdate">04/02/2020</div>
 
-                                            </li>
-                                            <li class="reviewListItem">
+                                        </li>
+                                        <li class="reviewListItem">
 
-                                                <div class="reviewMeta">
-                                                    <div class="ratingStars">
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                    </div>
-                                                    - <span class="username">PencilDick420</span>
-                                                    - <span class="usercountry">Canada</span>
-                                                    <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
-                                                </div>
+                                        <div class="reviewMeta">
+                                        <div class="ratingStars">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                        </div>
+                                        - <span class="username">PencilDick420</span>
+                                        - <span class="usercountry">Canada</span>
+                                        <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                                        </div>
 
-                                                <blockquote>"I got quick response to my questions. Everything was discretly packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+                                        <blockquote>"I got quick response to my questions. Everything was discretly packed and even had a personal note with something extra. I could really smell her..."</blockquote>
 
-                                                <div class="publishdate">04/02/2020</div>
+                                        <div class="publishdate">04/02/2020</div>
 
-                                            </li>
-                                            <li class="reviewListItem">
+                                        </li>
+                                        <li class="reviewListItem">
 
-                                                <div class="reviewMeta">
-                                                    <div class="ratingStars">
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                    </div>
-                                                    - <span class="username">PencilDick420</span>
-                                                    - <span class="usercountry">Canada</span>
-                                                    <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
-                                                </div>
+                                        <div class="reviewMeta">
+                                        <div class="ratingStars">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                        </div>
+                                        - <span class="username">PencilDick420</span>
+                                        - <span class="usercountry">Canada</span>
+                                        <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                                        </div>
 
-                                                <blockquote>"She's the best"</blockquote>
+                                        <blockquote>"She's the best"</blockquote>
 
-                                                <div class="publishdate">04/02/2020</div>
+                                        <div class="publishdate">04/02/2020</div>
 
-                                            </li>
-                                            <li class="reviewListItem">
+                                        </li>
+                                        <li class="reviewListItem">
 
-                                                <div class="reviewMeta">
-                                                    <div class="ratingStars">
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                    </div>
-                                                    - <span class="username">PencilDick420</span>
-                                                    - <span class="usercountry">Canada</span>
-                                                    <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
-                                                </div>
+                                        <div class="reviewMeta">
+                                        <div class="ratingStars">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                        </div>
+                                        - <span class="username">PencilDick420</span>
+                                        - <span class="usercountry">Canada</span>
+                                        <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                                        </div>
 
-                                                <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+                                        <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
 
-                                                <div class="publishdate">04/02/2020</div>
+                                        <div class="publishdate">04/02/2020</div>
 
-                                            </li>
-                                            <li class="reviewListItem">
+                                        </li>
+                                        <li class="reviewListItem">
 
-                                                <div class="reviewMeta">
-                                                    <div class="ratingStars">
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                    </div>
-                                                    - <span class="username">PencilDick420</span>
-                                                    - <span class="usercountry">Canada</span>
-                                                    <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
-                                                </div>
+                                        <div class="reviewMeta">
+                                        <div class="ratingStars">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                        </div>
+                                        - <span class="username">PencilDick420</span>
+                                        - <span class="usercountry">Canada</span>
+                                        <span class="tag kickstarter"><i class="fab fa-kickstarter-k"></i><span>Original backer</span></span>
+                                        </div>
 
-                                                <blockquote>"She's the best"</blockquote>
+                                        <blockquote>"She's the best"</blockquote>
 
-                                                <div class="publishdate">04/02/2020</div>
+                                        <div class="publishdate">04/02/2020</div>
 
-                                            </li>
-                                            <li class="reviewListItem">
+                                        </li>
+                                        <li class="reviewListItem">
 
-                                                <div class="reviewMeta">
-                                                    <div class="ratingStars">
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star" aria-hidden="true"></i>
-                                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
-                                                    </div>
-                                                    - <span class="username">PencilDick420</span>
-                                                    - <span class="usercountry">Canada</span>
-                                                    <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
-                                                </div>
+                                        <div class="reviewMeta">
+                                        <div class="ratingStars">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                                        </div>
+                                        - <span class="username">PencilDick420</span>
+                                        - <span class="usercountry">Canada</span>
+                                        <span class="tag bigspender"><i class="fas fa-dollar-sign"></i><span>Original backer</span></span>
+                                        </div>
 
-                                                <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
+                                        <blockquote>"I got quick response to my questions. Everything was discretely packed and even had a personal note with something extra. I could really smell her..."</blockquote>
 
-                                                <div class="publishdate">04/02/2020</div>
+                                        <div class="publishdate">04/02/2020</div>
 
-                                            </li>
+                                        </li>
                                         </ul>
-                                    </div>
+                                        </div>*@
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -504,49 +367,7 @@ else
         </div>
     </div>
 
-
-
-    <a id="faq"></a>
-    <div class="container-fluid vendorFaqContainer">
-        <div class="row">
-            <div class="col-12">
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2>Frequently Asked Store Related Questions</h2>
-
-                            <div id="accordionFaq">
-                                <a href="#" class="question collapsed" data-toggle="collapse" data-target="#answer1" aria-expanded="false" aria-controls="answer1">
-                                    <i class="fas fa-caret-right"></i> Question 1
-                                </a>
-                                <div id="answer1" class="collapse" data-parent="#accordionFaq">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-
-                                <a href="#" class="question collapsed" data-toggle="collapse" data-target="#answer2" aria-expanded="false" aria-controls="answer2">
-                                    <i class="fas fa-caret-right"></i> Question 2
-                                </a>
-                                <div id="answer2" class="collapse" data-parent="#accordionFaq">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-
-                                <a href="#" class="question collapsed" data-toggle="collapse" data-target="#answer3" aria-expanded="false" aria-controls="answer3">
-                                    <i class="fas fa-caret-right"></i> Question 3
-                                </a>
-                                <div id="answer3" class="collapse" data-parent="#accordionFaq">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
+    @await Component.InvokeAsync("VendorFaq", new { vendorId = Model.Id, amount = 3 })
 
     <!-- Product modal -->
     <div class="modal fade productModal" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
@@ -555,9 +376,9 @@ else
                 @*<div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                     </button>
-                </div>*@
+                    </div>*@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
@@ -629,12 +450,10 @@ else
                 @*<div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>
-                </div>*@
+                    </div>*@
             </div>
         </div>
     </div>
-
-
 
     <!--<div class="page vendor-page">
         <div class="page-title">
@@ -644,16 +463,16 @@ else
     @*description*@
     <!--@if (!string.IsNullOrWhiteSpace(Model.Description))
     {
-        <div class="vendor-description">
+                    <div class="vendor-description">
             @Html.Raw(Model.Description)
-        </div>
+                    </div>
     }-->
     @*contact vendor*@
     <!--@if (Model.AllowCustomersToContactVendors)
     {
-        <div class="contact-vendor">
-            <input type="button" value="@T("ContactVendor")" class="button-2 contact-vendor-button" onclick="setLocation('@Url.RouteUrl("ContactVendor", new { vendorId = Model.Id })')" />
-        </div>
+                    <div class="contact-vendor">
+                        <input type="button" value="@T("ContactVendor")" class="button-2 contact-vendor-button" onclick="setLocation('@Url.RouteUrl("ContactVendor", new { vendorId = Model.Id })')" />
+                    </div>
     }
 
     @if (Model.Products.Count > 0)
@@ -662,18 +481,18 @@ else
     }-->
     @*product list*@
     <!--@if (Model.Products.Count > 0)
-            {
-                <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
-                    <div class="item-grid">
-                        @foreach (var product in Model.Products)
-                        {
-                            <div class="item-box">
-                                @await Html.PartialAsync("_ProductBox", product)
+    {
+                            <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
+                                <div class="item-grid">
+                @foreach (var product in Model.Products)
+                {
+                                                    <div class="item-box">
+                        @await Html.PartialAsync("_ProductBox", product)
+                                                    </div>
+                }
+                                </div>
                             </div>
-                        }
-                    </div>
-                </div>
-            }
+    }
         </div>
     </div>-->
 }
