@@ -13,9 +13,9 @@
                     @foreach (var vendorProduct in Model.VendorProducts)
                     {
                         <div class="col-6 col-lg-3">
-                            <div class="categoryCard clothing" style="background-image: url('@vendorProduct.DefaultPictureModel.ImageUrl')">
+                            <div class="categoryCard clothing" style="background-image: url('@vendorProduct.DefaultPictureModel.ImageUrl')" data-url="/@vendorProduct.SeName" data-toggle="modal" data-target="#productModal">
                                 <div class="category">
-                                    <a href="/@vendorProduct.SeName">@vendorProduct.Name</a>
+                                    <span>@vendorProduct.Name</span>
                                     <div class="priceLabel">from</div>
                                     <div class="price">@vendorProduct.Price</div>
                                 </div>

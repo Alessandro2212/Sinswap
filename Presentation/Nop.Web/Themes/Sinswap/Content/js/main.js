@@ -2,9 +2,25 @@ $(function () {
 
 
     if ($('#productModal').length) {
-        $('#productModal').modal({
-            show: false
-        })
+        //$('.categoryCard').click(function (e) {
+        //    e.preventDefault();
+        //    console.log($(e.target).attr('data-url'));
+        //    var prodUrl = "/en" + $(e.target).attr('data-url');
+        //    $('#productModal .modal-body').load(prodUrl, function () {
+        //        $('#productModal').modal({ show: true });
+        //    });
+        //});
+
+        $('#productModal').on('show.bs.modal', function (e) {
+            $('#productModal').find('.modal-body').html("");
+
+            var prodUrl = $(e.relatedTarget).closest('.categoryCard').attr('data-url');
+
+            $.get(prodUrl, function (data) {
+                productContent = $(data).find('.productDetailContainer');
+                $('#productModal').find('.modal-body').html(productContent);
+            })
+        });
     }
 
     if ($('.topSellersSlide').length) {

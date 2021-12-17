@@ -17,6 +17,18 @@
         .descColumn {
             padding: 45px;
 
+            .closeBtn {
+                position: absolute;
+                right: 15px;
+                top: 10px;
+                color: $grey15;
+                cursor: pointer;
+
+                &:hover {
+                    color: $black;
+                }
+            }
+
             .description {
                 font-size: 14px;
             }
@@ -29,6 +41,40 @@
             }
 
             .orderContainer {
+                position: absolute;
+                bottom: 45px;
+                width: 100%;
+
+                .prodRow {
+                    font-size: 20px;
+                    font-weight: 600;
+                    margin-left: 0px;
+                    margin-right: 90px;
+                }
+
+                .shippingRow {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: $grey15;
+                    border-bottom: 2px solid $black;
+                    margin-left: 0px;
+                    margin-right: 90px;
+                    padding-bottom: 7px;
+                }
+
+                .price {
+                    text-align: right;
+
+                    sup {
+                        top: -.25em
+                    }
+                }
+
+                .btn-order {
+                    margin-top: 10px;
+                    color: $white;
+                    background-color: #00E39A;
+                }
             }
         }
     }

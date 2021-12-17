@@ -115,7 +115,7 @@ a.more {
         width: 100%;
         text-align: center;
 
-        a {
+        span {
             color: $white;
             text-decoration: none;
             opacity: 1;
@@ -182,7 +182,7 @@ a.more {
         transform: translate(-50%, -50%);
         transition: top 0.15s, opacity 0.15s;
 
-        a {
+        span {
             display: block;
             font-size: 20px;
             font-weight: 500;

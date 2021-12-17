@@ -14,7 +14,7 @@
                             <div id="lg_vendorMedia" class="vendorMediaSlide">
                                 @foreach (var vendorPicture in Model.VendorPictureUrls)
                                 {                               
-                                    <div class="vendorMediaCard">
+                                    <div class="vendorMediaCard" data-src="@vendorPicture">
                                         <a href="@vendorPicture" data-lg-size="1600-800">
                                             <img src="@vendorPicture" />
                                         </a>

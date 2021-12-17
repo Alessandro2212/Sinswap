@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /Presentation/Nop.Web/wwwroot/bundles
+/Presentation/Nop.Web/wwwroot/images/thumbs

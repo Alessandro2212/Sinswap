@@ -454,7 +454,7 @@ a.more:hover {
   width: 100%;
   text-align: center;
 }
-.categoryCard .category a {
+.categoryCard .category span {
   color: #fff;
   text-decoration: none;
   opacity: 1;
@@ -510,7 +510,7 @@ a.more:hover {
   transform: translate(-50%, -50%);
   transition: top 0.15s, opacity 0.15s;
 }
-.vendorCategoriesContainer .categoryCard .category a {
+.vendorCategoriesContainer .categoryCard .category span {
   display: block;
   font-size: 20px;
   font-weight: 500;
@@ -2340,6 +2340,16 @@ nav.main .btn:hover, nav.service .btn:hover, nav.vendorMenu .btn:hover {
 .productModal .modal-content .descColumn {
   padding: 45px;
 }
+.productModal .modal-content .descColumn .closeBtn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: #999999;
+  cursor: pointer;
+}
+.productModal .modal-content .descColumn .closeBtn:hover {
+  color: #171717;
+}
 .productModal .modal-content .descColumn .description {
   font-size: 14px;
 }
@@ -2347,6 +2357,38 @@ nav.main .btn:hover, nav.service .btn:hover, nav.vendorMenu .btn:hover {
   font-size: 14px;
   margin-bottom: 5px;
 }
+.productModal .modal-content .descColumn .orderContainer {
+  position: absolute;
+  bottom: 45px;
+  width: 100%;
+}
+.productModal .modal-content .descColumn .orderContainer .prodRow {
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 0px;
+  margin-right: 90px;
+}
+.productModal .modal-content .descColumn .orderContainer .shippingRow {
+  font-size: 14px;
+  font-weight: 600;
+  color: #999999;
+  border-bottom: 2px solid #171717;
+  margin-left: 0px;
+  margin-right: 90px;
+  padding-bottom: 7px;
+}
+.productModal .modal-content .descColumn .orderContainer .price {
+  text-align: right;
+}
+.productModal .modal-content .descColumn .orderContainer .price sup {
+  top: -0.25em;
+}
+.productModal .modal-content .descColumn .orderContainer .btn-order {
+  margin-top: 10px;
+  color: #fff;
+  background-color: #00E39A;
+}
+
 footer {
   color: #fff;
   background-color: #171717;
