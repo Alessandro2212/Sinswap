@@ -25,7 +25,7 @@
     var breadcrumbDelimiter = commonSettings.BreadcrumbDelimiter;
 }
 @*category breadcrumb*@
-@section Breadcrumb
+@*@section Breadcrumb
     {
     @if (Model.DisplayCategoryBreadcrumb)
     {
@@ -62,11 +62,8 @@
         </div>
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsAfterBreadcrumb, additionalData = Model })
     }
-}
+}*@
 <div class="page category-page">
-    <div class="page-title">
-        <h1>@Model.Name</h1>
-    </div>
     <div class="page-body">
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsTop, additionalData = Model })
         @*description*@
@@ -80,7 +77,31 @@
         @*subcategories*@
         @if (Model.SubCategories.Count > 0)
         {
-            <div class="category-grid sub-category-grid">
+
+            <div class="container popularCategoriesContainer">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>@Model.Name</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="flex-row row no-gutters">
+                            @foreach (var item in Model.SubCategories)
+                            {
+                                <div class="col-6 col-lg-3">
+                                    <div class="categoryCard clothing" style="background-image: url('@item.PictureModel.ImageUrl')">
+                                        <div class="category"><a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">@item.Name</a></div>
+                                    </div>
+                                </div>
+                            }
+                        </div>            
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="category-grid sub-category-grid">
                 <div class="item-grid">
                     @foreach (var item in Model.SubCategories)
                     {
@@ -100,8 +121,110 @@
                         </div>
                     }
                 </div>
-            </div>
+            </div>*@
         }
+
+        <div class="container topSellersContainer">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Top clothing sellers</h2>
+
+                    <div class="topSellersSlide">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFeaturedProducts, additionalData = Model })
         @*featured products*@
         @if (Model.FeaturedProducts.Count > 0)

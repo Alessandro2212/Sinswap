@@ -454,6 +454,9 @@ a.more:hover {
   width: 100%;
   text-align: center;
 }
+.categoryCard .category a {
+  color: #fff;
+}
 .categoryCard .category span {
   color: #fff;
   text-decoration: none;
@@ -1055,6 +1058,18 @@ nav.main .btn:hover, nav.service .btn:hover, nav.vendorMenu .btn:hover {
 }
 .popularCategoriesContainer a.more {
   margin-left: 5px;
+}
+
+.category-page .popularCategoriesContainer {
+  position: relative;
+  margin-top: -225px;
+  background-color: #fff;
+  border-radius: 5px;
+  padding-top: 0px;
+}
+.category-page .topSellersContainer {
+  margin-top: 40px;
+  margin-bottom: 60px;
 }
 
 @media (max-width: 768px) {
