@@ -113,6 +113,13 @@ $(function () {
     }
 
 
+    if ($('.categoryCard').length && !$('.vendorPremium').length) {
+        $('.categoryCard').click(function (e) {
+            window.location.href = $(e.target).find('a').attr('href');
+        });
+    }
+
+
     if ($('.vendorMediaSlide').length) {
         lightGallery(document.getElementById('lg_vendorMedia'), {
             speed: 500,

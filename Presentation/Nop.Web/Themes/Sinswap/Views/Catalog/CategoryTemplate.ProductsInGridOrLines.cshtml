@@ -14,7 +14,7 @@
     Html.AddMetaDescriptionParts(Model.MetaDescription);
     Html.AddMetaKeywordParts(Model.MetaKeywords);
     //page class
-    Html.AppendPageCssClassParts("html-category-page");
+    Html.AppendPageCssClassParts("categoryList");
 
     if (seoSettings.CanonicalUrlsEnabled)
     {
@@ -124,106 +124,110 @@
             </div>*@
         }
 
-        <div class="container topSellersContainer">
-            <div class="row">
-                <div class="col-12">
-                    <h2>Top clothing sellers</h2>
 
-                    <div class="topSellersSlide">
-                        <div class="topSellerCard">
-                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
-                            <div class="location">
-                                <span class="city">Brugge</span>, <span class="country">United States</span>
+        @if (Model.Products.Count == 0)
+        {
+            <div class="container topSellersContainer">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Top clothing sellers</h2>
+
+                        <div class="topSellersSlide">
+                            <div class="topSellerCard">
+                                <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                                <div class="location">
+                                    <span class="city">Brugge</span>, <span class="country">United States</span>
+                                </div>
+                                <div class="nameAge">
+                                    <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                                </div>
                             </div>
-                            <div class="nameAge">
-                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            <div class="topSellerCard">
+                                <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                                <div class="location">
+                                    <span class="city">Brugge</span>, <span class="country">United States</span>
+                                </div>
+                                <div class="nameAge">
+                                    <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="topSellerCard">
-                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
-                            <div class="location">
-                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            <div class="topSellerCard">
+                                <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                                <div class="location">
+                                    <span class="city">Brugge</span>, <span class="country">United States</span>
+                                </div>
+                                <div class="nameAge">
+                                    <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                                </div>
                             </div>
-                            <div class="nameAge">
-                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            <div class="topSellerCard">
+                                <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                                <div class="location">
+                                    <span class="city">Brugge</span>, <span class="country">United States</span>
+                                </div>
+                                <div class="nameAge">
+                                    <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="topSellerCard">
-                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
-                            <div class="location">
-                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            <div class="topSellerCard">
+                                <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                                <div class="location">
+                                    <span class="city">Brugge</span>, <span class="country">United States</span>
+                                </div>
+                                <div class="nameAge">
+                                    <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                                </div>
                             </div>
-                            <div class="nameAge">
-                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            <div class="topSellerCard">
+                                <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                                <div class="location">
+                                    <span class="city">Brugge</span>, <span class="country">United States</span>
+                                </div>
+                                <div class="nameAge">
+                                    <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="topSellerCard">
-                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
-                            <div class="location">
-                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            <div class="topSellerCard">
+                                <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                                <div class="location">
+                                    <span class="city">Brugge</span>, <span class="country">United States</span>
+                                </div>
+                                <div class="nameAge">
+                                    <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                                </div>
                             </div>
-                            <div class="nameAge">
-                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            <div class="topSellerCard">
+                                <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                                <div class="location">
+                                    <span class="city">Brugge</span>, <span class="country">United States</span>
+                                </div>
+                                <div class="nameAge">
+                                    <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="topSellerCard">
-                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
-                            <div class="location">
-                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            <div class="topSellerCard">
+                                <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                                <div class="location">
+                                    <span class="city">Brugge</span>, <span class="country">United States</span>
+                                </div>
+                                <div class="nameAge">
+                                    <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                                </div>
                             </div>
-                            <div class="nameAge">
-                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
-                            </div>
-                        </div>
-                        <div class="topSellerCard">
-                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
-                            <div class="location">
-                                <span class="city">Brugge</span>, <span class="country">United States</span>
-                            </div>
-                            <div class="nameAge">
-                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
-                            </div>
-                        </div>
-                        <div class="topSellerCard">
-                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
-                            <div class="location">
-                                <span class="city">Brugge</span>, <span class="country">United States</span>
-                            </div>
-                            <div class="nameAge">
-                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
-                            </div>
-                        </div>
-                        <div class="topSellerCard">
-                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
-                            <div class="location">
-                                <span class="city">Brugge</span>, <span class="country">United States</span>
-                            </div>
-                            <div class="nameAge">
-                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
-                            </div>
-                        </div>
-                        <div class="topSellerCard">
-                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
-                            <div class="location">
-                                <span class="city">Brugge</span>, <span class="country">United States</span>
-                            </div>
-                            <div class="nameAge">
-                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
-                            </div>
-                        </div>
-                        <div class="topSellerCard">
-                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
-                            <div class="location">
-                                <span class="city">Brugge</span>, <span class="country">United States</span>
-                            </div>
-                            <div class="nameAge">
-                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            <div class="topSellerCard">
+                                <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                                <div class="location">
+                                    <span class="city">Brugge</span>, <span class="country">United States</span>
+                                </div>
+                                <div class="nameAge">
+                                    <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
 
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFeaturedProducts, additionalData = Model })
         @*featured products*@
@@ -246,7 +250,249 @@
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsAfterFeaturedProducts, additionalData = Model })
         @if (Model.Products.Count > 0)
         {
-            @await Html.PartialAsync("_CatalogSelectors", Model.PagingFilteringContext)
+            @*static, needs to go to partial*@
+            <div class="container sellersContainer">
+                <div class="row">
+                    <div class="col-6 categoryDesc">
+                        <h1>Yoga pants</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id erat eget lorem lacinia dignissim 
+                            a in lacus. Quisque sit amet arcu et augue faucibus dictum. Curabitur mattis rutrum scelerisque. Pellentesque 
+                            euismod, nibh in ultrices ultrices, eros ante scelerisque metus, laoreet fringilla leo erat et elit. In 
+                            laoreet dui posuere sapien scelerisque iaculis.
+                        </p>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="topSellerCard">
+                            <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
+                            <div class="location">
+                                <span class="city">Brugge</span>, <span class="country">United States</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*@await Html.PartialAsync("_CatalogSelectors", Model.PagingFilteringContext)*@
         }
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFilters, additionalData = Model })
         <div class="product-filters">
@@ -263,7 +509,7 @@
         </div>
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeProductList, additionalData = Model })
 
-        @if (Model.Products.Count > 0)
+@*        @if (Model.Products.Count > 0)
         {
             <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
                 <div class="item-grid">
@@ -275,7 +521,7 @@
                     }
                 </div>
             </div>
-        }
+        }*@
         @{
             var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
         }
