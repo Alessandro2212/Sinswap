@@ -33,11 +33,32 @@ namespace Nop.Web.Factories
             this._urlRecordService = urlRecordService;
         }
 
-        public TopMiniVendorModel PrepareTopCategoryMiniVendorModel(int amount)
+        public TopMiniVendorModel PrepareTopCategoryMiniVendorModel(int categoryId, int amount)
         {
             //query to retrieve the top vendors of a specific category
+            var vendors = this._vendorService.GetTopCategoryVendors(categoryId, amount);
 
-            throw new NotImplementedException();
+            TopMiniVendorModel model = new TopMiniVendorModel();
+            List<MiniVendorModel> miniVendorModels = new List<MiniVendorModel>();
+
+            foreach (var vendor in vendors)
+            {
+                MiniVendorModel miniVendorModel = new MiniVendorModel
+                {
+                    Id = vendor.Id,
+                    Name = vendor.Name,
+                    City = vendor.City,
+                    Country = vendor.Country.Name,
+                    PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId),
+                    Age = vendor.BirthDate != null ? GetAge(vendor.BirthDate) : 0,
+                    SeName = _urlRecordService.GetSeName(vendor)
+                };
+                miniVendorModels.Add(miniVendorModel);
+            }
+
+            model.MiniVendors = miniVendorModels;
+
+            return model;
         }
 
         /// <summary>
@@ -56,7 +77,7 @@ namespace Nop.Web.Factories
             List<MiniVendorModel> miniVendors = new List<MiniVendorModel>();
 
             foreach (Vendor vendor in vendors.ToList())
-            {                
+            {
                 int age = 18;
                 if (vendor.BirthDate != null)
                 {
@@ -128,5 +149,15 @@ namespace Nop.Web.Factories
             return model;
         }
 
+        private int GetAge(DateTime birthDay)
+        {
+            int age = 18;
+
+            age = DateTime.Today.Year - birthDay.Year;
+            // Go back to the year the person was born in case of a leap year
+            if (birthDay.Date > DateTime.Today.AddYears(-age)) age--;
+
+            return age;
+        }
     }
 }

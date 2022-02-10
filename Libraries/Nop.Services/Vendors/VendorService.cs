@@ -26,11 +26,13 @@ namespace Nop.Services.Vendors
         private readonly IDataProvider _dataProvider;
         private readonly IRepository<Product> _productRepository;
         private readonly IRepository<ProductVendor> _productVendorRepository;
+        private readonly IRepository<ProductCategory> _productCategoryRepository;
         private readonly IRepository<VendorReviewRecord> _vendorReviewRepository;
         private readonly IRepository<VendorCustomer> _vendorCustomerRepository;
         private readonly IRepository<VendorCustomerStory> _vendorCustomerStoryRepository;
         private readonly IRepository<Follower> _followerRepository;
         private readonly IRepository<VendorFaq> _vendorFaqRepository;
+        private readonly IRepository<Category> _categoryRepository;
 
 
         #endregion
@@ -48,7 +50,9 @@ namespace Nop.Services.Vendors
             IRepository<VendorCustomer> vendorCustomerRepository,
             IRepository<VendorCustomerStory> vendorCustomerStoryRepository,
             IRepository<Follower> followerRepository,
-            IRepository<VendorFaq> vendorFaqRepository)
+            IRepository<VendorFaq> vendorFaqRepository,
+            IRepository<ProductCategory> productCategoryRepository,
+            IRepository<Category> categoryRepository)
         {
             this._eventPublisher = eventPublisher;
             this._vendorRepository = vendorRepository;
@@ -62,6 +66,8 @@ namespace Nop.Services.Vendors
             this._vendorCustomerStoryRepository = vendorCustomerStoryRepository;
             this._followerRepository = followerRepository;
             this._vendorFaqRepository = vendorFaqRepository;
+            this._productCategoryRepository = productCategoryRepository;
+            this._categoryRepository = categoryRepository;
         }
 
         #endregion
@@ -347,6 +353,37 @@ namespace Nop.Services.Vendors
                                     .Take(amount)
                                     .ToList();
             return vendorFaqs;
+        }
+
+        public IEnumerable<Vendor> GetTopCategoryVendors(int categoryId, int amount)
+        {
+            //get all sub categories belonging to that category
+            var categoryIds = _categoryRepository.Table
+                                    .Where(cat => cat.ParentCategoryId == categoryId)
+                                    .Select(cat => cat.Id)
+                                    .ToList();
+
+            categoryIds.Add(categoryId);
+
+            var query = _productCategoryRepository.Table
+                        .Where(pc => categoryIds.Contains(pc.CategoryId))
+                        .GroupBy(pc => pc.Product.VendorId)
+                        .Select(group =>
+                                new
+                                {
+                                    VendorId = group.Key,
+                                    AmountSold = group.Sum(x => x.Product.AmountSold)
+                                })
+                        .ToList();
+
+            var vendorIds = query
+                            .OrderByDescending(q => q.AmountSold)
+                            .Take(amount)
+                            .Select(q => q.VendorId);
+
+            return _vendorRepository.Table
+                    .Where(v => vendorIds.Contains(v.Id))
+                    .ToList();
         }
 
         #endregion

@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using FluentValidation.Attributes;
-using Nop.Web.Framework.Mvc.ModelBinding;
+﻿using FluentValidation.Attributes;
 using Nop.Web.Framework.Models;
-using Nop.Web.Validators.Vendors;
+using Nop.Web.Framework.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 
 namespace Nop.Web.Models.MiniVendors
 {

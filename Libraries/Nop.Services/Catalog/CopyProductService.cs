@@ -710,7 +710,8 @@ namespace Nop.Services.Catalog
                 Published = isPublished,
                 Deleted = product.Deleted,
                 CreatedOnUtc = DateTime.UtcNow,
-                UpdatedOnUtc = DateTime.UtcNow
+                UpdatedOnUtc = DateTime.UtcNow,
+                AmountSold = product.AmountSold
             };
 
             //validate search engine name

@@ -789,6 +789,7 @@ namespace Nop.Web.Areas.Admin.Factories
                 model.LastStockQuantity = product.StockQuantity;
                 model.ProductTags = string.Join(", ", _productTagService.GetAllProductTagsByProductId(product.Id).Select(tag => tag.Name));
                 model.ProductAttributesExist = _productAttributeService.GetAllProductAttributes().Any();
+                model.AmountSold = product.AmountSold;
 
                 if (!excludeProperties)
                 {

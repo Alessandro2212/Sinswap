@@ -959,8 +959,9 @@ namespace Nop.Web.Areas.Admin.Controllers
                 var previousWarehouseId = product.WarehouseId;
 
                 //product
+                var amountSold = product.AmountSold;
                 product = model.ToEntity(product);
-
+                product.AmountSold = amountSold;
                 product.UpdatedOnUtc = DateTime.UtcNow;
                 _productService.UpdateProduct(product);
 

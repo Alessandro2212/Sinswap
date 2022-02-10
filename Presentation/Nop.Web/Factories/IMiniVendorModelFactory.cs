@@ -12,7 +12,7 @@ namespace Nop.Web.Factories
 
         TopMiniVendorModel PrepareMostPopularMiniVendorModel(int amount);
 
-        TopMiniVendorModel PrepareTopCategoryMiniVendorModel(int amount);
+        TopMiniVendorModel PrepareTopCategoryMiniVendorModel(int categoryId, int amount);
 
     }
 }

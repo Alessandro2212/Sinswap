@@ -100,5 +100,7 @@ namespace Nop.Services.Vendors
         int GetNumberOfFollowers(int vendorId);
 
         IEnumerable<VendorFaq> GetVendorFaqs(int vendorId, int amount);
+
+        IEnumerable<Vendor> GetTopCategoryVendors(int categoryId, int amount);
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model CategoryModel
 @using Nop.Core.Domain.Common
 @using Nop.Core.Domain.Seo
-@using Nop.Web.Framework.Infrastructure 
+@using Nop.Web.Framework.Infrastructure
 @inject Nop.Core.IWebHelper webHelper
 @inject SeoSettings seoSettings
 @inject CommonSettings commonSettings
@@ -29,40 +29,40 @@
     {
     @if (Model.DisplayCategoryBreadcrumb)
     {
-        <div class="breadcrumb">
-            <ul itemscope itemtype="http://schema.org/BreadcrumbList">
-                <li>
-                    <a href="@Url.RouteUrl("HomePage")" title="@T("Categories.Breadcrumb.Top")">@T("Categories.Breadcrumb.Top")</a>
-                    <span class="delimiter">@breadcrumbDelimiter</span>
-                </li>
-                @{ int position = 1; }
-                @foreach (var cat in Model.CategoryBreadcrumb)
-                {
-                    var isLastCategory = cat.Id == Model.Id;
-                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                        @if (isLastCategory)
-                        {
-                            <strong class="current-item" itemprop="name">@cat.Name</strong>
-                            <span itemprop="item" itemscope itemtype="http://schema.org/Thing">
-                                <link itemprop="url" href="@Url.RouteUrl("Category", new {SeName = cat.SeName})" />
-                            </span>
-                        }
-                        else
-                        {
-                            <a href="@Url.RouteUrl("Category", new { SeName = cat.SeName })" title="@cat.Name" itemprop="item">
-                                <span itemprop="name">@cat.Name</span>
-                            </a>
-                            <span class="delimiter">@breadcrumbDelimiter</span>
-                        }
-                        <meta itemprop="position" content="@position" />
-                    </li>
-                    position++;
-                }
-            </ul>
-        </div>
-        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsAfterBreadcrumb, additionalData = Model })
+    <div class="breadcrumb">
+    <ul itemscope itemtype="http://schema.org/BreadcrumbList">
+    <li>
+    <a href="@Url.RouteUrl("HomePage")" title="@T("Categories.Breadcrumb.Top")">@T("Categories.Breadcrumb.Top")</a>
+    <span class="delimiter">@breadcrumbDelimiter</span>
+    </li>
+    @{ int position = 1; }
+    @foreach (var cat in Model.CategoryBreadcrumb)
+    {
+    var isLastCategory = cat.Id == Model.Id;
+    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+    @if (isLastCategory)
+    {
+    <strong class="current-item" itemprop="name">@cat.Name</strong>
+    <span itemprop="item" itemscope itemtype="http://schema.org/Thing">
+    <link itemprop="url" href="@Url.RouteUrl("Category", new {SeName = cat.SeName})" />
+    </span>
     }
-}*@
+    else
+    {
+    <a href="@Url.RouteUrl("Category", new { SeName = cat.SeName })" title="@cat.Name" itemprop="item">
+    <span itemprop="name">@cat.Name</span>
+    </a>
+    <span class="delimiter">@breadcrumbDelimiter</span>
+    }
+    <meta itemprop="position" content="@position" />
+    </li>
+    position++;
+    }
+    </ul>
+    </div>
+    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsAfterBreadcrumb, additionalData = Model })
+    }
+    }*@
 <div class="page category-page">
     <div class="page-body">
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsTop, additionalData = Model })
@@ -96,32 +96,32 @@
                                     </div>
                                 </div>
                             }
-                        </div>            
+                        </div>
                     </div>
                 </div>
             </div>
 
             @*<div class="category-grid sub-category-grid">
                 <div class="item-grid">
-                    @foreach (var item in Model.SubCategories)
-                    {
-                        <div class="item-box">
-                            <div class="sub-category-item">
-                                <h2 class="title">
-                                    <a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
-                                        @item.Name
-                                    </a>
-                                </h2>
-                                <div class="picture">
-                                    <a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
-                                        <img alt="@item.PictureModel.AlternateText" src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title" />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    }
+                @foreach (var item in Model.SubCategories)
+                {
+                <div class="item-box">
+                <div class="sub-category-item">
+                <h2 class="title">
+                <a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
+                @item.Name
+                </a>
+                </h2>
+                <div class="picture">
+                <a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">
+                <img alt="@item.PictureModel.AlternateText" src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title" />
+                </a>
                 </div>
-            </div>*@
+                </div>
+                </div>
+                }
+                </div>
+                </div>*@
         }
 
 
@@ -130,9 +130,11 @@
             <div class="container topSellersContainer">
                 <div class="row">
                     <div class="col-12">
-                        <h2>Top clothing sellers</h2>
+                        <h2>Top @Model.Name Sellers</h2>
+                        
+                        @await Component.InvokeAsync("TopCategoryVendor", new { categoryId = Model.Id, amount = 10 })
 
-                        <div class="topSellersSlide">
+                        @*<div class="topSellersSlide">
                             <div class="topSellerCard">
                                 <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>
                                 <div class="location">
@@ -223,7 +225,7 @@
                                     <a href="/en/emelie-lens"><span class="name">Emelie Lens</span>, <span class="age">31</span></a>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -256,9 +258,9 @@
                     <div class="col-6 categoryDesc">
                         <h1>Yoga pants</h1>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id erat eget lorem lacinia dignissim 
-                            a in lacus. Quisque sit amet arcu et augue faucibus dictum. Curabitur mattis rutrum scelerisque. Pellentesque 
-                            euismod, nibh in ultrices ultrices, eros ante scelerisque metus, laoreet fringilla leo erat et elit. In 
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id erat eget lorem lacinia dignissim
+                            a in lacus. Quisque sit amet arcu et augue faucibus dictum. Curabitur mattis rutrum scelerisque. Pellentesque
+                            euismod, nibh in ultrices ultrices, eros ante scelerisque metus, laoreet fringilla leo erat et elit. In
                             laoreet dui posuere sapien scelerisque iaculis.
                         </p>
                     </div>
@@ -509,19 +511,19 @@
         </div>
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeProductList, additionalData = Model })
 
-@*        @if (Model.Products.Count > 0)
-        {
+        @*        @if (Model.Products.Count > 0)
+            {
             <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
-                <div class="item-grid">
-                    @foreach (var product in Model.Products)
-                    {
-                        <div class="item-box">
-                            @await Html.PartialAsync("_ProductBox", product)
-                        </div>
-                    }
-                </div>
+            <div class="item-grid">
+            @foreach (var product in Model.Products)
+            {
+            <div class="item-box">
+            @await Html.PartialAsync("_ProductBox", product)
             </div>
-        }*@
+            }
+            </div>
+            </div>
+            }*@
         @{
             var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
         }
