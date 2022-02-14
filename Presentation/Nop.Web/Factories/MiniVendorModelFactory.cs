@@ -61,6 +61,35 @@ namespace Nop.Web.Factories
             return model;
         }
 
+        public TopMiniVendorModel PrepareCategoryMiniVendorModel(int categoryId)
+        {
+            //query to retrieve the top vendors of a specific category
+            var vendors = this._vendorService.GetCategoryVendors(categoryId);
+
+            TopMiniVendorModel model = new TopMiniVendorModel();
+            List<MiniVendorModel> miniVendorModels = new List<MiniVendorModel>();
+
+            foreach (var vendor in vendors)
+            {
+                MiniVendorModel miniVendorModel = new MiniVendorModel
+                {
+                    Id = vendor.Id,
+                    Name = vendor.Name,
+                    City = vendor.City,
+                    Country = vendor.Country.Name,
+                    PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId),
+                    Age = vendor.BirthDate != null ? GetAge(vendor.BirthDate) : 0,
+                    SeName = _urlRecordService.GetSeName(vendor)
+                };
+                miniVendorModels.Add(miniVendorModel);
+            }
+
+            model.MiniVendors = miniVendorModels;
+
+            return model;
+        }
+
+
         /// <summary>
         /// query to retriever the top (best) vendors of the home page
         /// </summary>

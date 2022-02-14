@@ -1,0 +1,21 @@
+﻿@model Nop.Web.Models.MiniVendors.TopMiniVendorModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+@if (Model.MiniVendors.Count > 0)
+{
+    @foreach (var vendor in Model.MiniVendors)
+    {
+        <div class="col-2">
+            <div class="topSellerCard">
+                <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })" class="miniVendorImg" style="background-image: url('@Url.Content(vendor.PictureUrl)');"></a>
+                <div class="location">
+                    <span class="city">@vendor.City</span>, <span class="country">@vendor.Country</span>
+                </div>
+                <div class="nameAge">
+                    <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><span class="name">@vendor.Name</span>, <span class="age">@vendor.Age</span></a>
+                </div>
+            </div>
+        </div>
+    }
+}

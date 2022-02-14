@@ -102,5 +102,7 @@ namespace Nop.Services.Vendors
         IEnumerable<VendorFaq> GetVendorFaqs(int vendorId, int amount);
 
         IEnumerable<Vendor> GetTopCategoryVendors(int categoryId, int amount);
+
+        IEnumerable<Vendor> GetCategoryVendors(int categoryId);
     }
 }

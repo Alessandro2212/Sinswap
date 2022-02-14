@@ -386,6 +386,19 @@ namespace Nop.Services.Vendors
                     .ToList();
         }
 
+        public IEnumerable<Vendor> GetCategoryVendors(int categoryId)
+        {
+            var vendorIds = _productCategoryRepository.Table
+                        .Where(pc => pc.CategoryId == categoryId)
+                        .Select(pc => pc.Product.VendorId)
+                        .Distinct()
+                        .ToList();
+
+            return _vendorRepository.Table
+                    .Where(v => vendorIds.Contains(v.Id))
+                    .ToList();
+        }
+
         #endregion
     }
 }
