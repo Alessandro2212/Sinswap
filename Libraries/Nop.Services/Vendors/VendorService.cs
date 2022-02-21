@@ -379,10 +379,12 @@ namespace Nop.Services.Vendors
             var vendorIds = query
                             .OrderByDescending(q => q.AmountSold)
                             .Take(amount)
+                            .OrderBy(q => Guid.NewGuid())
                             .Select(q => q.VendorId);
 
             return _vendorRepository.Table
                     .Where(v => vendorIds.Contains(v.Id))
+                    .OrderByDescending(v => v.IsPremium)
                     .ToList();
         }
 
