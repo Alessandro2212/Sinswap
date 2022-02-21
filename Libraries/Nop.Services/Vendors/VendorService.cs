@@ -401,6 +401,18 @@ namespace Nop.Services.Vendors
                     .ToList();
         }
 
+        public int GetNumberOfVendorsSellingCategory(int categoryId)
+        {
+            var numberOfVendors = _productCategoryRepository.Table
+                        .Where(pc => pc.CategoryId == categoryId)
+                        .Select(pc => pc.Product.VendorId)
+                        .Where(v => v > 0)
+                        .Distinct()
+                        .Count();
+
+            return numberOfVendors;
+        }
+
         #endregion
     }
 }

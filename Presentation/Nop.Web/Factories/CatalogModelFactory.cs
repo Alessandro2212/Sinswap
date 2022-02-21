@@ -391,12 +391,15 @@ namespace Nop.Web.Factories
                 _categoryService.GetAllCategoriesByParentCategoryId(category.Id)
                 .Select(x =>
                 {
+                    var numberOfVendorsForCategory = this._vendorService.GetNumberOfVendorsSellingCategory(x.Id);
+
                     var subCatModel = new CategoryModel.SubCategoryModel
                     {
                         Id = x.Id,
                         Name = _localizationService.GetLocalized(x, y => y.Name),
                         SeName = _urlRecordService.GetSeName(x),
-                        Description = _localizationService.GetLocalized(x, y => y.Description)
+                        Description = _localizationService.GetLocalized(x, y => y.Description),
+                        NumberOfVendorsForSubCategory = numberOfVendorsForCategory
                     };
 
                     //prepare picture model

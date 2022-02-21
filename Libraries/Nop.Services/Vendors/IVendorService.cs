@@ -104,5 +104,7 @@ namespace Nop.Services.Vendors
         IEnumerable<Vendor> GetTopCategoryVendors(int categoryId, int amount);
 
         IEnumerable<Vendor> GetCategoryVendors(int categoryId);
+
+        int GetNumberOfVendorsSellingCategory(int categoryId);
     }
 }
