@@ -1,6 +1,12 @@
 $(function () {
 
 
+    if ($('.service').length) {
+        $('.search').click(function (e) {
+            $('body').toggleClass('searchActive');
+        });
+    }
+
     if ($('#productModal').length) {
         //$('.categoryCard').click(function (e) {
         //    e.preventDefault();

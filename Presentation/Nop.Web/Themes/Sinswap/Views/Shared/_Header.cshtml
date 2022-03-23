@@ -1,4 +1,4 @@
-﻿<header>
+﻿<header class="headerHome">
     <div class="container-fluid">
 
         <div class="row">
@@ -31,6 +31,7 @@
                     <a href="#" class="btn btn-primary d-none d-md-block">Start selling</a>
                     <a href="@Url.RouteUrl("Register")" class="btn btn-primary">Signup</a>
                     <a href="@Url.RouteUrl("Login")" class="btn btn-primary">Login</a>
+                    <a href="#" class="btn search"><i class="fa fa-search" aria-hidden="true"></i></a>
                 </nav>
             </div>
         </div>
@@ -38,6 +39,18 @@
         <div class="row">
             <div class="col-12 payoffContainer" data-stellar-background-ratio="0.5">
                 <div class="payoff">We are all born sinners.</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 searchContainer">
+                <div class="searchTitle">Find what you're looking for...</div>
+                <form id="searchForm">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="searchInput" placeholder="What are you looking for (e.g. sellers or products)">
+                        <a href="#" class="searchSubmit"><i class="fa fa-search" aria-hidden="true"></i></a>
+                    </div>
+                </form>
             </div>
         </div>
 

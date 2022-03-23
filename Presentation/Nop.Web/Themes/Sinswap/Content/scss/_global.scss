@@ -34,6 +34,26 @@ body {
     display: flex;
 }
 
+.firstContainer {
+    margin-top: -225px;
+    transition: margin-top .25s ease-out;
+}
+
+.homepage .firstContainer {
+    margin-top: -100px;
+}
+
+.vendorPremium .firstContainer {
+    margin-top: 150px;
+}
+
+.searchActive {
+    .firstContainer {
+        margin-top: 0px;
+        transition: margin-top 0.25s ease-in;
+    }
+}
+
 .dividerContainer {
     padding: 0px 15px 90px 15px;
 
@@ -55,8 +75,6 @@ body {
 .bgGrey2 {
     background-color: $grey2;
 }
-
-
 // Slick
 .slick-prev,
 .slick-next {
@@ -73,8 +91,6 @@ body {
         transition: color 0.15s;
     }
 }
-
-
 // Links
 a.more {
     display: block;
@@ -91,7 +107,6 @@ a.more {
         transition: color 0.15s;
     }
 }
-
 // Category card
 .categoryCard {
     border-radius: 5px;
@@ -225,7 +240,6 @@ a.more {
         }
     }
 }
-
 
 
 // Extra extra large devices (large desktops, 1200px and up)

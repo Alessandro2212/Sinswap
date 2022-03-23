@@ -4,7 +4,6 @@
     position: relative;
     background-color: $white;
     border-radius: 5px;
-    margin-top: -100px;
     padding: 0 30px;
 
     h2 {
@@ -75,8 +74,6 @@
 }
 
 .sellersContainer {
-    margin-top: -225px;
-
     .categoryDesc {
         h1 {
             font-size: 42px;
@@ -88,6 +85,59 @@
             line-height: 40px;
             font-weight: 100;
             padding-right: 100px;
+        }
+    }
+
+    .pager {
+        height: 45px;
+        margin: 60px 0 120px 0;
+        text-align: center;
+
+        ul {
+            padding: 0px;
+            margin: 0px;
+            display: inline-block;
+
+            li {
+                list-style: none;
+                float: left;
+                margin: 0 2px;
+
+                a {
+                    display: block;
+                    color: $grey22;
+                    padding: 8px 12px;
+                    border-radius: 4px;
+                    font-weight: 500;
+                    transition: background-color 0.15s;
+
+                    &:hover {
+                        background-color: $grey6;
+                        transition: background-color 0.15s;
+                        text-decoration: none;
+                    }
+                }
+
+                &.current-page {
+                    padding: 8px 12px;
+                    color: $white;
+                    border-radius: 4px;
+                    background-color: $grey22;
+                }
+
+                &.next-page {
+                    a {
+                        padding: 8px 18px;
+                        background-color: $grey4;
+
+                        &:hover {
+                            background-color: $grey6;
+                            transition: background-color 0.15s;
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
         }
     }
 }

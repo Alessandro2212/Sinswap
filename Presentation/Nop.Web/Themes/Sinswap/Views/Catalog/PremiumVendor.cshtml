@@ -4,7 +4,7 @@
 @inject SeoSettings seoSettings
 
 @* Vendor Page == Shop Page *@
-<div class="container vendorInfoContainer">
+<div class="container firstContainer vendorInfoContainer">
     <div class="row">
 
         @await Component.InvokeAsync("VendorProductRating", new { vendorId = Model.Id })
