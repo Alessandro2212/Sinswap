@@ -643,15 +643,15 @@ namespace Nop.Web.Factories
         {
             var categoriesWithSubCategories = PrepareCategorySimpleModels();
             List<CategorySimpleModel> allCategories = new List<CategorySimpleModel>();
-            foreach(var category in categoriesWithSubCategories)
+            foreach (var category in categoriesWithSubCategories)
             {
-                if (category.SubCategories != null && category.SubCategories.Any()) 
+                if (category.SubCategories != null && category.SubCategories.Any())
                 {
                     allCategories.AddRange(category.SubCategories);
                 }
                 allCategories.Add(category);
             }
-            
+
             return allCategories.OrderByDescending(c => c.SoldItems).Take(amount).ToList();
         }
 
@@ -1453,6 +1453,76 @@ namespace Nop.Web.Factories
             model.PagingFilteringContext.LoadPagedList(products);
             return model;
         }
+
+
+        /// <summary>
+        /// generic search. if nothing found route to the search-model search
+        /// </summary>
+        public string GenericSearch(SearchModel model)
+        {
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
+
+            var searchTerms = model.q;
+            if (searchTerms == null)
+                searchTerms = "";
+            searchTerms = searchTerms.Trim();
+
+            // search in categories and subcategories
+            //all categories
+            var allCategories = _categoryService.GetAllCategories(storeId: _storeContext.CurrentStore.Id);
+            if (allCategories.Any())
+            {
+                foreach (var category in allCategories)
+                {
+                    var name = category.Name.Trim();
+                    if (name.ToLower() == searchTerms.ToLower())
+                    {
+                        var categoryUrl = _urlRecordService.GetSeName(category);
+                        return categoryUrl;
+                    }
+                }
+            }
+
+            // search in vendors
+            var vendors = _vendorService.GetAllVendors();
+            if (vendors.Any())
+            {
+                foreach (var vendor in vendors)
+                {
+                    var name = vendor.Name.Trim();
+                    if (name.ToLower() == searchTerms.ToLower())
+                    {
+                        var vendorUrl = _urlRecordService.GetSeName(vendor);
+                        return vendorUrl;
+                    }
+                }
+            }
+
+            // search in products
+            //products
+            var products = _productService.SearchProducts(
+                storeId: _storeContext.CurrentStore.Id,
+                visibleIndividuallyOnly: true,
+                keywords: searchTerms);
+
+            if (products.ToList().Any())
+            {
+                foreach (var product in products)
+                {
+                    var name = product.Name.Trim();
+                    if (name.ToLower() == searchTerms.ToLower())
+                    {
+                        var productUrl = _urlRecordService.GetSeName(product);
+                        return productUrl;
+                    }
+                }
+            }
+
+            // nothing has been found
+            return string.Empty;
+        }
+
 
         /// <summary>
         /// Prepare search box model

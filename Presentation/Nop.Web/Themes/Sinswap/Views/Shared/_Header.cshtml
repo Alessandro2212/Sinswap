@@ -45,12 +45,13 @@
         <div class="row">
             <div class="col-12 searchContainer">
                 <div class="searchTitle">Find what you're looking for...</div>
-                <form id="searchForm">
+                @await Component.InvokeAsync("SearchBox")
+                @*<form id="searchForm">
                     <div class="form-group">
                         <input type="text" class="form-control" id="searchInput" placeholder="What are you looking for (e.g. sellers or products)">
                         <a href="#" class="searchSubmit"><i class="fa fa-search" aria-hidden="true"></i></a>
                     </div>
-                </form>
+                </form>*@
             </div>
         </div>
 

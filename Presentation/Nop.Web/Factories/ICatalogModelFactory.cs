@@ -201,6 +201,8 @@ namespace Nop.Web.Factories
         /// <returns>Search box model</returns>
         SearchBoxModel PrepareSearchBoxModel();
 
+        string GenericSearch(SearchModel model);
+
         #endregion
     }
 }
