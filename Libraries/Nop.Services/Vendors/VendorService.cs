@@ -126,6 +126,13 @@ namespace Nop.Services.Vendors
             return vendors;
         }
 
+        public virtual IPagedList<Vendor> GetAllVendorsForCategory(int categoryId, string name = "", int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false)
+        {
+            var categoryVendors = this.GetCategoryVendors(categoryId);
+            var vendors = new PagedList<Vendor>(categoryVendors.AsQueryable(), pageIndex, pageSize);
+            return vendors;
+        }
+
         /// <summary>
         /// Get All Top 'amount' Vendors (vendors having the highes average reviews)
         /// </summary>

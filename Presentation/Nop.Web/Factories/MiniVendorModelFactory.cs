@@ -63,9 +63,14 @@ namespace Nop.Web.Factories
 
         public TopMiniVendorModel PrepareCategoryMiniVendorModel(int categoryId)
         {
-            //query to retrieve the top vendors of a specific category
+            //query to retrieve the top vendors of a specific category            
             var vendors = this._vendorService.GetCategoryVendors(categoryId);
 
+            return this.PrepareTopMiniVendorModel(vendors);
+        }
+
+        public TopMiniVendorModel PrepareTopMiniVendorModel(IEnumerable<Vendor> vendors)
+        {
             TopMiniVendorModel model = new TopMiniVendorModel();
             List<MiniVendorModel> miniVendorModels = new List<MiniVendorModel>();
 
@@ -88,7 +93,6 @@ namespace Nop.Web.Factories
 
             return model;
         }
-
 
         /// <summary>
         /// query to retriever the top (best) vendors of the home page

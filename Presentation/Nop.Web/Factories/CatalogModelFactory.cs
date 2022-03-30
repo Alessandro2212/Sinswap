@@ -62,6 +62,7 @@ namespace Nop.Web.Factories
         private readonly MediaSettings _mediaSettings;
         private readonly VendorSettings _vendorSettings;
         private readonly IRepository<VendorPictureRecord> _vendorPictureRecordRepository;
+        private readonly IMiniVendorModelFactory _minVendorModelFactory;
 
         #endregion
 
@@ -95,7 +96,8 @@ namespace Nop.Web.Factories
             IWorkContext workContext,
             MediaSettings mediaSettings,
             VendorSettings vendorSettings,
-            IRepository<VendorPictureRecord> vendorPictureRecordRepository)
+            IRepository<VendorPictureRecord> vendorPictureRecordRepository,
+            IMiniVendorModelFactory minVendorModelFactory)
         {
             this._blogSettings = blogSettings;
             this._catalogSettings = catalogSettings;
@@ -126,6 +128,7 @@ namespace Nop.Web.Factories
             this._mediaSettings = mediaSettings;
             this._vendorSettings = vendorSettings;
             this._vendorPictureRecordRepository = vendorPictureRecordRepository;
+            this._minVendorModelFactory = minVendorModelFactory;
         }
 
         #endregion
@@ -479,7 +482,17 @@ namespace Nop.Web.Factories
                 pageSize: command.PageSize);
             model.Products = _productModelFactory.PrepareProductOverviewModels(products).ToList();
 
-            model.PagingFilteringContext.LoadPagedList(products);
+            // make pagination based on products for that category
+            //model.PagingFilteringContext.LoadPagedList(products);
+
+            //vendors
+            var vendors = _vendorService.GetAllVendorsForCategory(categoryId: category.Id, pageIndex: command.PageNumber - 1,
+                pageSize: command.PageSize);
+
+            // make pagination based on vendors for that category
+            model.PagingFilteringContext.LoadPagedList(vendors);
+
+            model.MiniVendorsForCategory = this._minVendorModelFactory.PrepareTopMiniVendorModel(vendors.ToList());
 
             //specs
             model.PagingFilteringContext.SpecificationFilter.PrepareSpecsFilters(alreadyFilteredSpecOptionIds,

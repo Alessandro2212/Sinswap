@@ -1,4 +1,6 @@
-﻿using Nop.Web.Models.MiniVendors;
+﻿using Nop.Core.Domain.Vendors;
+using Nop.Web.Models.MiniVendors;
+using System.Collections.Generic;
 
 namespace Nop.Web.Factories
 {
@@ -12,5 +14,6 @@ namespace Nop.Web.Factories
 
         TopMiniVendorModel PrepareCategoryMiniVendorModel(int categoryId);
 
+        TopMiniVendorModel PrepareTopMiniVendorModel(IEnumerable<Vendor> vendors);
     }
 }

@@ -267,7 +267,7 @@
                         </p>
                     </div>
 
-                    @await Component.InvokeAsync("CategoryVendor", new { categoryId = Model.Id })
+                    @await Component.InvokeAsync("CategoryVendor", new { categoryId = Model.Id, modelAlreadyReady = Model.MiniVendorsForCategory })
                     @*<div class="col-2">
                         <div class="topSellerCard">
                         <a href="/en/emelie-lens" class="miniVendorImg" style="background-image: url('http://localhost:15536/images/thumbs/0000004_emelie-lens.png');"></a>

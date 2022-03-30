@@ -2,6 +2,7 @@
 using Nop.Core.Domain.Vendors;
 using Nop.Web.Factories;
 using Nop.Web.Framework.Components;
+using Nop.Web.Models.MiniVendors;
 
 namespace Nop.Web.Components
 {
@@ -17,10 +18,15 @@ namespace Nop.Web.Components
             this._vendorSettings = vendorSettings;
         }
 
-        public IViewComponentResult Invoke(int categoryId)
+        public IViewComponentResult Invoke(int categoryId, TopMiniVendorModel modelAlreadyReady = null)
         {
             if (_vendorSettings.VendorsBlockItemsToDisplay == 0)
                 return Content("");
+
+            if (modelAlreadyReady != null)
+            {
+                return View(modelAlreadyReady);
+            }
 
             var model = _miniVendorModelFactory.PrepareCategoryMiniVendorModel(categoryId);
 

@@ -33,6 +33,8 @@ namespace Nop.Services.Vendors
         /// <returns>Vendors</returns>
         IPagedList<Vendor> GetAllVendors(string name = "", int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
 
+        IPagedList<Vendor> GetAllVendorsForCategory(int categoryId, string name = "", int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
+
         /// <summary>
         /// Gets vendors
         /// </summary>
