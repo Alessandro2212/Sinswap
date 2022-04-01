@@ -95,6 +95,10 @@ header {
                 top: 0px;
                 right: 0px;
                 color: $black;
+                background-color: transparent;
+                border: 0 none;
+                cursor: pointer;
+                outline: none;
                 opacity: .5;
                 transition: opacity .15s;
 
