@@ -1,8 +1,15 @@
 ﻿@model ProductDetailsModel.AddToCartModel
 @using Nop.Core.Domain.Orders
+@{
+    //prepare "Add to cart" AJAX link
+    var addtocartlink = "";
+    var shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
+    var quantity = 1;
+    addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.ProductId, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity });
+}
 @if (Model.UpdatedShoppingCartItemId > 0)
 {
-    <input asp-for="UpdatedShoppingCartItemId" type="hidden"/>
+    <input asp-for="UpdatedShoppingCartItemId" type="hidden" />
 }
 @if (!Model.DisableBuyButton || Model.CustomerEntersPrice)
 {
@@ -27,26 +34,26 @@
         @if (!Model.DisableBuyButton)
         {
             <div class="add-to-cart-panel">
-@*                <label asp-for="EnteredQuantity" asp-postfix=":" class="qty-label"></label>
-                @if (Model.AllowedQuantities.Count > 0)
-                {
+                @*                <label asp-for="EnteredQuantity" asp-postfix=":" class="qty-label"></label>
+                    @if (Model.AllowedQuantities.Count > 0)
+                    {
                     <select asp-for="EnteredQuantity" asp-items="Model.AllowedQuantities" class="qty-dropdown"></select>
-                }
-                else
-                {
+                    }
+                    else
+                    {
                     <input asp-for="EnteredQuantity" class="qty-input" type="text"/>
                     <script asp-location="Footer">
-                        //when a customer clicks 'Enter' button we submit the "add to cart" button (if visible)
-                        $(document).ready(function() {
-                            $("#@Html.IdFor(model => model.EnteredQuantity)").on("keydown", function(event) {
-                                if (event.keyCode == 13) {
-                                    $("#add-to-cart-button-@Model.ProductId").trigger("click");
-                                    return false;
-                                }
-                            });
-                        });
+                    //when a customer clicks 'Enter' button we submit the "add to cart" button (if visible)
+                    $(document).ready(function() {
+                    $("#@Html.IdFor(model => model.EnteredQuantity)").on("keydown", function(event) {
+                    if (event.keyCode == 13) {
+                    $("#add-to-cart-button-@Model.ProductId").trigger("click");
+                    return false;
+                    }
+                    });
+                    });
                     </script>
-                }*@
+                    }*@
                 @{
                     var addToCartText = "";
                     if (Model.UpdatedShoppingCartItemId > 0 && Model.UpdateShoppingCartItemType.HasValue && Model.UpdateShoppingCartItemType.Value == ShoppingCartType.ShoppingCart)
@@ -65,7 +72,8 @@
                             addToCartText = T("ShoppingCart.PreOrder").Text;
                         }
                     }
-                    <input type="button" id="add-to-cart-button-@Model.ProductId" class="button-1 add-to-cart-button btn btn-order" value="@addToCartText" data-productid="@Model.ProductId" onclick="AjaxCart.addproducttocart_details('@Url.RouteUrl("AddProductToCart-Details", new {productId = Model.ProductId, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})', '#product-details-form');return false;"/>
+                    //<input type="button" id="add-to-cart-button-@Model.ProductId" class="button-1 add-to-cart-button btn btn-order" value="@addToCartText" data-productid="@Model.ProductId" onclick="AjaxCart.addproducttocart_details('@Url.RouteUrl("AddProductToCart-Details", new {productId = Model.ProductId, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})', '#product-details-form');return false;" />
+                    <input type="button" id="add-to-cart-button-@Model.ProductId" class="button-1 add-to-cart-button btn btn-order" value="@addToCartText" data-productid="@Model.ProductId" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;" />
                 }
             </div>
             if (!string.IsNullOrEmpty(Model.PreOrderAvailabilityStartDateTimeUserTime))

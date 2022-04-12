@@ -28,6 +28,7 @@
 
             <div class="col-12 col-md-4 serviceMenu">
                 <nav class="service">
+                    @await Component.InvokeAsync("FlyoutShoppingCart")
                     <a href="#" class="btn btn-primary d-none d-md-block">Start selling</a>
                     <a href="@Url.RouteUrl("Register")" class="btn btn-primary">Signup</a>
                     <a href="@Url.RouteUrl("Login")" class="btn btn-primary">Login</a>

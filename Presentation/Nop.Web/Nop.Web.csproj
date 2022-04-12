@@ -40,6 +40,10 @@
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
     <Content Remove="compilerconfig.json" />
     <None Remove="Themes\Sinswap\Content\css\styles.scss" />
+    <None Remove="Themes\Sinswap\Content\js\public.accordion.js" />
+    <None Remove="Themes\Sinswap\Content\js\public.ajaxcart.js" />
+    <None Remove="Themes\Sinswap\Content\js\public.common.js" />
+    <None Remove="Themes\Sinswap\Content\js\public.onepagecheckout.js" />
     <None Remove="Themes\Sinswap\Content\js\vendor\stellar\stellar.js" />
     <None Remove="Themes\Sinswap\Content\scss\components\_aboutUs.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_featured.scss" />
@@ -68,6 +72,21 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Themes\Sinswap\Content\js\public.accordion.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\public.ajaxcart.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\public.common.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\public.onepagecheckout.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
   </ItemGroup>
 
   <!-- This target execute after "Build" target.
