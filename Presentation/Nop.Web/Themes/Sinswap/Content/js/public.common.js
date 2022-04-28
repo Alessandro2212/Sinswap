@@ -120,7 +120,10 @@ function displayBarNotification(message, messagetype, timeout) {
         .on('mouseenter', function ()
             {
                 clearTimeout(barNotificationTimeout);
-            });
+        });
+
+    // here you can show the message inside the same modal as the one for buying a product in vendor page
+    $('#productModal').find('.modal-body').html($('#notifications').html());
 
     $('#bar-notification .close').off('click').on('click', function () {
         $('#bar-notification').fadeOut('slow');

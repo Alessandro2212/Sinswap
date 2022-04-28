@@ -2,7 +2,10 @@
     Layout = "_Root.Head";
 }
 
-
+@*probably has to be invisible so we can show the notification in a modal*@
+<div id="notifications">
+     @await Html.PartialAsync("_Notifications")
+</div>
 @*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.BodyStartHtmlTagAfter })
     @await Html.PartialAsync("_Notifications")
     @await Html.PartialAsync("_JavaScriptDisabledWarning")
