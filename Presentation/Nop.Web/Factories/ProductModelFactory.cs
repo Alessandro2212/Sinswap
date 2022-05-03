@@ -1199,6 +1199,8 @@ namespace Nop.Web.Factories
                 Gtin = product.Gtin,
                 ManageInventoryMethod = product.ManageInventoryMethod,
                 StockAvailability = _productService.FormatStockMessage(product, ""),
+                StockQuantity = product.StockQuantity,
+                AdditionalShippingCharge = product.AdditionalShippingCharge,
                 HasSampleDownload = product.IsDownload && product.HasSampleDownload,
                 DisplayDiscontinuedMessage = !product.Published && _catalogSettings.DisplayDiscontinuedMessageForUnpublishedProducts
             };

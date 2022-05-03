@@ -40,6 +40,31 @@ var AjaxCart = {
         });
     },
 
+    //add a product to the cart/wishlist from the catalog pages
+    addproducttocart_catalog_with_amount: function (urladd) {
+        if (this.loadWaiting != false) {
+            return;
+        }
+        this.setLoadWaiting(true);
+
+        var amount = $('#cart-product-amount').val();
+
+        if (amount > 0) {
+            var lastIndex = urladd.lastIndexOf('/');
+            var finalUrl = urladd.substring(0, lastIndex);
+            urladd = finalUrl + "/" + amount;
+        }
+
+        $.ajax({
+            cache: false,
+            url: urladd,
+            type: 'post',
+            success: this.success_process,
+            complete: this.resetLoadWaiting,
+            error: this.ajaxFailure
+        });
+    },
+
     //add a product to the cart/wishlist from the product details page
     addproducttocart_details: function (urladd, formselector) {
         if (this.loadWaiting != false) {

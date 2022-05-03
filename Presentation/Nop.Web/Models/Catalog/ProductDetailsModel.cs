@@ -74,6 +74,10 @@ namespace Nop.Web.Models.Catalog
 
         public string StockAvailability { get; set; }
 
+        public int StockQuantity { get; set; }
+
+        public decimal AdditionalShippingCharge { get; set; }
+
         public bool DisplayBackInStockSubscription { get; set; }
 
         public bool EmailAFriendEnabled { get; set; }
