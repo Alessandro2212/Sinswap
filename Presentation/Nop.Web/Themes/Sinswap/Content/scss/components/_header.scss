@@ -107,6 +107,21 @@ header {
                     transition: opacity .15s;
                 }
             }
+
+            a {
+                position: absolute;
+                display: block;
+                right: 20px;
+                bottom: -30px;
+                color: $white;
+                opacity: 0.75;
+                
+                &:hover {
+                    text-decoration: none;
+                    opacity: 1;
+                    transition: opacity .15s;
+                }
+            }
         }
     }
 
@@ -174,18 +189,37 @@ nav {
         }
     }
 
-    &.service .search {
+    &.service .icon {
         color: $white;
         background-color: rgba(255, 255, 255, 0);
+        font-size: 22px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        position: relative;
 
         &:hover {
             background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: 0px;
+            font-size: 10px;
+            font-weight: 100;
+            padding: 4px 5px;
+            background-color: $sales;
         }
     }
 
     .btn:focus,
     .btn.focus {
         box-shadow: none;
+    }
+
+    .cartFoldout {
+        display: none;
+        position: absolute;
     }
 }
 

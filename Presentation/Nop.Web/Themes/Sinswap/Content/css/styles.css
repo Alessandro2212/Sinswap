@@ -572,6 +572,14 @@ a.more:hover {
 .categoryCard .category a {
   color: #fff;
 }
+.categoryCard .category a span {
+  font-weight: 500;
+  font-size: 14px;
+  top: -7px;
+  opacity: 0.75;
+  position: relative;
+  display: inline-block;
+}
 .categoryCard .category a:hover {
   text-decoration: none;
 }
@@ -763,6 +771,19 @@ header .searchContainer #searchForm .searchSubmit:hover {
   opacity: 1;
   transition: opacity 0.15s;
 }
+header .searchContainer #searchForm a {
+  position: absolute;
+  display: block;
+  right: 20px;
+  bottom: -30px;
+  color: #fff;
+  opacity: 0.75;
+}
+header .searchContainer #searchForm a:hover {
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity 0.15s;
+}
 header.headerHome .searchContainer {
   padding-top: 30px;
 }
@@ -812,16 +833,33 @@ nav.main .btn:hover, nav.service .btn:hover, nav.vendorMenu .btn:hover {
   background-color: rgba(0, 0, 0, 0.1);
   transition: background-color 0.15s;
 }
-nav.service .search {
+nav.service .icon {
   color: #fff;
   background-color: rgba(255, 255, 255, 0);
+  font-size: 22px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  position: relative;
 }
-nav.service .search:hover {
+nav.service .icon:hover {
   background-color: rgba(255, 255, 255, 0.1);
+}
+nav.service .icon .badge {
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  font-size: 10px;
+  font-weight: 100;
+  padding: 4px 5px;
+  background-color: #10bc3a;
 }
 nav .btn:focus,
 nav .btn.focus {
   box-shadow: none;
+}
+nav .cartFoldout {
+  display: none;
+  position: absolute;
 }
 
 @media (max-width: 992px) {
