@@ -73,7 +73,8 @@
                         }
                     }
                     //@Html.TextBoxFor(Model=>Model.EnteredQuantity, new { @id = "cart-product-amount", @placeholder="Enter amount" })
-                    <input type="text" id="cart-product-amount" placeholder="Enter amount"/>
+                    //TODO: enable line below after presentation
+                    //<input type="text" id="cart-product-amount" placeholder="Enter amount"/> 
                     //<input type="button" id="add-to-cart-button-@Model.ProductId" class="button-1 add-to-cart-button btn btn-order" value="@addToCartText" data-productid="@Model.ProductId" onclick="AjaxCart.addproducttocart_details('@Url.RouteUrl("AddProductToCart-Details", new {productId = Model.ProductId, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})', '#product-details-form');return false;" />
                     <input type="button" id="add-to-cart-button-@Model.ProductId" class="button-1 add-to-cart-button btn btn-order" value="@addToCartText" data-productid="@Model.ProductId" onclick="AjaxCart.addproducttocart_catalog_with_amount('@addtocartlink');return false;" />
                 }

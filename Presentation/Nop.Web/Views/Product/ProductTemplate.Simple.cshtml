@@ -139,12 +139,12 @@
                             </div>
                         </div>
                         @{
-                            @if (this.User.Identity.IsAuthenticated)
-                            {
-                                var dataDictAddToCart = new ViewDataDictionary(ViewData);
-                                dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
-                                @await Html.PartialAsync("_AddToCart", Model.AddToCart, dataDictAddToCart)
-                            }
+                            //@if (this.User.Identity.IsAuthenticated)
+                            //{
+                            var dataDictAddToCart = new ViewDataDictionary(ViewData);
+                            dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
+                            @await Html.PartialAsync("_AddToCart", Model.AddToCart, dataDictAddToCart)
+                            //}
                         }
                     </div>
 

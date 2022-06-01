@@ -1,5 +1,6 @@
 ﻿@model VendorModel
 @using Nop.Core.Domain.Seo
+@using System.Text.RegularExpressions
 @inject Nop.Core.IWebHelper webHelper
 @inject SeoSettings seoSettings
 
@@ -81,6 +82,11 @@
 
                     <div class="col-12 col-lg-6 personalContainer">
                         <p>
+                            @{
+                                var text = Model.Description;
+                                Model.Description = Regex.Replace(text, "<.*?>", String.Empty);
+                            }
+                            
                             @Model.Description
                         </p>
                     </div>
@@ -90,7 +96,6 @@
                         </blockquote>
                         <div class="quoteAuthor">- @Model.Name -</div>
                     </div>
-
                 </div>
             </div>
         </div>
