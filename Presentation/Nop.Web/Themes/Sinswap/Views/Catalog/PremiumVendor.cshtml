@@ -82,12 +82,7 @@
 
                     <div class="col-12 col-lg-6 personalContainer">
                         <p>
-                            @{
-                                var text = Model.Description;
-                                Model.Description = Regex.Replace(text, "<.*?>", String.Empty);
-                            }
-                            
-                            @Model.Description
+                            @Html.Raw(Model.Description)
                         </p>
                     </div>
                     <div class="col-12 col-lg-6 quoteContainer">
