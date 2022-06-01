@@ -147,6 +147,7 @@
 
 
 <a id="messageboard"></a>
+
 @await Component.InvokeAsync("VendorStory", new { vendorId = Model.Id, vendorSeName=Model.SeName, amount = 10 })
 
 @await Component.InvokeAsync("VendorFaq", new { vendorId = Model.Id, amount = 3 })

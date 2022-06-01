@@ -49,6 +49,8 @@ namespace Nop.Services.Catalog
             DisplayOrder = c.DisplayOrder;
             CreatedOnUtc = c.CreatedOnUtc;
             UpdatedOnUtc = c.UpdatedOnUtc;
+            SoldItems = c.SoldItems;
+            TotalRatings = c.TotalRatings;
         }
 
         [JsonIgnore]
