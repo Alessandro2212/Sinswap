@@ -1,6 +1,8 @@
 ﻿{
-  "DataProvider": "sqlserver",
-  //"DataConnectionString": "Data Source=LAPTOP-7SMMD52P\\SQLEXPRESS;Initial Catalog=SinSwap;Integrated Security=False;Persist Security Info=False;User ID=aless;Password=Alessandro22121987!",
+  //"DataConnectionString": "Data Source=.\\MSSQLSERVER2017;Initial Catalog=SinSwap;Integrated Security=False;Persist Security Info=False;User ID=sinswap_admin;Password=v3P8z$0o;MultipleActiveResultSets=True",
   "DataConnectionString": "Server=207.246.94.224;Database=SinSwap;User Id=sinswap_admin;Password=v3P8z$0o",
+  //"DataConnectionString": "Server=.\\MSSQLSERVER2017;Database=SinSwap;User Id=sinswap_admin;Password=v3P8z$0o",
+  //"DataConnectionString": "Data Source=MSSQLSERVER2017\\SinSwap;Initial Catalog=SinSwap;Integrated Security=True;User ID=sinswap_admin;Password=v3P8z$0o;MultipleActiveResultSets=True",
+  "DataProvider": "sqlserver",
   "RawDataSettings": {}
 }
