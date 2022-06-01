@@ -2,14 +2,14 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-12 col-md-0 col-lg-3 logoContainer">
+            <div class="col-12 col-md-4 logoContainer">
                 <h1>sinswap</h1>
                 <a href="@Url.RouteUrl("HomePage")">
                     <img class="logo" title="Sinning is Winning" alt="Sinswap" src="/Themes/Sinswap/content/images/logoHome.svg">
                 </a>
             </div>
 
-            <div class="col-12 col-md-7 col-lg-6">
+            <div class="col-12 col-md-4">
                 <nav class="main">
                     <a href="/en/clothing" class="menuLink">Clothing</a>
                     <a href="/en/food" class="menuLink">Food</a>
@@ -20,7 +20,7 @@
                 </nav>
             </div>
 
-            <div class="col-12 col-md-5 col-lg-3 serviceMenu">
+            <div class="col-12 col-md-4 serviceMenu">
                 <nav class="service">
                     @if (this.User.Identity.IsAuthenticated)
                     {
@@ -43,13 +43,13 @@
             </div>
         </div>
 
-        <div class="row">
+@*        <div class="row">
             <div class="col-12 searchContainer">
                 <div class="searchTitle">Find what you're looking for...</div>
                 @await Component.InvokeAsync("SearchBox")
             </div>
         </div>
-
+*@
     </div>
 </header>
 
