@@ -24,10 +24,13 @@
 
         <div class="container firstContainer sellersContainer">
             <div class="row">
+                @{//change this component to show the most popular vendors, the pagination is handled outside the component with Html.Pager
+                 }
                 @await Component.InvokeAsync("CategoryVendor", new { categoryId = Model.Id, modelAlreadyReady = Model.MiniVendorsForCategory })
             </div>
 
             @{
+                
                 var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
             }
 
