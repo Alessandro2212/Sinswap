@@ -486,8 +486,11 @@ namespace Nop.Web.Factories
             //model.PagingFilteringContext.LoadPagedList(products);
 
             //vendors
+            //var vendors = _vendorService.GetAllVendorsForCategory(categoryId: category.Id, pageIndex: command.PageNumber - 1,
+            //    pageSize: command.PageSize);
+
             var vendors = _vendorService.GetAllVendorsForCategory(categoryId: category.Id, pageIndex: command.PageNumber - 1,
-                pageSize: command.PageSize);
+                pageSize: 9);
 
             // make pagination based on vendors for that category
             model.PagingFilteringContext.LoadPagedList(vendors);

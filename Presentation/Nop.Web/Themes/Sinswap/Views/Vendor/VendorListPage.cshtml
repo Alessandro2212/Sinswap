@@ -1,0 +1,42 @@
+﻿@model CategoryModel //use vendorList model
+ 
+@using Nop.Core.Domain.Common
+@using Nop.Core.Domain.Seo
+@using Nop.Web.Framework.Infrastructure
+@using System.Text.RegularExpressions;
+@inject Nop.Core.IWebHelper webHelper
+@inject SeoSettings seoSettings
+@inject CommonSettings commonSettings
+@{
+    Layout = "_ColumnsTwo";
+
+    //title
+    Html.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    //meta
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+    //page class
+    Html.AppendPageCssClassParts("vendorList");
+}
+
+<div class="page category-page">
+    <div class="page-body">
+
+        <div class="container firstContainer sellersContainer">
+            <div class="row">
+                @await Component.InvokeAsync("CategoryVendor", new { categoryId = Model.Id, modelAlreadyReady = Model.MiniVendorsForCategory })
+            </div>
+
+            @{
+                var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
+            }
+
+            @if (!pager.IsEmpty())
+            {
+                <div class="pager">
+                    @pager
+                </div>
+            }
+        </div>
+    </div>
+</div>
