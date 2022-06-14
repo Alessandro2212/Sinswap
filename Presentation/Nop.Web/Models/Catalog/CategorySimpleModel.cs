@@ -27,6 +27,8 @@ namespace Nop.Web.Models.Catalog
 
         public PictureModel PictureModel { get; set; }
 
+        public string ParentCategoryName { get; set; }
+
         public List<CategorySimpleModel> SubCategories { get; set; }
     }
 }

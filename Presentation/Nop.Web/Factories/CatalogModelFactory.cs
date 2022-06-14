@@ -660,6 +660,10 @@ namespace Nop.Web.Factories
             {
                 if (category.SubCategories != null && category.SubCategories.Any())
                 {
+                    foreach(var cat in category.SubCategories)
+                    {
+                        cat.ParentCategoryName = category.Name;
+                    }
                     allCategories.AddRange(category.SubCategories);
                 }
                 allCategories.Add(category);
@@ -676,6 +680,10 @@ namespace Nop.Web.Factories
             {
                 if (category.SubCategories != null && category.SubCategories.Any())
                 {
+                    foreach (var cat in category.SubCategories)
+                    {
+                        cat.ParentCategoryName = category.Name;
+                    }
                     allCategories.AddRange(category.SubCategories);
                 }
                 allCategories.Add(category);
