@@ -126,6 +126,36 @@ namespace Nop.Services.Vendors
             return vendors;
         }
 
+        public virtual IPagedList<Vendor> GetAllMostPopularVendors(string name = "", int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false)
+        {
+            var amountParameter = _dataProvider.GetInt32Parameter("Amount", int.MaxValue);
+            var query = _dbContext.EntityFromSql<Vendor>("GetMostPopularVendors", amountParameter);
+            if (!string.IsNullOrWhiteSpace(name))
+                query = query.Where(v => v.Name.Contains(name));
+            if (!showHidden)
+                query = query.Where(v => v.Active);
+
+            query = query.Where(v => !v.Deleted);
+
+            var vendors = new PagedList<Vendor>(query, pageIndex, pageSize);
+            return vendors;
+        }
+
+        public virtual IPagedList<Vendor> GetAllBestVendors(string name = "", int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false)
+        {
+            var amountParameter = _dataProvider.GetInt32Parameter("VendorAmount", int.MaxValue);
+            var query = _dbContext.EntityFromSql<Vendor>("GetTopXVendors", amountParameter);
+            if (!string.IsNullOrWhiteSpace(name))
+                query = query.Where(v => v.Name.Contains(name));
+            if (!showHidden)
+                query = query.Where(v => v.Active);
+
+            query = query.Where(v => !v.Deleted);
+
+            var vendors = new PagedList<Vendor>(query, pageIndex, pageSize);
+            return vendors;
+        }
+
         public virtual IPagedList<Vendor> GetAllVendorsForCategory(int categoryId, string name = "", int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false)
         {
             var categoryVendors = this.GetCategoryVendors(categoryId);

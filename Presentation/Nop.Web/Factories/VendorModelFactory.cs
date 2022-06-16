@@ -10,7 +10,9 @@ using Nop.Core.Domain.Vendors;
 using Nop.Services.Common;
 using Nop.Services.Localization;
 using Nop.Services.Media;
+using Nop.Services.Seo;
 using Nop.Services.Vendors;
+using Nop.Web.Models.MiniVendors;
 using Nop.Web.Models.Vendors;
 
 namespace Nop.Web.Factories
@@ -32,6 +34,7 @@ namespace Nop.Web.Factories
         private readonly IWorkContext _workContext;
         private readonly MediaSettings _mediaSettings;
         private readonly VendorSettings _vendorSettings;
+        private readonly IUrlRecordService _urlRecordService;
 
         #endregion
 
@@ -46,7 +49,8 @@ namespace Nop.Web.Factories
             IVendorAttributeService vendorAttributeService,
             IWorkContext workContext,
             MediaSettings mediaSettings,
-            VendorSettings vendorSettings)
+            VendorSettings vendorSettings,
+            IUrlRecordService urlRecordService)
         {
             this._captchaSettings = captchaSettings;
             this._commonSettings = commonSettings;
@@ -58,6 +62,7 @@ namespace Nop.Web.Factories
             this._workContext = workContext;
             this._mediaSettings = mediaSettings;
             this._vendorSettings = vendorSettings;
+            this._urlRecordService = urlRecordService;
         }
 
         #endregion
@@ -224,6 +229,48 @@ namespace Nop.Web.Factories
             model.VendorAttributes = PrepareVendorAttributes(overriddenVendorAttributesXml);
 
             return model;
+        }
+
+        public virtual VendorListModel PrepareVendorListModel(IPagedList<Vendor> vendors, VendorPagingFilteringModel command)
+        {
+            if (vendors == null)
+                throw new ArgumentNullException(nameof(vendors));
+
+            VendorListModel model = new VendorListModel();
+            List<MiniVendorModel> miniVendorModels = new List<MiniVendorModel>();
+
+            foreach (var vendor in vendors)
+            {
+                MiniVendorModel miniVendorModel = new MiniVendorModel
+                {
+                    Id = vendor.Id,
+                    Name = vendor.Name,
+                    City = vendor.City,
+                    Country = vendor.Country.Name,
+                    PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId),
+                    Age = vendor.BirthDate != null ? GetAge(vendor.BirthDate) : 0,
+                    SeName = _urlRecordService.GetSeName(vendor)
+                };
+                miniVendorModels.Add(miniVendorModel);
+            }
+
+            model.MiniVendors = miniVendorModels;
+            model.PagingFilteringContext = command == null ? new VendorPagingFilteringModel() : command;
+
+            model.PagingFilteringContext.LoadPagedList(vendors);
+
+            return model;
+        }
+
+        private int GetAge(DateTime birthDay)
+        {
+            int age = 18;
+
+            age = DateTime.Today.Year - birthDay.Year;
+            // Go back to the year the person was born in case of a leap year
+            if (birthDay.Date > DateTime.Today.AddYears(-age)) age--;
+
+            return age;
         }
 
         #endregion

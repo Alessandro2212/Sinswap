@@ -1,4 +1,6 @@
-﻿using Nop.Web.Models.Vendors;
+﻿using Nop.Core;
+using Nop.Core.Domain.Vendors;
+using Nop.Web.Models.Vendors;
 
 namespace Nop.Web.Factories
 {
@@ -25,5 +27,8 @@ namespace Nop.Web.Factories
         /// <param name="overriddenVendorAttributesXml">Overridden vendor attributes in XML format; pass null to use VendorAttributes of vendor</param>
         /// <returns>Vendor info model</returns>
         VendorInfoModel PrepareVendorInfoModel(VendorInfoModel model, bool excludeProperties, string overriddenVendorAttributesXml = "");
+
+        VendorListModel PrepareVendorListModel(IPagedList<Vendor> vendors, VendorPagingFilteringModel command);
+
     }
 }

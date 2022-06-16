@@ -1,9 +1,15 @@
-﻿namespace Nop.Web.Models.Vendors
+﻿using Nop.Web.Enums;
+using Nop.Web.Models.MiniVendors;
+using System.Collections.Generic;
+
+namespace Nop.Web.Models.Vendors
 {
     public class VendorListModel
     {
         public VendorPagingFilteringModel PagingFilteringContext { get; set; }
 
-        //add the property list of mini vendors to have them in the page
+        public IEnumerable<MiniVendorModel> MiniVendors { get; set; }
+
+        public VendorTypeEnum VendorType { get; set; }
     }
 }

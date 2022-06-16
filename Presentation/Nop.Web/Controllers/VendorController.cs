@@ -419,6 +419,32 @@ namespace Nop.Web.Controllers
             return RedirectToRoute("Vendor", new { SeName = vendorSeName });
         }
 
+        [HttpGet]
+        public virtual IActionResult BestVendorList(VendorPagingFilteringModel command)
+        {
+            var vendors = _vendorService.GetAllBestVendors("", pageIndex: command.PageNumber > 0 ? command.PageNumber - 1 : command.PageNumber,
+                pageSize: 5);
+
+            //prepare model
+            var model = _vendorModelFactory.PrepareVendorListModel(vendors, command);
+            model.VendorType = Enums.VendorTypeEnum.BestReviewed;
+
+            return View("VendorList", model);
+        }
+
+        [HttpGet]
+        public virtual IActionResult MostPopularVendorList(VendorPagingFilteringModel command)
+        {
+            var vendors = _vendorService.GetAllMostPopularVendors("", pageIndex: command.PageNumber > 0 ? command.PageNumber - 1 : command.PageNumber,
+                pageSize: 5);
+
+            //prepare model
+            var model = _vendorModelFactory.PrepareVendorListModel(vendors, command);
+            model.VendorType = Enums.VendorTypeEnum.MostPopular;
+
+            return View("VendorList", model);
+        }
+
         #endregion
     }
 }
