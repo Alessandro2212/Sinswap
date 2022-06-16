@@ -144,6 +144,17 @@ namespace Nop.Web.Controllers
             return RedirectToAction("Category", new { categoryId = 17 });
         }
 
+        [HttpGet]
+        public virtual IActionResult CategoryList(CategoryPagingFilteringModel command)
+        {
+            var categories = _categoryService.GetAllCategoriesForList("", pageIndex: command.PageNumber > 0 ? command.PageNumber - 1 : command.PageNumber,
+                pageSize: 8);
+
+            //prepare model
+            var model = _catalogModelFactory.PrepareCategoryListModel(categories, command);
+
+            return View("CategoryList", model);
+        }
 
         #endregion
 

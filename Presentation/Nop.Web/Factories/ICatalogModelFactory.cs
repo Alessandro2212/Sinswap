@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Nop.Core;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Vendors;
 using Nop.Web.Models.Catalog;
@@ -53,6 +54,8 @@ namespace Nop.Web.Factories
         /// <returns>Category template view path</returns>
         string PrepareCategoryTemplateViewPath(int templateId);
 
+        CategoryListModel PrepareCategoryListModel(IPagedList<Category> categories, CategoryPagingFilteringModel command);
+
         /// <summary>
         /// Prepare category navigation model
         /// </summary>
@@ -93,6 +96,8 @@ namespace Nop.Web.Factories
         /// <param name="amount">the amount of trendy categories to retrieve</param>
         /// <returns></returns>
         List<CategorySimpleModel> GetTrendyHomePageCategories(int amount);
+
+        List<CategorySimpleModel> GetSubCategories(int amount);
 
         /// <summary>
         /// Prepare category (simple) models
