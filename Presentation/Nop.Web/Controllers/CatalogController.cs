@@ -148,7 +148,7 @@ namespace Nop.Web.Controllers
         public virtual IActionResult CategoryList(CategoryPagingFilteringModel command)
         {
             var categories = _categoryService.GetAllCategoriesForList("", pageIndex: command.PageNumber > 0 ? command.PageNumber - 1 : command.PageNumber,
-                pageSize: 8);
+                pageSize: 40);
 
             //prepare model
             var model = _catalogModelFactory.PrepareCategoryListModel(categories, command);

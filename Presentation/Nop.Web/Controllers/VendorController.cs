@@ -423,7 +423,7 @@ namespace Nop.Web.Controllers
         public virtual IActionResult BestVendorList(VendorPagingFilteringModel command)
         {
             var vendors = _vendorService.GetAllBestVendors("", pageIndex: command.PageNumber > 0 ? command.PageNumber - 1 : command.PageNumber,
-                pageSize: 5);
+                pageSize: 25);
 
             //prepare model
             var model = _vendorModelFactory.PrepareVendorListModel(vendors, command);
@@ -436,7 +436,7 @@ namespace Nop.Web.Controllers
         public virtual IActionResult MostPopularVendorList(VendorPagingFilteringModel command)
         {
             var vendors = _vendorService.GetAllMostPopularVendors("", pageIndex: command.PageNumber > 0 ? command.PageNumber - 1 : command.PageNumber,
-                pageSize: 5);
+                pageSize: 25);
 
             //prepare model
             var model = _vendorModelFactory.PrepareVendorListModel(vendors, command);
