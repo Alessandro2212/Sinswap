@@ -33,21 +33,23 @@
                     {
                         <h2>Our most popular members</h2>
                     }
-                    <div class="topSellersSlide">
-                        @foreach (var vendor in Model.MiniVendors)
-                        {
-                            <div class="topSellerCard">
-                                <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })" class="miniVendorImg" style="background-image: url('@Url.Content(vendor.PictureUrl)');"></a>
-                                <div class="location">
-                                    <span class="city">@vendor.City</span>, <span class="country">@vendor.Country</span>
-                                </div>
-                                <div class="nameAge">
-                                    <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><span class="name">@vendor.Name</span>, <span class="age">@vendor.Age</span></a>
-                                </div>
-                            </div>
-                        }
-                    </div>
                 </div>
+            </div>
+            <div class="row pb-5">
+                @foreach (var vendor in Model.MiniVendors)
+                {
+                    <div class="col-3">
+                        <div class="topSellerCard">
+                            <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })" class="miniVendorImg" style="background-image: url('@Url.Content(vendor.PictureUrl)');"></a>
+                            <div class="location">
+                                <span class="city">@vendor.City</span>, <span class="country">@vendor.Country</span>
+                            </div>
+                            <div class="nameAge">
+                                <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><span class="name">@vendor.Name</span>, <span class="age">@vendor.Age</span></a>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
 
             @{

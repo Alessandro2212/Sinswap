@@ -221,39 +221,6 @@
     </div>
 </div>
 
-@*<div class="container trendingCategoriesContainer">
-    <div class="row">
-        <div class="col-12">
-            <h2>Trending categories</h2>
-
-            <div class="flex-row row no-gutters">
-
-                <div class="col-6 col-sm-4">
-                    <div class="categoryCard food" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
-                        <div class="category"><a href="#">Lollipops</a></div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-sm-4">
-                    <div class="categoryCard object" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
-                        <div class="category"><a href="#">Polaroids</a></div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-sm-4 d-none d-sm-block">
-                    <div class="categoryCard food" style="background-image: url('/Themes/Sinswap/content/images/dummyPopularCategories.png')">
-                        <div class="category"><a href="#">Corn on the cob</a></div>
-                    </div>
-                </div>
-
-            </div>
-
-            <a href="#" class="more">Check out our 500+ categories...</a>
-
-        </div>
-    </div>
-</div>*@
-
 @await Component.InvokeAsync("HomepageTrendyCategories", new { amount = 8 })
 
 <div class="container aboutUsContainer">

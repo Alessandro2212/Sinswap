@@ -10,19 +10,12 @@
                     @foreach (var item in Model)
                     {
                         <div class="col-6 col-lg-3">
-                            <div class="categoryCard clothing" style="background-image: url('@item.PictureModel.ImageUrl')">
-                                @{
-                                    var name = @item.Name;
-                                    if (!string.IsNullOrEmpty(@item.ParentCategoryName))
-                                    {
-                                        name = $"{@item.Name} ({@item.ParentCategoryName})";
-                                    }
-                                }
-                                <div class="category"><a href="@Url.RouteUrl("Category", new { SeName = item.SeName })">@name</a></div>
+                            <div class="categoryCard @{if (!string.IsNullOrEmpty(@item.ParentCategoryName)) {@item.ParentCategoryName.ToLower()}}" style="background-image: url('@item.PictureModel.ImageUrl')">
+                                <div class="category"><a href="@Url.RouteUrl("Category", new { SeName = item.SeName })">@item.Name</a></div>
                             </div>
                         </div>
                     }
-                    <a href="@Url.Action("CategoryList", "Catalog")" class="more">Check out our 500+ categories...</a>
+                    <a href="@Url.Action("CategoryList", "Catalog")" class="more">Check out our 50+ categories...</a>
                 </div>
             </div>
         </div>
