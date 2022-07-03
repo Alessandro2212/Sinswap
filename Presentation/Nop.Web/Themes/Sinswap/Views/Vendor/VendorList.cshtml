@@ -1,0 +1,65 @@
+﻿@model VendorListModel
+
+@using Nop.Core.Domain.Common
+@using Nop.Core.Domain.Seo
+@using Nop.Web.Framework.Infrastructure
+@using System.Text.RegularExpressions;
+@inject Nop.Core.IWebHelper webHelper
+@inject SeoSettings seoSettings
+@inject CommonSettings commonSettings
+@{
+    Layout = "_ColumnsTwo";
+
+    //title
+    Html.AddTitleParts("Best Sellers");
+    //meta
+    //Html.AddMetaDescriptionParts(Model.MetaDescription);
+    //Html.AddMetaKeywordParts(Model.MetaKeywords);
+    //page class
+    Html.AppendPageCssClassParts("vendorList");
+}
+
+<div class="page category-page">
+    <div class="page-body">
+
+        <div class="container firstContainer sellersContainer">
+            <div class="row">
+                <div class="col-12">
+                    @if (Model.VendorType == Nop.Web.Enums.VendorTypeEnum.BestReviewed)
+                    {
+                        <h2>Our top members</h2>
+                    }
+                    @if (Model.VendorType == Nop.Web.Enums.VendorTypeEnum.MostPopular)
+                    {
+                        <h2>Our most popular members</h2>
+                    }
+                    <div class="topSellersSlide">
+                        @foreach (var vendor in Model.MiniVendors)
+                        {
+                            <div class="topSellerCard">
+                                <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })" class="miniVendorImg" style="background-image: url('@Url.Content(vendor.PictureUrl)');"></a>
+                                <div class="location">
+                                    <span class="city">@vendor.City</span>, <span class="country">@vendor.Country</span>
+                                </div>
+                                <div class="nameAge">
+                                    <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><span class="name">@vendor.Name</span>, <span class="age">@vendor.Age</span></a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            @{
+                var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
+            }
+
+            @if (!pager.IsEmpty())
+            {
+                <div class="pager">
+                    @pager
+                </div>
+            }
+        </div>
+    </div>
+</div>

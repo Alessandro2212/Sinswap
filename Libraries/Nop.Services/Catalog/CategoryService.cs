@@ -236,6 +236,23 @@ namespace Nop.Services.Catalog
             return new PagedList<Category>(sortedCategories, pageIndex, pageSize);
         }
 
+        public virtual IPagedList<Category> GetAllCategoriesForList(string categoryName = "", int pageIndex = 0, int pageSize = int.MaxValue, 
+            bool showHidden = false)
+        {
+            var query = _categoryRepository.Table;
+            if (!showHidden)
+                query = query.Where(c => c.Published);
+            if (!string.IsNullOrWhiteSpace(categoryName))
+                query = query.Where(c => c.Name.Contains(categoryName));
+            query = query.Where(c => !c.Deleted);
+            query = query.Where(c => c.ParentCategoryId > 0);
+            query = query.OrderBy(c => c.ParentCategoryId).ThenBy(c => c.DisplayOrder).ThenBy(c => c.Id);
+
+            var categories = new PagedList<Category>(query, pageIndex, pageSize);
+            return categories;
+        }
+
+
         /// <summary>
         /// Gets all categories filtered by parent category identifier
         /// </summary>

@@ -1,0 +1,59 @@
+﻿@model CategoryListModel
+
+@using Nop.Core.Domain.Common
+@using Nop.Core.Domain.Seo
+@using Nop.Web.Framework.Infrastructure
+@using System.Text.RegularExpressions;
+@inject Nop.Core.IWebHelper webHelper
+@inject SeoSettings seoSettings
+@inject CommonSettings commonSettings
+@{
+    Layout = "_ColumnsTwo";
+
+    //title
+    Html.AddTitleParts("Categories");
+    //meta
+    //Html.AddMetaDescriptionParts(Model.MetaDescription);
+    //Html.AddMetaKeywordParts(Model.MetaKeywords);
+    //page class
+    Html.AppendPageCssClassParts("vendorList");
+}
+
+<div class="page category-page">
+    <div class="page-body">
+        <div class="container trendingCategoriesContainer">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Our categories</h2>
+                    <div class="flex-row row no-gutters">
+                        @foreach (var item in Model.Categories)
+                        {
+                            <div class="col-6 col-lg-3">
+                                <div class="categoryCard food" style="background-image: url('@item.PictureModel.ImageUrl')">
+                                    @{
+                                        var name = @item.Name;
+                                        if (!string.IsNullOrEmpty(@item.ParentCategoryName))
+                                        {
+                                            name = $"{@item.Name} ({@item.ParentCategoryName})";
+                                        }
+                                    }
+                                    <div class="category"><a href="@Url.RouteUrl("Category", new { SeName = item.SeName })">@name</a></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            @{
+                var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
+            }
+
+            @if (!pager.IsEmpty())
+            {
+                <div class="pager">
+                    @pager
+                </div>
+            }
+        </div>
+    </div>
+</div>

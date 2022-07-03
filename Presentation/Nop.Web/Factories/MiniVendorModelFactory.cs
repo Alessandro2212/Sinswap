@@ -4,6 +4,7 @@ using Nop.Core.Domain.Vendors;
 using Nop.Services.Media;
 using Nop.Services.Seo;
 using Nop.Services.Vendors;
+using Nop.Web.Areas.Admin.Models.Vendors;
 using Nop.Web.Models.MiniVendors;
 using System;
 using System.Collections.Generic;

@@ -486,8 +486,11 @@ namespace Nop.Web.Factories
             //model.PagingFilteringContext.LoadPagedList(products);
 
             //vendors
+            //var vendors = _vendorService.GetAllVendorsForCategory(categoryId: category.Id, pageIndex: command.PageNumber - 1,
+            //    pageSize: command.PageSize);
+
             var vendors = _vendorService.GetAllVendorsForCategory(categoryId: category.Id, pageIndex: command.PageNumber - 1,
-                pageSize: command.PageSize);
+                pageSize: 5);
 
             // make pagination based on vendors for that category
             model.PagingFilteringContext.LoadPagedList(vendors);
@@ -552,6 +555,22 @@ namespace Nop.Web.Factories
                 CurrentCategoryId = activeCategoryId,
                 Categories = cachedCategoriesModel
             };
+
+            return model;
+        }
+
+        public virtual CategoryListModel PrepareCategoryListModel(IPagedList<Category> categories, CategoryPagingFilteringModel command)
+        {
+            if (categories == null)
+                throw new ArgumentNullException(nameof(categories));
+
+            CategoryListModel model = new CategoryListModel();
+
+            var categoryModels = this.GetTrendyHomePageCategories(int.MaxValue);
+
+            model.Categories = categoryModels.Where(c => categories.Select(cat => cat.Name).Contains(c.Name));
+            model.PagingFilteringContext = command == null ? new CategoryPagingFilteringModel() : command;
+            model.PagingFilteringContext.LoadPagedList(categories);
 
             return model;
         }
@@ -660,6 +679,10 @@ namespace Nop.Web.Factories
             {
                 if (category.SubCategories != null && category.SubCategories.Any())
                 {
+                    foreach(var cat in category.SubCategories)
+                    {
+                        cat.ParentCategoryName = category.Name;
+                    }
                     allCategories.AddRange(category.SubCategories);
                 }
                 allCategories.Add(category);
@@ -676,9 +699,28 @@ namespace Nop.Web.Factories
             {
                 if (category.SubCategories != null && category.SubCategories.Any())
                 {
+                    foreach (var cat in category.SubCategories)
+                    {
+                        cat.ParentCategoryName = category.Name;
+                    }
                     allCategories.AddRange(category.SubCategories);
                 }
                 allCategories.Add(category);
+            }
+
+            return allCategories.OrderByDescending(c => c.TotalRatings).Take(amount).ToList();
+        }
+
+        public virtual List<CategorySimpleModel> GetSubCategories(int amount)
+        {
+            var categoriesWithSubCategories = PrepareCategorySimpleModels();
+            List<CategorySimpleModel> allCategories = new List<CategorySimpleModel>();
+            foreach (var category in categoriesWithSubCategories)
+            {
+                if (category.SubCategories != null && category.SubCategories.Any())
+                {                
+                    allCategories.AddRange(category.SubCategories);
+                }
             }
 
             return allCategories.OrderByDescending(c => c.TotalRatings).Take(amount).ToList();

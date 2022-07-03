@@ -24,6 +24,8 @@ namespace Nop.Services.Catalog
         /// <returns>Categories</returns>
         IList<Category> GetAllCategories(int storeId = 0, bool showHidden = false, bool loadCacheableCopy = true);
 
+        IPagedList<Category> GetAllCategoriesForList(string categoryName, int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
+
         /// <summary>
         /// Gets all categories
         /// </summary>
