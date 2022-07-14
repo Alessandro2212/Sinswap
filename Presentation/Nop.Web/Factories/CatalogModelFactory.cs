@@ -671,27 +671,7 @@ namespace Nop.Web.Factories
             return model;
         }
 
-        public virtual List<CategorySimpleModel> GetPopularHomePageCategories(int amount)
-        {
-            var categoriesWithSubCategories = PrepareCategorySimpleModels();
-            List<CategorySimpleModel> allCategories = new List<CategorySimpleModel>();
-            foreach (var category in categoriesWithSubCategories)
-            {
-                if (category.SubCategories != null && category.SubCategories.Any())
-                {
-                    foreach(var cat in category.SubCategories)
-                    {
-                        cat.ParentCategoryName = category.Name;
-                    }
-                    allCategories.AddRange(category.SubCategories);
-                }
-                allCategories.Add(category);
-            }
-
-            return allCategories.OrderByDescending(c => c.SoldItems).Take(amount).ToList();
-        }
-
-        public virtual List<CategorySimpleModel> GetTrendyHomePageCategories(int amount)
+        public virtual List<CategorySimpleModel> GetHomePageCategories()
         {
             var categoriesWithSubCategories = PrepareCategorySimpleModels();
             List<CategorySimpleModel> allCategories = new List<CategorySimpleModel>();
@@ -708,6 +688,18 @@ namespace Nop.Web.Factories
                 allCategories.Add(category);
             }
 
+            return allCategories;
+        }
+
+        public virtual List<CategorySimpleModel> GetPopularHomePageCategories(int amount)
+        {
+            List<CategorySimpleModel> allCategories = GetHomePageCategories();
+            return allCategories.OrderByDescending(c => c.SoldItems).Take(amount).ToList();
+        }
+
+        public virtual List<CategorySimpleModel> GetTrendyHomePageCategories(int amount)
+        {
+            List<CategorySimpleModel> allCategories = GetHomePageCategories();
             return allCategories.OrderByDescending(c => c.TotalRatings).Take(amount).ToList();
         }
 

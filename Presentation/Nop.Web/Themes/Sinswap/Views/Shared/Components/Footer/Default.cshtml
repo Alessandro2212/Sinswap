@@ -4,55 +4,7 @@
 @inject IWorkContext workContext;
 
 <footer>
-    <div class="container allCatagoryContainer">
-        <div class="row">
-            <div class="col">
-                <h2>All categories</h2>
-            </div>
-        </div>
-
-        <div class="row service">
-            <div class="col-2 col-lg-1 label">Service</div>
-            <div class="col-10 col-lg-11">
-                <a href="#">Chat</a> <a href="#">KIK/Whatsapp</a> <a href="#">Cam session</a> <a href="#">Skype call</a> <a href="#">GFE</a> <a href="#">Penis rating</a> <a href="#">Pussy rating</a> <a href="#">Boob rating</a> <a href="#">Face rating</a> <a href="#">Tasks</a> <a href="#">Pay pig</a> <a href="#">Gift pig</a> <a href="#">Pay for pedicure</a> <a href="#">Pay for manicure</a> <a href="#">Gaming</a>
-            </div>
-        </div>
-
-        <div class="row object">
-            <div class="col-2 col-lg-1 label">Object</div>
-            <div class="col-10 col-lg-11">
-                <a href="#">Pillowcase</a> <a href="#">Ribbon</a> <a href="#">Rope</a> <a href="#">Dildo</a> <a href="#">Vibrator</a> <a href="#">Sex toy</a> <a href="#">Cock ring plain</a> <a href="#">Cock ring vibrating</a> <a href="#">Buttplug</a>
-            </div>
-        </div>
-
-        <div class="row clothing">
-            <div class="col-2 col-lg-1 label">Clothing</div>
-            <div class="col-10 col-lg-11">
-                <a href="#">Panties</a> <a href="#">Long socks</a> <a href="#">Slippers</a> <a href="#">Bra</a> <a href="#">Bikini</a> <a href="#">Tights</a> <a href="#">Bodysuit</a> <a href="#">Flat shoe</a> <a href="#">Pumps</a> <a href="#">Sneakers</a> <a href="#">Gym clothing</a> <a href="#">Yoga pants</a> <a href="#">Latex/rubber/silk gloves</a>
-            </div>
-        </div>
-
-        <div class="row body">
-            <div class="col-2 col-lg-1 label">Body</div>
-            <div class="col-10 col-lg-11">
-                <a href="#">Dust</a> <a href="#">Nail clipping</a> <a href="#">Fluids</a> <a href="#">Gas</a> <a href="#">Hair</a> <a href="#">Bath water</a> <a href="#">Silicone mold</a>
-            </div>
-        </div>
-
-        <div class="row food">
-            <div class="col-2 col-lg-1 label">Food</div>
-            <div class="col-10 col-lg-11">
-                <a href="#">Ramen</a> <a href="#">Cake</a> <a href="#">Sandwich</a> <a href="#">Pizza</a> <a href="#">Grapes</a> <a href="#">Banana</a> <a href="#">Various fruit</a> <a href="#">Zucchini</a> <a href="#">Eggplant</a> <a href="#">Carrot</a> <a href="#">Corn on the cob</a> <a href="#">Cucumber</a> <a href="#">Cherry</a> <a href="#">Tomato</a> <a href="#">Radish</a> <a href="#">Various vegetables</a> <a href="#">Boiled egg</a> <a href="#">Sausage</a> <a href="#">Pickle</a> <a href="#">Lollypop</a>
-            </div>
-        </div>
-
-        <div class="row media">
-            <div class="col-2 col-lg-1 label">Media</div>
-            <div class="col-10 col-lg-11">
-                <a href="#">Photos</a> <a href="#">Polaroid</a> <a href="#">Video</a> <a href="#">Audio</a> <a href="#">Erotic story</a> <a href="#">Drawing</a>
-            </div>
-        </div>
-    </div>
+    @await Component.InvokeAsync("FooterCategories")
 
     <div class="container footerMenu">
         <div class="row">

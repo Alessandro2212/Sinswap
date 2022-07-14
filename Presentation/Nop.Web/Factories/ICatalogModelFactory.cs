@@ -90,6 +90,8 @@ namespace Nop.Web.Factories
         /// <returns></returns>
         List<CategorySimpleModel> GetPopularHomePageCategories(int amount);
 
+        List<CategorySimpleModel> GetHomePageCategories();
+
         /// <summary>
         /// Get (amount of) Trendy HomePage Categories
         /// </summary>
