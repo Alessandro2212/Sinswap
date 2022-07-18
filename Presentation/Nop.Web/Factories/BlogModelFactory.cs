@@ -294,6 +294,21 @@ namespace Nop.Web.Factories
             return cachedModel;
         }
 
+        public IList<AboutUsModel> GetAllAboutUs()
+        {
+            List<AboutUsModel> aboutUsModels = new List<AboutUsModel>();
+            
+            var aboutUs = _blogService.GetAllAboutUs();
+
+            foreach (var item in aboutUs)
+            {
+                aboutUsModels.Add(new AboutUsModel(item));
+            }
+
+            return aboutUsModels;
+        }
+
+
         #endregion
     }
 }

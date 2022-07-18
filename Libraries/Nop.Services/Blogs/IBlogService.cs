@@ -147,6 +147,8 @@ namespace Nop.Services.Blogs
         /// <returns>Number of blog comments</returns>
         int GetBlogCommentsCount(BlogPost blogPost, int storeId = 0, bool? isApproved = null);
 
+        IList<AboutUs> GetAllAboutUs();
+
         /// <summary>
         /// Deletes a blog comment
         /// </summary>

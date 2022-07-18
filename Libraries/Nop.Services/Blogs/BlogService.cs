@@ -22,6 +22,7 @@ namespace Nop.Services.Blogs
         private readonly IRepository<BlogComment> _blogCommentRepository;
         private readonly IRepository<BlogPost> _blogPostRepository;
         private readonly IRepository<StoreMapping> _storeMappingRepository;
+        private readonly IRepository<AboutUs> _aboutUsRepository;
         private readonly string _entityName;
 
         #endregion
@@ -32,13 +33,15 @@ namespace Nop.Services.Blogs
             IEventPublisher eventPublisher,
             IRepository<BlogComment> blogCommentRepository,
             IRepository<BlogPost> blogPostRepository,
-            IRepository<StoreMapping> storeMappingRepository)
+            IRepository<StoreMapping> storeMappingRepository,
+            IRepository<AboutUs> aboutUsRepository)
         {
             this._catalogSettings = catalogSettings;
             this._eventPublisher = eventPublisher;
             this._blogCommentRepository = blogCommentRepository;
             this._blogPostRepository = blogPostRepository;
             this._storeMappingRepository = storeMappingRepository;
+            this._aboutUsRepository = aboutUsRepository;
             this._entityName = typeof(BlogPost).Name;
         }
 
@@ -329,6 +332,15 @@ namespace Nop.Services.Blogs
                 query = query.Where(c => c.CommentText.Contains(commentText));
 
             query = query.OrderBy(comment => comment.CreatedOnUtc);
+
+            return query.ToList();
+        }
+
+        public virtual IList<AboutUs> GetAllAboutUs()
+        {
+            var query = _aboutUsRepository.Table;
+
+            query = query.OrderBy(au => au.Id);
 
             return query.ToList();
         }
