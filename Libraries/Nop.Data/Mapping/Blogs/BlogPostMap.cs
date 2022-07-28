@@ -30,6 +30,11 @@ namespace Nop.Data.Mapping.Blogs
                 .HasForeignKey(blogPost => blogPost.LanguageId)
                 .IsRequired();
 
+            builder.HasOne(blogPost => blogPost.BlogPostCategory)
+                .WithMany()
+                .HasForeignKey(blogPost => blogPost.BlogPostCategoryId)
+                .IsRequired();
+
             base.Configure(builder);
         }
 
