@@ -13,10 +13,9 @@ namespace Nop.Core.Domain.Blogs
     {
         private ICollection<BlogComment> _blogComments;
 
-        /// <summary>
-        /// Gets or sets the language identifier
-        /// </summary>
         public int LanguageId { get; set; }
+
+        public int BlogPostCategoryId { get; set; }
 
         /// <summary>
         /// Gets or sets the blog post title
@@ -87,9 +86,7 @@ namespace Nop.Core.Domain.Blogs
             protected set => _blogComments = value;
         }
         
-        /// <summary>
-        /// Gets or sets the language
-        /// </summary>
         public virtual Language Language { get; set; }
+        public virtual BlogPostCategory BlogPostCategory { get; set; }
     }
 }

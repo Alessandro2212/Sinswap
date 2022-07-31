@@ -142,7 +142,8 @@ namespace Nop.Web.Areas.Admin.Controllers
                 blogPost.StartDateUtc = model.StartDate;
                 blogPost.EndDateUtc = model.EndDate;
                 blogPost.CreatedOnUtc = DateTime.UtcNow;
-                _blogService.InsertBlogPost(blogPost);
+
+                _blogService.InsertBlogPost(blogPost); // add also the vendor id here in case we want to bind the blog to a vendor 
 
                 //activity log
                 _customerActivityService.InsertActivity("AddNewBlogPost",
