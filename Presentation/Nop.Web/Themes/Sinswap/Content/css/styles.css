@@ -396,7 +396,7 @@ body {
 }
 
 .vendorPremium .firstContainer {
-  margin-top: 150px;
+  margin-top: 165px;
 }
 
 .searchActive .firstContainer {
@@ -607,7 +607,7 @@ a.more:hover {
 .categoryCard.media {
   background-color: #36ae94;
 }
-.categoryCard.service {
+.categoryCard.services {
   background-color: #3eb5b0;
 }
 .categoryCard.body {
@@ -763,6 +763,7 @@ header h1 {
 header .logo {
   margin-top: 15px;
   height: 75px;
+  margin-bottom: 15px;
 }
 header .payoffContainer .payoff {
   display: table-cell;
@@ -841,15 +842,18 @@ header.headerHome .searchContainer {
 }
 
 nav {
-  padding-top: 35px;
+  align-items: center;
+  justify-content: center;
 }
 nav.main, nav.vendorMenu {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 }
 nav.service {
-  margin-right: 20px;
+  margin-right: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 nav a.menuLink {
   margin: 0px 7px;
@@ -910,13 +914,21 @@ nav .cartFoldout {
   position: absolute;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1660px) {
   header nav.service .btn {
-    margin-bottom: 14px;
     font-size: 12px;
   }
+  header nav.service .btn.icon {
+    padding-top: 6px;
+  }
+}
+@media (max-width: 992px) {
   header .searchContainer .searchTitle {
     font-size: 42px;
+  }
+  header nav a.menuLink {
+    margin: 0 5px;
+    font-size: 14px;
   }
 }
 @media (max-width: 768px) {
@@ -938,11 +950,12 @@ nav .cartFoldout {
   header .row nav .btn {
     margin: 0px 5px;
   }
-  header .row .main {
-    padding-top: 30px;
+  header .row nav.service {
+    padding-top: 0px;
   }
   header .row .serviceMenu {
     position: absolute;
+    height: 90px;
   }
   header .payoffContainer {
     display: none;
@@ -972,6 +985,10 @@ nav .cartFoldout {
   }
 }
 @media (max-width: 576px) {
+  header .row nav a.menuLink {
+    font-size: 14px;
+    margin: 0 5px;
+  }
   header .searchContainer #searchForm {
     width: 400px;
   }
@@ -981,11 +998,11 @@ nav .cartFoldout {
   background: none;
 }
 .vendorPremium header .logoContainer a {
-  padding: 20px 30px;
-  display: inline-block;
-  position: absolute;
-  top: 20px;
-  left: 20px;
+  display: block;
+  position: relative;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 216px;
   z-index: 1;
   background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
   background-size: 300% 300%;
@@ -996,21 +1013,28 @@ nav .cartFoldout {
 }
 .vendorPremium header .logoContainer a .logo {
   margin-top: 0px;
-  width: 213px;
-  height: 57px;
-}
-.vendorPremium header nav {
-  padding-bottom: 35px;
+  margin-bottom: 0px;
+  width: 216px;
+  height: 75px;
 }
 .vendorPremium header nav a.menuLink {
   color: #171717;
 }
 .vendorPremium header nav .btn {
+  padding: 0.375rem 0.25rem;
   color: #171717;
   background-color: rgba(255, 255, 255, 0.1);
 }
 .vendorPremium header nav .btn:hover {
   background-color: rgba(17, 17, 17, 0.1);
+}
+.vendorPremium header nav.service .icon {
+  background-color: rgba(255, 255, 255, 0);
+}
+.vendorPremium header nav.service .icon:hover {
+  background-color: rgba(255, 255, 255, 0);
+  color: #171717;
+  transition: color 0.15s;
 }
 .vendorPremium header .payoffContainer {
   background-image: url("/Themes/Sinswap/Content/images/vendorBackground.jpg");
@@ -1023,20 +1047,11 @@ nav .cartFoldout {
 
 @media (max-width: 1350px) {
   .vendorPremium header nav.service .btn {
-    margin-bottom: 14px;
     font-size: 12px;
     margin-left: 0px;
   }
 }
 @media (max-width: 992px) {
-  .vendorPremium header .logoContainer a {
-    padding: 15px 20px;
-    top: 70px;
-  }
-  .vendorPremium header .logoContainer a .logo {
-    width: 106.5px;
-    height: 28.5px;
-  }
   .vendorPremium header nav.main {
     justify-content: start;
   }
@@ -2780,13 +2795,13 @@ footer .allCatagoryContainer .row.food .label, footer .allCatagoryContainer .row
 footer .allCatagoryContainer .row.media .label, footer .allCatagoryContainer .row.media a:hover {
   color: #36ae94;
 }
-footer .allCatagoryContainer .row.service .label, footer .allCatagoryContainer .row.service a:hover {
+footer .allCatagoryContainer .row.services .label, footer .allCatagoryContainer .row.services a:hover {
   color: #3eb5b0;
 }
 footer .allCatagoryContainer .row.body .label, footer .allCatagoryContainer .row.body a:hover {
   color: #4fe9a7;
 }
-footer .allCatagoryContainer .row.object .label, footer .allCatagoryContainer .row.object a:hover {
+footer .allCatagoryContainer .row.objects .label, footer .allCatagoryContainer .row.objects a:hover {
   color: #4adfd0;
 }
 footer .footerMenu {

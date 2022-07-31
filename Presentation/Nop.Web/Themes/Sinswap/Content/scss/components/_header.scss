@@ -48,6 +48,7 @@ header {
     .logo {
         margin-top: 15px;
         height: 75px;
+        margin-bottom: 15px;
     }
 
     .payoffContainer {
@@ -144,17 +145,20 @@ header {
 }
 
 nav {
-    padding-top: 35px;
+    align-items: center;
+    justify-content: center;
 
     &.main,
     &.vendorMenu {
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
     }
 
     &.service {
-        margin-right: 20px;
+        margin-right: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     a.menuLink {
@@ -229,6 +233,23 @@ nav {
 
 
 
+// Extra Extra large devices (large desktops, 1660px and down)
+@media (max-width: 1660px) {
+    header {
+        nav {
+            &.service {
+                .btn {
+                    font-size: 12px;
+
+                    &.icon {
+                        padding-top: 6px;
+                    }
+                }
+            }
+        }
+    }
+}
+
 // Extra large devices (large desktops, 1200px and up)
 @media (max-width: 1200px) {
 }
@@ -236,19 +257,15 @@ nav {
 // Large devices (desktops, 992px and up)
 @media (max-width: 992px) {
     header {
-        nav {
-            &.service {
-                .btn {
-                    margin-bottom: 14px;
-                    font-size: 12px;
-                }
-            }
-        }
-
         .searchContainer {
             .searchTitle {
                 font-size: 42px;
             }
+        }
+
+        nav a.menuLink {
+            margin: 0 5px;
+            font-size: 14px;
         }
     }
 }
@@ -278,14 +295,15 @@ nav {
                 .btn {
                     margin: 0px 5px;
                 }
-            }
 
-            .main {
-                padding-top: 30px;
+                &.service {
+                    padding-top: 0px;
+                }
             }
 
             .serviceMenu {
                 position: absolute;
+                height: 90px;
             }
         }
 
@@ -330,6 +348,15 @@ nav {
 // Small devices (landscape phones, 576px and up)
 @media (max-width: 576px) {
     header {
+        .row {
+            nav {
+                a.menuLink {
+                    font-size: 14px;
+                    margin: 0 5px;
+                }
+            }
+        }
+
         .searchContainer {
             #searchForm {
                 width: 400px;
@@ -340,4 +367,7 @@ nav {
 
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 576px) {
+    header {
+
+    }
 }

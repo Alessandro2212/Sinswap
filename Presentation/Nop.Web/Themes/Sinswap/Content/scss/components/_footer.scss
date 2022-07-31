@@ -30,6 +30,7 @@ footer {
                 transition: color 0.15s;
                 white-space: nowrap;
 
+
                 &:hover {
                     transition: color 0.15s;
                     text-decoration: none;
@@ -54,7 +55,7 @@ footer {
                 }
             }
 
-            &.service {
+            &.services {
                 .label, a:hover {
                     color: $catService;
                 }
@@ -66,7 +67,7 @@ footer {
                 }
             }
 
-            &.object {
+            &.objects {
                 .label, a:hover {
                     color: $catObject;
                 }

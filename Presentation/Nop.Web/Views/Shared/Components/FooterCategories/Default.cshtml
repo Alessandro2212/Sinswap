@@ -11,7 +11,7 @@
 
         @foreach (var item in Model.Where(m=>string.IsNullOrEmpty(m.ParentCategoryName)))
         {          
-            <div class="row service">
+            <div class="row @item.SeName">
                 <div class="col-2 col-lg-1 label">@item.Name</div>
                 <div class="col-10 col-lg-11">
                     @foreach(var subItem in @item.SubCategories)
