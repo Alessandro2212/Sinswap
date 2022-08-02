@@ -22,10 +22,11 @@ namespace Nop.Data.Mapping.Blogs
                 .HasForeignKey(blogPost => blogPost.PictureId)
                 .IsRequired();
 
-            builder.HasOne(blogPost => blogPost.BlogPost)
-               .WithMany()
-               .HasForeignKey(blogPost => blogPost.BlogPostId)
-               .IsRequired();
+
+            builder.HasOne(comment => comment.BlogPost)
+                .WithMany(blog => blog.BlogPictures)
+                .HasForeignKey(comment => comment.BlogPostId)
+                .IsRequired();
 
             base.Configure(builder);
         }

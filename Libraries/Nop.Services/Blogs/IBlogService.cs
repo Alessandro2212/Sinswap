@@ -149,6 +149,8 @@ namespace Nop.Services.Blogs
 
         IList<AboutUs> GetAllAboutUs();
 
+        IList<BlogPost> GetBlogs(int amount);
+
         /// <summary>
         /// Deletes a blog comment
         /// </summary>

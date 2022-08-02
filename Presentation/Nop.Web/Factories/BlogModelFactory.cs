@@ -308,6 +308,29 @@ namespace Nop.Web.Factories
             return aboutUsModels;
         }
 
+        public IList<BlogModel> PrepareBlogModel(int amount)
+        {
+            IList<BlogModel> blogModels = new List<BlogModel>();
+
+            var blogs = _blogService.GetBlogs(amount);
+      
+            foreach (var blog in blogs)
+            {
+                var model = new BlogModel(blog);
+                var pictureId = blog.BlogPictures?.FirstOrDefault()?.PictureId;
+                if (pictureId.HasValue)
+                {
+                    var picture = _pictureService.GetPictureById(pictureId.Value);
+                    var pictureSize = _mediaSettings.ProductThumbPictureSize;
+                    model.PictureUrl = picture != null ? _pictureService.GetPictureUrl(picture, pictureSize) : string.Empty;
+                }
+                
+                blogModels.Add(model);
+            }
+
+            return blogModels;
+        }
+
 
         #endregion
     }

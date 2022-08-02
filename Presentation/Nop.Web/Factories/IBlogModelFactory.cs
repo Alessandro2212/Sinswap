@@ -44,5 +44,7 @@ namespace Nop.Web.Factories
         List<BlogPostYearModel> PrepareBlogPostYearModel();
 
         IList<AboutUsModel> GetAllAboutUs();
+
+        IList<BlogModel> PrepareBlogModel(int amount);
     }
 }

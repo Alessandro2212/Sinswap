@@ -255,7 +255,7 @@ namespace Nop.Services.Blogs
         /// </summary>
         /// <param name="blogPost">Blog post</param>
         /// <returns>Tags</returns>
-        public virtual IList<string> ParseTags(BlogPost blogPost) 
+        public virtual IList<string> ParseTags(BlogPost blogPost)
         {
             if (blogPost == null)
                 throw new ArgumentNullException(nameof(blogPost));
@@ -343,6 +343,13 @@ namespace Nop.Services.Blogs
             query = query.OrderBy(au => au.Id);
 
             return query.ToList();
+        }
+
+        public virtual IList<BlogPost> GetBlogs(int amount)
+        {
+            var query = _blogPostRepository.Table;
+
+            return query.OrderBy(blog => blog.Position).Take(amount).ToList();
         }
 
         /// <summary>

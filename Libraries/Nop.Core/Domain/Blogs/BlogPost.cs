@@ -12,6 +12,7 @@ namespace Nop.Core.Domain.Blogs
     public partial class BlogPost : BaseEntity, ISlugSupported, IStoreMappingSupported
     {
         private ICollection<BlogComment> _blogComments;
+        private ICollection<BlogPostPicture> _blogPictures;
 
         public int LanguageId { get; set; }
 
@@ -77,6 +78,8 @@ namespace Nop.Core.Domain.Blogs
         /// </summary>
         public DateTime CreatedOnUtc { get; set; }
 
+        public int Position { get; set; }
+
         /// <summary>
         /// Gets or sets the blog comments
         /// </summary>
@@ -85,8 +88,16 @@ namespace Nop.Core.Domain.Blogs
             get => _blogComments ?? (_blogComments = new List<BlogComment>());
             protected set => _blogComments = value;
         }
-        
+
+        public virtual ICollection<BlogPostPicture> BlogPictures
+        {
+            get => _blogPictures ?? (_blogPictures = new List<BlogPostPicture>());
+            protected set => _blogPictures = value;
+        }
+
         public virtual Language Language { get; set; }
         public virtual BlogPostCategory BlogPostCategory { get; set; }
+
+
     }
 }
