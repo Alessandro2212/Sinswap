@@ -238,6 +238,10 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapLocalizedRoute("BlogRSS", "blog/rss/{languageId:min(0)}",
 				new { controller = "Blog", action = "ListRss" });
 
+            //blog Post
+            routeBuilder.MapLocalizedRoute("BlogShow", "blog/blogpost/{blogPostId:min(0)}",
+                new { controller = "Blog", action = "BlogPost" });
+
             //news RSS
             routeBuilder.MapLocalizedRoute("NewsRSS", "news/rss/{languageId:min(0)}",
 				new { controller = "News", action = "ListRss" });

@@ -138,6 +138,7 @@ namespace Nop.Web.Controllers
             return new RssActionResult(feed, _webHelper.GetThisPageUrl(false));
         }
 
+        [HttpGet]
         public virtual IActionResult BlogPost(int blogPostId)
         {
             if (!_blogSettings.Enabled)

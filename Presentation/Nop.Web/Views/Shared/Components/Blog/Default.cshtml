@@ -20,7 +20,7 @@
                                         <img src="@blog.PictureUrl" />
                                     }
                                     <p>
-                                        <a href="#">
+                                        <a href="@Url.RouteUrl("BlogShow", new { blogPostId = @blog.Id })">
                                             @Html.Raw(@blog.Title)
                                         </a>
                                     </p>
@@ -45,7 +45,7 @@
                                         <img src="@blog.PictureUrl" />
                                     }
                                     <p>
-                                        <a href="#">
+                                        <a href="@Url.RouteUrl("BlogShow", new { blogPostId = @blog.Id })">
                                             @blog.Title
                                         </a>
                                     </p>

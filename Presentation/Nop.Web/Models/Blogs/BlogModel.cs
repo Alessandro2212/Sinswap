@@ -13,6 +13,7 @@ namespace Nop.Web.Models.Blogs
 
         public BlogModel(BlogPost blogPost)
         {
+            this.Id = blogPost.Id;
             this.Title = blogPost.Title;
             this.Category = blogPost.BlogPostCategory?.Name;
             this.Color = blogPost.BlogPostCategory?.Color;
