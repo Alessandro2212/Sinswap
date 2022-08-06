@@ -1,0 +1,64 @@
+﻿@model IList<BlogModel>
+
+@if (Model.Count > 0)
+{
+    <div class="container-fluid newsContainer">
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <h2 class="sr-only">News</h2>
+                    <div class="flex-row row no-gutters">
+                        @foreach (var blog in Model.ToList().Take(2))
+                        {
+                            <div class="col-12 col-lg-6">
+                                @{
+                                    var image = blog.HasPicture ? "" : "noImg";
+                                }
+                                <div class="newsCard @blog.Color @image">
+                                    @if (blog.HasPicture)
+                                    {
+                                        <div class="newsImgContainer" style="background-image: url('@blog.PictureUrl');"></div>
+                                    }
+                                    <p>
+                                        <a href="@Url.RouteUrl("BlogShow", new { blogPostId = @blog.Id })">
+                                            @Html.Raw(@blog.Title)
+                                        </a>
+                                    </p>
+
+                                    <div class="category">
+                                        @blog.Category
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="flex-row row no-gutters">
+                        @foreach (var blog in Model.ToList().Skip(2))
+                        {
+                            <div class="col-6 col-lg-3">
+                                @{
+                                    var image = blog.HasPicture ? "" : "noImg";
+                                }
+                                <div class="newsCard @blog.Color @image">
+                                    @if (blog.HasPicture)
+                                    {
+                                        <div class="newsImgContainer" style="background-image: url('@blog.PictureUrl');"></div>
+                                    }
+                                    <p>
+                                        <a href="@Url.RouteUrl("BlogShow", new { blogPostId = @blog.Id })">
+                                            @blog.Title
+                                        </a>
+                                    </p>
+
+                                    <div class="category">
+                                        @blog.Category
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

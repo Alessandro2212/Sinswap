@@ -1195,14 +1195,8 @@ nav .cartFoldout {
   .topSellersContainer {
     margin-top: -50px;
   }
-  .topSellersContainer .topSellerCard .miniVendorImg {
-    height: 250px;
-  }
 }
 @media (max-width: 768px) {
-  .topSellersContainer .topSellerCard .miniVendorImg {
-    height: 200px;
-  }
   .topSellersContainer h2 {
     font-size: 18px;
   }
@@ -1210,9 +1204,6 @@ nav .cartFoldout {
 @media (max-width: 576px) {
   .topSellersContainer {
     border-radius: 0px;
-  }
-  .topSellersContainer .topSellerCard .miniVendorImg {
-    height: 150px;
   }
 }
 .newsContainer {
@@ -1241,9 +1232,13 @@ nav .cartFoldout {
   opacity: 0.8;
   transition: opacity 0.15s;
 }
-.newsContainer .container .newsCard img {
+.newsContainer .container .newsCard .newsImgContainer {
   border-radius: 5px 5px 0 0;
   width: 100%;
+  height: 135px;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .newsContainer .container .newsCard p {
   font-size: 20px;
@@ -1487,8 +1482,8 @@ nav .cartFoldout {
   transition: color 0.15s;
 }
 
-@media (min-width: 1660px) {
-  .popularMemberCard .miniVendorImg {
+@media (max-width: 1200px) {
+  .popularMembersContainer .popularMemberCard .miniVendorImg {
     height: 400px;
   }
 }
@@ -1496,10 +1491,13 @@ nav .cartFoldout {
   .popularMembersContainer h2 {
     font-size: 18px;
   }
+  .popularMembersContainer .popularMemberCard .miniVendorImg {
+    height: 300px;
+  }
 }
 @media (max-width: 576px) {
-  .popularMemberCard .miniVendorImg {
-    height: 300px;
+  .popularMembersContainer .popularMemberCard .miniVendorImg {
+    height: 200px;
   }
 }
 .promoContainer {

@@ -110,24 +110,12 @@
 @media (max-width: 992px) {
     .topSellersContainer {
         margin-top: -50px;
-
-        .topSellerCard {
-            .miniVendorImg {
-                height: 250px;
-            }
-        }
     }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (max-width: 768px) {
     .topSellersContainer {
-        .topSellerCard {
-            .miniVendorImg {
-                height: 200px;
-            }
-        }
-
         h2 {
             font-size: 18px;
         }
@@ -138,12 +126,6 @@
 @media (max-width: 576px) {
     .topSellersContainer {
         border-radius: 0px;
-
-        .topSellerCard {
-            .miniVendorImg {
-                height: 150px;
-            }
-        }
     }
 }
 

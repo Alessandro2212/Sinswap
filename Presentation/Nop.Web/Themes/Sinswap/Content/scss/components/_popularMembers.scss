@@ -79,15 +79,17 @@
 
 // Extra extra large devices (large desktops, 1200px and up)
 @media (min-width: 1660px) {
-    .popularMemberCard {
-        .miniVendorImg {
-            height: 400px;
-        }
-    }
 }
 
 // Extra large devices (large desktops, 1200px and up)
 @media (max-width: 1200px) {
+    .popularMembersContainer {
+        .popularMemberCard {
+            .miniVendorImg {
+                height: 400px;
+            }
+        }
+    }
 }
 
 // Large devices (desktops, 992px and up)
@@ -100,14 +102,22 @@
         h2 {
             font-size: 18px;
         }
+
+        .popularMemberCard {
+            .miniVendorImg {
+                height: 300px;
+            }
+        }
     }
 }
 
 // Small devices (landscape phones, 576px and up)
 @media (max-width: 576px) {
-    .popularMemberCard {
-        .miniVendorImg {
-            height: 300px;
+    .popularMembersContainer {
+        .popularMemberCard {
+            .miniVendorImg {
+                height: 200px;
+            }
         }
     }
 }
