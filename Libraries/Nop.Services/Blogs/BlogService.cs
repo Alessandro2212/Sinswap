@@ -352,6 +352,15 @@ namespace Nop.Services.Blogs
             return query.OrderBy(blog => blog.Position).Take(amount).ToList();
         }
 
+        public virtual IList<BlogPost> GetRelatedBlogs(string userCategory)
+        {
+            //var query = _blogPostRepository.Table.Where(b => b.BlogPostCategory.UserCategory == userCategory);
+
+            //return query.ToList();
+
+            return null;
+        }
+
         /// <summary>
         /// Gets a blog comment
         /// </summary>

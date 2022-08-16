@@ -5,5 +5,7 @@ namespace Nop.Core.Domain.Blogs
         public string Name { get; set; }
 
         public string Color { get; set; }
+
+        //public string UserCategory { get; set; }
     }
 }

@@ -150,6 +150,7 @@ namespace Nop.Services.Blogs
         IList<AboutUs> GetAllAboutUs();
 
         IList<BlogPost> GetBlogs(int amount);
+        IList<BlogPost> GetRelatedBlogs(string userCategory);
 
         /// <summary>
         /// Deletes a blog comment
