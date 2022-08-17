@@ -151,9 +151,9 @@ namespace Nop.Web.Factories
             }
 
             model.PictureUrl = GetBlogPicture(blogPost);
-
-            //model.BlogUserCategory = blogPost.BlogPostCategory.UserCategory;
-            //model.RelatedBlogs = _blogService.GetRelatedBlogs(blogPost.BlogPostCategory.UserCategory);
+            model.PictureCredit = GetBlogPictureCredit(blogPost);
+            model.BlogUserCategory = blogPost.BlogPostCategory.UserCategory;
+            model.RelatedBlogs = _blogService.GetRelatedBlogs(blogPost.Id, blogPost.BlogPostCategory.UserCategory);
         }
 
         /// <summary>
@@ -340,6 +340,11 @@ namespace Nop.Web.Factories
             }
 
             return string.Empty;
+        }
+
+        private string GetBlogPictureCredit(BlogPost blogPost)
+        {
+            return blogPost.BlogPictures?.FirstOrDefault()?.PictureCredit;
         }
 
 

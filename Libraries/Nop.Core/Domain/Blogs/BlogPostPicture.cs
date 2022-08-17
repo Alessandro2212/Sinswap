@@ -11,7 +11,7 @@ namespace Nop.Core.Domain.Blogs
 
         public int PictureId { get; set; }
 
-        //public string PictureCredit { get; set; }
+        public string PictureCredit { get; set; }
 
         public virtual BlogPost BlogPost { get; set; }
 
