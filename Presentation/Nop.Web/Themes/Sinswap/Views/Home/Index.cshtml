@@ -9,7 +9,9 @@
 
 @await Component.InvokeAsync("Blog", new { amount = 6 })
 
-<div class="container-fluid featuredContainer">
+@await Component.InvokeAsync("VendorFeaturette", new { name = "Regina Lemme" })
+
+@*<div class="container-fluid featuredContainer">
     <div class="row">
         <div class="col">
             <div class="container">
@@ -59,11 +61,12 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 @await Component.InvokeAsync("HomepageCategories", new { showMostPopular = true })
 
 @await Component.InvokeAsync("MostPopularVendor")
+
 
 <div class="container-fluid promoContainer">
     <div class="row">

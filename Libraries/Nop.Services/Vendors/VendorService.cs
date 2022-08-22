@@ -28,6 +28,7 @@ namespace Nop.Services.Vendors
         private readonly IRepository<ProductVendor> _productVendorRepository;
         private readonly IRepository<ProductCategory> _productCategoryRepository;
         private readonly IRepository<VendorReviewRecord> _vendorReviewRepository;
+        private readonly IRepository<VendorPictureRecord> _vendorPictureRepository;
         private readonly IRepository<VendorCustomer> _vendorCustomerRepository;
         private readonly IRepository<VendorCustomerStory> _vendorCustomerStoryRepository;
         private readonly IRepository<Follower> _followerRepository;
@@ -52,7 +53,8 @@ namespace Nop.Services.Vendors
             IRepository<Follower> followerRepository,
             IRepository<VendorFaq> vendorFaqRepository,
             IRepository<ProductCategory> productCategoryRepository,
-            IRepository<Category> categoryRepository)
+            IRepository<Category> categoryRepository,
+            IRepository<VendorPictureRecord> vendorPictureRepository)
         {
             this._eventPublisher = eventPublisher;
             this._vendorRepository = vendorRepository;
@@ -68,6 +70,7 @@ namespace Nop.Services.Vendors
             this._vendorFaqRepository = vendorFaqRepository;
             this._productCategoryRepository = productCategoryRepository;
             this._categoryRepository = categoryRepository;
+            this._vendorPictureRepository = vendorPictureRepository;
         }
 
         #endregion
@@ -448,6 +451,24 @@ namespace Nop.Services.Vendors
                         .Count();
 
             return numberOfVendors;
+        }
+
+        public IEnumerable<VendorPictureRecord> GetVendorFeaturette(string vendorName)
+        {
+            return _vendorPictureRepository.Table
+                                           .Where(vp => vp.Vendor.Name == vendorName)
+                                           .Take(2)
+                                           .ToList();
+        }
+
+        public string GetVendorMostSoldProduct(int vendorId)
+        {
+            var mostSoldProduct = _productRepository.Table
+                                                    .Where(p => p.VendorId == vendorId)
+                                                    .OrderByDescending(p => p.AmountSold)
+                                                    .FirstOrDefault();
+
+            return mostSoldProduct != null ? mostSoldProduct.Name : string.Empty;
         }
 
         #endregion

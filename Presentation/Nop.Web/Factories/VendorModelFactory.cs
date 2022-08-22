@@ -35,6 +35,7 @@ namespace Nop.Web.Factories
         private readonly MediaSettings _mediaSettings;
         private readonly VendorSettings _vendorSettings;
         private readonly IUrlRecordService _urlRecordService;
+        private readonly IVendorService _vendorService;
 
         #endregion
 
@@ -50,7 +51,8 @@ namespace Nop.Web.Factories
             IWorkContext workContext,
             MediaSettings mediaSettings,
             VendorSettings vendorSettings,
-            IUrlRecordService urlRecordService)
+            IUrlRecordService urlRecordService,
+            IVendorService vendorService)
         {
             this._captchaSettings = captchaSettings;
             this._commonSettings = commonSettings;
@@ -63,6 +65,7 @@ namespace Nop.Web.Factories
             this._mediaSettings = mediaSettings;
             this._vendorSettings = vendorSettings;
             this._urlRecordService = urlRecordService;
+            this._vendorService = vendorService;
         }
 
         #endregion
@@ -262,6 +265,30 @@ namespace Nop.Web.Factories
             return model;
         }
 
+        public virtual VendorFeaturetteModel PrepareVendorFeaturetteModel(string name)
+        {
+            var vendorRecords = this._vendorService.GetVendorFeaturette(name);
+            VendorFeaturetteModel model = new VendorFeaturetteModel();
+            if (vendorRecords.Any())
+            {
+                var vendor = vendorRecords.First().Vendor;
+                var pictureId1 = vendor.PictureId;
+                var pictureId2 = vendorRecords.Last().PictureId;
+                model.Name = vendor.Name;
+                model.Quote = vendor.VendorNotes?.FirstOrDefault()?.Note;
+                model.City = vendor.City;
+                model.Country = vendor.Country.Name;
+                model.Age = vendor.BirthDate != null ? GetAge(vendor.BirthDate) : 0;
+                model.KnownFor = vendor.KnownFor;
+                model.SeName = _urlRecordService.GetSeName(vendor);
+                model.PictureUrl1 = _pictureService.GetPictureUrl(pictureId1);
+                model.PictureUrl2 = _pictureService.GetPictureUrl(pictureId2);
+                model.BestSoldProduct = this._vendorService.GetVendorMostSoldProduct(vendor.Id);
+            }
+             
+            return model;
+        }
+
         private int GetAge(DateTime birthDay)
         {
             int age = 18;
@@ -272,6 +299,8 @@ namespace Nop.Web.Factories
 
             return age;
         }
+
+
 
         #endregion
     }

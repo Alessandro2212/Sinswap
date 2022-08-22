@@ -110,5 +110,9 @@ namespace Nop.Services.Vendors
         IEnumerable<Vendor> GetCategoryVendors(int categoryId);
 
         int GetNumberOfVendorsSellingCategory(int categoryId);
+
+        IEnumerable<VendorPictureRecord> GetVendorFeaturette(string vendorName);
+
+        string GetVendorMostSoldProduct(int vendorId);
     }
 }

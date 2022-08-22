@@ -1,6 +1,4 @@
-﻿using Nop.Core;
-
-namespace Nop.Core.Domain.Vendors
+﻿namespace Nop.Core.Domain.Vendors
 {
     /// <summary>
     /// Represents a vendor picture mapping
@@ -21,5 +19,7 @@ namespace Nop.Core.Domain.Vendors
         /// Gets or sets the display order
         /// </summary>
         public int DisplayOrder { get; set; }
+
+        public virtual Vendor Vendor { get; set; }
     }
 }

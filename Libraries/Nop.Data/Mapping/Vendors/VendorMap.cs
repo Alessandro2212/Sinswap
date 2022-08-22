@@ -28,6 +28,7 @@ namespace Nop.Data.Mapping.Vendors
             builder.Property(vendor => vendor.MetaKeywords).HasMaxLength(400);
             builder.Property(vendor => vendor.MetaTitle).HasMaxLength(400);
             builder.Property(vendor => vendor.PageSizeOptions).HasMaxLength(200);
+            builder.Property(vendor => vendor.KnownFor).HasMaxLength(100);
 
             base.Configure(builder);
         }

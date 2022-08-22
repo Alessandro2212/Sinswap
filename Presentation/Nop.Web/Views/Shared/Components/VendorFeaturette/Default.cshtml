@@ -1,0 +1,55 @@
+﻿@model Nop.Web.Models.Vendors.VendorFeaturetteModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+@if (Model != null)
+{
+    <div class="container-fluid featuredContainer">
+        <div class="row">
+            <div class="col">
+                <div class="container">
+
+                    <h2>This week’s <strong>sinswap</strong> featurette</h2>
+
+                    <div class="flex-row row no-gutters">
+
+                        <div class="col-12 col-lg-6">
+                            <div class="featuredCard" style="background-image: url('/Themes/Sinswap/content/images/Feature_1.jpeg')">
+                                <div class="content">
+                                    <blockquote>
+                                       “@Html.Raw(Model.Quote)”
+                                    </blockquote>
+                                    <div class="location">
+                                        <span class="city">@Model.City</span>, <span class="country">@Model.Country</span>
+                                    </div>
+                                    <div class="nameAge">
+                                        <a href="@Url.RouteUrl("Vendor", new { SeName = @Model.SeName })"><span class="name">@Model.Name</span>, <span class="age">@Model.Age</span></a>
+                                    </div>
+                                    <a href="@Url.RouteUrl("Vendor", new { SeName = @Model.SeName })" class="btn btn-light">Checkout my <strong>sinswap</strong>-shop</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-lg-3">
+                            <div class="featuredCard" style="background-image: url('@Model.PictureUrl1')">
+                                <div class="content">
+                                    <div class="label">Known for:</div>
+                                    <div class="title"><a href="@Url.RouteUrl("Vendor", new { SeName = @Model.SeName })">@Model.KnownFor</a></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-lg-3">
+                            <div class="featuredCard" style="background-image: url('@Model.PictureUrl2')">
+                                <div class="content">
+                                    <div class="label">@Model.Name ’s best seller:</div>
+                                    <div class="title"><a href="@Url.RouteUrl("Vendor", new { SeName = @Model.SeName })">@Model.BestSoldProduct</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
