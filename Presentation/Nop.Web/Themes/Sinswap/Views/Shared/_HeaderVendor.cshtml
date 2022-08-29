@@ -30,8 +30,8 @@
                     }
                     else
                     {
-@*                        <a href="#" class="btn btn-primary d-none d-sm-block d-md-none d-xl-block">Start selling</a>
-*@                        <a href="@Url.RouteUrl("Register")" class="btn btn-primary d-none d-sm-block mr-0 mr-xl-4">Join</a>
+                        <a href="#" class="btn btn-primary d-none d-sm-block d-md-none d-xl-block">Start selling</a>
+                        <a href="@Url.RouteUrl("Register")" class="btn btn-primary d-none d-sm-block mr-0 mr-xl-4">Join</a>
                         <a href="@Url.RouteUrl("Login")" class="btn btn-primary">Log in</a>
                         @await Component.InvokeAsync("FlyoutShoppingCart")
                     }
