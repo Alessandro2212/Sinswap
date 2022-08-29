@@ -36,12 +36,13 @@
                     <a href="#" class="btn search icon"><i class="fa fa-search" aria-hidden="true"></i></a>
                     @if (this.User.Identity.IsAuthenticated)
                     {
+                        <a href="@Url.RouteUrl("Logout")" class="btn btn-primary">Log out</a>
                         @await Component.InvokeAsync("FlyoutShoppingCart")
                     }
                     else
                     {
-                        <a href="#" class="btn btn-primary d-none d-sm-block d-md-none d-xl-block">Start selling</a>
-                        <a href="@Url.RouteUrl("Register")" class="btn btn-primary d-none d-sm-block mr-0 mr-xl-4">Join</a>
+@*                        <a href="#" class="btn btn-primary d-none d-sm-block d-md-none d-xl-block">Start selling</a>
+*@                        <a href="@Url.RouteUrl("Register")" class="btn btn-primary d-none d-sm-block mr-0 mr-xl-4">Join</a>
                         <a href="@Url.RouteUrl("Login")" class="btn btn-primary">Log in</a>
                         @await Component.InvokeAsync("FlyoutShoppingCart")
                     }
