@@ -22,6 +22,11 @@
     <div class="page-title">
         <h1>@Model.Title</h1>
     </div>
+    @if (!string.IsNullOrEmpty(Model.PictureUrl))
+    {
+        <img src="@Model.PictureUrl" />
+        <h3>credits to: <b>@Model.PictureCredit</b></h3>
+    }
     <div class="page-body">
         <div class="post-date">
             @Model.CreatedOn.ToString("D")
@@ -64,7 +69,7 @@
                         <div class="result">@result</div>
                     }
                 </div>
-                
+
                 <form asp-route="BlogPost" asp-route-sename="@Model.SeName" method="post">
                     <div class="form-fields">
                         <div class="inputs">
@@ -111,12 +116,12 @@
                                                 @if (comment.AllowViewingProfiles)
                                                 {
                                                     <a href="@Url.RouteUrl("CustomerProfile", new {id = comment.CustomerId})" class="avatar-img-link">
-                                                        <img src="@(comment.CustomerAvatarUrl)" class="avatar-img" alt="avatar"/>
+                                                        <img src="@(comment.CustomerAvatarUrl)" class="avatar-img" alt="avatar" />
                                                     </a>
                                                 }
                                                 else
                                                 {
-                                                    <img src="@(comment.CustomerAvatarUrl)" class="avatar-img" alt="avatar"/>
+                                                    <img src="@(comment.CustomerAvatarUrl)" class="avatar-img" alt="avatar" />
                                                 }
                                             </div>
                                         }

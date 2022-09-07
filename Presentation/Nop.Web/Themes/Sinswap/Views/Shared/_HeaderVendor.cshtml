@@ -25,6 +25,7 @@
                     <a href="#" class="btn search icon"><i class="fa fa-search" aria-hidden="true"></i></a>
                     @if (this.User.Identity.IsAuthenticated)
                     {
+                        <a href="@Url.RouteUrl("Logout")" class="btn btn-primary">Log out</a>
                         @await Component.InvokeAsync("FlyoutShoppingCart")
                     }
                     else

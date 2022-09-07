@@ -373,6 +373,10 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// this is the action to call for signing out
+        /// </summary>
+        /// <returns></returns>
         //available even when a store is closed
         [CheckAccessClosedStore(true)]
         //available even when navigation is not allowed

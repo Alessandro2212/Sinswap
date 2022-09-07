@@ -97,7 +97,5 @@ namespace Nop.Core.Domain.Blogs
 
         public virtual Language Language { get; set; }
         public virtual BlogPostCategory BlogPostCategory { get; set; }
-
-
     }
 }

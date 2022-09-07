@@ -149,6 +149,11 @@ namespace Nop.Web.Factories
                     model.Comments.Add(commentModel);
                 }
             }
+
+            model.PictureUrl = GetBlogPicture(blogPost);
+            model.PictureCredit = GetBlogPictureCredit(blogPost);
+            model.BlogUserCategory = blogPost.BlogPostCategory.UserCategory;
+            model.RelatedBlogs = _blogService.GetRelatedBlogs(blogPost.Id, blogPost.BlogPostCategory.UserCategory);
         }
 
         /// <summary>
@@ -317,18 +322,29 @@ namespace Nop.Web.Factories
             foreach (var blog in blogs)
             {
                 var model = new BlogModel(blog);
-                var pictureId = blog.BlogPictures?.FirstOrDefault()?.PictureId;
-                if (pictureId.HasValue)
-                {
-                    var picture = _pictureService.GetPictureById(pictureId.Value);
-                    var pictureSize = _mediaSettings.ProductThumbPictureSize;
-                    model.PictureUrl = picture != null ? _pictureService.GetPictureUrl(picture, pictureSize) : string.Empty;
-                }
-                
+                model.PictureUrl = GetBlogPicture(blog);             
                 blogModels.Add(model);
             }
 
             return blogModels;
+        }
+
+        private string GetBlogPicture(BlogPost blogPost)
+        {
+            var pictureId = blogPost.BlogPictures?.FirstOrDefault()?.PictureId;
+            if (pictureId.HasValue)
+            {
+                var picture = _pictureService.GetPictureById(pictureId.Value);
+                var pictureSize = _mediaSettings.ProductThumbPictureSize;
+                return picture != null ? _pictureService.GetPictureUrl(picture, pictureSize) : string.Empty;
+            }
+
+            return string.Empty;
+        }
+
+        private string GetBlogPictureCredit(BlogPost blogPost)
+        {
+            return blogPost.BlogPictures?.FirstOrDefault()?.PictureCredit;
         }
 
 

@@ -106,6 +106,8 @@ namespace Nop.Core.Domain.Vendors
 
         public bool? IsPremium { get; set; }
 
+        public string KnownFor { get; set; }
+
         /// <summary>
         /// Gets or sets vendor notes
         /// </summary>
