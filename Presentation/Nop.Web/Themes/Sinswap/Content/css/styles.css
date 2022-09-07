@@ -719,6 +719,114 @@ a.more:hover {
     height: 250px;
   }
 }
+.form-fields .text {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.form-group .form-control {
+  padding: 0.75rem;
+  height: auto;
+  -webkit-box-shadow: inset 0px 3px 7px -6px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0px 3px 7px -6px rgba(0, 0, 0, 0.7);
+}
+.form-group.date-of-birth .form-control {
+  width: auto;
+  display: inline;
+  margin-right: 5px;
+}
+
+.field-validation-error {
+  position: relative;
+  padding-left: 0.75rem;
+  font-size: 14px;
+  text-align: center;
+  color: #ed2939;
+}
+
+.result {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.btn.btn-action {
+  background-color: #0ebc39;
+  color: #fff;
+}
+.btn.btn-light {
+  border: 1px solid #171717;
+  background-color: #fff;
+  color: #171717;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.btn.btn-light.btn-facebook {
+  background: #fff url("../images/social/btn-facebook.svg") 15px center no-repeat;
+  background-size: 20px;
+}
+.btn.btn-light.btn-google {
+  background: #fff url("../images/social/btn-google.svg") 15px center no-repeat;
+  background-size: 20px;
+}
+.btn.btn-light.btn-apple {
+  background: #fff url("../images/social/btn-apple.svg") 17px center no-repeat;
+  background-size: 16.3px 20px;
+}
+
+.modal .btn {
+  width: 100%;
+  padding: 0.65rem;
+}
+.modal .btn-text {
+  color: #0ebc39;
+}
+
+.modal .modal-content .modal-header {
+  text-align: center;
+  border-bottom: 0px;
+  padding: 1rem 1rem 0.5rem 1rem;
+}
+.modal .modal-content .modal-header .close {
+  position: absolute;
+  right: 2rem;
+}
+.modal .modal-content .modal-header .modal-title {
+  width: 100%;
+}
+.modal .modal-content .modal-header .modal-title h5 {
+  margin-bottom: 0px;
+  font-size: 24px;
+}
+.modal .modal-content .modal-body {
+  padding: 1rem 2rem 2rem 2rem;
+}
+.modal .modal-content .modal-body .devider {
+  width: 100%;
+  text-align: center;
+  border-top: 2px solid #ededed;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+.modal .modal-content .modal-body .devider span {
+  position: relative;
+  background-color: #fff;
+  padding: 0 15px;
+  top: -13px;
+}
+.modal .modal-content .modal-footer {
+  border-top: 2px solid #ededed;
+  padding: 0.5rem 2em;
+  justify-content: center;
+  font-size: 14px;
+}
+
+@media (min-width: 576px) {
+  .modal-sm {
+    max-width: 400px !important;
+  }
+}
 header {
   position: relative;
   color: #fff;

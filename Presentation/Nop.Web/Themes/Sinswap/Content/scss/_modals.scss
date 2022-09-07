@@ -1,0 +1,83 @@
+﻿// General
+.modal {
+    .modal-content {
+        .modal-header {
+            text-align: center;
+            border-bottom: 0px;
+            padding: 1rem 1rem 0.5rem 1rem;
+
+            .close {
+                position: absolute;
+                right: 2rem;
+            }
+
+            .modal-title {
+                width: 100%;
+
+                h5 {
+                    margin-bottom: 0px;
+                    font-size: 24px;
+                }
+            }
+        }
+
+        .modal-body {
+            padding: 1rem 2rem 2rem 2rem;
+
+            .devider {
+                width: 100%;
+                text-align: center;
+                border-top: 2px solid $grey3;
+                margin-top: 40px;
+                margin-bottom: 10px;
+
+                span {
+                    position: relative;
+                    background-color: $white;
+                    padding: 0 15px;
+                    top: -13px;
+                }
+            }
+        }
+
+        .modal-footer {
+            border-top: 2px solid $grey3;
+            padding: 0.5rem 2em;
+            justify-content: center;
+            font-size: 14px;
+        }
+    }
+}
+
+
+
+// Extra Extra large devices (large desktops, 1660px and down)
+@media (max-width: 1660px) {
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (min-width: 576px) {
+    .modal-sm {
+        max-width: 400px !important;
+    }
+}
