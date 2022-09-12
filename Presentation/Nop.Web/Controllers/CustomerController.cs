@@ -287,16 +287,16 @@ namespace Nop.Web.Controllers
 
         #region Login / logout
 
-        [HttpsRequirement(SslRequirement.Yes)]
-        //available even when a store is closed
-        [CheckAccessClosedStore(true)]
-        //available even when navigation is not allowed
-        [CheckAccessPublicStore(true)]
-        public virtual IActionResult Login(bool? checkoutAsGuest)
-        {
-            var model = _customerModelFactory.PrepareLoginModel(checkoutAsGuest);
-            return View(model);
-        }
+        //[HttpsRequirement(SslRequirement.Yes)]
+        ////available even when a store is closed
+        //[CheckAccessClosedStore(true)]
+        ////available even when navigation is not allowed
+        //[CheckAccessPublicStore(true)]
+        //public virtual IActionResult Login(bool? checkoutAsGuest)
+        //{
+        //    var model = _customerModelFactory.PrepareLoginModel(checkoutAsGuest);
+        //    return View(model);
+        //}
 
         [HttpPost]
         [ValidateCaptcha]
