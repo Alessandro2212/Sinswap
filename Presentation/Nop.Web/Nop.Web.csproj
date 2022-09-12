@@ -46,6 +46,7 @@
     <None Remove="Themes\Sinswap\Content\js\public.onepagecheckout.js" />
     <None Remove="Themes\Sinswap\Content\js\vendor\stellar\stellar.js" />
     <None Remove="Themes\Sinswap\Content\scss\components\_aboutUs.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_cart.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_featured.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_footer.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_modals.scss" />
@@ -87,6 +88,10 @@
     </Content>
     <Content Update="Themes\Sinswap\Content\js\public.onepagecheckout.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Views\Shared\Components\OrderSummary\Default.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
 

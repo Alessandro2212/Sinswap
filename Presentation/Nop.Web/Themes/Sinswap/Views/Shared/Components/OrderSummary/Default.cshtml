@@ -1,0 +1,190 @@
+@model ShoppingCartModel
+@using Nop.Core
+@using Nop.Core.Domain.Orders
+@using Nop.Core.Domain.Tax
+@inject IWebHelper webHelper
+@inject IWorkContext workContext
+@inject OrderSettings orderSettings
+
+<div class="order-summary-content">
+    @*@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.OrderSummaryContentBefore })*@
+    @await Html.PartialAsync("_OrderReviewData", Model.OrderReviewData)
+    @if (Model.Items.Count > 0)
+    {
+        if (Model.Warnings.Count > 0)
+        {
+            <div class="message-error">
+                <ul>
+                    @foreach (var warning in Model.Warnings)
+                    {
+                        <li>@warning</li>
+                    }
+                </ul>
+            </div>
+        }
+        @*we add enctype = "multipart/form-data" because "File upload" attribute control type requires it*@
+        <form asp-route="ShoppingCart" method="post" enctype="multipart/form-data" id="shopping-cart-form">
+
+            <div class="container cartItemList">
+                <div class="row">
+                    <div class="col-6">
+                        Product
+                    </div>
+                    <div class="col-3">
+                        Seller
+                    </div>
+                    <div class="col-1 text-center">
+                        Amount
+                    </div>
+                    <div class="col-2 text-right">
+                        Price
+                    </div>
+                </div>
+                @foreach (var item in Model.Items) {
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="itemImg">
+                                <a href="@Url.RouteUrl("Product", new {SeName = item.ProductSeName})"><img alt="@item.Picture.AlternateText" src="@item.Picture.ImageUrl" title="@item.Picture.Title" /></a>
+                            </div>
+                            <div class="itemInfo">
+                                <div class="itemLabel">
+                                    <a href="@Url.RouteUrl("Product", new {SeName = item.ProductSeName})" class="product-name">@item.ProductName</a>
+                                </div>
+                                <div class="itemDesc">
+                                    @Html.Raw(item.AttributeInfo)
+                                </div>
+                                <div class="itemRemove">
+                                    <input type="checkbox" name="removefromcart" id="removefromcart@(item.Id)" value="@(item.Id)"/>
+                                    <label class="td-title" for="removefromcart@(item.Id)">Remove@*@T("ShoppingCart.Remove"):*@</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 itemVendor">
+                            By <a href="#">@item.VendorName</a>
+                        </div>
+                        <div class="col-1 text-center form-group itemAmount">
+                            @if (item.AllowedQuantities.Count > 0) {
+                                <select name="itemquantity@(item.Id)" id="itemquantity@(item.Id)" class="qty-dropdown">
+                                    @foreach (var qty in item.AllowedQuantities) {
+                                        <option selected="@qty.Selected" value="@qty.Value">@qty.Value</option>
+                                    }
+                                </select>
+                            } else {
+                                <input name="itemquantity@(item.Id)" class="qty-input form-control" id="itemquantity@(item.Id)" type="text" value="@(item.Quantity)" />
+                            }
+                        </div>
+                        <div class="col-2 text-right itemPrice">
+                            @item.SubTotal
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (Model.IsEditable) {
+                <div class="container">
+                    <div class="row btnRow">
+                        <div class="col-6">
+                            <input type="submit" name="updatecart" value="@T("ShoppingCart.UpdateCart")" class="btn btn-grey update-cart-button" />
+                        </div>
+
+                        <div class="col-6 text-right">
+                            <input type="submit" name="continueshopping" value="@T("ShoppingCart.ContinueShopping")" class="btn btn-grey continue-shopping-button" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model.IsEditable) {
+                @await Html.PartialAsync("_CheckoutAttributes", Model)
+            }
+
+            @await Component.InvokeAsync("SelectedCheckoutAttributes")
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-5 shippingContainer">
+                        <h5>Shipping estimate</h5>
+                        <p>Enter your destination to get a shipping estimate</p>
+                        
+                        @await Component.InvokeAsync("EstimateShipping")
+                    </div>
+                    <div class="col-1 d-none d-xl-flex"></div>
+                    <div class="col-7 col-xl-6 totalContainer">
+                        @await Html.PartialAsync("_DiscountBox", Model.DiscountBox)
+                        @await Html.PartialAsync("_GiftCardBox", Model.GiftCardBox)
+
+                        @await Component.InvokeAsync("OrderTotals", new { isEditable = Model.IsEditable })
+
+                        @if (Model.TermsOfServiceOnShoppingCartPage) {
+                            <div id="terms-of-service-warning-box" title="@T("Checkout.TermsOfService")" style="display: none;">
+                                <p>@T("Checkout.TermsOfService.PleaseAccept")</p>
+                            </div>
+                            <div class="terms-of-service">
+                                <input id="termsofservice" type="checkbox" name="termsofservice" />
+                                <label for="termsofservice">@T("Checkout.TermsOfService.IAccept")</label>
+                                @if (Model.TermsOfServicePopup) {
+                                    <a class="read" id="read-terms">@T("Checkout.TermsOfService.Read")</a>
+                                    <script asp-location="Footer">
+                                        $(document).ready(function() {
+                                            $('#read-terms').on('click',
+                                                function(e) {
+                                                    e.preventDefault();
+                                                    displayPopupContentFromUrl(
+                                                        '@Url.RouteUrl("TopicPopup", new {SystemName = "conditionsofuse"})',
+                                                        '@T("Checkout.TermsOfService")');
+                                                });
+                                        });
+                                    </script>
+                                } else {
+                                    <a class="read" id="read-terms" href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("conditionsofuse") })">@T("Checkout.TermsOfService.Read")</a>
+                                }
+                            </div>
+                        }
+
+                        <div class="checkout-buttons text-right">
+                            @if (string.IsNullOrEmpty(Model.MinOrderSubtotalWarning) && !Model.HideCheckoutButton) {
+                                <script asp-location="Footer">
+                                    $(document).ready(function () {
+                                        $('#checkout').on('click', function () {
+                                            //terms of service
+                                            var termOfServiceOk = true;
+                                            if ($('#termsofservice').length > 0) {
+                                                //terms of service element exists
+                                                if (!$('#termsofservice').is(':checked')) {
+                                                    $("#terms-of-service-warning-box").dialog();
+                                                    termOfServiceOk = false;
+                                                } else {
+                                                    termOfServiceOk = true;
+                                                }
+                                            }
+                                            return termOfServiceOk;
+                                        });
+                                    });
+                                </script>
+
+                                if (orderSettings.CheckoutDisabled) {
+                                    <div class="checkout-disabled">
+                                        @T("Checkout.Disabled")
+                                    </div>
+                                } else {
+                                    <button type="submit" id="checkout" name="checkout" value="checkout" class="btn btn-action checkout-button">
+                                        @T("Checkout.Button")
+                                    </button>
+                                }
+                            }
+                        </div>
+                        <div class="addon-buttons">
+                            @foreach (var pm in Model.ButtonPaymentMethodViewComponentNames) {
+                                @await Component.InvokeAsync(pm)
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    } else {
+        <div class="no-data">
+            @T("ShoppingCart.CartIsEmpty")
+        </div>
+    }
+</div>
