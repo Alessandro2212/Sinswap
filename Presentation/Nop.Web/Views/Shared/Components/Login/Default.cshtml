@@ -4,8 +4,6 @@
 @inject IWebHelper webHelper
 
 @{
-    //Layout = "_ColumnsOne";
-
     //title
     //Html.AddTitleParts(T("PageTitle.Login").Text);
     ////page class
@@ -68,7 +66,8 @@
                                     <input asp-for="RememberMe" />
                                     <label asp-for="RememberMe">Remember me</label>
                                     <span class="forgot-password float-right">
-                                        <a asp-route="PasswordRecovery" class="btn-text">@T("Account.Login.ForgotPassword")</a>
+                                        @*<a asp-route="PasswordRecovery" class="btn-text">@T("Account.Login.ForgotPassword")</a>*@
+                                        <button type="button" class="btn-text" data-toggle="modal" data-target="#pwRecoveryModal">@T("Account.Login.ForgotPassword")</button>
                                     </span>
                                 </div>
                                 @if (Model.DisplayCaptcha)
@@ -124,7 +123,9 @@
                                 <strong>@T("Account.Login.NewCustomer")</strong>
                             </div>*@
                             <div class="text">
-                                Not a member yet? <a href="@registerUrl" class="btn-text">Join now!@*@T("Account.Register")*@</a>
+                                Not a member yet? 
+                                @*<a href="@registerUrl" class="btn-text">Join now!@T("Account.Register")</a>*@
+                                <button type="button" class="btn-text" data-toggle="modal" data-target="#registerModal">Join now!</button>
                             </div>
                         </div>
                     }

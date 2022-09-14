@@ -433,14 +433,14 @@ namespace Nop.Web.Controllers
 
         #region Password recovery
 
-        [HttpsRequirement(SslRequirement.Yes)]
-        //available even when navigation is not allowed
-        [CheckAccessPublicStore(true)]
-        public virtual IActionResult PasswordRecovery()
-        {
-            var model = _customerModelFactory.PreparePasswordRecoveryModel();
-            return View(model);
-        }
+        //[HttpsRequirement(SslRequirement.Yes)]
+        ////available even when navigation is not allowed
+        //[CheckAccessPublicStore(true)]
+        //public virtual IActionResult PasswordRecovery()
+        //{
+        //    var model = _customerModelFactory.PreparePasswordRecoveryModel();
+        //    return View(model);
+        //}
 
         [HttpPost, ActionName("PasswordRecovery")]
         [PublicAntiForgery]
@@ -571,20 +571,20 @@ namespace Nop.Web.Controllers
 
         #region Register
 
-        [HttpsRequirement(SslRequirement.Yes)]
-        //available even when navigation is not allowed
-        [CheckAccessPublicStore(true)]
-        public virtual IActionResult Register()
-        {
-            //check whether registration is allowed
-            if (_customerSettings.UserRegistrationType == UserRegistrationType.Disabled)
-                return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.Disabled });
+        //[HttpsRequirement(SslRequirement.Yes)]
+        ////available even when navigation is not allowed
+        //[CheckAccessPublicStore(true)]
+        //public virtual IActionResult Register()
+        //{
+        //    //check whether registration is allowed
+        //    if (_customerSettings.UserRegistrationType == UserRegistrationType.Disabled)
+        //        return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.Disabled });
 
-            var model = new RegisterModel();
-            model = _customerModelFactory.PrepareRegisterModel(model, false, setDefaultValues: true);
+        //    var model = new RegisterModel();
+        //    model = _customerModelFactory.PrepareRegisterModel(model, false, setDefaultValues: true);
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         [HttpPost]
         [ValidateCaptcha]
