@@ -125,6 +125,12 @@ namespace Nop.Services.Customers
         /// <param name="customer">Customer</param>
         void UpdateCustomer(Customer customer);
 
+        string GenerateActivationCode(int size);
+
+        void InsertCustomerActivationCode(CustomerActivationCode customerActivationCode);
+
+        string GetCustomerActivationCode(int customerId);
+
         /// <summary>
         /// Reset data required for checkout
         /// </summary>

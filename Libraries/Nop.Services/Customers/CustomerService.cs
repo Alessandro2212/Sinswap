@@ -39,6 +39,7 @@ namespace Nop.Services.Customers
         private readonly IRepository<CustomerRole> _customerRoleRepository;
         private readonly IRepository<GenericAttribute> _gaRepository;
         private readonly IStaticCacheManager _staticCacheManager;
+        private readonly IRepository<CustomerActivationCode> _customerActivationCodeRepository;
         private readonly string _entityName;
 
         #endregion
@@ -56,7 +57,8 @@ namespace Nop.Services.Customers
             IRepository<CustomerPassword> customerPasswordRepository,
             IRepository<CustomerRole> customerRoleRepository,
             IRepository<GenericAttribute> gaRepository,
-            IStaticCacheManager staticCacheManager)
+            IStaticCacheManager staticCacheManager,
+            IRepository<CustomerActivationCode> customerActivationCodeRepository)
         {
             this._customerSettings = customerSettings;
             this._cacheManager = cacheManager;
@@ -70,6 +72,7 @@ namespace Nop.Services.Customers
             this._customerRoleRepository = customerRoleRepository;
             this._gaRepository = gaRepository;
             this._staticCacheManager = staticCacheManager;
+            this._customerActivationCodeRepository = customerActivationCodeRepository;
             this._entityName = typeof(Customer).Name;
         }
 
@@ -467,6 +470,48 @@ namespace Nop.Services.Customers
 
             //event notification
             _eventPublisher.EntityUpdated(customer);
+        }
+
+        public string GenerateActivationCode(int size)
+        {
+            Random rand = new Random();
+            // Characters we will use to generate this random string.
+            char[] allowableChars = "ABCDEFGHIJKLOMNOPQRSTUVWXYZ0123456789".ToCharArray();
+
+            // Start generating the random string.
+            string activationCode = string.Empty;
+            for (int i = 0; i <= size - 1; i++)
+            {
+                activationCode += allowableChars[rand.Next(allowableChars.Length - 1)];
+            }
+
+            // Return the random string in upper case.
+            return activationCode.ToUpper();
+        }
+
+        
+        public void InsertCustomerActivationCode(CustomerActivationCode customerActivationCode)
+        {
+            if (customerActivationCode == null)
+                throw new ArgumentNullException(nameof(customerActivationCode));
+
+            customerActivationCode.InsertAt = DateTime.Now;
+
+            _customerActivationCodeRepository.Insert(customerActivationCode);
+        }
+
+        public string GetCustomerActivationCode(int customerId)
+        {
+            var cac = _customerActivationCodeRepository.Table
+                                                        .Where(c => c.CustomerId == customerId)
+                                                        .OrderByDescending(c => c.InsertAt)
+                                                        .FirstOrDefault();
+            if (cac == null)
+            {
+                return string.Empty;
+            }
+
+            return cac.ActivationCode;
         }
 
         /// <summary>

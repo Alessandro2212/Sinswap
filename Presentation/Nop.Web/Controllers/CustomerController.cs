@@ -627,7 +627,7 @@ namespace Nop.Web.Controllers
             }
 
             if (ModelState.IsValid)
-            {             
+            {
                 if (_customerSettings.UsernamesEnabled && model.Username != null)
                 {
                     model.Username = model.Username.Trim();
@@ -822,6 +822,13 @@ namespace Nop.Web.Controllers
                     //raise event       
                     _eventPublisher.Publish(new CustomerRegisteredEvent(customer));
 
+                    //TODO: here we should insert the activation code in the database (to check once registration is complete with the form)
+                    //var customerActivationCode = new CustomerActivationCode(); 
+                    //customerActivationCode.CustomerId = customer.Id;
+                    //customerActivationCode.ActivationCode = _customerService.GenerateActivationCode(100);
+
+                    //_customerService.InsertCustomerActivationCode(customerActivationCode);
+
                     //If RegisterAsVendor is true, map register model to vendor model and redirect to CreateVendorController/Create
                     if (model.RegisterAsPremiumVendor || model.RegisterAsFreeVendor)
                     {
@@ -964,6 +971,25 @@ namespace Nop.Web.Controllers
 
             //if we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [HttpGet] //TODO: check here once the email is sent with the link (parameter taken from the link)
+        public virtual IActionResult VerifyEmail(int? customerId, string activationCode = null)
+        {
+            //verify 
+            if (customerId.HasValue == false)
+            {
+                return RedirectToRoute("HomePage"); //decide where
+            }
+
+            var storedActivationCode = _customerService.GetCustomerActivationCode(customerId.Value);
+
+            if (storedActivationCode != activationCode)
+            {
+                return RedirectToRoute("HomePage"); //decide where
+            }
+
+            return RedirectToRoute("HomePage");
         }
 
         protected virtual string ParseVendorAttributes(IFormCollection form)
