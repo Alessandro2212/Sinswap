@@ -1,0 +1,28 @@
+﻿<div class="col-12 col-md-4 d-flex justify-content-center">
+    <nav class="main">
+        <a href="/en/clothing" class="menuLink">Clothing</a>
+        <a href="/en/food" class="menuLink">Food</a>
+        <a href="/en/media" class="menuLink">Media</a>
+        <a href="/en/services" class="menuLink">Services</a>
+        <a href="/en/body" class="menuLink">Body</a>
+        <a href="/en/objects" class="menuLink">Objects</a>
+    </nav>
+</div>
+
+<div class="col-12 col-md-4 d-flex justify-content-end serviceMenu">
+    <nav class="service">
+        <a href="#" class="btn search icon"><i class="fa fa-search" aria-hidden="true"></i></a>
+        @if (this.User.Identity.IsAuthenticated)
+        {
+            <a href="@Url.RouteUrl("Logout")" class="btn btn-primary">Log out</a>
+            @await Component.InvokeAsync("FlyoutShoppingCart")
+        }
+        else
+        {
+            <a href="#" class="btn btn-primary d-none d-sm-block d-md-none d-xl-block">Start selling</a>
+            <button type="button" class="btn btn-primary mr-0 mr-xl-4" data-toggle="modal" data-target="#registerModal">Join</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Log in</button>
+            @await Component.InvokeAsync("FlyoutShoppingCart")
+        }
+    </nav>
+</div>
