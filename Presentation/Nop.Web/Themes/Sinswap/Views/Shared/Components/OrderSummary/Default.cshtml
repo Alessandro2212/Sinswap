@@ -83,11 +83,11 @@
             @if (Model.IsEditable) {
                 <div class="container">
                     <div class="row btnRow">
-                        <div class="col-6">
+                        <div class="col-12 mb-2 mb-sm-0 col-sm-6">
                             <input type="submit" name="updatecart" value="@T("ShoppingCart.UpdateCart")" class="btn btn-grey update-cart-button" />
                         </div>
 
-                        <div class="col-6 text-right">
+                        <div class="col-12 col-sm-6 text-left text-sm-right">
                             <input type="submit" name="continueshopping" value="@T("ShoppingCart.ContinueShopping")" class="btn btn-grey continue-shopping-button" />
                         </div>
                     </div>
@@ -102,14 +102,14 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-5 shippingContainer">
+                    <div class="mb-5 mb-sm-0 col-12 col-sm-5 shippingContainer">
                         <h5>Shipping estimate</h5>
                         <p>Enter your destination to get a shipping estimate</p>
                         
                         @await Component.InvokeAsync("EstimateShipping")
                     </div>
                     <div class="col-1 d-none d-xl-flex"></div>
-                    <div class="col-7 col-xl-6 totalContainer">
+                    <div class="col-12 col-sm-7 col-xl-6 totalContainer">
                         @await Html.PartialAsync("_DiscountBox", Model.DiscountBox)
                         @await Html.PartialAsync("_GiftCardBox", Model.GiftCardBox)
 

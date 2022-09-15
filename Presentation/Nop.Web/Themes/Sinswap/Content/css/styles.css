@@ -762,6 +762,10 @@ a.more:hover {
   margin-bottom: 10px;
 }
 
+button:focus {
+  outline: none;
+}
+
 div.btn-container {
   display: table-cell;
   vertical-align: middle;
@@ -901,6 +905,8 @@ div.btn-container .btn-color-mode-switch input[type=checkbox]:checked ~ .alert {
   padding: 0.65rem;
 }
 .modal .btn-text {
+  background: none;
+  border: none;
   color: #0ebc39;
 }
 
@@ -1025,7 +1031,7 @@ header .searchContainer #searchForm {
 header .searchContainer #searchForm input {
   margin-top: 10px;
   font-size: 18px;
-  padding: 30px 20px;
+  padding: 15px 20px;
   -webkit-box-shadow: 1px 5px 15px -3px rgba(0, 0, 0, 0.5);
   box-shadow: 1px 5px 15px -3px rgba(0, 0, 0, 0.5);
 }
@@ -3096,6 +3102,106 @@ nav .cartFoldout {
 @media (min-width: 1660px) {
   .cartContainer {
     padding: 0px 250px;
+  }
+}
+.blogpost-page .blogPostContainer {
+  margin-bottom: 60px;
+}
+.blogpost-page .blogPostContainer .blogPostBody {
+  padding-right: 80px;
+}
+.blogpost-page .blogPostContainer .blogPostBody .blogImg {
+  width: 100%;
+  margin-bottom: 60px;
+}
+.blogpost-page .blogPostContainer .blogPostBody .photoCredits {
+  font-size: 10px;
+  color: #c4c4c4;
+  float: right;
+  margin-top: -57px;
+}
+.blogpost-page .blogPostContainer .blogPostBody .post-body p {
+  margin-bottom: 30px;
+}
+.blogpost-page .blogPostContainer .blogPostBody .post-body blockquote {
+  font-size: 24px;
+  font-weight: 600;
+  color: #fd6721;
+}
+.blogpost-page .blogPostContainer .blogPostSidebar h4 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard {
+  text-align: center;
+  margin-bottom: 40px;
+  border-radius: 6px 6px 5px 5px;
+}
+.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard.seller {
+  background-color: #2d7de4;
+}
+.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard.buyer {
+  background-color: #fd6721;
+}
+.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard img {
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 10px;
+}
+.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard h5 {
+  font-size: 20px;
+  font-weight: 200;
+  color: #fff;
+  padding: 25px 50px 20px 50px;
+  margin: 0px;
+  line-height: 30px;
+}
+.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard .category {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0.5;
+  margin-bottom: 30px;
+}
+.blogpost-page .blogPostContainer .advertisement {
+  border-top: 2px solid #dedede;
+  padding: 40px;
+  margin-top: 40px;
+  position: relative;
+}
+.blogpost-page .blogPostContainer .advertisement .label {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 70px;
+  text-align: center;
+  font-size: 14px;
+  color: #c4c4c4;
+}
+.blogpost-page .blogPostContainer .advertisement .bannerContainer {
+  padding: 60px 40px;
+  background-color: #ededed;
+}
+.blogpost-page .newsContainer {
+  margin-top: 0px;
+  padding: 80px 0;
+  background-color: #000;
+}
+.blogpost-page .newsContainer .container {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+.blogpost-page .newsContainer .container .newsCard p {
+  font-size: 32px;
+}
+.blogpost-page .newsContainer .container .newsCard .category {
+  bottom: 40px;
+  font-size: 24px;
+}
+
+@media (max-width: 768px) {
+  .blogPostContainer .blogPostBody {
+    padding-right: 0px;
   }
 }
 footer {

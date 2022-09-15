@@ -53,6 +53,10 @@
 
 
 // Buyer / Seller toggle
+button:focus {
+    outline: none;
+}
+
 div.btn-container {
     display: table-cell;
     vertical-align: middle;
@@ -216,6 +220,8 @@ div.btn-container {
     }
 
     .btn-text {
+        background: none;
+        border: none;
         color: $signin;
     }
 }

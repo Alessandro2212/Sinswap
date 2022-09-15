@@ -7,6 +7,14 @@ $(function () {
         });
     }
 
+    // news cards are fully clickeable
+    if ($('.newsCard').length) {
+        $('.newsCard').click(function (e) {
+            var url = $(e.target).closest('.newsCard').find('a').attr('href');
+            window.location.href = url;
+        });
+    }
+
     if ($('#productModal').length) {
         //$('.categoryCard').click(function (e) {
         //    e.preventDefault();

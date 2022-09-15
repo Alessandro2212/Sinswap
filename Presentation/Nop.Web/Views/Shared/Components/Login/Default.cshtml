@@ -67,7 +67,7 @@
                                     <label asp-for="RememberMe">Remember me</label>
                                     <span class="forgot-password float-right">
                                         @*<a asp-route="PasswordRecovery" class="btn-text">@T("Account.Login.ForgotPassword")</a>*@
-                                        <button type="button" class="btn-text" data-toggle="modal" data-target="#pwRecoveryModal">@T("Account.Login.ForgotPassword")</button>
+                                        <button type="button" class="btn-text" data-dismiss="modal" data-toggle="modal" data-target="#pwRecoveryModal">@T("Account.Login.ForgotPassword")</button>
                                     </span>
                                 </div>
                                 @if (Model.DisplayCaptcha)
@@ -125,7 +125,7 @@
                             <div class="text">
                                 Not a member yet? 
                                 @*<a href="@registerUrl" class="btn-text">Join now!@T("Account.Register")</a>*@
-                                <button type="button" class="btn-text" data-toggle="modal" data-target="#registerModal">Join now!</button>
+                                <button type="button" class="btn-text" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">Join now!</button>
                             </div>
                         </div>
                     }

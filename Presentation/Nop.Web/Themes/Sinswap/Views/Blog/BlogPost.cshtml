@@ -1,4 +1,5 @@
 ﻿@model BlogPostModel
+
 @{
     Layout = "_ColumnsTwo";
 
@@ -10,35 +11,22 @@
     //page class
     Html.AppendPageCssClassParts("html-blogpost-page");
 }
+
 @section left {
     @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.LeftSideColumnBlogBefore })
-    @await Component.InvokeAsync("BlogMonths")
+    @*@await Component.InvokeAsync("BlogMonths")*@
     @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.LeftSideColumnAfterBlogArchive })
     @await Component.InvokeAsync("BlogTags")
     @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.LeftSideColumnBlogAfter })
 }
+
 <div class="page blogpost-page">
+
     @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.BlogPostPageTop, additionalData = Model })
+    
     <div class="page-title">
-        <h1>@Model.Title</h1>
-    </div>
-    @if (!string.IsNullOrEmpty(Model.PictureUrl))
-    {
-        <img src="@Model.PictureUrl" />
-        <h3>credits to: <b>@Model.PictureCredit</b></h3>
-    }
-    <div class="page-body">
-        <div class="post-date">
-            @Model.CreatedOn.ToString("D")
-        </div>
-        @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.BlogPostPageBeforeBody, additionalData = Model })
-        <div class="post-body">
-            @Html.Raw(Model.Body)
-        </div>
-        @if (Model.Tags.Count > 0)
-        {
+        @if (Model.Tags.Count > 0) {
             <div class="tags">
-                <label>@T("Blog.Tags"):</label>
                 <ul>
                     @for (var i = 0; i < Model.Tags.Count; i++)
                     {
@@ -52,9 +40,130 @@
                 </ul>
             </div>
         }
+        <h1>@Model.Title</h1>
+        @Model.CreatedOn.ToString("D")
+    </div>
+
+    <div class="page-body blogPostContainer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8 blogPostBody">
+                    @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.BlogPostPageBeforeBody, additionalData = Model })
+
+                    @if (!string.IsNullOrEmpty(Model.PictureUrl)) {
+                        <img src="@Model.PictureUrl" class="blogImg img-fluid" />
+                        <div class="photoCredits">Photo: @Model.PictureCredit</div>
+                    }
+        
+                    <div class="post-body">
+                        @Html.Raw(Model.Body)
+                        <!-- Start: Dummy article -->
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit 
+                            viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae 
+                            feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem, 
+                            sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos 
+                            himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis 
+                            consequat. Donec sed mollis nunc, vitae eleifend odio.
+                        </p>
+
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit 
+                            viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae 
+                            feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem, 
+                            sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos 
+                            himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis 
+                            consequat. Donec sed mollis nunc, vitae eleifend odio.
+                        </p>
+
+                        <img src="https://dummyimage.com/1000x400/ddd/aaa" class="blogImg img-fluid" />
+                        <div class="photoCredits">Photo: @Model.PictureCredit</div>
+
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit 
+                            viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae 
+                            feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem, 
+                            sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos 
+                            himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis 
+                            consequat. Donec sed mollis nunc, vitae eleifend odio.
+                        </p>
+
+                        <div class="row p-0">
+                            <div class="col-12 col-sm-6">
+                                <p>
+                                    Nam sed odio pellentesque, finibus orci eu, fringilla mauris. Phasellus magna sapien, malesuada id 
+                                    consectetur quis, vulputate vel dui. Nulla sed velit sed neque congue varius. Quisque interdum ante 
+                                    vel rutrum viverra. Donec eget sapien arcu. Etiam ipsum eros, dapibus ut odio non, porttitor ultrices 
+                                    sem. Suspendisse ut ante elit. Vivamus ullamcorper cursus tortor, accumsan rhoncus neque volutpat ac.
+                                    Ut nec pellentesque purus. Integer vel nulla sed risus varius consectetur. Mauris pulvinar metus in 
+                                    turpis vehicula tristique.
+                                </p>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <blockquote>
+                                    Proin egestas, erat quis viverra lacinia, massa magna aliquet purus. Integer vel nulla sed risus varius 
+                                    consectetur.
+                                </blockquote>
+                            </div>
+                        </div>
+                        <!-- End: Dummy article -->
+                    </div>
+
+                    <div class="advertisement">
+                        <div class="label">advertisement</div>
+                        <div class="bannerContainer">
+                            <img src="https://dummyimage.com/1000x900/ddd/aaa" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4 blogPostSidebar">
+                    <h4>Other articles</h4>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 p-0 otherArticleCard seller">
+                                <img src="https://dummyimage.com/550x360/eee/aaa" class="img-fluid" />
+                                <h5>Wow! 5 orders of Asa Akara's 5k pussy juice already!</h5>
+                                <div class="category">
+                                    News
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 p-0 otherArticleCard seller">
+                                <img src="https://dummyimage.com/550x360/eee/aaa" class="img-fluid" />
+                                <h5>Wow! 5 orders of Asa Akara's 5k pussy juice already!</h5>
+                                <div class="category">
+                                    News
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 p-0 otherArticleCard buyer">
+                                <img src="https://dummyimage.com/550x360/eee/aaa" class="img-fluid" />
+                                <h5>Wow! 5 orders of Asa Akara's 5k pussy juice already!</h5>
+                                <div class="category">
+                                    News
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="advertisement">
+                        <div class="label">advertisement</div>
+                        <div class="bannerContainer">
+                            <img src="https://dummyimage.com/550x900/ddd/aaa" class="img-fluid" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
         @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.BlogPostPageBeforeComments, additionalData = Model })
-        @if (Model.AllowComments)
-        {
+
+        @if (Model.AllowComments) {
             <div class="fieldset new-comment" id="comments">
                 <div class="title">
                     <strong>@T("Blog.Comments.LeaveYourComment")</strong>
@@ -64,8 +173,7 @@
                     @{
                         var result = TempData["nop.blog.addcomment.result"] as string;
                     }
-                    @if (!string.IsNullOrEmpty(result))
-                    {
+                    @if (!string.IsNullOrEmpty(result)) {
                         <div class="result">@result</div>
                     }
                 </div>
@@ -89,8 +197,7 @@
                     </div>
                 </form>
             </div>
-            if (Model.Comments.Count > 0)
-            {
+            if (Model.Comments.Count > 0) {
                 <div class="comment-list">
                     <div class="title">
                         <strong>@T("Blog.Comments")</strong>
@@ -143,7 +250,43 @@
                 </div>
             }
         }
+
         @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.BlogPostPageAfterComments, additionalData = Model })
+    
     </div>
+    
+    <div class="newsContainer">
+        <div class="container">
+            <div class="flex-row row no-gutters">
+                <div class="col-12 col-lg-6">
+                    <div class="newsCard news noImg">
+                        <p>
+                            <a href="/en/blog/blogpost/6">
+                                How to use your camera phone to take photos of your panties
+                            </a>
+                        </p>
+
+                        <div class="category">
+                            Tips &amp; Tricks
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="newsCard seller noImg">
+                        <p>
+                            <a href="/en/blog/blogpost/7">
+                                Getting personal with Garcia Vegas
+                            </a>
+                        </p>
+
+                        <div class="category">
+                            Dirty Talk
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.BlogPostPageBottom, additionalData = Model })
 </div>

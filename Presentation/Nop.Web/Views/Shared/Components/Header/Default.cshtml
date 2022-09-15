@@ -19,9 +19,9 @@
         }
         else
         {
-            <a href="#" class="btn btn-primary d-none d-sm-block d-md-none d-xl-block">Start selling</a>
-            <button type="button" class="btn btn-primary mr-0 mr-xl-4" data-toggle="modal" data-target="#registerModal">Join</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Log in</button>
+            <a href="#" class="btn btn-primary d-none d-sm-block d-md-none d-xl-block" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">Start selling</a>
+            <button type="button" class="btn btn-primary mr-0 mr-xl-4" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">Join</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#loginModal">Log in</button>
             @await Component.InvokeAsync("FlyoutShoppingCart")
         }
     </nav>
