@@ -66,14 +66,16 @@
             </div>
 
             <div class="modal-body">
-                <form asp-route="Register" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" method="post">
+                <form asp-route="RegisterVerification" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" method="post">
                     <div asp-validation-summary="ModelOnly" class="message-error"></div>
                     <div class="fieldset">
                         <div class="form-fields">
                             <div class="btn-container">
                                 <label class="switch btn-color-mode-switch">
-                                    <input type="checkbox" name="color_mode" id="color_mode" value="1">
-                                    <label for="color_mode" data-on="Seller" data-off="Buyer" class="btn-color-mode-switch-inner"></label>
+                                    @*                                    <input type="checkbox" name="color_mode" id="color_mode" value="1">
+                                    *@                                   
+                                    <nop-editor asp-for="IsVendor" name="color_mode" id="color_mode" value="1">
+                                      <label for="IsVendor" data-on="Seller" data-off="Buyer" class="btn-color-mode-switch-inner"></label>
                                 </label>
                             </div>
                         </div>
@@ -119,9 +121,9 @@
                 <div class="new-wrapper register-block">
                     @*<div class="title">
                         <strong>@T("Account.Login.NewCustomer")</strong>
-                    </div>*@
+                        </div>*@
                     <div class="text">
-                        Already a member? 
+                        Already a member?
                         @*<a href="@loginUrl" class="btn-text">Sign in@T("Account.Register")</a>*@
                         <button type="button" class="btn-text" data-dismiss="modal" data-toggle="modal" data-target="#loginModal">Sign in</button>
                     </div>

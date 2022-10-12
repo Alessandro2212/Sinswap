@@ -164,8 +164,9 @@ namespace Nop.Services.Tests.Customers
             _workContext = new Mock<IWorkContext>();
             _workflowMessageService = new Mock<IWorkflowMessageService>();
             _customerCustomerRoleMappingRepo = new Mock<IRepository<CustomerCustomerRoleMapping>>();
-            
-             _customerService = new CustomerService(new CustomerSettings(), 
+            var _customerActivationCodeRepo = new Mock<IRepository<CustomerActivationCode>>();
+
+            _customerService = new CustomerService(new CustomerSettings(), 
                 new NopNullCache(), 
                 null,
                 null,
@@ -176,7 +177,8 @@ namespace Nop.Services.Tests.Customers
                 _customerPasswordRepo.Object,
                 _customerRoleRepo.Object,
                 _genericAttributeRepo.Object,
-                null);
+                null,
+                _customerActivationCodeRepo.Object);
 
             _customerRegistrationService = new CustomerRegistrationService(_customerSettings,
                 _customerService,

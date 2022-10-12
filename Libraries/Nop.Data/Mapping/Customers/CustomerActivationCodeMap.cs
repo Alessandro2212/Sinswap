@@ -16,10 +16,8 @@ namespace Nop.Data.Mapping.Customers
             builder.HasKey(customer => customer.Id);
 
             builder.Property(customer => customer.ActivationCode).HasMaxLength(255);
-
-            builder.HasOne(customer => customer.Customer)
-                .WithMany()
-                .HasForeignKey(customer => customer.CustomerId);
+            builder.Property(customer => customer.CustomerEmail).HasMaxLength(255);
+            builder.Property(customer => customer.CustomerType).HasMaxLength(10);
 
             base.Configure(builder);
         }

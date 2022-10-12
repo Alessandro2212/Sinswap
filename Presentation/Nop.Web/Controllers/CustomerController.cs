@@ -587,6 +587,55 @@ namespace Nop.Web.Controllers
         //}
 
         [HttpPost]
+        //available even when navigation is not allowed
+        [CheckAccessPublicStore(true)]
+        public virtual IActionResult RegisterVerification(RegisterModel model, string returnUrl, bool captchaValid)
+        {
+            //check if email already exists
+            var isExisting = _customerService.IsEmailExisting(model.Email);
+
+            if (isExisting)
+                return RedirectToRoute("HomePage"); //decide where
+
+            //generate code
+            var code = _customerService.GenerateActivationCode(10);
+
+            //save entity to database
+            CustomerActivationCode cac = new CustomerActivationCode()
+            {
+                ActivationCode = code,
+                CustomerEmail = model.Email,
+                CustomerType = model.IsVendor ? "Seller" : "Buyer",
+                InsertAt = DateTime.Now,
+            };
+            
+            _customerService.InsertCustomerActivationCode(cac); //check autogeneration id
+
+            //send email with link
+
+            return View();
+        }
+
+        [HttpGet] //TODO: check here once the email is sent with the link (parameter taken from the link)
+        public virtual IActionResult VerifyEmail(int? customerId, string activationCode = null)
+        {
+            //verify 
+            if (customerId.HasValue == false)
+            {
+                return RedirectToRoute("HomePage"); //decide where
+            }
+
+            var storedActivationCode = _customerService.GetCustomerActivationCode(customerId.Value);
+
+            if (storedActivationCode != activationCode)
+            {
+                return RedirectToRoute("HomePage"); //decide where
+            }
+
+            return RedirectToRoute("HomePage");
+        }
+
+        [HttpPost]
         [ValidateCaptcha]
         [ValidateHoneypot]
         [PublicAntiForgery]
@@ -973,24 +1022,7 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        [HttpGet] //TODO: check here once the email is sent with the link (parameter taken from the link)
-        public virtual IActionResult VerifyEmail(int? customerId, string activationCode = null)
-        {
-            //verify 
-            if (customerId.HasValue == false)
-            {
-                return RedirectToRoute("HomePage"); //decide where
-            }
-
-            var storedActivationCode = _customerService.GetCustomerActivationCode(customerId.Value);
-
-            if (storedActivationCode != activationCode)
-            {
-                return RedirectToRoute("HomePage"); //decide where
-            }
-
-            return RedirectToRoute("HomePage");
-        }
+       
 
         protected virtual string ParseVendorAttributes(IFormCollection form)
         {

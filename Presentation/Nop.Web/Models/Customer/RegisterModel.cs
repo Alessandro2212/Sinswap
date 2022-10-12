@@ -155,6 +155,9 @@ namespace Nop.Web.Models.Customer
         public bool DisplayCaptcha { get; set; }
 
         //Vendor registration
+
+        public bool IsVendor { get; set; }
+
         [DisplayName("Register as Free Seller")]
         public bool RegisterAsFreeVendor { get; set; }
 

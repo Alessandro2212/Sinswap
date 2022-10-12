@@ -503,7 +503,7 @@ namespace Nop.Services.Customers
         public string GetCustomerActivationCode(int customerId)
         {
             var cac = _customerActivationCodeRepository.Table
-                                                        .Where(c => c.CustomerId == customerId)
+                                                        .Where(c => c.Id == customerId)
                                                         .OrderByDescending(c => c.InsertAt)
                                                         .FirstOrDefault();
             if (cac == null)
@@ -512,6 +512,14 @@ namespace Nop.Services.Customers
             }
 
             return cac.ActivationCode;
+        }
+
+        public bool IsEmailExisting(string email)
+        {
+            var user = _customerActivationCodeRepository.Table
+                                                        .Where(c => c.CustomerEmail == email)
+                                                        .FirstOrDefault();
+            return user != null;
         }
 
         /// <summary>

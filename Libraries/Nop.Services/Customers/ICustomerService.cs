@@ -127,6 +127,8 @@ namespace Nop.Services.Customers
 
         string GenerateActivationCode(int size);
 
+        bool IsEmailExisting(string email);
+
         void InsertCustomerActivationCode(CustomerActivationCode customerActivationCode);
 
         string GetCustomerActivationCode(int customerId);
