@@ -15,9 +15,9 @@ namespace Nop.Data.Mapping.Customers
             builder.ToTable(nameof(CustomerActivationCode));
             builder.HasKey(customer => customer.Id);
 
-            builder.Property(customer => customer.ActivationCode).HasMaxLength(255);
-            builder.Property(customer => customer.CustomerEmail).HasMaxLength(255);
-            builder.Property(customer => customer.CustomerType).HasMaxLength(10);
+            builder.Property(customer => customer.ActivationCode).HasMaxLength(255).IsRequired();
+            builder.Property(customer => customer.CustomerEmail).HasMaxLength(255).IsRequired();
+            builder.Property(customer => customer.CustomerType).HasMaxLength(10).IsRequired();
 
             base.Configure(builder);
         }
