@@ -612,8 +612,12 @@ namespace Nop.Web.Controllers
             _customerService.InsertCustomerActivationCode(cac); //check autogeneration id
 
             //send email with link
+            var emailIsSent = _customerService.SendEmailForCustomerVerification(model.Email, "test");
 
-            return View();
+            if(emailIsSent)
+                return View();
+            else
+                return RedirectToRoute("HomePage");
         }
 
         [HttpGet] //TODO: check here once the email is sent with the link (parameter taken from the link)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net.Mail;
 using System.Xml;
 using Nop.Core;
 using Nop.Core.Caching;
@@ -489,7 +490,7 @@ namespace Nop.Services.Customers
             return activationCode.ToUpper();
         }
 
-        
+
         public void InsertCustomerActivationCode(CustomerActivationCode customerActivationCode)
         {
             if (customerActivationCode == null)
@@ -512,6 +513,35 @@ namespace Nop.Services.Customers
             }
 
             return cac.ActivationCode;
+        }
+
+        public bool SendEmailForCustomerVerification(string email, string verificationLink)
+        {
+            try
+            {
+                SmtpClient smtpClient = new SmtpClient("webmail.sinswap.org", 25);
+
+                smtpClient.Credentials = new System.Net.NetworkCredential("social@sinswap.org", "sinswap_0123456789");
+                // smtpClient.UseDefaultCredentials = true; // uncomment if you don't want to use the network credentials
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.EnableSsl = false;
+
+                MailMessage mail = new MailMessage();
+
+                mail.Body = verificationLink;
+
+                //Setting From , To and CC
+                mail.From = new MailAddress("social@sinswap.org", "SinSwap");
+                mail.To.Add(new MailAddress(email));
+
+                smtpClient.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool IsEmailExisting(string email)
@@ -734,7 +764,7 @@ namespace Nop.Services.Customers
                 var nodeList1 = xmlDoc.SelectNodes(@"//DiscountCouponCodes/CouponCode");
                 foreach (XmlNode node1 in nodeList1)
                 {
-                    if (node1.Attributes?["Code"] == null) 
+                    if (node1.Attributes?["Code"] == null)
                         continue;
                     var code = node1.Attributes["Code"].InnerText.Trim();
                     couponCodes.Add(code);
@@ -784,12 +814,12 @@ namespace Nop.Services.Customers
                 var nodeList1 = xmlDoc.SelectNodes(@"//DiscountCouponCodes/CouponCode");
                 foreach (XmlNode node1 in nodeList1)
                 {
-                    if (node1.Attributes?["Code"] == null) 
+                    if (node1.Attributes?["Code"] == null)
                         continue;
 
                     var couponCodeAttribute = node1.Attributes["Code"].InnerText.Trim();
 
-                    if (couponCodeAttribute.ToLower() != couponCode.ToLower()) 
+                    if (couponCodeAttribute.ToLower() != couponCode.ToLower())
                         continue;
 
                     gcElement = (XmlElement)node1;
@@ -862,7 +892,7 @@ namespace Nop.Services.Customers
                 var nodeList1 = xmlDoc.SelectNodes(@"//GiftCardCouponCodes/CouponCode");
                 foreach (XmlNode node1 in nodeList1)
                 {
-                    if (node1.Attributes?["Code"] == null) 
+                    if (node1.Attributes?["Code"] == null)
                         continue;
 
                     var code = node1.Attributes["Code"].InnerText.Trim();
@@ -913,11 +943,11 @@ namespace Nop.Services.Customers
                 var nodeList1 = xmlDoc.SelectNodes(@"//GiftCardCouponCodes/CouponCode");
                 foreach (XmlNode node1 in nodeList1)
                 {
-                    if (node1.Attributes?["Code"] == null) 
+                    if (node1.Attributes?["Code"] == null)
                         continue;
 
                     var couponCodeAttribute = node1.Attributes["Code"].InnerText.Trim();
-                    if (couponCodeAttribute.ToLower() != couponCode.ToLower()) 
+                    if (couponCodeAttribute.ToLower() != couponCode.ToLower())
                         continue;
 
                     gcElement = (XmlElement)node1;
