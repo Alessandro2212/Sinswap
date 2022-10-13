@@ -491,7 +491,7 @@ namespace Nop.Services.Customers
         }
 
 
-        public void InsertCustomerActivationCode(CustomerActivationCode customerActivationCode)
+        public int InsertCustomerActivationCode(CustomerActivationCode customerActivationCode)
         {
             if (customerActivationCode == null)
                 throw new ArgumentNullException(nameof(customerActivationCode));
@@ -499,6 +499,15 @@ namespace Nop.Services.Customers
             customerActivationCode.InsertAt = DateTime.Now;
 
             _customerActivationCodeRepository.Insert(customerActivationCode);
+
+            return customerActivationCode.Id;
+        }
+
+        public void DeleteCustomerActivationCode(int customerActivationCodeId)
+        {
+           var cac = _customerActivationCodeRepository.GetById(customerActivationCodeId);
+
+            _customerActivationCodeRepository.Delete(cac);
         }
 
         public string GetCustomerActivationCode(int customerId)

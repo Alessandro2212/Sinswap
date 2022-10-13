@@ -39,6 +39,10 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapLocalizedRoute("RegisterVerification", "registerverification/",
                 new { controller = "Customer", action = "RegisterVerification" });
 
+            //verifyemail
+            routeBuilder.MapLocalizedRoute("VerifyEmail", "verifyemail/",
+                new { controller = "Customer", action = "VerifyEmail" });
+
             //logout
             routeBuilder.MapLocalizedRoute("Logout", "logout/",
 				new { controller = "Customer", action = "Logout" });

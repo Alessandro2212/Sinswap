@@ -609,10 +609,11 @@ namespace Nop.Web.Controllers
                 InsertAt = DateTime.Now,
             };
             
-            _customerService.InsertCustomerActivationCode(cac); //check autogeneration id
+            var customerId = _customerService.InsertCustomerActivationCode(cac); //check autogeneration id
 
             //send email with link
-            var emailIsSent = _customerService.SendEmailForCustomerVerification(model.Email, "test");
+            string verificationLink = $"http://localhost:15536/en/VerifyEmail/?customerId={customerId}&activationCode={code}";
+            var emailIsSent = _customerService.SendEmailForCustomerVerification("alessandro.zelli87@gmail.com", verificationLink);
 
             if(emailIsSent)
                 return View();
@@ -621,22 +622,29 @@ namespace Nop.Web.Controllers
         }
 
         [HttpGet] //TODO: check here once the email is sent with the link (parameter taken from the link)
-        public virtual IActionResult VerifyEmail(int? customerId, string activationCode = null)
+        public virtual IActionResult VerifyEmail(string customerId, string activationCode = null)
         {
             //verify 
-            if (customerId.HasValue == false)
+            int id = 0;
+            if (int.TryParse(customerId, out id))
+            {
+                var storedActivationCode = _customerService.GetCustomerActivationCode(id);
+                if (storedActivationCode != activationCode)
+                {
+                    return RedirectToRoute("HomePage"); //decide where
+                }
+
+                //for now we delete the customer activation code, but in future with the registration page in place 
+                //we build the registrationmodelwith the email provided, redirect the user to the registration page so that we allow the user to complete the registration
+                //with the email and the type of customer (buyer or seller) already defined
+                _customerService.DeleteCustomerActivationCode(id);
+            }
+            else
             {
                 return RedirectToRoute("HomePage"); //decide where
-            }
+            } 
 
-            var storedActivationCode = _customerService.GetCustomerActivationCode(customerId.Value);
-
-            if (storedActivationCode != activationCode)
-            {
-                return RedirectToRoute("HomePage"); //decide where
-            }
-
-            return RedirectToRoute("HomePage");
+            return RedirectToRoute("HomePage"); //go to Registration page (to be defined)
         }
 
         [HttpPost]
