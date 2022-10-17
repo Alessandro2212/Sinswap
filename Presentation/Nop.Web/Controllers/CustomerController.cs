@@ -571,20 +571,39 @@ namespace Nop.Web.Controllers
 
         #region Register
 
-        //[HttpsRequirement(SslRequirement.Yes)]
-        ////available even when navigation is not allowed
-        //[CheckAccessPublicStore(true)]
-        //public virtual IActionResult Register()
-        //{
-        //    //check whether registration is allowed
-        //    if (_customerSettings.UserRegistrationType == UserRegistrationType.Disabled)
-        //        return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.Disabled });
+        [HttpsRequirement(SslRequirement.Yes)]
+        [CheckAccessPublicStore(true)]
+        public virtual IActionResult Register(int? id)
+        {
+            //check whether registration is allowed
+            if (_customerSettings.UserRegistrationType == UserRegistrationType.Disabled)
+                return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.Disabled });
 
-        //    var model = new RegisterModel();
-        //    model = _customerModelFactory.PrepareRegisterModel(model, false, setDefaultValues: true);
+            var customerId = id.HasValue ? id.Value : 0;
+            var cac = _customerService.GetPreRegisteredCustomer(customerId);
 
-        //    return View(model);
-        //}
+            if (cac == null)
+            {
+                //**inizio test**//
+                var m = new RegisterModel();
+                m = _customerModelFactory.PrepareRegisterModel(m, false, setDefaultValues: true);
+                return View(m);
+                //**fine test**//
+
+                return RedirectToRoute("HomePage"); //decide where
+            }
+            else
+            {
+                _customerService.DeleteCustomerActivationCode(customerId);
+            }
+
+            var model = new RegisterModel();
+            model.Email = model.ConfirmEmail = cac.CustomerEmail;
+            model.IsVendor = cac.CustomerType == "Seller";
+            model = _customerModelFactory.PrepareRegisterModel(model, false, setDefaultValues: true);
+
+            return View(model);
+        }
 
         [HttpPost]
         //available even when navigation is not allowed
@@ -608,20 +627,20 @@ namespace Nop.Web.Controllers
                 CustomerType = model.IsVendor ? "Seller" : "Buyer",
                 InsertAt = DateTime.Now,
             };
-            
+
             var customerId = _customerService.InsertCustomerActivationCode(cac); //check autogeneration id
 
             //send email with link
             string verificationLink = $"http://localhost:15536/en/VerifyEmail/?customerId={customerId}&activationCode={code}";
             var emailIsSent = _customerService.SendEmailForCustomerVerification("alessandro.zelli87@gmail.com", verificationLink);
 
-            if(emailIsSent)
+            if (emailIsSent)
                 return View();
             else
                 return RedirectToRoute("HomePage");
         }
 
-        [HttpGet] //TODO: check here once the email is sent with the link (parameter taken from the link)
+        [HttpGet]
         public virtual IActionResult VerifyEmail(string customerId, string activationCode = null)
         {
             //verify 
@@ -633,18 +652,13 @@ namespace Nop.Web.Controllers
                 {
                     return RedirectToRoute("HomePage"); //decide where
                 }
-
-                //for now we delete the customer activation code, but in future with the registration page in place 
-                //we build the registrationmodelwith the email provided, redirect the user to the registration page so that we allow the user to complete the registration
-                //with the email and the type of customer (buyer or seller) already defined
-                _customerService.DeleteCustomerActivationCode(id);
             }
             else
             {
                 return RedirectToRoute("HomePage"); //decide where
-            } 
+            }
 
-            return RedirectToRoute("HomePage"); //go to Registration page (to be defined)
+            return RedirectToRoute("Register", new { id = id }); //go to Registration page
         }
 
         [HttpPost]
@@ -1034,7 +1048,7 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-       
+
 
         protected virtual string ParseVendorAttributes(IFormCollection form)
         {

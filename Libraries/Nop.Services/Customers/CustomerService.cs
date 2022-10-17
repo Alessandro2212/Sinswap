@@ -524,6 +524,30 @@ namespace Nop.Services.Customers
             return cac.ActivationCode;
         }
 
+        public string GetCustomerEmail(int customerId)
+        {
+            var cac = _customerActivationCodeRepository.Table
+                                                        .Where(c => c.Id == customerId)
+                                                        .OrderByDescending(c => c.InsertAt)
+                                                        .FirstOrDefault();
+            if (cac == null)
+            {
+                return string.Empty;
+            }
+
+            return cac.CustomerEmail;
+        }
+
+        public CustomerActivationCode GetPreRegisteredCustomer(int customerId)
+        {
+            var cac = _customerActivationCodeRepository.Table
+                                                        .Where(c => c.Id == customerId)
+                                                        .OrderByDescending(c => c.InsertAt)
+                                                        .FirstOrDefault();
+
+            return cac;
+        }
+
         public bool SendEmailForCustomerVerification(string email, string verificationLink)
         {
             try
@@ -537,11 +561,14 @@ namespace Nop.Services.Customers
 
                 MailMessage mail = new MailMessage();
 
-                mail.Body = verificationLink;
-
                 //Setting From , To and CC
                 mail.From = new MailAddress("social@sinswap.org", "SinSwap");
-                mail.To.Add(new MailAddress(email));
+                //mail.To.Add(new MailAddress(email));  //uncomment this for my tests          
+                mail.To.Add(new MailAddress("voordave@gmail.com")); //for testing purposes
+                mail.Subject = "Registration to SinSwap";
+
+                mail.Body = $"Welcome to SinSwap! here is the link to complete your registration: {verificationLink} !";
+
 
                 smtpClient.Send(mail);
             }

@@ -137,6 +137,10 @@ namespace Nop.Services.Customers
 
         string GetCustomerActivationCode(int customerId);
 
+        string GetCustomerEmail(int customerId);
+
+        CustomerActivationCode GetPreRegisteredCustomer(int customerId);
+
         /// <summary>
         /// Reset data required for checkout
         /// </summary>
