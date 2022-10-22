@@ -2,8 +2,8 @@
 header {
     position: relative;
     color: $white;
-    min-height: 400px;
-    height: 400px;
+    min-height: 440px;
+    height: 440px;
     background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
     background-size: 300% 300%;
     -webkit-animation: MoveBG 60s ease infinite;
@@ -116,7 +116,7 @@ header {
                 bottom: -30px;
                 color: $white;
                 opacity: 0.75;
-                
+
                 &:hover {
                     text-decoration: none;
                     opacity: 1;
@@ -126,10 +126,15 @@ header {
         }
     }
 
-    &.headerHome {
+    &.home {
         .searchContainer {
             padding-top: 30px;
         }
+    }
+
+    &.blogDetail {
+        min-height: 500px;
+        height: 500px;
     }
 }
 
@@ -138,8 +143,12 @@ header {
         height: 450px;
         transition: height 0.25s ease-in;
 
-        &.headerHome {
+        &.home {
             height: 550px;
+        }
+
+        &.blogDetail {
+            height: 750px;
         }
     }
 }
@@ -338,7 +347,7 @@ nav {
 
     .searchActive {
         header {
-            &.headerHome {
+            &.home {
                 height: 350px;
             }
         }

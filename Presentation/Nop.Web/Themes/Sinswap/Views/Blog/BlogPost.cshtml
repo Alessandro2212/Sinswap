@@ -20,29 +20,62 @@
     @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.LeftSideColumnBlogAfter })
 }
 
-<div class="page blogpost-page">
+<header class="blogDetail">
+    <div class="container-fluid">
 
-    @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.BlogPostPageTop, additionalData = Model })
-    
-    <div class="page-title">
-        @if (Model.Tags.Count > 0) {
-            <div class="tags">
-                <ul>
-                    @for (var i = 0; i < Model.Tags.Count; i++)
-                    {
-                        var tag = Model.Tags[i];
-                        <li><a href="@Url.RouteUrl("BlogByTag", new {tag = tag})">@tag</a></li>
-                        if (i != Model.Tags.Count - 1)
-                        {
-                            <li class="separator">,</li>
-                        }
-                    }
-                </ul>
+        <div class="row">
+            <div class="col-12 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                <a href="@Url.RouteUrl("HomePage")">
+                    <img class="logo" title="Sinning is Winning" alt="Sinswap" src="/Themes/Sinswap/content/images/logoVendor.svg">
+                </a>
             </div>
-        }
-        <h1>@Model.Title</h1>
-        @Model.CreatedOn.ToString("D")
+
+            @await Component.InvokeAsync("Header")
+
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8">
+               @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.BlogPostPageTop, additionalData = Model })
+    
+                <div class="page-title">
+                    <div class="tags"><a href="#">Tip & Tricks</a>
+                    </div>
+
+                    @if (Model.Tags.Count > 0) {
+                        <div class="tags">
+                            @for (var i = 0; i < Model.Tags.Count; i++) {
+                                var tag = Model.Tags[i];
+                                
+                                <a href="@Url.RouteUrl("BlogByTag", new {tag = tag})">@tag</a>
+
+                                if (i != Model.Tags.Count - 1) {
+                                    <div class="separator">,</div>
+                                }
+                            }
+                        </div>
+                    }
+
+                    <div class="title">@Model.Title</div>
+
+                    <div class="date">@Model.CreatedOn.ToString("D")</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 searchContainer">
+                <div class="searchTitle">Find what you're looking for...</div>
+    
+                @await Component.InvokeAsync("SearchBox")
+            </div>
+        </div>
     </div>
+</header>
+
+<div class="page blogpost-page">
 
     <div class="page-body blogPostContainer">
         <div class="container">
@@ -55,6 +88,16 @@
                         <div class="photoCredits">Photo: @Model.PictureCredit</div>
                     }
         
+                    <div class="socialShareContainer" data-spy="affix">
+                        <a href="#" title="Share on Facebook"><i class="lab la-facebook-square"></i></a>
+                        <a href="#" title="Share on Twitter"><i class="lab la-twitter"></i></a>
+                        <a href="#" title="Share on LinkedIn"><i class="lab la-linkedin"></i></a>
+                        <a href="#" title="Share on Snapchat"><i class="lab la-snapchat"></i></a>
+                        <a href="#" title="Share on WhatsApp"><i class="lab la-whatsapp"></i></a>
+                        <a href="#" title="Share on Telegram"><i class="lab la-telegram"></i></a>
+                        <a href="#" title="Share with Email"><i class="lar la-envelope"></i></a>
+                    </div>
+
                     <div class="post-body">
                         @Html.Raw(Model.Body)
                         <!-- Start: Dummy article -->
@@ -150,7 +193,7 @@
                         </div>
                     </div>
 
-                    <div class="advertisement">
+                    <div class="advertisement" @*data-spy="affix"*@>
                         <div class="label">advertisement</div>
                         <div class="bannerContainer">
                             <img src="https://dummyimage.com/550x900/ddd/aaa" class="img-fluid" />

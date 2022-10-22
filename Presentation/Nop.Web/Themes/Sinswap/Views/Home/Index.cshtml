@@ -5,63 +5,54 @@
     Html.AppendPageCssClassParts("homepage");
 }
 
+<header class="home">
+    <div class="container-fluid">
+
+        <div class="row">
+            @{
+                var r = new Random();
+                var rnd = "/Themes/Sinswap/content/images/headerbg/headerbgA" + r.Next(14) + ".png";
+                var rnd2 = "/Themes/Sinswap/content/images/headerbg/headerbgB" + r.Next(12) + ".png";
+            }
+
+            <div class="floatingObj1 d-none d-md-block" data-stellar-ratio="0.4">
+                <img src=@rnd />
+            </div>
+
+            <div class="floatingObj2 d-none d-md-block" data-stellar-ratio="0.6">
+                <img src=@rnd2 />
+            </div>
+
+            <div class="col-12 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                @await Component.InvokeAsync("Logo")
+            </div>
+
+            @await Component.InvokeAsync("Header")
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 payoffContainer" data-stellar-background-ratio="0.5">
+                <div class="payoff">We are all born sinners.</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 searchContainer">
+                <div class="searchTitle">Find what you're looking for...</div>
+                @await Component.InvokeAsync("SearchBox")
+            </div>
+        </div>
+
+    </div>
+</header>
+
 @await Component.InvokeAsync("TopVendor")
 
 @await Component.InvokeAsync("Blog", new { amount = 6 })
 
 @await Component.InvokeAsync("VendorFeaturette", new { name = "Regina Lemme" })
-
-@*<div class="container-fluid featuredContainer">
-    <div class="row">
-        <div class="col">
-            <div class="container">
-
-                <h2>This week’s <strong>sinswap</strong> featurette</h2>
-
-                <div class="flex-row row no-gutters">
-
-                    <div class="col-12 col-lg-6">
-                        <div class="featuredCard" style="background-image: url('/Themes/Sinswap/content/images/Feature_1.jpeg')">
-                            <div class="content">
-                                <blockquote>
-                                    “I love that men and women tell me
-                                    what they want. So what can I do for you?”
-                                </blockquote>
-                                <div class="location">
-                                    <span class="city">Sydney</span>, <span class="country">Australia</span>
-                                </div>
-                                <div class="nameAge">
-                                    <a href="#"><span class="name">Pixie Dust</span>, <span class="age">22</span></a>
-                                </div>
-                                <a href="#" class="btn btn-light">Checkout my <strong>sinswap</strong>-shop</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-lg-3">
-                        <div class="featuredCard" style="background-image: url('/Themes/Sinswap/content/images/Feature_2.jpeg')">
-                            <div class="content">
-                                <div class="label">Known for:</div>
-                                <div class="title"><a href="#">Naked dancing</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-lg-3">
-                        <div class="featuredCard" style="background-image: url('/Themes/Sinswap/content/images/Feature_3.jpeg')">
-                            <div class="content">
-                                <div class="label">Katee’s best seller:</div>
-                                <div class="title"><a href="#">Lollipop guess</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>*@
 
 @await Component.InvokeAsync("HomepageCategories", new { showMostPopular = true })
 

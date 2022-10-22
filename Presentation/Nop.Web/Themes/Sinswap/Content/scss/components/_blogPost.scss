@@ -1,7 +1,51 @@
 ﻿// Blog Post
+header.blogDetail {
+    .page-title {
+        margin-top: 40px;
+        text-align: center;
+
+        .tags {
+            font-weight: 600;
+            opacity: 0.75;
+            font-size: 22px;
+
+            a {
+                color: $white;
+                transition: color 0.15s;
+
+                &:hover {
+                    text-decoration: none;
+                    opacity: 1;
+                    transition: color 0.15s;
+                }
+            }
+        }
+
+        .title {
+            display: table-cell;
+            vertical-align: middle;
+            width: 100vw;
+            font-weight: 700;
+            font-size: 70px;
+            line-height: 70px;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .date {
+            opacity: 0.5;
+            font-size: 22px;
+        }
+    }
+}
+
 .blogpost-page {
+    position: relative;
+    background-color: $white;
+
     .blogPostContainer {
         margin-bottom: 60px;
+        padding-top: 40px;
 
         .blogPostBody {
             padding-right: 80px;
@@ -18,7 +62,32 @@
                 margin-top: -57px;
             }
 
+            .socialShareContainer {
+                position: relative;
+                float: left;
+
+                &.affix {
+                    position: fixed;
+                    top: 25px;
+                }
+
+                a {
+                    color: $grey16;
+                    display: block;
+                    padding: 0 30px 0 0;
+                    font-size: 32px;
+                    transition: color 0.15s;
+
+                    &:hover {
+                        color: $black;
+                        transition: color 0.15s;
+                    }
+                }
+            }
+
             .post-body {
+                padding-left: 90px;
+
                 p {
                     margin-bottom: 30px;
                 }
@@ -80,6 +149,11 @@
             padding: 40px;
             margin-top: 40px;
             position: relative;
+
+            &.affix {
+                position: fixed;
+                top: -42px;
+            }
 
             .label {
                 position: absolute;

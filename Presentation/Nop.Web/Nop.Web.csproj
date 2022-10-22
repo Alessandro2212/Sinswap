@@ -40,6 +40,7 @@
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
     <Content Remove="compilerconfig.json" />
     <None Remove="Themes\Sinswap\Content\css\styles.scss" />
+    <None Remove="Themes\Sinswap\Content\js\affix.js" />
     <None Remove="Themes\Sinswap\Content\js\public.accordion.js" />
     <None Remove="Themes\Sinswap\Content\js\public.ajaxcart.js" />
     <None Remove="Themes\Sinswap\Content\js\public.common.js" />

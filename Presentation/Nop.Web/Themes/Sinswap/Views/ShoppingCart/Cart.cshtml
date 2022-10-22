@@ -11,14 +11,45 @@
     @await Component.InvokeAsync("CheckoutProgress", new {step = CheckoutProgressStep.Cart})
 }
 
+<header>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                <a href="@Url.RouteUrl("HomePage")">
+                    <img class="logo" title="Sinning is Winning" alt="Sinswap" src="/Themes/Sinswap/content/images/logoVendor.svg">
+                </a>
+            </div>
+
+            @await Component.InvokeAsync("Header")
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 payoffContainer">
+                <div class="payoff">Your guilty pleasures@*@T("ShoppingCart")*@</div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 searchContainer">
+                <div class="searchTitle">Find what you're looking for...</div>
+
+                @await Component.InvokeAsync("SearchBox")
+            </div>
+        </div>
+
+    </div>
+</header>
+
 <div class="page shopping-cart-page">
 
     <div class="page-body">
         <div class="container firstContainer cartContainer">
             <div class="row">
                 <div class="col-12">
-                    <h2>Your guilty pleasures@*@T("ShoppingCart")*@</h2>
-
                     @await Component.InvokeAsync("OrderSummary", new { overriddenModel = Model})
                 </div>
             </div>

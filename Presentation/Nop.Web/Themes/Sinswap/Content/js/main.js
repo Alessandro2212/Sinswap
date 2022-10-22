@@ -15,6 +15,36 @@ $(function () {
         });
     }
 
+    // Blog detail specific
+    if ($('.blogPostContainer').length) {
+        $(window).resize(function () {
+            setAffixedElements();
+        });
+
+        setAffixedElements();
+    }
+
+    function setAffixedElements() {
+        if ($('.socialShareContainer').length) {
+            $('.socialShareContainer').removeData('bs.affix').removeClass('affix affix-top affix-bottom');
+            var elem = $(".socialShareContainer");
+            var elemTop = elem.offset().top - 25;
+
+            var container = $('.post-body');
+            var containerBottom = $('body').outerHeight(true) - (container.offset().top + container.outerHeight(true));
+            elem.affix({ offset: { top: elemTop, bottom: containerBottom } });
+        }
+
+        //if ($('.blogPostSidebar .advertisement').length) {
+        //    var elem = $(".blogPostSidebar .advertisement");
+        //    var elemTop = elem.offset().top + 42;
+
+        //    var container = $('.blogPostSidebar');
+        //    var containerBottom = $('body').outerHeight(true) - (container.offset().top + container.outerHeight(true));
+        //    elem.affix({ offset: { top: elemTop, bottom: containerBottom } });
+        //}
+    }
+
     if ($('#productModal').length) {
         //$('.categoryCard').click(function (e) {
         //    e.preventDefault();

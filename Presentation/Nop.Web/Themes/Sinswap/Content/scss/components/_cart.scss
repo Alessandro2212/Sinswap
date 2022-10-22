@@ -3,7 +3,7 @@
     position: relative;
     background-color: $white;
     border-radius: 5px;
-    padding: 0px 25px;
+    padding: 45px 25px 0 25px;
 
     h2 {
         font-size: 28px;
@@ -145,7 +145,7 @@
 // Extra extra large devices (large desktops, 1200px and up)
 @media (min-width: 1660px) {
     .cartContainer {
-        padding: 0px 250px;
+        padding: 45px 250px 0 250px;
     }
 }
 

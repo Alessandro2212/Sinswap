@@ -910,6 +910,9 @@ div.btn-container .btn-color-mode-switch input[type=checkbox]:checked ~ .alert {
   color: #0ebc39;
 }
 
+.modal .modal-content {
+  border: none;
+}
 .modal .modal-content .modal-header {
   text-align: center;
   border-bottom: 0px;
@@ -963,8 +966,8 @@ div.btn-container .btn-color-mode-switch input[type=checkbox]:checked ~ .alert {
 header {
   position: relative;
   color: #fff;
-  min-height: 400px;
-  height: 400px;
+  min-height: 440px;
+  height: 440px;
   background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
   background-size: 300% 300%;
   -webkit-animation: MoveBG 60s ease infinite;
@@ -1070,16 +1073,23 @@ header .searchContainer #searchForm a:hover {
   opacity: 1;
   transition: opacity 0.15s;
 }
-header.headerHome .searchContainer {
+header.home .searchContainer {
   padding-top: 30px;
+}
+header.blogDetail {
+  min-height: 500px;
+  height: 500px;
 }
 
 .searchActive header {
   height: 450px;
   transition: height 0.25s ease-in;
 }
-.searchActive header.headerHome {
+.searchActive header.home {
   height: 550px;
+}
+.searchActive header.blogDetail {
+  height: 750px;
 }
 
 nav {
@@ -1221,7 +1231,7 @@ nav .cartFoldout {
     line-height: 52px;
   }
 
-  .searchActive header.headerHome {
+  .searchActive header.home {
     height: 350px;
   }
 }
@@ -2997,7 +3007,7 @@ nav .cartFoldout {
   position: relative;
   background-color: #fff;
   border-radius: 5px;
-  padding: 0px 25px;
+  padding: 45px 25px 0 25px;
 }
 .cartContainer h2 {
   font-size: 28px;
@@ -3101,11 +3111,49 @@ nav .cartFoldout {
 
 @media (min-width: 1660px) {
   .cartContainer {
-    padding: 0px 250px;
+    padding: 45px 250px 0 250px;
   }
+}
+header.blogDetail .page-title {
+  margin-top: 40px;
+  text-align: center;
+}
+header.blogDetail .page-title .tags {
+  font-weight: 600;
+  opacity: 0.75;
+  font-size: 22px;
+}
+header.blogDetail .page-title .tags a {
+  color: #fff;
+  transition: color 0.15s;
+}
+header.blogDetail .page-title .tags a:hover {
+  text-decoration: none;
+  opacity: 1;
+  transition: color 0.15s;
+}
+header.blogDetail .page-title .title {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100vw;
+  font-weight: 700;
+  font-size: 70px;
+  line-height: 70px;
+  text-align: center;
+  padding: 30px 0;
+}
+header.blogDetail .page-title .date {
+  opacity: 0.5;
+  font-size: 22px;
+}
+
+.blogpost-page {
+  position: relative;
+  background-color: #fff;
 }
 .blogpost-page .blogPostContainer {
   margin-bottom: 60px;
+  padding-top: 40px;
 }
 .blogpost-page .blogPostContainer .blogPostBody {
   padding-right: 80px;
@@ -3119,6 +3167,28 @@ nav .cartFoldout {
   color: #c4c4c4;
   float: right;
   margin-top: -57px;
+}
+.blogpost-page .blogPostContainer .blogPostBody .socialShareContainer {
+  position: relative;
+  float: left;
+}
+.blogpost-page .blogPostContainer .blogPostBody .socialShareContainer.affix {
+  position: fixed;
+  top: 25px;
+}
+.blogpost-page .blogPostContainer .blogPostBody .socialShareContainer a {
+  color: #919191;
+  display: block;
+  padding: 0 30px 0 0;
+  font-size: 32px;
+  transition: color 0.15s;
+}
+.blogpost-page .blogPostContainer .blogPostBody .socialShareContainer a:hover {
+  color: #171717;
+  transition: color 0.15s;
+}
+.blogpost-page .blogPostContainer .blogPostBody .post-body {
+  padding-left: 90px;
 }
 .blogpost-page .blogPostContainer .blogPostBody .post-body p {
   margin-bottom: 30px;
@@ -3168,6 +3238,10 @@ nav .cartFoldout {
   padding: 40px;
   margin-top: 40px;
   position: relative;
+}
+.blogpost-page .blogPostContainer .advertisement.affix {
+  position: fixed;
+  top: -42px;
 }
 .blogpost-page .blogPostContainer .advertisement .label {
   position: absolute;

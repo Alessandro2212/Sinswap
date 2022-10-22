@@ -25,45 +25,39 @@
 
     var breadcrumbDelimiter = commonSettings.BreadcrumbDelimiter;
 }
-@*category breadcrumb*@
-@*@section Breadcrumb
-    {
-    @if (Model.DisplayCategoryBreadcrumb)
-    {
-    <div class="breadcrumb">
-    <ul itemscope itemtype="http://schema.org/BreadcrumbList">
-    <li>
-    <a href="@Url.RouteUrl("HomePage")" title="@T("Categories.Breadcrumb.Top")">@T("Categories.Breadcrumb.Top")</a>
-    <span class="delimiter">@breadcrumbDelimiter</span>
-    </li>
-    @{ int position = 1; }
-    @foreach (var cat in Model.CategoryBreadcrumb)
-    {
-    var isLastCategory = cat.Id == Model.Id;
-    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-    @if (isLastCategory)
-    {
-    <strong class="current-item" itemprop="name">@cat.Name</strong>
-    <span itemprop="item" itemscope itemtype="http://schema.org/Thing">
-    <link itemprop="url" href="@Url.RouteUrl("Category", new {SeName = cat.SeName})" />
-    </span>
-    }
-    else
-    {
-    <a href="@Url.RouteUrl("Category", new { SeName = cat.SeName })" title="@cat.Name" itemprop="item">
-    <span itemprop="name">@cat.Name</span>
-    </a>
-    <span class="delimiter">@breadcrumbDelimiter</span>
-    }
-    <meta itemprop="position" content="@position" />
-    </li>
-    position++;
-    }
-    </ul>
+
+<header>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                <a href="@Url.RouteUrl("HomePage")">
+                    <img class="logo" title="Sinning is Winning" alt="Sinswap" src="/Themes/Sinswap/content/images/logoVendor.svg">
+                </a>
+            </div>
+
+            @await Component.InvokeAsync("Header")
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 payoffContainer">
+                <div class="payoff">@Model.Name</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 searchContainer">
+                <div class="searchTitle">Find what you're looking for...</div>
+    
+                @await Component.InvokeAsync("SearchBox")
+            </div>
+        </div>
+
     </div>
-    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsAfterBreadcrumb, additionalData = Model })
-    }
-    }*@
+</header>
+
 <div class="page category-page">
     <div class="page-body">
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsTop, additionalData = Model })
@@ -83,6 +77,8 @@
                 <div class="row">
                     <div class="col-12">
                         <h2>@Model.Name</h2>
+
+                        <p class="p-1">Room for a short explanation about our main categories?</p>
                     </div>
                 </div>
 
