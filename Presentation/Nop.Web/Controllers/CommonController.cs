@@ -179,6 +179,51 @@ namespace Nop.Web.Controllers
 
             return Redirect(returnUrl);
         }
+        
+        [HttpsRequirement(SslRequirement.Yes)]
+        //available even when a store is closed
+        [CheckAccessClosedStore(true)]
+        public virtual IActionResult PrivacyPolicy()
+        {
+            var model = new PrivacyPolicyModel();
+            return View(model);
+        }
+
+        [HttpsRequirement(SslRequirement.Yes)]
+        //available even when a store is closed
+        [CheckAccessClosedStore(true)]
+        public virtual IActionResult AboutUs()
+        {
+            var model = new AboutModel();
+            return View(model);
+        }
+
+        [HttpsRequirement(SslRequirement.Yes)]
+        //available even when a store is closed
+        [CheckAccessClosedStore(true)]
+        public virtual IActionResult TermsOfUse()
+        {
+            var model = new TermsOfUseModel();
+            return View(model);
+        }
+
+        [HttpsRequirement(SslRequirement.Yes)]
+        //available even when a store is closed
+        [CheckAccessClosedStore(true)]
+        public virtual IActionResult CustomerService()
+        {
+            var model = new CustomerServiceModel();
+            return View(model);
+        }
+
+        [HttpsRequirement(SslRequirement.Yes)]
+        //available even when a store is closed
+        [CheckAccessClosedStore(true)]
+        public virtual IActionResult FAQ()
+        {
+            var model = new FAQModel();
+            return View(model);
+        }
 
         //contact us page
         [HttpsRequirement(SslRequirement.Yes)]

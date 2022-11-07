@@ -73,6 +73,22 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapLocalizedRoute("ContactUs", "contactus",
 				new { controller = "Common", action = "ContactUs" });
 
+            routeBuilder.MapLocalizedRoute("PrivacyPolicy", "privacypolicy",
+                new { controller = "Common", action = "PrivacyPolicy" });
+
+            routeBuilder.MapLocalizedRoute("TermsOfUse", "termsofuse",
+                new { controller = "Common", action = "TermsOfUse" });
+
+            routeBuilder.MapLocalizedRoute("CustomerService", "customerservice",
+                new { controller = "Common", action = "CustomerService" });
+
+            routeBuilder.MapLocalizedRoute("FAQ", "faq",
+                new { controller = "Common", action = "FAQ" });
+
+            routeBuilder.MapLocalizedRoute("AboutUs", "aboutus",
+                new { controller = "Common", action = "AboutUs" });
+
+
             //sitemap
             routeBuilder.MapLocalizedRoute("Sitemap", "sitemap",
 				new { controller = "Common", action = "Sitemap" });
