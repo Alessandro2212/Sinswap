@@ -21,6 +21,7 @@ namespace Nop.Data.Mapping.Vendors
             builder.HasKey(vendor => vendor.Id);
 
             builder.Property(vendor => vendor.Name).HasMaxLength(400).IsRequired();
+            builder.Property(vendor => vendor.ShopName).HasMaxLength(400);
             builder.Property(vendor => vendor.Email).HasMaxLength(400);
             builder.Property(vendor => vendor.City).HasMaxLength(400);
             builder.Property(vendor => vendor.BirthDate);

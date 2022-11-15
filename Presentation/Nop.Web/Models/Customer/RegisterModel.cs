@@ -156,6 +156,9 @@ namespace Nop.Web.Models.Customer
 
         //Vendor registration
 
+        [DisplayName("Shop Name")]
+        public string ShopName { get; set; }
+
         public bool IsVendor { get; set; }
 
         [DisplayName("Register as Free Seller")]

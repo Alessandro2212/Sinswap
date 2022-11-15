@@ -18,6 +18,8 @@ namespace Nop.Core.Domain.Vendors
         /// </summary>
         public string Name { get; set; }
 
+        public string ShopName { get; set; }
+
         /// <summary>
         /// Gets or sets the email
         /// </summary>

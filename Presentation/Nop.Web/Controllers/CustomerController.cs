@@ -910,6 +910,7 @@ namespace Nop.Web.Controllers
                         VendorModel vendorModel = new VendorModel
                         {
                             Name = $"{model.FirstName} {model.LastName}",
+                            ShopName = model.ShopName,
                             Email = model.Email,
                             Address = new Areas.Admin.Models.Common.AddressModel
                             {

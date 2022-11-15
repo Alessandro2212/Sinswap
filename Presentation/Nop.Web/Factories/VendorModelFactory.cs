@@ -249,7 +249,7 @@ namespace Nop.Web.Factories
                     Id = vendor.Id,
                     Name = vendor.Name,
                     City = vendor.City,
-                    Country = vendor.Country.Name,
+                    Country = vendor.Country?.Name ?? string.Empty,
                     PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId),
                     Age = vendor.BirthDate != null ? GetAge(vendor.BirthDate) : 0,
                     SeName = _urlRecordService.GetSeName(vendor)
@@ -277,7 +277,7 @@ namespace Nop.Web.Factories
                 model.Name = vendor.Name;
                 model.Quote = vendor.VendorNotes?.FirstOrDefault()?.Note;
                 model.City = vendor.City;
-                model.Country = vendor.Country.Name;
+                model.Country = vendor.Country?.Name ?? string.Empty;
                 model.Age = vendor.BirthDate != null ? GetAge(vendor.BirthDate) : 0;
                 model.KnownFor = vendor.KnownFor;
                 model.SeName = _urlRecordService.GetSeName(vendor);

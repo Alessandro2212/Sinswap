@@ -36,7 +36,11 @@ namespace Nop.Web.Areas.Admin.Models.Vendors
         #region Properties
 
         [NopResourceDisplayName("Admin.Vendors.Fields.Name")]
+
         public string Name { get; set; }
+
+        [DisplayName("Shop Name")]
+        public string ShopName { get; set; }
 
         [DataType(DataType.EmailAddress)]
         [NopResourceDisplayName("Admin.Vendors.Fields.Email")]
