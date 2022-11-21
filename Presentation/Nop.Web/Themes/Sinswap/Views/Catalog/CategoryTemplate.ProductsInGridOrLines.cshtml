@@ -44,6 +44,12 @@
         <div class="row">
             <div class="col-12 payoffContainer">
                 <div class="payoff">@Model.Name</div>
+                <p>
+                    @if (!string.IsNullOrEmpty(Model.Description))
+                    {
+                        @Regex.Replace(@Model.Description, "<.*?>", String.Empty)
+                    }
+                </p>
             </div>
         </div>
 
@@ -131,15 +137,6 @@
             @*static, needs to go to partial*@
             <div class="container firstContainer sellersContainer">
                 <div class="row">
-                    <div class="col-6 categoryDesc">
-                        <h1>@Model.SeName</h1>
-                        <p>
-                            @if (!string.IsNullOrEmpty(Model.Description))
-                            {
-                                @Regex.Replace(@Model.Description, "<.*?>", String.Empty)
-                            }
-                        </p>
-                    </div>
                     @await Component.InvokeAsync("CategoryVendor", new { categoryId = Model.Id, modelAlreadyReady = Model.MiniVendorsForCategory })
                 </div>
 

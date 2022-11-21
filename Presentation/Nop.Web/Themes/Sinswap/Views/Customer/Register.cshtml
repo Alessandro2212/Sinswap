@@ -11,6 +11,7 @@
     Html.AddTitleParts(T("PageTitle.Register").Text);
     //page class
     Html.AppendPageCssClassParts("html-registration-page");
+    Html.AppendPageCssClassParts("vendorRegistrationPage");
 
     //login URL with return URL (if specified)
     var loginUrl = Url.RouteUrl("Login", null, webHelper.CurrentRequestProtocol);
