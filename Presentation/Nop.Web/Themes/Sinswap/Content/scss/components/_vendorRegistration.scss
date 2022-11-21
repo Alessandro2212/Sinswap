@@ -1,4 +1,18 @@
 ﻿// Vendor registration
+.html-registration-page {
+    .serviceMenu {
+        display: none!important;
+    }
+
+    footer {
+        min-height: 122px;
+
+        .allCatagoryContainer {
+            display: none;
+        }
+    }
+}
+
 header.vendorRegistration {
     height: auto;
     max-height: none;

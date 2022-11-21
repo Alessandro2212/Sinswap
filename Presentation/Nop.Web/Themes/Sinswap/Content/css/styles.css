@@ -1929,6 +1929,16 @@ nav .cartFoldout {
     font-size: 18px;
   }
 }
+.html-registration-page .serviceMenu {
+  display: none !important;
+}
+.html-registration-page footer {
+  min-height: 122px;
+}
+.html-registration-page footer .allCatagoryContainer {
+  display: none;
+}
+
 header.vendorRegistration {
   height: auto;
   max-height: none;
