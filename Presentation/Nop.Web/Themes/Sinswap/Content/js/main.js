@@ -24,6 +24,25 @@ $(function () {
         setAffixedElements();
     }
 
+    // Signup specific
+    if ($('.vendorRegistration .swiper').length) {
+        var swiper = new Swiper(".swiper", {
+            navigation: {
+                nextEl: ".swipe-next",
+            },
+            allowSlideNext: true,
+            allowSlidePrev: false,
+            allowTouchMove: false,
+            followFinger: false,
+            grabCursor: false
+        });
+
+        swiper.on('slideChange', function () {
+            $(".stepIconContainer li").removeClass('active');
+            $(".stepIconContainer .icon" + swiper.activeIndex).addClass('active');
+        });
+    }
+
     function setAffixedElements() {
         if ($('.socialShareContainer').length) {
             $('.socialShareContainer').removeData('bs.affix').removeClass('affix affix-top affix-bottom');

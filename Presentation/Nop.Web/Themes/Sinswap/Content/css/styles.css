@@ -1929,6 +1929,121 @@ nav .cartFoldout {
     font-size: 18px;
   }
 }
+header.vendorRegistration {
+  height: auto;
+  max-height: none;
+}
+header.vendorRegistration .swiper-slide {
+  min-height: 900px;
+}
+header.vendorRegistration .page-title {
+  margin-top: 40px;
+  text-align: center;
+}
+header.vendorRegistration .page-title .title {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100vw;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 60px;
+  text-align: center;
+  padding: 30px 0;
+}
+header.vendorRegistration .page-title .subtitle {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 32px;
+  text-align: center;
+  padding: 0 15% 60px 15%;
+}
+header.vendorRegistration p {
+  font-size: 22px;
+  padding: 0 15%;
+  margin-bottom: 60px;
+  text-align: center;
+}
+header.vendorRegistration .fieldsetStepContainer input {
+  padding: 15px 20px;
+  font-size: 20px;
+}
+header.vendorRegistration .fieldsetStepContainer .form-check {
+  padding: 15px 20px;
+  font-size: 20px;
+  color: #495057;
+  background-color: #fff;
+  width: 100%;
+  line-height: 1.5;
+  font-weight: 400;
+  border-radius: 0.25em;
+  box-shadow: inset 0 3px 7px -6px rgba(0, 0, 0, 0.7);
+  margin-bottom: 1rem;
+}
+header.vendorRegistration .fieldsetStepContainer .form-check input {
+  zoom: 2;
+  margin-top: 1px;
+  margin-left: 0px;
+}
+header.vendorRegistration .fieldsetStepContainer .form-check label {
+  padding-left: 40px;
+  width: 100%;
+}
+header.vendorRegistration .fieldsetStepContainer .footnote {
+  padding: 10px 30px;
+}
+header.vendorRegistration .fieldsetStepContainer .footnote a {
+  color: #fff;
+  text-decoration: underline;
+}
+header.vendorRegistration .fieldsetStepContainer .footnote a:hover {
+  text-decoration: none;
+}
+header.vendorRegistration .fieldsetStepContainer .buttons {
+  margin-top: 30px;
+}
+header.vendorRegistration .fieldsetStepContainer .buttons input {
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
+  transition: all 0.25s ease-in;
+}
+header.vendorRegistration .fieldsetStepContainer .buttons input:hover {
+  background-color: #fff;
+  color: #171717;
+  transition: all 0.25s ease-out;
+}
+header.vendorRegistration .fieldsetStepContainer .buttons input.done {
+  border-color: #0ebc39;
+  background-color: #0ebc39;
+}
+header.vendorRegistration .stepIconContainer {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+header.vendorRegistration .stepIconContainer ul {
+  margin: 0px;
+  padding: 0px;
+}
+header.vendorRegistration .stepIconContainer ul li {
+  list-style: none;
+  float: left;
+  margin: 0 15px 20px 15px;
+  opacity: 0.5;
+  text-align: center;
+  font-size: 14px;
+}
+header.vendorRegistration .stepIconContainer ul li img {
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 50px;
+}
+header.vendorRegistration .stepIconContainer ul li.active {
+  opacity: 1;
+}
+
 .vendorInfoContainer {
   position: relative;
   background-color: #fff;

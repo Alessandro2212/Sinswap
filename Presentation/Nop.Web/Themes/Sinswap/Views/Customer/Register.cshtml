@@ -19,12 +19,415 @@
         loginUrl = webHelper.ModifyQueryString(loginUrl, "returnurl", this.Context.Request.Query["returnUrl"]);
     }
 }
-@*
-<button type="button" class="btn btn-primary m-5" data-toggle="modal" data-target="#registerModal">
-  Launch Registration modal
-</button>*@
 
-<h1>Proceed with the registration @Model.Email!</h1>
+<header class="vendorRegistration">
+    <div class="container-fluid p-0">
+
+        <div class="row">
+            <div class="col-12 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                <a href="@Url.RouteUrl("HomePage")">
+                    <img class="logo" title="Sinning is Winning" alt="Sinswap" src="/Themes/Sinswap/content/images/logoHome.svg">
+                </a>
+            </div>
+
+            @await Component.InvokeAsync("Header")
+
+        </div>
+
+        <form method="post" action="#">
+
+            <div class="swiper">
+                <div class="swiper-wrapper">
+
+                    @* Step 1 *@
+                    <div class="swiper-slide">
+
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-8">
+    
+                                <div class="page-title">
+                                    <div class="title">Welcome and thank you for joining!</div>
+
+                                    <div class="subtitle">We want to create your account, so we need some basic info.</div>
+                                </div>
+
+                                <p>
+                                    First things first, privacy and security are really important to us and they should be to you too,
+                                    so please create a strong password so we know it's really you.
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <div class="row fieldsetStepContainer justify-content-center">
+                            <div class="col-12 col-md-3">
+
+                                <div class="fieldset">
+                                    <div class="form-fields">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Password" type="password" data-val="true" data-val-required="Password is required." id="Password" name="Password" value="">
+                                            <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Re-type password" type="password" data-val="true" data-val-required="Password is required." id="Password2" name="Password2" value="">
+                                            <span class="field-validation-valid" data-valmsg-for="Password2" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="buttons">
+                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    @* /Step 1 *@
+
+                    @* Step 2 *@
+                    <div class="swiper-slide">
+
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-8">
+
+                                <div class="page-title">
+                                    <div class="title">Come as you are, respected as you are</div>
+
+                                    <div class="subtitle">How do you identify?</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row fieldsetStepContainer justify-content-center">
+                            <div class="col-12 col-md-3">
+
+                                <div class="fieldset">
+                                    <div class="form-fields">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="genderidentity" id="female" value="female">
+                                            <label class="form-check-label" for="female">
+                                                Female
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="genderidentity" id="male" value="male">
+                                            <label class="form-check-label" for="male">
+                                                Male
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="genderidentity" id="nonbinary" value="nonbinary">
+                                            <label class="form-check-label" for="nonbinary">
+                                                Non-binary
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="genderidentity" id="furry" value="furry">
+                                            <label class="form-check-label" for="furry">
+                                                Furry
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="genderidentity" id="unknown" value="unknown">
+                                            <label class="form-check-label" for="unknown">
+                                                None of your business
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="buttons">
+                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    @* /Step 2 *@
+
+                    @* Step 3 *@
+                    <div class="swiper-slide">
+
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-8">
+    
+                                <div class="page-title">
+                                    <div class="title">Let's get to know each other a little better</div>
+
+                                    <div class="subtitle">What should we call you?</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row fieldsetStepContainer justify-content-center">
+                            <div class="col-12 col-md-3">
+
+                                <div class="fieldset">
+                                    <div class="form-fields">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Your first name" type="text" data-val="true" data-val-required="Your first name is required." id="firstname" name="firstname" value="">
+                                            <span class="field-validation-valid" data-valmsg-for="firstname" data-valmsg-replace="true"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Your last name" type="text" data-val="true" data-val-required="Your last name is required." id="lastname" name="lastname" value="">
+                                            <span class="field-validation-valid" data-valmsg-for="lastname" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="footnote">
+                                    This info will NEVER be posted anywhere,
+                                    but for legal reasons we need to know your
+                                    real name. We hope you understand.
+                                </div>
+
+                                <div class="buttons">
+                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    @* /Step 3 *@
+
+                    @* Step 4 *@
+                    <div class="swiper-slide">
+
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-8">
+
+                                <div class="page-title">
+                                    <div class="title">What will be the name of your Sinswap store?</div>
+
+                                    <div class="subtitle">Originality really pays off</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row fieldsetStepContainer justify-content-center">
+                            <div class="col-12 col-md-3">
+
+                                <div class="fieldset">
+                                    <div class="form-fields">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="sinswap.com/" type="text" data-val="true" data-val-required="This name is required." id="shopname" name="shopname" value="sinswap.com/">
+                                            <span class="field-validation-valid" data-valmsg-for="shopname" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="buttons">
+                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    @* /Step 4 *@
+
+                    @* Step 5 *@
+                    <div class="swiper-slide">
+
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-8">
+
+                                <div class="page-title">
+                                    <div class="title">Where do you live?</div>
+
+                                    <div class="subtitle">We will never share this with any buyers or other sellers</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row fieldsetStepContainer justify-content-center">
+                            <div class="col-12 col-md-3">
+
+                                <div class="fieldset">
+                                    <div class="form-fields">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Street address" type="text" data-val="true" data-val-required="Your address is required." id="streetaddress" name="streetaddress">
+                                            <span class="field-validation-valid" data-valmsg-for="streetaddress" data-valmsg-replace="true"></span>
+                                        </div>
+                                        <div class="row p-0">
+                                            <div class="col-5">
+                                                <div class="form-group">
+                                                    <input class="form-control" placeholder="Zipcode" type="text" data-val="true" data-val-required="Your zipcode is required." id="zipcode" name="zipcode">
+                                                    <span class="field-validation-valid" data-valmsg-for="zipcode" data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-7 pl-0">
+                                                <div class="form-group">
+                                                    <input class="form-control" placeholder="City" type="text" data-val="true" data-val-required="Your city is required." id="city" name="city">
+                                                    <span class="field-validation-valid" data-valmsg-for="city" data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder="Country" type="text" data-val="true" data-val-required="Your country is required." id="country" name="country">
+                                            <span class="field-validation-valid" data-valmsg-for="country" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="buttons">
+                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    @* /Step 5 *@
+
+                    @* Step 6 *@
+                    <div class="swiper-slide">
+
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-8">
+
+                                <div class="page-title">
+                                    <div class="title">We're building a community here</div>
+
+                                    <div class="subtitle">
+                                        You succeed, we succeed!<br />
+                                        So we would like to help you out with tips, updates and more. Spam? No thanks!
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row fieldsetStepContainer justify-content-center">
+                            <div class="col-12 col-md-3">
+
+                                <div class="fieldset">
+                                    <div class="form-fields">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="optin" id="optin" value="optin">
+                                            <label class="form-check-label" for="optin">
+                                                You can e-mail me occasionally
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="optin" id="optout" value="optout">
+                                            <label class="form-check-label" for="optout">
+                                                No thanks
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="buttons">
+                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    @* /Step 6 *@
+
+                    @* Step 7 *@
+                    <div class="swiper-slide">
+
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-8">
+
+                                <div class="page-title">
+                                    <div class="title">Our least favourite part</div>
+
+                                    <div class="subtitle">The legal stuff...</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row fieldsetStepContainer justify-content-center">
+                            <div class="col-12 col-md-3">
+
+                                <div class="fieldset">
+                                    <div class="form-fields">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="terms" id="terms" value="terms">
+                                            <label class="form-check-label" for="terms">
+                                                I trust you guys
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="footnote">
+                                    By accepting our <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a> and
+                                    <a href="#">GDPS concent</a> and continue our service. You agree with terms and policies.
+                                </div>
+
+                                <div class="buttons">
+                                    <input type="button" class="btn btn-action done register-next-step-button" value="Create my Sinswap-account" name="continue-button">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    @* /Step 7 *@
+
+                </div>
+
+                <div class="row stepIconContainer">
+                    <div class="col-12 justify-content-center d-flex">
+
+                        <ul>
+                            <li class="icon0 active">
+                                <img src="/Themes/Sinswap/content/images/icons/registerPassword.svg" /><br />
+                                Safety first
+                            </li>
+                            <li class="icon1">
+                                <img src="/Themes/Sinswap/content/images/icons/registerGender.svg" /><br />
+                                Identify as
+                            </li>
+                            <li class="icon2">
+                                <img src="/Themes/Sinswap/content/images/icons/registerName.svg" /><br />
+                                Who?
+                            </li>
+                            <li class="icon3">
+                                <img src="/Themes/Sinswap/content/images/icons/registerShop.svg" /><br />
+                                Your shop
+                            </li>
+                            <li class="icon4">
+                                <img src="/Themes/Sinswap/content/images/icons/registerLocation.svg" /><br />
+                                You're from
+                            </li>
+                            <li class="icon5">
+                                <img src="/Themes/Sinswap/content/images/icons/registerCommunity.svg" /><br />
+                                Community
+                            </li>
+                            <li class="icon6">
+                                <img src="/Themes/Sinswap/content/images/icons/registerReady.svg" /><br />
+                                Done!
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+</header>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@8.4.4/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8.4.4/swiper-bundle.min.css">
 
 @if (Model.CountryEnabled && Model.StateProvinceEnabled)
 {
