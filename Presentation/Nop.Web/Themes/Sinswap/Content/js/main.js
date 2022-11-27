@@ -1,9 +1,18 @@
 $(function () {
 
 
+    // Search init
     if ($('.service').length) {
         $('.search').click(function (e) {
-            $('body').toggleClass('searchActive');
+            $('body').addClass('searchActive');
+        });
+    }
+
+    if ($('.searchModal').length) {
+        $('.searchModal').click(function (e) {
+            if ($(e.target).closest('.searchContainer').length == 0) {
+                $('body').removeClass('searchActive');
+            }
         });
     }
 

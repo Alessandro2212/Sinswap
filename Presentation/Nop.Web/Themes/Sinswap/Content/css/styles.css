@@ -399,11 +399,6 @@ body {
   margin-top: 165px;
 }
 
-.searchActive .firstContainer {
-  margin-top: 0px;
-  transition: margin-top 0.25s ease-in;
-}
-
 .dividerContainer {
   padding: 0px 15px 90px 15px;
 }
@@ -1026,26 +1021,49 @@ header .payoffContainer p {
   padding: 0px;
   margin: -50px 0 0 0;
 }
-header .searchContainer {
+header.blogDetail {
+  min-height: 500px;
+  height: 500px;
+}
+
+.searchModal {
+  display: none;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+.searchModal:before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+}
+.searchModal .searchContainer {
   text-align: center;
-  padding: 90px 0 60px 0;
+  margin-top: 20%;
 }
-header .searchContainer .searchTitle {
+.searchModal .searchContainer .searchTitle {
   font-size: 52px;
+  color: #fff;
 }
-header .searchContainer #searchForm {
+.searchModal .searchContainer #searchForm {
   width: 700px;
   margin: 0px auto;
   position: relative;
 }
-header .searchContainer #searchForm input {
+.searchModal .searchContainer #searchForm input {
   margin-top: 10px;
   font-size: 18px;
   padding: 15px 20px;
   -webkit-box-shadow: 1px 5px 15px -3px rgba(0, 0, 0, 0.5);
   box-shadow: 1px 5px 15px -3px rgba(0, 0, 0, 0.5);
 }
-header .searchContainer #searchForm .searchSubmit {
+.searchModal .searchContainer #searchForm .searchSubmit {
   font-size: 30px;
   width: 62px;
   height: 62px;
@@ -1063,11 +1081,11 @@ header .searchContainer #searchForm .searchSubmit {
   opacity: 0.5;
   transition: opacity 0.15s;
 }
-header .searchContainer #searchForm .searchSubmit:hover {
+.searchModal .searchContainer #searchForm .searchSubmit:hover {
   opacity: 1;
   transition: opacity 0.15s;
 }
-header .searchContainer #searchForm a {
+.searchModal .searchContainer #searchForm a {
   position: absolute;
   display: block;
   right: 20px;
@@ -1075,28 +1093,14 @@ header .searchContainer #searchForm a {
   color: #fff;
   opacity: 0.75;
 }
-header .searchContainer #searchForm a:hover {
+.searchModal .searchContainer #searchForm a:hover {
   text-decoration: none;
   opacity: 1;
   transition: opacity 0.15s;
 }
-header.home .searchContainer {
-  padding-top: 30px;
-}
-header.blogDetail {
-  min-height: 500px;
-  height: 500px;
-}
 
-.searchActive header {
-  height: 450px;
-  transition: height 0.25s ease-in;
-}
-.searchActive header.home {
-  height: 550px;
-}
-.searchActive header.blogDetail {
-  height: 750px;
+.searchActive .searchModal {
+  display: block;
 }
 
 nav {
@@ -1236,10 +1240,6 @@ nav .cartFoldout {
     width: 52px;
     height: 52px;
     line-height: 52px;
-  }
-
-  .searchActive header.home {
-    height: 350px;
   }
 }
 @media (max-width: 576px) {
