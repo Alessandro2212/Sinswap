@@ -36,7 +36,9 @@
 
         </div>
 
-        <form method="post" action="#">
+        @using (Html.BeginForm("register", "customer", FormMethod.Post))
+        {
+            @*<form method="post" action="#">*@
 
             <div class="swiper">
                 <div class="swiper-wrapper">
@@ -46,7 +48,7 @@
 
                         <div class="row justify-content-center">
                             <div class="col-12 col-md-8">
-    
+
                                 <div class="page-title">
                                     <div class="title">Welcome and thank you for joining!</div>
 
@@ -67,12 +69,16 @@
                                 <div class="fieldset">
                                     <div class="form-fields">
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="Password" type="password" data-val="true" data-val-required="Password is required." id="Password" name="Password" value="">
-                                            <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                                            @*<input class="form-control" placeholder="Password" type="password" data-val="true" data-val-required="Password is required." id="Password" name="Password" value="">
+                                        <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>*@
+                                            @Html.TextBoxFor(model => model.Password, new {@class = "form-control", placeholder="Password", type="password"})
+                                            @Html.ValidationMessageFor(model => model.Password)
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="Re-type password" type="password" data-val="true" data-val-required="Password is required." id="Password2" name="Password2" value="">
-                                            <span class="field-validation-valid" data-valmsg-for="Password2" data-valmsg-replace="true"></span>
+                                            @*<input class="form-control" placeholder="Re-type password" type="password" data-val="true" data-val-required="Password is required." id="Password2" name="Password2" value="">
+                                        <span class="field-validation-valid" data-valmsg-for="Password2" data-valmsg-replace="true"></span>*@
+                                            @Html.TextBoxFor(model => model.ConfirmPassword, new {@class = "form-control", placeholder="Re-type password", type="password"})
+                                            @Html.ValidationMessageFor(model => model.ConfirmPassword)
                                         </div>
                                     </div>
                                 </div>
@@ -108,31 +114,36 @@
                                 <div class="fieldset">
                                     <div class="form-fields">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="genderidentity" id="female" value="female">
+                                            @*<input class="form-check-input" type="radio" name="genderidentity" id="female" value="female">*@
+                                            @Html.RadioButtonFor(model => model.Gender, "Female", new {@class = "form-check-input"})
                                             <label class="form-check-label" for="female">
                                                 Female
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="genderidentity" id="male" value="male">
+                                            @* <input class="form-check-input" type="radio" name="genderidentity" id="male" value="male">*@
+                                            @Html.RadioButtonFor(model => model.Gender, "Male", new {@class = "form-check-input"})
                                             <label class="form-check-label" for="male">
                                                 Male
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="genderidentity" id="nonbinary" value="nonbinary">
+                                            @* <input class="form-check-input" type="radio" name="genderidentity" id="nonbinary" value="nonbinary">*@
+                                            @Html.RadioButtonFor(model => model.Gender, "Non-binary", new {@class = "form-check-input"})
                                             <label class="form-check-label" for="nonbinary">
                                                 Non-binary
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="genderidentity" id="furry" value="furry">
+                                            @*<input class="form-check-input" type="radio" name="genderidentity" id="furry" value="furry">*@
+                                            @Html.RadioButtonFor(model => model.Gender, "Furry", new {@class = "form-check-input"})
                                             <label class="form-check-label" for="furry">
                                                 Furry
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="genderidentity" id="unknown" value="unknown">
+                                            @*<input class="form-check-input" type="radio" name="genderidentity" id="unknown" value="unknown">*@
+                                            @Html.RadioButtonFor(model => model.Gender, "None of your business", new {@class = "form-check-input"})
                                             <label class="form-check-label" for="unknown">
                                                 None of your business
                                             </label>
@@ -155,7 +166,7 @@
 
                         <div class="row justify-content-center">
                             <div class="col-12 col-md-8">
-    
+
                                 <div class="page-title">
                                     <div class="title">Let's get to know each other a little better</div>
 
@@ -171,12 +182,16 @@
                                 <div class="fieldset">
                                     <div class="form-fields">
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="Your first name" type="text" data-val="true" data-val-required="Your first name is required." id="firstname" name="firstname" value="">
-                                            <span class="field-validation-valid" data-valmsg-for="firstname" data-valmsg-replace="true"></span>
+                                            @*<input class="form-control" placeholder="Your first name" type="text" data-val="true" data-val-required="Your first name is required." id="firstname" name="firstname" value="">
+                                        <span class="field-validation-valid" data-valmsg-for="firstname" data-valmsg-replace="true"></span>*@
+                                            @Html.TextBoxFor(model => model.FirstName, new {@class = "form-control", placeholder="Your first name", type="text"})
+                                            @Html.ValidationMessageFor(model => model.FirstName)
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="Your last name" type="text" data-val="true" data-val-required="Your last name is required." id="lastname" name="lastname" value="">
-                                            <span class="field-validation-valid" data-valmsg-for="lastname" data-valmsg-replace="true"></span>
+                                            @* <input class="form-control" placeholder="Your last name" type="text" data-val="true" data-val-required="Your last name is required." id="lastname" name="lastname" value="">
+                                        <span class="field-validation-valid" data-valmsg-for="lastname" data-valmsg-replace="true"></span>*@
+                                            @Html.TextBoxFor(model => model.LastName, new {@class = "form-control", placeholder="Your last name", type="text"})
+                                            @Html.ValidationMessageFor(model => model.LastName)
                                         </div>
                                     </div>
                                 </div>
@@ -218,8 +233,10 @@
                                 <div class="fieldset">
                                     <div class="form-fields">
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="sinswap.com/" type="text" data-val="true" data-val-required="This name is required." id="shopname" name="shopname" value="sinswap.com/">
-                                            <span class="field-validation-valid" data-valmsg-for="shopname" data-valmsg-replace="true"></span>
+                                            @*<input class="form-control" placeholder="sinswap.com/" type="text" data-val="true" data-val-required="This name is required." id="shopname" name="shopname" value="sinswap.com/">
+                                        <span class="field-validation-valid" data-valmsg-for="shopname" data-valmsg-replace="true"></span>*@
+                                            @Html.TextBoxFor(model => model.ShopName, new {@class = "form-control", placeholder="sinswap.com/", type="text"})
+                                            @Html.ValidationMessageFor(model => model.ShopName)
                                         </div>
                                     </div>
                                 </div>
@@ -255,26 +272,34 @@
                                 <div class="fieldset">
                                     <div class="form-fields">
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="Street address" type="text" data-val="true" data-val-required="Your address is required." id="streetaddress" name="streetaddress">
-                                            <span class="field-validation-valid" data-valmsg-for="streetaddress" data-valmsg-replace="true"></span>
+                                            @*<input class="form-control" placeholder="Street address" type="text" data-val="true" data-val-required="Your address is required." id="streetaddress" name="streetaddress">
+                                        <span class="field-validation-valid" data-valmsg-for="streetaddress" data-valmsg-replace="true"></span>*@
+                                            @Html.TextBoxFor(model => model.StreetAddress, new {@class = "form-control", placeholder="Street address", type="text"})
+                                            @Html.ValidationMessageFor(model => model.StreetAddress)
                                         </div>
                                         <div class="row p-0">
                                             <div class="col-5">
                                                 <div class="form-group">
-                                                    <input class="form-control" placeholder="Zipcode" type="text" data-val="true" data-val-required="Your zipcode is required." id="zipcode" name="zipcode">
-                                                    <span class="field-validation-valid" data-valmsg-for="zipcode" data-valmsg-replace="true"></span>
+                                                    @*<input class="form-control" placeholder="Zipcode" type="text" data-val="true" data-val-required="Your zipcode is required." id="zipcode" name="zipcode">
+                                                <span class="field-validation-valid" data-valmsg-for="zipcode" data-valmsg-replace="true"></span>*@
+                                                    @Html.TextBoxFor(model => model.ZipPostalCode, new {@class = "form-control", placeholder="Zipcode", type="text"})
+                                                    @Html.ValidationMessageFor(model => model.ZipPostalCode)
                                                 </div>
                                             </div>
                                             <div class="col-7 pl-0">
                                                 <div class="form-group">
-                                                    <input class="form-control" placeholder="City" type="text" data-val="true" data-val-required="Your city is required." id="city" name="city">
-                                                    <span class="field-validation-valid" data-valmsg-for="city" data-valmsg-replace="true"></span>
+                                                    @*<input class="form-control" placeholder="City" type="text" data-val="true" data-val-required="Your city is required." id="city" name="city">
+                                                <span class="field-validation-valid" data-valmsg-for="city" data-valmsg-replace="true"></span>*@
+                                                    @Html.TextBoxFor(model => model.City, new {@class = "form-control", placeholder="City", type="text"})
+                                                    @Html.ValidationMessageFor(model => model.City)
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="Country" type="text" data-val="true" data-val-required="Your country is required." id="country" name="country">
-                                            <span class="field-validation-valid" data-valmsg-for="country" data-valmsg-replace="true"></span>
+                                            @*<input class="form-control" placeholder="Country" type="text" data-val="true" data-val-required="Your country is required." id="country" name="country">
+                                        <span class="field-validation-valid" data-valmsg-for="country" data-valmsg-replace="true"></span>*@
+                                            @Html.TextBoxFor(model => model.County, new {@class = "form-control", placeholder="Country", type="text"})
+                                            @Html.ValidationMessageFor(model => model.County)
                                         </div>
                                     </div>
                                 </div>
@@ -313,13 +338,15 @@
                                 <div class="fieldset">
                                     <div class="form-fields">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="optin" id="optin" value="optin">
+                                            @*<input class="form-check-input" type="radio" name="optin" id="optin" value="optin">*@
+                                            @Html.RadioButtonFor(model => model.EnteringEmailTwice, true, new {@class = "form-check-input"})
                                             <label class="form-check-label" for="optin">
                                                 You can e-mail me occasionally
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="optin" id="optout" value="optout">
+                                            @*<input class="form-check-input" type="radio" name="optin" id="optout" value="optout">*@
+                                            @Html.RadioButtonFor(model => model.EnteringEmailTwice, false, new {@class = "form-check-input"})
                                             <label class="form-check-label" for="optout">
                                                 No thanks
                                             </label>
@@ -358,7 +385,8 @@
                                 <div class="fieldset">
                                     <div class="form-fields">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="terms" id="terms" value="terms">
+                                            @*<input class="form-check-input" type="checkbox" name="terms" id="terms" value="terms">*@
+                                            @Html.RadioButtonFor(model => model.AcceptPrivacyPolicyEnabled, true, new {@class = "form-check-input"})
                                             <label class="form-check-label" for="terms">
                                                 I trust you guys
                                             </label>
@@ -372,7 +400,8 @@
                                 </div>
 
                                 <div class="buttons">
-                                    <input type="button" class="btn btn-action done register-next-step-button" value="Create my Sinswap-account" name="continue-button">
+                                    <button type="submit" class="btn btn-action done register-next-step-button">Create my Sinswap-account</button>
+                                    @*<input type="button" class="btn btn-action done register-next-step-button" value="Create my Sinswap-account" name="continue-button">*@
                                 </div>
 
                             </div>
@@ -422,7 +451,9 @@
 
             </div>
 
-        </form>
+            @*</form>*@
+        }
+
 
     </div>
 </header>
@@ -530,7 +561,7 @@
             <div class="modal-footer">
                 <div class="new-wrapper register-block">
                     @*<div class="title">
-                        <strong>@T("Account.Login.NewCustomer")</strong>
+                    <strong>@T("Account.Login.NewCustomer")</strong>
                     </div>*@
                     <div class="text">
                         Already a member? <a href="@loginUrl" class="btn-text">Sign in@*@T("Account.Register")*@</a>

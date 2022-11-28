@@ -573,6 +573,7 @@ namespace Nop.Web.Controllers
 
         [HttpsRequirement(SslRequirement.Yes)]
         [CheckAccessPublicStore(true)]
+        [HttpGet]
         public virtual IActionResult Register(int? id)
         {
             //check whether registration is allowed
