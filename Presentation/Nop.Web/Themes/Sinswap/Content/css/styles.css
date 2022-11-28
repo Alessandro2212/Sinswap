@@ -3109,13 +3109,13 @@ header.vendorRegistration .stepIconContainer ul li.active {
 .productModal .modal-content .descColumn .orderContainer {
   position: absolute;
   bottom: 45px;
-  width: 100%;
+  width: 310px;
 }
 .productModal .modal-content .descColumn .orderContainer .prodRow {
   font-size: 20px;
   font-weight: 600;
   margin-left: 0px;
-  margin-right: 90px;
+  margin-right: 0px;
 }
 .productModal .modal-content .descColumn .orderContainer .shippingRow {
   font-size: 14px;
@@ -3123,7 +3123,7 @@ header.vendorRegistration .stepIconContainer ul li.active {
   color: #999999;
   border-bottom: 2px solid #171717;
   margin-left: 0px;
-  margin-right: 90px;
+  margin-right: 0px;
   padding-bottom: 7px;
 }
 .productModal .modal-content .descColumn .orderContainer .price {
@@ -3136,6 +3136,8 @@ header.vendorRegistration .stepIconContainer ul li.active {
   margin-top: 10px;
   color: #fff;
   background-color: #00E39A;
+  width: auto;
+  float: right;
 }
 
 .cartContainer {

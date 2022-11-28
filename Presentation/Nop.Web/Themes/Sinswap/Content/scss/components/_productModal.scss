@@ -43,13 +43,13 @@
             .orderContainer {
                 position: absolute;
                 bottom: 45px;
-                width: 100%;
+                width: 310px;
 
                 .prodRow {
                     font-size: 20px;
                     font-weight: 600;
                     margin-left: 0px;
-                    margin-right: 90px;
+                    margin-right: 0px;
                 }
 
                 .shippingRow {
@@ -58,7 +58,7 @@
                     color: $grey15;
                     border-bottom: 2px solid $black;
                     margin-left: 0px;
-                    margin-right: 90px;
+                    margin-right: 0px;
                     padding-bottom: 7px;
                 }
 
@@ -74,6 +74,8 @@
                     margin-top: 10px;
                     color: $white;
                     background-color: #00E39A;
+                    width: auto;
+                    float: right;
                 }
             }
         }
