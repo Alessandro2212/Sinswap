@@ -3243,6 +3243,16 @@ header.vendorRegistration .stepIconContainer ul li.active {
 .cartContainer .totalContainer .terms-of-service label {
   left: 5px;
 }
+.cartContainer .order-summary-content .no-data {
+  text-align: center;
+  padding: 100px 0 345px 0;
+  font-size: 22px;
+  color: #c4c4c4;
+}
+.cartContainer .order-summary-content .no-data .fa-sad-tear {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
 
 @media (min-width: 1660px) {
   .cartContainer {
