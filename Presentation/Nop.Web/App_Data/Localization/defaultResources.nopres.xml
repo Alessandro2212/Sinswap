@@ -17266,7 +17266,7 @@
     <Value>Your cart has standard and auto-ship (recurring) items. Only one product type is allowed per order.</Value>
   </LocaleResource>
   <LocaleResource Name="ShoppingCart.CartIsEmpty">
-    <Value>Your Shopping Cart is empty!</Value>
+    <Value>What?! No items in your cart yet?<br />This makes us sad...</Value>
   </LocaleResource>
   <LocaleResource Name="ShoppingCart.CheckoutAttributes.PriceAdjustment">
     <Value>{0} [{1}]</Value>
