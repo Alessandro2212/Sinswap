@@ -21,6 +21,19 @@
     }
 }
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+<script>
+    var onloadCallback = function () {
+        grecaptcha.render('divcaptch', {
+            'sitekey': '6Lch1kMjAAAAAFYLkTWmVleazq1h25E2WWkmmdrf',
+            'callback': function (response) {
+                $('#txtcaptcha').val('t');
+            }
+        })
+    }
+</script>
+
 <header class="vendorRegistration">
     <div class="container-fluid p-0">
 
@@ -398,6 +411,9 @@
                                     By accepting our <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a> and
                                     <a href="#">GDPS concent</a> and continue our service. You agree with terms and policies.
                                 </div>
+
+                                <div id="divcaptch"></div>
+                                <input id="txtcaptcha" type="text" style="display:none" required />
 
                                 <div class="buttons">
                                     <button type="submit" class="btn btn-action done register-next-step-button">Create my Sinswap-account</button>
