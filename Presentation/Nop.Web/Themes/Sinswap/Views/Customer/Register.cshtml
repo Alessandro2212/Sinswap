@@ -399,7 +399,7 @@
                                     <div class="form-fields">
                                         <div class="form-check">
                                             @*<input class="form-check-input" type="checkbox" name="terms" id="terms" value="terms">*@
-                                            @Html.RadioButtonFor(model => model.AcceptPrivacyPolicyEnabled, true, new {@class = "form-check-input"})
+                                            @Html.CheckBoxFor(model => model.AcceptPrivacyPolicyEnabled, new {@class = "form-check-input"})
                                             <label class="form-check-label" for="terms">
                                                 I trust you guys
                                             </label>
