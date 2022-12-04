@@ -23,6 +23,33 @@
     }
 }
 
+
+
+<header>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                <a href="@Url.RouteUrl("HomePage")">
+                    <img class="logo" title="Sinning is Winning" alt="Sinswap" src="/Themes/Sinswap/content/images/logoVendor.svg">
+                </a>
+            </div>
+
+            @await Component.InvokeAsync("Header")
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 payoffContainer" data-stellar-background-ratio="0.5">
+            </div>
+        </div>
+
+    </div>
+</header>
+
+
+
 @* Vendor Page == Shop Page *@
 @if (Model.IsPremium.HasValue && Model.IsPremium.Value == true)
 {
