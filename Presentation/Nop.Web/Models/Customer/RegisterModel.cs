@@ -58,11 +58,14 @@ namespace Nop.Web.Models.Customer
         public string LastName { get; set; }
 
         public bool DateOfBirthEnabled { get; set; }
-        [NopResourceDisplayName("Account.Fields.DateOfBirth")]
+        //[NopResourceDisplayName("Account.Fields.DateOfBirth")]
+        [DisplayName("Day")]
         public int? DateOfBirthDay { get; set; }
-        [NopResourceDisplayName("Account.Fields.DateOfBirth")]
+        //[NopResourceDisplayName("Account.Fields.DateOfBirth")]
+        [DisplayName("Month")]
         public int? DateOfBirthMonth { get; set; }
-        [NopResourceDisplayName("Account.Fields.DateOfBirth")]
+        //[NopResourceDisplayName("Account.Fields.DateOfBirth")]
+        [DisplayName("Year")]
         public int? DateOfBirthYear { get; set; }
         public bool DateOfBirthRequired { get; set; }
         public DateTime? ParseDateOfBirth()
@@ -161,11 +164,8 @@ namespace Nop.Web.Models.Customer
 
         public bool IsVendor { get; set; }
 
-        [DisplayName("Register as Free Seller")]
-        public bool RegisterAsFreeVendor { get; set; }
-
         [DisplayName("Register as Premium Seller")]
-        public bool RegisterAsPremiumVendor { get; set; }
+        public bool IsPremiumVendor { get; set; }
 
         public IList<CustomerAttributeModel> CustomerAttributes { get; set; }
 

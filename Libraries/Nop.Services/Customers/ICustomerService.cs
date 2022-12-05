@@ -133,7 +133,7 @@ namespace Nop.Services.Customers
 
         int InsertCustomerActivationCode(CustomerActivationCode customerActivationCode);
 
-        void DeleteCustomerActivationCode(int customerActivationCodeId);
+        bool DeleteCustomerActivationCode(int customerActivationCodeId);
 
         string GetCustomerActivationCode(int customerId);
 

@@ -595,7 +595,11 @@ namespace Nop.Web.Controllers
             }
             else
             {
-                _customerService.DeleteCustomerActivationCode(customerId);
+                var result = _customerService.DeleteCustomerActivationCode(customerId);
+                if (result == false)
+                {
+                    return RedirectToRoute("HomePage"); //decide where
+                }
             }
 
             var model = new RegisterModel();
@@ -607,7 +611,6 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
-        //available even when navigation is not allowed
         [CheckAccessPublicStore(true)]
         public virtual IActionResult RegisterVerification(RegisterModel model, string returnUrl, bool captchaValid)
         {
@@ -906,7 +909,7 @@ namespace Nop.Web.Controllers
                     //_customerService.InsertCustomerActivationCode(customerActivationCode);
 
                     //If RegisterAsVendor is true, map register model to vendor model and redirect to CreateVendorController/Create
-                    if (model.RegisterAsPremiumVendor || model.RegisterAsFreeVendor)
+                    if (model.IsVendor)
                     {
                         VendorModel vendorModel = new VendorModel
                         {
@@ -932,7 +935,7 @@ namespace Nop.Web.Controllers
                             SeName = $"{model.FirstName}-{model.LastName}",
                             Form = model.Form,
                             BirthDate = new DateTime(model.DateOfBirthYear.Value, model.DateOfBirthMonth.Value, model.DateOfBirthDay.Value),
-                            IsPremium = model.RegisterAsPremiumVendor
+                            IsPremium = model.IsPremiumVendor
                         };
                         return CreateVendor(vendorModel, false, customer);
                     }

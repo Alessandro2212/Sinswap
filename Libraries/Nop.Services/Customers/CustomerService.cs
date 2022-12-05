@@ -503,11 +503,20 @@ namespace Nop.Services.Customers
             return customerActivationCode.Id;
         }
 
-        public void DeleteCustomerActivationCode(int customerActivationCodeId)
+        public bool DeleteCustomerActivationCode(int customerActivationCodeId)
         {
-           var cac = _customerActivationCodeRepository.GetById(customerActivationCodeId);
+            var cac = _customerActivationCodeRepository.GetById(customerActivationCodeId);
 
-            _customerActivationCodeRepository.Delete(cac);
+            if (cac != null)
+            {
+                if ((DateTime.Today - cac.InsertAt).TotalDays < 7)
+                {
+                    _customerActivationCodeRepository.Delete(cac);
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public string GetCustomerActivationCode(int customerId)
@@ -563,8 +572,8 @@ namespace Nop.Services.Customers
 
                 //Setting From , To and CC
                 mail.From = new MailAddress("social@sinswap.org", "SinSwap");
-                //mail.To.Add(new MailAddress(email));  //uncomment this for my tests          
-                mail.To.Add(new MailAddress("voordave@gmail.com")); //for testing purposes
+                mail.To.Add(new MailAddress(email));  //uncomment this for my tests          
+                //mail.To.Add(new MailAddress("voordave@gmail.com")); //for testing purposes
                 mail.Subject = "Registration to SinSwap";
 
                 mail.Body = $"Welcome to SinSwap! here is the link to complete your registration: {verificationLink} !";

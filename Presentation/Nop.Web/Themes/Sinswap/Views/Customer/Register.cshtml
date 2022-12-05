@@ -128,7 +128,7 @@
                                     <div class="form-fields">
                                         <div class="form-check">
                                             @*<input class="form-check-input" type="radio" name="genderidentity" id="female" value="female">*@
-                                            @Html.RadioButtonFor(model => model.Gender, "Female", new {@class = "form-check-input"})
+                                            @Html.RadioButtonFor(model => model.Gender, "Female", new {@class = "form-check-input", @Checked = "" })
                                             <label class="form-check-label" for="female">
                                                 Female
                                             </label>
@@ -209,6 +209,42 @@
                                     </div>
                                 </div>
 
+                                <div class="fieldset">
+                                    <div class="form-fields">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.DateOfBirthDay)
+                                            @Html.DropDownListFor(m => m.DateOfBirthDay, Enumerable.Range(1, 31).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+                                            @Html.ValidationMessageFor(model => model.DateOfBirthDay)
+
+                                            @Html.DropDownListFor(m => m.DateOfBirthMonth, Enumerable.Range(1, 12).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+                                            @Html.ValidationMessageFor(model => model.DateOfBirthMonth)
+
+                                            @Html.DropDownListFor(m => m.DateOfBirthYear, Enumerable.Range(1900, 105).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+                                            @Html.ValidationMessageFor(model => model.DateOfBirthYear)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (Model.IsVendor)
+                                {
+                                    <div class="fieldset">
+                                        <div class="form-fields">
+                                            <div class="form-check">
+                                                @Html.RadioButtonFor(model => model.IsPremiumVendor, true, new {@class = "form-check-input"})
+                                                <label class="form-check-label" for="furry">
+                                                    Premium
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                @Html.RadioButtonFor(model => model.IsPremiumVendor, false, new {@class = "form-check-input"})
+                                                <label class="form-check-label" for="unknown">
+                                                    Regular
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
                                 <div class="footnote">
                                     This info will NEVER be posted anywhere,
                                     but for legal reasons we need to know your
@@ -218,10 +254,8 @@
                                 <div class="buttons">
                                     <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
                     @* /Step 3 *@
 
