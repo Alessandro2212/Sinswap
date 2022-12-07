@@ -160,6 +160,7 @@ namespace Nop.Web.Models.Customer
         //Vendor registration
 
         [DisplayName("Shop Name")]
+        [Required]
         public string ShopName { get; set; }
 
         public bool IsVendor { get; set; }

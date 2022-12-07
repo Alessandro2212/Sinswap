@@ -357,7 +357,14 @@ namespace Nop.Web.Areas.Admin.Controllers
                     string.Format(_localizationService.GetResource("ActivityLog.EditVendor"), vendor.Id), vendor);
 
                 //search engine name
-                model.SeName = _urlRecordService.ValidateSeName(vendor, model.SeName, vendor.Name, true);
+                if (string.IsNullOrEmpty(vendor.ShopName))
+                {
+                    model.SeName = _urlRecordService.ValidateSeName(vendor, model.SeName, vendor.Name, true);
+                }
+                else
+                {
+                    model.SeName = _urlRecordService.ValidateSeName(vendor, model.ShopName, vendor.ShopName, true);
+                }
                 _urlRecordService.SaveSlug(vendor, model.SeName, 0);
 
                 //address

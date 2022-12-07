@@ -673,6 +673,11 @@ namespace Nop.Web.Controllers
         [CheckAccessPublicStore(true)]
         public virtual IActionResult Register(RegisterModel model, string returnUrl, bool captchaValid)
         {
+            if (model.AcceptPrivacyPolicyEnabled == false)
+            {
+                return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.AdminApproval });
+            }
+
             //check whether registration is allowed
             if (_customerSettings.UserRegistrationType == UserRegistrationType.Disabled)
                 return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.Disabled });
@@ -705,6 +710,11 @@ namespace Nop.Web.Controllers
                 ModelState.AddModelError("", _captchaSettings.GetWrongCaptchaMessage(_localizationService));
             }
 
+            if (model.Gender == null)
+            {
+                model.Gender = "None of your business";
+            }
+
             if (ModelState.IsValid)
             {
                 if (_customerSettings.UsernamesEnabled && model.Username != null)
@@ -712,7 +722,8 @@ namespace Nop.Web.Controllers
                     model.Username = model.Username.Trim();
                 }
 
-                var isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
+                //var isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
+                var isApproved =true;
                 var registrationRequest = new CustomerRegistrationRequest(customer,
                     model.Email,
                     _customerSettings.UsernamesEnabled ? model.Username : model.Email,
@@ -1003,7 +1014,15 @@ namespace Nop.Web.Controllers
                     string.Format(_localizationService.GetResource("ActivityLog.AddNewVendor"), vendor.Id), vendor);
 
                 //search engine name
-                model.SeName = _urlRecordService.ValidateSeName(vendor, model.SeName, vendor.Name, true);
+                if (string.IsNullOrEmpty(vendor.ShopName))
+                {
+                    model.SeName = _urlRecordService.ValidateSeName(vendor, null, vendor.Name, true);
+                }
+                else
+                {
+                    model.SeName = _urlRecordService.ValidateSeName(vendor, null, vendor.ShopName, true);
+                }
+
                 _urlRecordService.SaveSlug(vendor, model.SeName, 0);
 
                 //address

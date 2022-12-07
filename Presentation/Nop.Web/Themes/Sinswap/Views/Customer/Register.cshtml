@@ -128,7 +128,7 @@
                                     <div class="form-fields">
                                         <div class="form-check">
                                             @*<input class="form-check-input" type="radio" name="genderidentity" id="female" value="female">*@
-                                            @Html.RadioButtonFor(model => model.Gender, "Female", new {@class = "form-check-input", @Checked = "" })
+                                            @Html.RadioButtonFor(model => model.Gender, "Female", new {@class = "form-check-input", @checked = "" })
                                             <label class="form-check-label" for="female">
                                                 Female
                                             </label>
@@ -259,44 +259,52 @@
                     </div>
                     @* /Step 3 *@
 
-                    @* Step 4 *@
-                    <div class="swiper-slide">
+                    @if (Model.IsVendor)
+                    {
+                        @* Step 4 *@
+                        <div class="swiper-slide">
 
-                        <div class="row justify-content-center">
-                            <div class="col-12 col-md-8">
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-md-8">
 
-                                <div class="page-title">
-                                    <div class="title">What will be the name of your Sinswap store?</div>
+                                    <div class="page-title">
+                                        <div class="title">What will be the name of your Sinswap store?</div>
 
-                                    <div class="subtitle">Originality really pays off</div>
+                                        <div class="subtitle">Originality really pays off</div>
+                                    </div>
+
                                 </div>
-
                             </div>
-                        </div>
 
-                        <div class="row fieldsetStepContainer justify-content-center">
-                            <div class="col-12 col-md-3">
+                            <div class="row fieldsetStepContainer justify-content-center">
+                                <div class="col-12 col-md-3">
 
-                                <div class="fieldset">
-                                    <div class="form-fields">
-                                        <div class="form-group">
-                                            @*<input class="form-control" placeholder="sinswap.com/" type="text" data-val="true" data-val-required="This name is required." id="shopname" name="shopname" value="sinswap.com/">
+                                    <div class="fieldset">
+                                        <div class="form-fields">
+                                            <div class="form-group">
+                                                @*<input class="form-control" placeholder="sinswap.com/" type="text" data-val="true" data-val-required="This name is required." id="shopname" name="shopname" value="sinswap.com/">
                                         <span class="field-validation-valid" data-valmsg-for="shopname" data-valmsg-replace="true"></span>*@
-                                            @Html.TextBoxFor(model => model.ShopName, new {@class = "form-control", placeholder="sinswap.com/", type="text"})
-                                            @Html.ValidationMessageFor(model => model.ShopName)
+                                                @Html.TextBoxFor(model => model.ShopName, new {@class = "form-control", placeholder="sinswap.com/", type="text"})
+                                                @Html.ValidationMessageFor(model => model.ShopName)
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="buttons">
-                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
-                                </div>
+                                    <div class="buttons">
+                                        <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-                    @* /Step 4 *@
+                        </div>
+                        @* /Step 4 *@
+                    }
+                    else
+                    {
+                        Model.ShopName = "buyer";
+                        @Html.HiddenFor(m => m.ShopName )
+                    }
 
                     @* Step 5 *@
                     <div class="swiper-slide">
@@ -500,7 +508,9 @@
                 </div>
 
             </div>
-
+            @Html.HiddenFor(m => m.Email)
+            @Html.HiddenFor(m => m.ConfirmEmail)
+            @Html.HiddenFor(m => m.IsVendor)
             @*</form>*@
         }
 
