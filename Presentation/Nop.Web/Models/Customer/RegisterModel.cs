@@ -105,6 +105,7 @@ namespace Nop.Web.Models.Customer
         public bool CityEnabled { get; set; }
         public bool CityRequired { get; set; }
         [NopResourceDisplayName("Account.Fields.City")]
+        [Required]
         public string City { get; set; }
 
         public bool CountyEnabled { get; set; }

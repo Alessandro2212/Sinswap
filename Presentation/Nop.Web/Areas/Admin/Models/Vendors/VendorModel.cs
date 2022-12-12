@@ -94,6 +94,10 @@ namespace Nop.Web.Areas.Admin.Models.Vendors
         [DisplayName("Followers")]
         public int FollowersNumber { get; set; }
 
+        public string City { get; set; }
+
+        public int CountryId { get; set; }
+
         public List<VendorAttributeModel> VendorAttributes { get; set; }
 
         public IList<VendorLocalizedModel> Locales { get; set; }

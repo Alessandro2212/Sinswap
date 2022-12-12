@@ -151,6 +151,15 @@ namespace Nop.Services.Directory
             return _countryRepository.GetById(countryId);
         }
 
+        public virtual int GetCountryIdByName(string countryName)
+        {
+            var id = from c in _countryRepository.Table
+                     where c.Name == countryName
+                     select c.Id;
+
+            return id.FirstOrDefault();
+        }
+
         /// <summary>
         /// Get countries by identifiers
         /// </summary>

@@ -715,6 +715,19 @@ namespace Nop.Web.Controllers
                 model.Gender = "None of your business";
             }
 
+            if (!string.IsNullOrEmpty(model.County))
+            {
+                int countryId = this._countryService.GetCountryIdByName(model.County);
+                if (countryId < 1)
+                {
+                    ModelState.AddModelError("County", "wrong country");
+                }
+                else
+                {
+                    model.CountryId = countryId;
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 if (_customerSettings.UsernamesEnabled && model.Username != null)
@@ -723,13 +736,23 @@ namespace Nop.Web.Controllers
                 }
 
                 //var isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
-                var isApproved =true;
+                var isApproved = true;
+                //var registrationRequest = new CustomerRegistrationRequest(customer,
+                //    model.Email,
+                //    _customerSettings.UsernamesEnabled ? model.Username : model.Email,
+                //    model.Password,
+                //    _customerSettings.DefaultPasswordFormat,
+                //    _storeContext.CurrentStore.Id,                  
+                //    isApproved);
                 var registrationRequest = new CustomerRegistrationRequest(customer,
                     model.Email,
                     _customerSettings.UsernamesEnabled ? model.Username : model.Email,
                     model.Password,
                     _customerSettings.DefaultPasswordFormat,
                     _storeContext.CurrentStore.Id,
+                    model.ParseDateOfBirth().Value,
+                    model.CountryId,
+                    model.City,
                     isApproved);
                 var registrationResult = _customerRegistrationService.RegisterCustomer(registrationRequest);
                 if (registrationResult.Success)
@@ -756,11 +779,11 @@ namespace Nop.Web.Controllers
                         _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.GenderAttribute, model.Gender);
                     _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.FirstNameAttribute, model.FirstName);
                     _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.LastNameAttribute, model.LastName);
-                    if (_customerSettings.DateOfBirthEnabled)
-                    {
-                        var dateOfBirth = model.ParseDateOfBirth();
-                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.DateOfBirthAttribute, dateOfBirth);
-                    }
+                    //if (_customerSettings.DateOfBirthEnabled)
+                    //{
+                    var dateOfBirth = model.ParseDateOfBirth();
+                    _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.DateOfBirthAttribute, dateOfBirth);
+                    //}
                     if (_customerSettings.CompanyEnabled)
                         _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.CompanyAttribute, model.Company);
                     if (_customerSettings.StreetAddressEnabled)
@@ -769,11 +792,15 @@ namespace Nop.Web.Controllers
                         _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.StreetAddress2Attribute, model.StreetAddress2);
                     if (_customerSettings.ZipPostalCodeEnabled)
                         _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.ZipPostalCodeAttribute, model.ZipPostalCode);
-                    if (_customerSettings.CityEnabled)
+                    //if (_customerSettings.CityEnabled)
+                    //    _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.CityAttribute, model.City);
+                    if (!string.IsNullOrEmpty(model.City))
                         _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.CityAttribute, model.City);
                     if (_customerSettings.CountyEnabled)
                         _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.CountyAttribute, model.County);
-                    if (_customerSettings.CountryEnabled)
+                    //if (_customerSettings.CountryEnabled)
+                    //    _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.CountryIdAttribute, model.CountryId);
+                    if (!string.IsNullOrEmpty(model.County))
                         _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.CountryIdAttribute, model.CountryId);
                     if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
                         _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.StateProvinceIdAttribute,
@@ -868,41 +895,73 @@ namespace Nop.Web.Controllers
                         _authenticationService.SignIn(customer, true);
 
                     //insert default address (if possible)
+                    //var defaultAddress = new Address
+                    //{
+                    //    FirstName = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.FirstNameAttribute),
+                    //    LastName = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.LastNameAttribute),
+                    //    Email = customer.Email,
+                    //    Company = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.CompanyAttribute),
+                    //    CountryId = _genericAttributeService.GetAttribute<int>(customer, NopCustomerDefaults.CountryIdAttribute) > 0
+                    //        ? (int?)_genericAttributeService.GetAttribute<int>(customer, NopCustomerDefaults.CountryIdAttribute)
+                    //        : null,
+                    //    StateProvinceId = _genericAttributeService.GetAttribute<int>(customer, NopCustomerDefaults.StateProvinceIdAttribute) > 0
+                    //        ? (int?)_genericAttributeService.GetAttribute<int>(customer, NopCustomerDefaults.StateProvinceIdAttribute)
+                    //        : null,
+                    //    County = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.CountyAttribute),
+                    //    City = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.CityAttribute),
+                    //    Address1 = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.StreetAddressAttribute),
+                    //    Address2 = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.StreetAddress2Attribute),
+                    //    ZipPostalCode = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.ZipPostalCodeAttribute),
+                    //    PhoneNumber = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.PhoneAttribute),
+                    //    FaxNumber = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.FaxAttribute),
+                    //    CreatedOnUtc = customer.CreatedOnUtc
+                    //};
+                    //if (this._addressService.IsAddressValid(defaultAddress))
+                    //{
+                    //    //some validation
+                    //    if (defaultAddress.CountryId == 0)
+                    //        defaultAddress.CountryId = null;
+                    //    if (defaultAddress.StateProvinceId == 0)
+                    //        defaultAddress.StateProvinceId = null;
+                    //    //set default address
+                    //    //customer.Addresses.Add(defaultAddress);
+                    //    customer.CustomerAddressMappings.Add(new CustomerAddressMapping { Address = defaultAddress });
+                    //    customer.BillingAddress = defaultAddress;
+                    //    customer.ShippingAddress = defaultAddress;
+                    //    _customerService.UpdateCustomer(customer);
+                    //}
+
                     var defaultAddress = new Address
                     {
                         FirstName = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.FirstNameAttribute),
                         LastName = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.LastNameAttribute),
                         Email = customer.Email,
                         Company = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.CompanyAttribute),
-                        CountryId = _genericAttributeService.GetAttribute<int>(customer, NopCustomerDefaults.CountryIdAttribute) > 0
-                            ? (int?)_genericAttributeService.GetAttribute<int>(customer, NopCustomerDefaults.CountryIdAttribute)
-                            : null,
+                        CountryId = model.CountryId,
                         StateProvinceId = _genericAttributeService.GetAttribute<int>(customer, NopCustomerDefaults.StateProvinceIdAttribute) > 0
                             ? (int?)_genericAttributeService.GetAttribute<int>(customer, NopCustomerDefaults.StateProvinceIdAttribute)
                             : null,
                         County = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.CountyAttribute),
-                        City = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.CityAttribute),
-                        Address1 = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.StreetAddressAttribute),
+                        City = model.City,
+                        Address1 = model.StreetAddress,
                         Address2 = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.StreetAddress2Attribute),
-                        ZipPostalCode = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.ZipPostalCodeAttribute),
+                        ZipPostalCode = model.ZipPostalCode,
                         PhoneNumber = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.PhoneAttribute),
                         FaxNumber = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.FaxAttribute),
                         CreatedOnUtc = customer.CreatedOnUtc
                     };
-                    if (this._addressService.IsAddressValid(defaultAddress))
-                    {
-                        //some validation
-                        if (defaultAddress.CountryId == 0)
-                            defaultAddress.CountryId = null;
-                        if (defaultAddress.StateProvinceId == 0)
-                            defaultAddress.StateProvinceId = null;
-                        //set default address
-                        //customer.Addresses.Add(defaultAddress);
-                        customer.CustomerAddressMappings.Add(new CustomerAddressMapping { Address = defaultAddress });
-                        customer.BillingAddress = defaultAddress;
-                        customer.ShippingAddress = defaultAddress;
-                        _customerService.UpdateCustomer(customer);
-                    }
+
+                    //some validation
+                    if (defaultAddress.CountryId == 0)
+                        defaultAddress.CountryId = null;
+                    if (defaultAddress.StateProvinceId == 0)
+                        defaultAddress.StateProvinceId = null;
+                    //set default address
+                    //customer.Addresses.Add(defaultAddress);
+                    customer.CustomerAddressMappings.Add(new CustomerAddressMapping { Address = defaultAddress });
+                    customer.BillingAddress = defaultAddress;
+                    customer.ShippingAddress = defaultAddress;
+                    _customerService.UpdateCustomer(customer);
 
                     //notifications
                     if (_customerSettings.NotifyNewCustomerRegistration)
@@ -912,14 +971,6 @@ namespace Nop.Web.Controllers
                     //raise event       
                     _eventPublisher.Publish(new CustomerRegisteredEvent(customer));
 
-                    //TODO: here we should insert the activation code in the database (to check once registration is complete with the form)
-                    //var customerActivationCode = new CustomerActivationCode(); 
-                    //customerActivationCode.CustomerId = customer.Id;
-                    //customerActivationCode.ActivationCode = _customerService.GenerateActivationCode(100);
-
-                    //_customerService.InsertCustomerActivationCode(customerActivationCode);
-
-                    //If RegisterAsVendor is true, map register model to vendor model and redirect to CreateVendorController/Create
                     if (model.IsVendor)
                     {
                         VendorModel vendorModel = new VendorModel
@@ -940,13 +991,16 @@ namespace Nop.Web.Controllers
                                 Address2 = model.StreetAddress2,
                                 ZipPostalCode = model.ZipPostalCode,
                                 PhoneNumber = model.Phone,
-                                FaxNumber = model.Fax
+                                FaxNumber = model.Fax,
+                                CountryName = model.County
                             },
                             Active = true,
                             SeName = $"{model.FirstName}-{model.LastName}",
                             Form = model.Form,
                             BirthDate = new DateTime(model.DateOfBirthYear.Value, model.DateOfBirthMonth.Value, model.DateOfBirthDay.Value),
-                            IsPremium = model.IsPremiumVendor
+                            IsPremium = model.IsPremiumVendor,
+                            City = model.City,
+                            CountryId = model.CountryId
                         };
                         return CreateVendor(vendorModel, false, customer);
                     }

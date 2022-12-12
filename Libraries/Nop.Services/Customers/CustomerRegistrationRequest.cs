@@ -1,4 +1,5 @@
 ﻿using Nop.Core.Domain.Customers;
+using System;
 
 namespace Nop.Services.Customers
 {
@@ -30,6 +31,27 @@ namespace Nop.Services.Customers
             this.PasswordFormat = passwordFormat;
             this.StoreId = storeId;
             this.IsApproved = isApproved;
+        }
+
+        public CustomerRegistrationRequest(Customer customer, string email, string username,
+            string password,
+            PasswordFormat passwordFormat,
+            int storeId,
+            DateTime birthday,
+            int countryId,
+            string city,
+            bool isApproved = true)
+        {
+            this.Customer = customer;
+            this.Email = email;
+            this.Username = username;
+            this.Password = password;
+            this.PasswordFormat = passwordFormat;
+            this.StoreId = storeId;
+            this.IsApproved = isApproved;
+            this.City = city;
+            this.CountryId = countryId;
+            this.Birthday = birthday;
         }
 
         /// <summary>
@@ -66,5 +88,10 @@ namespace Nop.Services.Customers
         /// Is approved
         /// </summary>
         public bool IsApproved { get; set; }
+
+        public int CountryId { get; set; }
+        public string City { get; set; }
+        public DateTime Birthday { get; set; }
+
     }
 }

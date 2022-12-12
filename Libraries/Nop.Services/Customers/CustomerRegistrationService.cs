@@ -277,6 +277,10 @@ namespace Nop.Services.Customers
                     request.StoreId, _localizationService.GetResource("RewardPoints.Message.EarnedForRegistration"), endDate: endDate);
             }
 
+            request.Customer.City = request.City;
+            request.Customer.CountryId = request.CountryId;
+            request.Customer.BirthDate = request.Birthday;
+
             _customerService.UpdateCustomer(request.Customer);
 
             return result;

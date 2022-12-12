@@ -45,6 +45,8 @@ namespace Nop.Services.Directory
         /// <returns>Country</returns>
         Country GetCountryById(int countryId);
 
+        int GetCountryIdByName(string countryName);
+
         /// <summary>
         /// Get countries by identifiers
         /// </summary>
