@@ -1,0 +1,123 @@
+﻿.info-page {
+    header.infoDetail {
+        min-height: 320px;
+        height: auto;
+
+        .page-title {
+            margin-top: 40px;
+            text-align: center;
+
+            .subtitle {
+                font-weight: 600;
+                opacity: 0.75;
+                font-size: 22px;
+
+                a {
+                    color: $white;
+                    transition: color 0.15s;
+
+                    &:hover {
+                        text-decoration: none;
+                        opacity: 1;
+                        transition: color 0.15s;
+                    }
+                }
+            }
+
+            .title {
+                display: table-cell;
+                vertical-align: middle;
+                width: 100vw;
+                font-weight: 700;
+                font-size: 70px;
+                line-height: 70px;
+                text-align: center;
+                padding: 30px 0;
+            }
+        }
+    }
+
+    .infoContainer {
+        margin-bottom: 60px;
+        padding-top: 40px;
+
+        .infoBody {
+            p {
+                margin-bottom: 30px;
+            }
+        }
+
+        .infoSidebar {
+            ul {
+                padding-left: 0px;
+
+                li {
+                    margin-bottom: 30px;
+                    list-style: none;
+
+                    a {
+                        color: $black;
+                        font-size: 16px;
+                        font-weight: 600;
+                        text-decoration: none;
+                        opacity: 1;
+                        transition: opacity .15s;
+
+                        &:hover {
+                            opacity: 0.8;
+                            transition: opacity .15s;
+                        }
+                    }
+
+                    &.active {
+                        a {
+                            opacity: 0.6;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Extra extra large devices (large desktops, 1200px and up)
+@media (min-width: 1660px) {
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    .info-page {
+        .infoContainer {
+            .infoBody {
+                margin-top: 30px;
+            }
+
+            .infoSidebar {
+                ul {
+                    li {
+                        margin-bottom: 10px;
+                        float: left;
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (min-width: 576px) {
+}

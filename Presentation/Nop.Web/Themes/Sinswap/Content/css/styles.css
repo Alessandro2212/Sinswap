@@ -6,10 +6,8 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 html {
-  line-height: 1.15;
-  /* 1 */
-  -webkit-text-size-adjust: 100%;
-  /* 2 */
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
 }
 
 /* Sections
@@ -44,12 +42,9 @@ h1 {
    * 2. Show the overflow in Edge and IE.
    */
 hr {
-  box-sizing: content-box;
-  /* 1 */
-  height: 0;
-  /* 1 */
-  overflow: visible;
-  /* 2 */
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
 }
 
 /**
@@ -57,10 +52,8 @@ hr {
    * 2. Correct the odd `em` font sizing in all browsers.
    */
 pre {
-  font-family: monospace, monospace;
-  /* 1 */
-  font-size: 1em;
-  /* 2 */
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
 }
 
 /* Text-level semantics
@@ -77,12 +70,9 @@ a {
    * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
    */
 abbr[title] {
-  border-bottom: none;
-  /* 1 */
-  text-decoration: underline;
-  /* 2 */
-  text-decoration: underline dotted;
-  /* 2 */
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
 }
 
 /**
@@ -100,10 +90,8 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace;
-  /* 1 */
-  font-size: 1em;
-  /* 2 */
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
 }
 
 /**
@@ -153,14 +141,10 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: inherit;
-  /* 1 */
-  font-size: 100%;
-  /* 1 */
-  line-height: 1.15;
-  /* 1 */
-  margin: 0;
-  /* 2 */
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
 }
 
 /**
@@ -228,18 +212,12 @@ fieldset {
    *    `fieldset` elements in all browsers.
    */
 legend {
-  box-sizing: border-box;
-  /* 1 */
-  color: inherit;
-  /* 2 */
-  display: table;
-  /* 1 */
-  max-width: 100%;
-  /* 1 */
-  padding: 0;
-  /* 3 */
-  white-space: normal;
-  /* 1 */
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
 }
 
 /**
@@ -262,10 +240,8 @@ textarea {
    */
 [type=checkbox],
 [type=radio] {
-  box-sizing: border-box;
-  /* 1 */
-  padding: 0;
-  /* 2 */
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
 }
 
 /**
@@ -281,10 +257,8 @@ textarea {
    * 2. Correct the outline style in Safari.
    */
 [type=search] {
-  -webkit-appearance: textfield;
-  /* 1 */
-  outline-offset: -2px;
-  /* 2 */
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
 }
 
 /**
@@ -299,10 +273,8 @@ textarea {
    * 2. Change font properties to `inherit` in Safari.
    */
 ::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  /* 1 */
-  font: inherit;
-  /* 2 */
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
 }
 
 /* Interactive
@@ -586,7 +558,7 @@ a.more:hover {
 }
 .categoryCard:hover {
   cursor: pointer;
-  box-shadow: 0px 4px 15px -5px black;
+  box-shadow: 0px 4px 15px -5px rgb(0, 0, 0);
   transition: box-shadow 0.15s;
 }
 .categoryCard:hover .category a {
@@ -709,7 +681,6 @@ a.more:hover {
   .container {
     max-width: 1640px;
   }
-
   .categoryCard {
     height: 250px;
   }
@@ -1421,7 +1392,7 @@ nav .cartFoldout {
 }
 .sellersContainer .topSellerCard:hover .miniVendorImg,
 .topSellersContainer .topSellerCard:hover .miniVendorImg {
-  box-shadow: 0px 4px 15px -5px black;
+  box-shadow: 0px 4px 15px -5px rgb(0, 0, 0);
   transition: box-shadow 0.15s;
 }
 .sellersContainer .topSellerCard:hover .location,
@@ -1486,7 +1457,7 @@ nav .cartFoldout {
 }
 .newsContainer .container .newsCard:hover {
   cursor: pointer;
-  box-shadow: 0px 4px 15px -5px black;
+  box-shadow: 0px 4px 15px -5px rgb(0, 0, 0);
   transition: box-shadow 0.15s;
 }
 .newsContainer .container .newsCard:hover p {
@@ -1565,7 +1536,7 @@ nav .cartFoldout {
 }
 .featuredContainer .container .featuredCard.hover, .featuredContainer .container .featuredCard:hover {
   cursor: pointer;
-  box-shadow: 0px 4px 15px -5px black;
+  box-shadow: 0px 4px 15px -5px rgb(0, 0, 0);
   transition: box-shadow 0.15s;
 }
 .featuredContainer .container .featuredCard:after {
@@ -1734,7 +1705,7 @@ nav .cartFoldout {
   cursor: pointer;
 }
 .popularMembersContainer .popularMemberCard:hover .miniVendorImg {
-  box-shadow: 0px 4px 15px -5px black;
+  box-shadow: 0px 4px 15px -5px rgb(0, 0, 0);
   transition: box-shadow 0.15s;
 }
 .popularMembersContainer .popularMemberCard:hover .location,
@@ -2116,7 +2087,7 @@ header.vendorRegistration .stepIconContainer ul li.active {
   left: 0px;
   width: 100%;
   height: 50px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 95%, white 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 95%, rgb(255, 255, 255) 100%);
 }
 .vendorInfoContainer .avatarContainer h1 {
   font-family: "Montserrat", sans-serif;
@@ -2341,7 +2312,7 @@ header.vendorRegistration .stepIconContainer ul li.active {
 }
 @media (max-width: 768px) {
   .vendorMenuContainer .submenuContainer .vendorMenu .menuLink:first-of-type,
-.vendorMenuContainer .submenuContainer .vendorMenu .menuLink:last-of-type {
+  .vendorMenuContainer .submenuContainer .vendorMenu .menuLink:last-of-type {
     padding-left: 7px;
     padding-right: 7px;
   }
@@ -3058,7 +3029,7 @@ header.vendorRegistration .stepIconContainer ul li.active {
     font-size: 18px;
   }
   .vendorFaqContainer #accordionFaq .collapse,
-.vendorFaqContainer #accordionFaq .collapsing {
+  .vendorFaqContainer #accordionFaq .collapsing {
     font-size: 16px;
   }
 }
@@ -3070,7 +3041,7 @@ header.vendorRegistration .stepIconContainer ul li.active {
     font-size: 16px;
   }
   .vendorFaqContainer #accordionFaq .collapse,
-.vendorFaqContainer #accordionFaq .collapsing {
+  .vendorFaqContainer #accordionFaq .collapsing {
     font-size: 14px;
   }
 }
@@ -3423,6 +3394,78 @@ header.blogDetail .page-title .date {
 @media (max-width: 768px) {
   .blogPostContainer .blogPostBody {
     padding-right: 0px;
+  }
+}
+.info-page header.infoDetail {
+  min-height: 320px;
+  height: auto;
+}
+.info-page header.infoDetail .page-title {
+  margin-top: 40px;
+  text-align: center;
+}
+.info-page header.infoDetail .page-title .subtitle {
+  font-weight: 600;
+  opacity: 0.75;
+  font-size: 22px;
+}
+.info-page header.infoDetail .page-title .subtitle a {
+  color: #fff;
+  transition: color 0.15s;
+}
+.info-page header.infoDetail .page-title .subtitle a:hover {
+  text-decoration: none;
+  opacity: 1;
+  transition: color 0.15s;
+}
+.info-page header.infoDetail .page-title .title {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100vw;
+  font-weight: 700;
+  font-size: 70px;
+  line-height: 70px;
+  text-align: center;
+  padding: 30px 0;
+}
+.info-page .infoContainer {
+  margin-bottom: 60px;
+  padding-top: 40px;
+}
+.info-page .infoContainer .infoBody p {
+  margin-bottom: 30px;
+}
+.info-page .infoContainer .infoSidebar ul {
+  padding-left: 0px;
+}
+.info-page .infoContainer .infoSidebar ul li {
+  margin-bottom: 30px;
+  list-style: none;
+}
+.info-page .infoContainer .infoSidebar ul li a {
+  color: #171717;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity 0.15s;
+}
+.info-page .infoContainer .infoSidebar ul li a:hover {
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+.info-page .infoContainer .infoSidebar ul li.active a {
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .info-page .infoContainer .infoBody {
+    margin-top: 30px;
+  }
+  .info-page .infoContainer .infoSidebar ul li {
+    margin-bottom: 10px;
+    float: left;
+    margin-right: 15px;
   }
 }
 footer {

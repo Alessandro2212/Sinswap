@@ -51,6 +51,7 @@
     <None Remove="Themes\Sinswap\Content\scss\components\_cart.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_featured.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_footer.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_info.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_modals.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_news.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_popularCategories.scss" />

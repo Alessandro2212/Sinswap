@@ -1,70 +1,99 @@
 ﻿@using Nop.Web.Framework.Infrastructure
 @model CustomerServiceModel
+
 @{
     Layout = "_ColumnsOne";
 
     //page class
     Html.AppendPageCssClassParts("html-contact-page");
+    Html.AppendPageCssClassParts("info-page");
 }
-<div class="page contact-page">
-    <div class="page-title">
-        <h1>Customer Service</h1>
-    </div>
-    <div class="page-body">
-        @*@await Component.InvokeAsync("TopicBlock", new { systemName = "ContactUs" })
-        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContactUsTop })
-        @if (Model.SuccessfullySent)
-        {
-            <div class="result">
-                @Model.Result
+
+
+<header class="infoDetail">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                <a href="@Url.RouteUrl("HomePage")">
+                    <img class="logo" title="Sinning is Winning" alt="Sinswap" src="/Themes/Sinswap/content/images/logoVendor.svg">
+                </a>
             </div>
-        }
-        else
-        {
-            <form asp-route="ContactUs" method="post">
-                <div asp-validation-summary="ModelOnly" class="message-error"></div>
-                <div class="fieldset">
-                    <div class="form-fields">
-                        <div class="inputs">
-                            <label asp-for="FullName" asp-postfix=":"></label>
-                            <input asp-for="FullName" placeholder="@T("ContactUs.FullName.Hint")" class="fullname" />
-                            <nop-required />
-                            <span asp-validation-for="FullName"></span>
-                        </div>
-                        <div class="inputs">
-                            <label asp-for="Email" asp-postfix=":"></label>
-                            <input asp-for="Email" placeholder="@T("ContactUs.Email.Hint")" class="email"/>
-                            <nop-required />
-                            <span asp-validation-for="Email"></span>
-                        </div>
-                        @if (Model.SubjectEnabled)
-                        {
-                            <div class="inputs">
-                                <label asp-for="Subject" asp-postfix=":"></label>
-                                <input asp-for="Subject" placeholder="@T("ContactUs.Subject.Hint")" class="subject" />
-                                <nop-required />
-                                <span asp-validation-for="Subject"></span>
-                            </div>
-                        }
-                        <div class="inputs">
-                            <label asp-for="Enquiry" asp-postfix=":"></label>
-                            <textarea asp-for="Enquiry" placeholder="@T("ContactUs.Enquiry.Hint")" class="enquiry"></textarea>
-                            <nop-required />
-                            <span asp-validation-for="Enquiry"></span>
-                        </div>
-                        @if (Model.DisplayCaptcha)
-                        {
-                            <div class="captcha-box">
-                                <nop-captcha />
-                            </div>
-                        }
+
+            @await Component.InvokeAsync("Header")
+
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8">
+
+                <div class="page-title">
+                    <div class="subtitle">
+                        <a href="#">About us</a>
                     </div>
+
+                    <div class="title">Customer Service</div>
+
                 </div>
-                <div class="buttons">
-                    <input type="submit" name="send-email" class="button-1 contact-us-button" value="@T("ContactUs.Button")" />
+
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div class="page info-page">
+
+    <div class="page-body infoContainer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-3 infoMenu">
+    
+                    <div class="infoSidebar">
+                        <ul>
+                            <li><a href="@Url.RouteUrl("TermsOfUse")">Terms of Use</a></li>
+                            <li><a href="@Url.RouteUrl("PrivacyPolicy")">Privacy Policy</a></li>
+                            <li><a href="#">Partner Terms</a></li>
+                            <li><a href="#">Buyer Guarantee</a></li>
+                            <li><a href="#">Seller Terms</a></li>
+                            <li><a href="#">Contests</a></li>
+                        </ul>
+                    </div>
+
                 </div>
-            </form>
-        }
-        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContactUsBottom })*@
+
+                <div class="col-12 col-md-9 infoBody">
+                    <!-- Start: Dummy article -->
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit
+                        viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae
+                        feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem,
+                        sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                        himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis
+                        consequat. Donec sed mollis nunc, vitae eleifend odio.
+                    </p>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit
+                        viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae
+                        feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem,
+                        sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                        himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis
+                        consequat. Donec sed mollis nunc, vitae eleifend odio.
+                    </p>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit
+                        viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae
+                        feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem,
+                        sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                        himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis
+                        consequat. Donec sed mollis nunc, vitae eleifend odio.
+                    </p>
+                    <!-- End: Dummy article -->
+                </div>
+            </div>
+        </div>
     </div>
 </div>
