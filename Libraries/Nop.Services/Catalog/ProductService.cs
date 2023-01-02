@@ -335,6 +335,21 @@ namespace Nop.Services.Catalog
         }
 
         /// <summary>
+        /// Gets all products displayed on the home page
+        /// </summary>
+        /// <returns>Products</returns>
+        public virtual IList<Product> GetAllProducts()
+        {
+            var query = from p in _productRepository.Table
+                        orderby p.DisplayOrder, p.Id
+                        where p.Published &&
+                        !p.Deleted
+                        select p;
+            var products = query.ToList();
+            return products;
+        }
+
+        /// <summary>
         /// Gets product
         /// </summary>
         /// <param name="productId">Product identifier</param>

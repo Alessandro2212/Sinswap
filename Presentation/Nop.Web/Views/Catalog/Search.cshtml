@@ -27,6 +27,112 @@
         <h1>@T("Search")</h1>
     </div>
     <div class="page-body">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductSearchPageBeforeResults })
+        <div class="search-results">
+            @if (!string.IsNullOrEmpty(Model.Warning))
+            {
+                <div class="warning">
+                    @Model.Warning
+                </div>
+            }
+            @if (Model.NoResults)
+            {
+                <div class="no-result">
+                    @T("Search.NoResultsText")
+                </div>
+            }
+
+            @if (Model.SearchElementModels.Count > 0)
+            {
+                <div class="container firstContainer sellersContainer">
+                    <div class="row">
+                        @foreach (var element in Model.SearchElementModels)
+                        {
+                            <div class="col-6 col-lg-3">
+                                <div class="categoryCard" style="background-image: url('@element.PictureModel?.ImageUrl')">
+                                    <div class="category"><a href="@Url.RouteUrl(element.SearchElementEnum.ToString(), new { SeName = element.SeName })">@element.Name</a></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+
+            @*@if (Model.Categories.Count > 0)
+            {
+                <div class="container firstContainer sellersContainer">
+                    <div class="row">
+                        @foreach (var category in Model.Categories)
+                        {
+                            <div class="col-6 col-lg-3">
+                                <div class="categoryCard" style="background-image: url('@category.PictureModel?.ImageUrl')">
+                                    <div class="category"><a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">@category.Name</a></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            @if (Model.Products.Count > 0)
+            {
+                <div class="container firstContainer sellersContainer">
+                    <div class="row">
+                        @foreach (var product in Model.Products)
+                        {
+                            <div class="col-6 col-lg-3">
+                                <div class="categoryCard @product.Name.ToLower()" style="background-image: url('@product.DefaultPictureModel?.ImageUrl')">
+                                    <div class="category"><a href="@Url.RouteUrl("Category", new { SeName = product.SeName })" title="@product.DefaultPictureModel.Title">@product.Name</a></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            @if (Model.Vendors.Count > 0)
+            {
+                <div class="container firstContainer sellersContainer">
+                    <div class="row">
+                        @foreach (var vendor in Model.Vendors)
+                        {
+                            <div class="col-2">
+                                <div class="topSellerCard">
+                                    <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })" class="miniVendorImg" style="background-image: url('@vendor.PictureModel?.ImageUrl');"></a>
+                                    <div class="location">
+                                        <span class="city">@vendor.City</span>, <span class="country">@vendor.Country</span>
+                                    </div>
+                                    <div class="nameAge">
+                                        <a href="@Url.RouteUrl("Vendor", new { SeName = vendor.SeName })"><span class="name">@vendor.Name</span>, <span class="age">@vendor.Age</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }*@
+
+            @{
+                var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
+            }
+            @if (!pager.IsEmpty())
+            {
+                <div class="pager">
+                    @pager
+                </div>
+            }
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductSearchPageAfterResults })
+    </div>
+</div>
+
+@**********BELOW THE OFFICIAL NOPCOMMERCE PAGE**************@
+@*<div class="page search-page">
+    <div class="page-title">
+        <h1>@T("Search")</h1>
+    </div>
+    <div class="page-body">
         <div class="search-input">
             <form asp-route="ProductSearch" method="get">
                 <div class="fieldset">
@@ -108,7 +214,7 @@
                     @T("Search.NoResultsText")
                 </div>
             }
-            
+
             @if (Model.Products.Count > 0)
             {
                 <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
@@ -135,3 +241,4 @@
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductSearchPageAfterResults })
     </div>
 </div>
+*@
