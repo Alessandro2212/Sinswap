@@ -942,6 +942,10 @@ header {
   animation: MoveBG 60s ease infinite;
   transition: height 0.25s ease-out;
 }
+header.narrow {
+  min-height: 0px;
+  height: auto;
+}
 header .floatingObj1 {
   position: absolute;
   top: 8%;
@@ -1643,6 +1647,16 @@ nav .cartFoldout {
   margin-top: 40px;
   margin-bottom: 60px;
 }
+.category-page .topSellersContainer .no-data {
+  text-align: center;
+  padding: 100px 0 345px 0;
+  font-size: 22px;
+  color: #c4c4c4;
+}
+.category-page .topSellersContainer .no-data .fa-sad-tear {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
 
 @media (max-width: 768px) {
   .popularCategoriesContainer h2 {
@@ -1818,7 +1832,7 @@ nav .cartFoldout {
   position: relative;
   background-color: #fff;
   border-radius: 5px;
-  padding: 0 30px;
+  padding: 20px 30px 0 30px;
 }
 .trendingCategoriesContainer.firstContainer {
   margin-bottom: 120px;
@@ -3406,17 +3420,9 @@ header.blogDetail .page-title .date {
 }
 .info-page header.infoDetail .page-title .subtitle {
   font-weight: 600;
-  opacity: 0.75;
+  opacity: 0.5;
   font-size: 22px;
-}
-.info-page header.infoDetail .page-title .subtitle a {
   color: #fff;
-  transition: color 0.15s;
-}
-.info-page header.infoDetail .page-title .subtitle a:hover {
-  text-decoration: none;
-  opacity: 1;
-  transition: color 0.15s;
 }
 .info-page header.infoDetail .page-title .title {
   display: table-cell;
@@ -3466,6 +3472,105 @@ header.blogDetail .page-title .date {
     margin-bottom: 10px;
     float: left;
     margin-right: 15px;
+  }
+}
+.searchResultContainer {
+  position: relative;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px 30px 0 30px;
+}
+.searchResultContainer .search-text {
+  border-width: 0px 0px 2px 0px;
+  border-radius: 0px;
+  box-shadow: none;
+  font-size: 28px;
+  font-weight: 600;
+  padding: 1px 0;
+}
+.searchResultContainer .searchSubmit {
+  font-size: 30px;
+  display: block;
+  text-align: center;
+  line-height: 47px;
+  position: absolute;
+  top: 0px;
+  right: 15px;
+  color: #171717;
+  background-color: transparent;
+  border: 0 none;
+  cursor: pointer;
+  outline: none;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+.searchResultContainer .searchSubmit:hover {
+  opacity: 1;
+  transition: opacity 0.15s;
+}
+.searchResultContainer .topSellerCard {
+  margin-top: 10px;
+}
+.searchResultContainer .topSellerCard .miniVendorImg {
+  width: 100%;
+  height: 375px;
+  display: block;
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  box-shadow: none;
+  transition: box-shadow 0.15s;
+}
+.searchResultContainer .topSellerCard .location {
+  margin-top: 5px;
+  font-size: 10px;
+  color: #757575;
+  transition: color 0.15s;
+}
+.searchResultContainer .topSellerCard .location .country {
+  text-transform: uppercase;
+}
+.searchResultContainer .topSellerCard a, .searchResultContainer .topSellerCard .nameAge {
+  font-size: 14px;
+  color: #242424;
+  transition: color 0.15s;
+}
+.searchResultContainer .topSellerCard a:hover, .searchResultContainer .topSellerCard .nameAge:hover {
+  text-decoration: none;
+}
+.searchResultContainer .topSellerCard:hover {
+  cursor: pointer;
+}
+.searchResultContainer .topSellerCard:hover .miniVendorImg {
+  box-shadow: 0px 4px 15px -5px rgb(0, 0, 0);
+  transition: box-shadow 0.15s;
+}
+.searchResultContainer .topSellerCard:hover .location,
+.searchResultContainer .topSellerCard:hover .nameAge, .searchResultContainer .topSellerCard:hover a {
+  color: #2d7de4;
+  transition: color 0.15s;
+}
+.searchResultContainer .no-result {
+  font-size: 52px;
+  text-align: center;
+  padding: 60px;
+  font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+  .searchContainer .topSellerCard .miniVendorImg {
+    height: 250px;
+  }
+}
+@media (max-width: 992px) {
+  .searchContainer {
+    margin-top: -50px;
+  }
+}
+@media (max-width: 576px) {
+  .searchContainer {
+    border-radius: 0px;
   }
 }
 footer {

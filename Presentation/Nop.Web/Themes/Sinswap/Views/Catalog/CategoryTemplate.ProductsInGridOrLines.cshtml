@@ -90,15 +90,16 @@
         }
 
 
-        @if (Model.Products.Count == 0)
+        @if (Model.Products.Count == 0 && Model.SubCategories.Count == 0)
         {
             <div class="container firstContainer topSellersContainer">
                 <div class="row">
                     <div class="col-12">
-                        <h2>Top @Model.Name Sellers</h2>
-
-                        @await Component.InvokeAsync("TopCategoryVendor", new { categoryId = Model.Id, amount = 10 })
-
+                        <div class="no-data">
+                            <i class="fas fa-sad-tear"></i><br />
+                            What?! How come nobody is selling @Model.Name yet?<br />
+                            We'll let our sellers know you're interested, check back soon!
+                        </div>
                     </div>
                 </div>
             </div>
@@ -144,6 +145,15 @@
 
             </div>
             @*@await Html.PartialAsync("_CatalogSelectors", Model.PagingFilteringContext)*@
+        } else {
+            <div class="container firstContainer sellersContainer">
+                <div class="row">
+                    <div class="no-data">
+                        <i class="fas fa-sad-tear"></i><br />
+                        What?! No items in your cart yet?<br />This makes us sad...
+                    </div>
+                </div>
+            </div>
         }
 
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFilters, additionalData = Model })

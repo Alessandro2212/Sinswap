@@ -19,12 +19,35 @@
     Html.AppendPageCssClassParts("vendorList");
 }
 
+<header>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                <a href="@Url.RouteUrl("HomePage")">
+                    <img class="logo" title="Sinning is Winning" alt="Sinswap" src="/Themes/Sinswap/content/images/logoVendor.svg">
+                </a>
+            </div>
+
+            @await Component.InvokeAsync("Header")
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 payoffContainer">
+                <div class="payoff">Our Catgories</div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
 <div class="page category-page">
     <div class="page-body">
         <div class="container firstContainer trendingCategoriesContainer">
             <div class="row">
                 <div class="col-12">
-                    <h2>Our categories</h2>
                     <div class="flex-row row no-gutters">
                         @foreach (var item in Model.Categories)
                         {

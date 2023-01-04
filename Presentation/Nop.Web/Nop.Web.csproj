@@ -58,6 +58,7 @@
     <None Remove="Themes\Sinswap\Content\scss\components\_popularMembers.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_productModal.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_promo.scss" />
+    <None Remove="Themes\Sinswap\Content\scss\components\_search.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_trendingCategories.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_vendorBlog.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_vendorFaq.scss" />

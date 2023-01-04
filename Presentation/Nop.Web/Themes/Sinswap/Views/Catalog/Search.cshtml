@@ -1,0 +1,131 @@
+﻿@model Nop.Web.Models.Catalog.SearchModel
+@{
+    Layout = "_ColumnsTwo";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Search").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-search-page");
+}
+
+<header class="narrow">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                <a href="@Url.RouteUrl("HomePage")">
+                    <img class="logo" title="Sinning is Winning" alt="Sinswap" src="/Themes/Sinswap/content/images/logoVendor.svg">
+                </a>
+            </div>
+
+            @await Component.InvokeAsync("Header")
+
+        </div>
+
+    </div>
+</header>
+
+<div class="page search-page">
+    <div class="page-body">
+
+        <div class="container searchResultContainer">
+
+            <form asp-route="ProductSearch" method="get">
+                <div class="row">
+                    <div class="col-12 col-lg-5">
+                        <div class="form-group">
+                            <input asp-for="q" class="search-text form-control" placeholder="What are you looking for?" />
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-2">
+                        @if (Model.AvailableCategories.Count > 0)
+                        {
+                            <div class="form-group">
+                                <select asp-for="cid" asp-items="Model.AvailableCategories" class="form-control"></select>
+                            </div>
+                            @*<div class="inputs reversed">
+                                <input asp-for="isc" />
+                                <label asp-for="isc">@T("Search.IncludeSubCategories")</label>
+                            </div>*@
+                        }
+                        @if (Model.AvailableManufacturers.Count > 0)
+                        {
+                            <div class="form-group">
+                                <select asp-for="mid" asp-items="Model.AvailableManufacturers" class="form-control"></select>
+                            </div>
+                        }
+                        @*@if (Model.asv && Model.AvailableVendors.Count > 0)
+                        {
+                            <div class="inputs">
+                                <label asp-for="vid">@T("Search.Vendor"):</label>
+                                <select asp-for="vid" asp-items="Model.AvailableVendors"></select>
+                            </div>
+                        }*@
+                    </div>
+                    <div class="col-3 col-lg-2">
+                        <div class="form-group">
+                            <input asp-for="pf" class="price-from form-control" />
+                        </div>
+                    </div>
+                    <div class="col-3 col-lg-2">
+                        <div class="form-group">
+                            <input asp-for="pt" class="price-to form-control" />
+                        </div>
+                    </div>
+                    <div class="col-2 col-lg-1">
+                        <button type="submit" class="searchSubmit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-12 search-results">
+                    @if (!string.IsNullOrEmpty(Model.Warning))
+                    {
+                        <div class="warning">
+                            @Model.Warning
+                        </div>
+                    }
+
+                    @if (Model.NoResults)
+                    {
+                        <div class="no-result">
+                            Sorry, but we don't have any... '@Model.q'.<br />
+                            Try again using another keyword
+                        </div>
+                    }
+
+                    @if (Model.Products.Count > 0)
+                    {
+                        <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
+                            <div class="item-grid">
+                                @foreach (var product in Model.Products)
+                                {
+                                    <div class="item-box">
+                                        @await Html.PartialAsync("_ProductBox", product)
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+ 
+                    @{
+                        var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber").BooleanParameterName("adv").BooleanParameterName("isc").BooleanParameterName("sid").RenderEmptyParameters(true);
+                    }
+
+                    @if (!pager.IsEmpty())
+                    {
+                        <div class="pager">
+                            @pager
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

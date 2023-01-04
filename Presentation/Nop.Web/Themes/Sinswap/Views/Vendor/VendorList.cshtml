@@ -19,22 +19,39 @@
     Html.AppendPageCssClassParts("vendorList");
 }
 
+<header>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                <a href="@Url.RouteUrl("HomePage")">
+                    <img class="logo" title="Sinning is Winning" alt="Sinswap" src="/Themes/Sinswap/content/images/logoVendor.svg">
+                </a>
+            </div>
+
+            @await Component.InvokeAsync("Header")
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 payoffContainer">
+                @if (Model.VendorType == Nop.Web.Enums.VendorTypeEnum.BestReviewed) {
+                    <div class="payoff">Our top sellers</div>
+                }
+                @if (Model.VendorType == Nop.Web.Enums.VendorTypeEnum.MostPopular) {
+                    <div class="payoff">Our most popular sellers</div>
+                }
+            </div>
+        </div>
+
+    </div>
+</header>
+
 <div class="page category-page">
     <div class="page-body">
 
         <div class="container firstContainer sellersContainer">
-            <div class="row">
-                <div class="col-12">
-                    @if (Model.VendorType == Nop.Web.Enums.VendorTypeEnum.BestReviewed)
-                    {
-                        <h2>Our top sellers</h2>
-                    }
-                    @if (Model.VendorType == Nop.Web.Enums.VendorTypeEnum.MostPopular)
-                    {
-                        <h2>Our most popular sellers</h2>
-                    }
-                </div>
-            </div>
             <div class="row pb-5">
                 @foreach (var vendor in Model.MiniVendors)
                 {

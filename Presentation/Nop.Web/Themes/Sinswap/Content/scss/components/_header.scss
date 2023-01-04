@@ -12,6 +12,11 @@ header {
     animation: MoveBG 60s ease infinite;
     transition: height 0.25s ease-out;
 
+    &.narrow {
+        min-height: 0px;
+        height: auto;
+    }
+
     .floatingObj1 {
         position: absolute;
         top: 8%;
