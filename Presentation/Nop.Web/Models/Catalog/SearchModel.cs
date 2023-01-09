@@ -10,11 +10,8 @@ namespace Nop.Web.Models.Catalog
         public SearchModel()
         {
             this.PagingFilteringContext = new CatalogPagingFilteringModel();
-            this.Products = new List<ProductOverviewModel>();
             this.Categories = new List<Catalog.CategoryModel>();
-            this.Products = new List<ProductOverviewModel>();
             this.Vendors = new List<VendorModel>();
-            this.SearchElementModels = new List<SearchElementModel>();
             this.AvailableCategories = new List<SelectListItem>();
             this.AvailableManufacturers = new List<SelectListItem>();
             this.AvailableVendors = new List<SelectListItem>();
@@ -85,9 +82,9 @@ namespace Nop.Web.Models.Catalog
 
         public CatalogPagingFilteringModel PagingFilteringContext { get; set; }
         public IList<Catalog.CategoryModel> Categories { get; set; }
-        public IList<ProductOverviewModel> Products { get; set; }
+        //public IList<ProductOverviewModel> Products { get; set; }
         public IList<VendorModel> Vendors { get; set; }
-        public IList<SearchElementModel> SearchElementModels { get; set; }
+        //public IList<SearchElementModel> SearchElementModels { get; set; }
 
         #region Nested classes
 

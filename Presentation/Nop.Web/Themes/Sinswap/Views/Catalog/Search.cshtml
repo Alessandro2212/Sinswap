@@ -45,9 +45,9 @@
                                 <select asp-for="cid" asp-items="Model.AvailableCategories" class="form-control"></select>
                             </div>
                             @*<div class="inputs reversed">
-                                <input asp-for="isc" />
-                                <label asp-for="isc">@T("Search.IncludeSubCategories")</label>
-                            </div>*@
+                        <input asp-for="isc" />
+                        <label asp-for="isc">@T("Search.IncludeSubCategories")</label>
+                        </div>*@
                         }
                         @if (Model.AvailableManufacturers.Count > 0)
                         {
@@ -57,10 +57,10 @@
                         }
                         @*@if (Model.asv && Model.AvailableVendors.Count > 0)
                         {
-                            <div class="inputs">
-                                <label asp-for="vid">@T("Search.Vendor"):</label>
-                                <select asp-for="vid" asp-items="Model.AvailableVendors"></select>
-                            </div>
+                        <div class="inputs">
+                        <label asp-for="vid">@T("Search.Vendor"):</label>
+                        <select asp-for="vid" asp-items="Model.AvailableVendors"></select>
+                        </div>
                         }*@
                     </div>
                     <div class="col-3 col-lg-2">
@@ -98,22 +98,52 @@
                         </div>
                     }
 
-                    @if (Model.Products.Count > 0)
+                    @*@if (Model.Products.Count > 0)
                     {
-                        <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
-                            <div class="item-grid">
-                                @foreach (var product in Model.Products)
-                                {
-                                    <div class="item-box">
-                                        @await Html.PartialAsync("_ProductBox", product)
+                    <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
+                    <div class="item-grid">
+                    @foreach (var product in Model.Products)
+                    {
+                    <div class="item-box">
+                    @await Html.PartialAsync("_ProductBox", product)
+                    </div>
+                    }
+                    </div>
+                    </div>
+                    }*@
+
+                    @if (Model.Categories.Count > 0)
+                    {
+                        <h1>Categories</h1>
+                        <div class="row">
+                            @foreach (var element in Model.Categories)
+                            {
+                                <div class="col-6 col-lg-3">
+                                    <div class="categoryCard" style="background-image: url('@element.PictureModel?.ImageUrl')">
+                                        <div class="category"><a href="@Url.RouteUrl("Category", new { SeName = element.SeName })">@element.Name</a></div>
                                     </div>
-                                }
-                            </div>
+                                </div>
+                            }
                         </div>
                     }
- 
+
+                    @if (Model.Vendors.Count > 0)
+                    {
+                        <h1>Vendors</h1>
+                        <div class="row">
+                            @foreach (var element in Model.Vendors)
+                            {
+                                <div class="col-6 col-lg-3">
+                                    <div class="categoryCard" style="background-image: url('@element.PictureModel?.ImageUrl')">
+                                        <div class="category"><a href="@Url.RouteUrl("Vendor", new { SeName = element.SeName })">@element.Name</a></div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+
                     @{
-                        var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber").BooleanParameterName("adv").BooleanParameterName("isc").BooleanParameterName("sid").RenderEmptyParameters(true);
+                        var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
                     }
 
                     @if (!pager.IsEmpty())

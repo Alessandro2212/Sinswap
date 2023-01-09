@@ -1527,121 +1527,103 @@ namespace Nop.Web.Factories
                 _storeContext.CurrentStore.Id);
 
             //search in categories
-            var allCategories = _categoryService.GetAllCategories(storeId: _storeContext.CurrentStore.Id);
-            if (allCategories.Any())
+            var categories = _cacheManager.Get(cacheKey, () =>
             {
-                foreach (var c in allCategories)
+                var categoriesModel = new List<CategoryModel>();
+                var allCat = _categoryService.GetAllCategories(storeId: _storeContext.CurrentStore.Id);
+                foreach (var c in allCat)
                 {
-                    if (c.Name.Trim().ToLower().Contains(searchTerms.ToLower()))
+                    var pictureModel = this.GetPictureModel(c.PictureId, 800, c.Name);
+                    categoriesModel.Add(new CategoryModel
                     {
-                        var pictureModel = this.GetPictureModel(c.PictureId, 800, c.Name);
-                        model.Categories.Add(new CategoryModel
-                        {
-                            Id = c.Id,
-                            Name = _localizationService.GetLocalized(c, x => x.Name),
-                            Description = _localizationService.GetLocalized(c, x => x.Description),
-                            MetaKeywords = _localizationService.GetLocalized(c, x => x.MetaKeywords),
-                            MetaDescription = _localizationService.GetLocalized(c, x => x.MetaDescription),
-                            MetaTitle = _localizationService.GetLocalized(c, x => x.MetaTitle),
-                            SeName = _urlRecordService.GetSeName(c),
-                            PictureModel = pictureModel
-                        });
-                        model.SearchElementModels.Add(new SearchElementModel
-                        {
-                            Id = c.Id,
-                            Name = _localizationService.GetLocalized(c, x => x.Name),
-                            SeName = _urlRecordService.GetSeName(c),
-                            PictureModel = pictureModel,
-                            SearchElementEnum = SearchElementEnum.Category
-                        });
-                    }
+                        Id = c.Id,
+                        Name = _localizationService.GetLocalized(c, x => x.Name),
+                        Description = _localizationService.GetLocalized(c, x => x.Description),
+                        MetaKeywords = _localizationService.GetLocalized(c, x => x.MetaKeywords),
+                        MetaDescription = _localizationService.GetLocalized(c, x => x.MetaDescription),
+                        MetaTitle = _localizationService.GetLocalized(c, x => x.MetaTitle),
+                        SeName = _urlRecordService.GetSeName(c),
+                        PictureModel = pictureModel
+                    });
                 }
-            }
+                return categoriesModel;
+            });
+
+            model.Categories = categories.Where(c => c.Name.Trim().ToLower().Contains(searchTerms.ToLower())).ToList();
 
             //search in products
-            var products = _productService.GetAllProducts();
-            if (products.Any())
-            {
-                foreach (var p in products)
-                {
-                    if (p.Name.Trim().ToLower().Contains(searchTerms.ToLower()))
-                    {
-                        var pictureModel = this.GetPictureModel(p.ProductPictures?.FirstOrDefault()?.ProductId ?? 0, 800, p.Name);
-                        model.Products.Add(new ProductOverviewModel
-                        {
-                            Id = p.Id,
-                            Name = _localizationService.GetLocalized(p, x => x.Name),
-                            ShortDescription = _localizationService.GetLocalized(p, x => x.ShortDescription),
-                            FullDescription = _localizationService.GetLocalized(p, x => x.FullDescription),
-                            SeName = _urlRecordService.GetSeName(p),
-                            Sku = p.Sku,
-                            ProductType = p.ProductType,
-                            MarkAsNew = p.MarkAsNew &&
-                            (!p.MarkAsNewStartDateTimeUtc.HasValue || p.MarkAsNewStartDateTimeUtc.Value < DateTime.UtcNow) &&
-                            (!p.MarkAsNewEndDateTimeUtc.HasValue || p.MarkAsNewEndDateTimeUtc.Value > DateTime.UtcNow),
-                            DefaultPictureModel = pictureModel
-                        });
-                        model.SearchElementModels.Add(new SearchElementModel
-                        {
-                            Id = p.Id,
-                            Name = _localizationService.GetLocalized(p, x => x.Name),
-                            SeName = _urlRecordService.GetSeName(p),
-                            PictureModel = pictureModel,
-                            SearchElementEnum = SearchElementEnum.Category
-                        });
-                    }
-                }
-            }
+            //var products = _productService.GetAllProducts();
+            //if (products.Any())
+            //{
+            //    foreach (var p in products)
+            //    {
+            //        if (p.Name.Trim().ToLower().Contains(searchTerms.ToLower()))
+            //        {
+            //            var pictureModel = this.GetPictureModel(p.ProductPictures?.FirstOrDefault()?.ProductId ?? 0, 800, p.Name);
+            //            model.Products.Add(new ProductOverviewModel
+            //            {
+            //                Id = p.Id,
+            //                Name = _localizationService.GetLocalized(p, x => x.Name),
+            //                ShortDescription = _localizationService.GetLocalized(p, x => x.ShortDescription),
+            //                FullDescription = _localizationService.GetLocalized(p, x => x.FullDescription),
+            //                SeName = _urlRecordService.GetSeName(p),
+            //                Sku = p.Sku,
+            //                ProductType = p.ProductType,
+            //                MarkAsNew = p.MarkAsNew &&
+            //                (!p.MarkAsNewStartDateTimeUtc.HasValue || p.MarkAsNewStartDateTimeUtc.Value < DateTime.UtcNow) &&
+            //                (!p.MarkAsNewEndDateTimeUtc.HasValue || p.MarkAsNewEndDateTimeUtc.Value > DateTime.UtcNow),
+            //                DefaultPictureModel = pictureModel
+            //            });
+            //        }
+            //    }
+            //}
 
             //search in vendors
-            var vendors = _vendorService.GetAllVendors();
-            if (vendors.Any())
+            //
+            var vendorCacheKey = string.Format("VendorSearch");
+            var vendors = _cacheManager.Get(vendorCacheKey, () =>
             {
-                foreach (var v in vendors)
+                var vendorsModel = new List<VendorModel>();
+                var allVendors = _vendorService.GetAllVendors();
+                foreach (var v in allVendors)
                 {
-                    if (v.Name.Trim().ToLower().Contains(searchTerms.ToLower()) || (!string.IsNullOrEmpty(v.ShopName) && v.ShopName.Trim().ToLower().Contains(searchTerms.ToLower())))
-                    {
-                        var pictureModel = this.GetPictureModel(v.PictureId, 800, v.Name);
-                        int age = 18;
-                        if (v.BirthDate != null)
-                        {
-                            age = DateTime.Today.Year - v.BirthDate.Year;
-                            // Go back to the year the person was born in case of a leap year
-                            if (v.BirthDate.Date > DateTime.Today.AddYears(-age)) age--;
-                        }
-                        model.Vendors.Add(new VendorModel
-                        {
-                            Id = v.Id,
-                            Name = _localizationService.GetLocalized(v, x => x.Name),
-                            Description = _localizationService.GetLocalized(v, x => x.Description),
-                            MetaKeywords = _localizationService.GetLocalized(v, x => x.MetaKeywords),
-                            MetaDescription = _localizationService.GetLocalized(v, x => x.MetaDescription),
-                            MetaTitle = _localizationService.GetLocalized(v, x => x.MetaTitle),
-                            SeName = _urlRecordService.GetSeName(v),
-                            AllowCustomersToContactVendors = _vendorSettings.AllowCustomersToContactVendors,
-                            IsPremium = v.IsPremium,
-                            VendorNotes = v.VendorNotes,
-                            PictureUrl = _pictureService.GetPictureUrl(v.PictureId),
-                            Age = age,
-                            City = v.City,
-                            Country = v.Country?.Name,
-                            PictureModel = pictureModel
-                        });
-                        model.SearchElementModels.Add(new SearchElementModel
-                        {
-                            Id = v.Id,
-                            Name = _localizationService.GetLocalized(v, x => x.Name),
-                            SeName = _urlRecordService.GetSeName(v),
-                            PictureModel = pictureModel,
-                            SearchElementEnum = SearchElementEnum.Vendor
-                        });
-                    }
-                }
-            }
 
-            var searchElements = new PagedList<SearchElementModel>(model.SearchElementModels.AsQueryable(), pageIndex: command.PageNumber - 1,
-                pageSize: 48);
-            model.SearchElementModels = searchElements.ToList();
+                    var pictureModel = this.GetPictureModel(v.PictureId, 800, v.Name);
+                    int age = 18;
+                    if (v.BirthDate != null)
+                    {
+                        age = DateTime.Today.Year - v.BirthDate.Year;
+                        // Go back to the year the person was born in case of a leap year
+                        if (v.BirthDate.Date > DateTime.Today.AddYears(-age)) age--;
+                    }
+                    vendorsModel.Add(new VendorModel
+                    {
+                        Id = v.Id,
+                        Name = _localizationService.GetLocalized(v, x => x.Name),
+                        Description = _localizationService.GetLocalized(v, x => x.Description),
+                        MetaKeywords = _localizationService.GetLocalized(v, x => x.MetaKeywords),
+                        MetaDescription = _localizationService.GetLocalized(v, x => x.MetaDescription),
+                        MetaTitle = _localizationService.GetLocalized(v, x => x.MetaTitle),
+                        SeName = _urlRecordService.GetSeName(v),
+                        AllowCustomersToContactVendors = _vendorSettings.AllowCustomersToContactVendors,
+                        IsPremium = v.IsPremium,
+                        VendorNotes = v.VendorNotes,
+                        PictureUrl = _pictureService.GetPictureUrl(v.PictureId),
+                        Age = age,
+                        City = v.City,
+                        Country = v.Country?.Name,
+                        PictureModel = pictureModel,
+                        ShopName = v.ShopName
+                    });
+                }
+                return vendorsModel;
+            }, 120);
+
+            model.Vendors = vendors.Where(v => v.Name.Trim().ToLower().Contains(searchTerms.ToLower()) || (!string.IsNullOrEmpty(v.ShopName) && v.ShopName.Trim().ToLower().Contains(searchTerms.ToLower()))).ToList();
+
+            var searchElements = new PagedList<VendorModel>(model.Vendors.AsQueryable(), pageIndex: command.PageNumber - 1,
+                pageSize: 16);
+            model.Vendors = searchElements.ToList();
             model.PagingFilteringContext.LoadPagedList(searchElements);
             return model;
         }

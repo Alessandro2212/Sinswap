@@ -284,12 +284,12 @@ namespace Nop.Web.Controllers
             if (model == null)
                 model = new SearchModel();
 
-            var url = _catalogModelFactory.GenericSearch(model);
-
-            if (!string.IsNullOrEmpty(url))
-            {
-                return Redirect($"{url}");
-            }
+            //Skipping the redirect to a single page (if found), we always go to the search page
+            //var url = _catalogModelFactory.GenericSearch(model);
+            //if (!string.IsNullOrEmpty(url))
+            //{
+            //    return Redirect($"{url}");
+            //}
 
             model = _catalogModelFactory.PrepareSearchModel(model, command);
 

@@ -1,4 +1,4 @@
-﻿@model Nop.Web.Models.MiniVendors.TopMiniVendorModel
+﻿@model Nop.Web.Models.MiniVendors.CategoryMiniVendorModel
 @{
     Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
 }
@@ -18,4 +18,8 @@
             </div>
         </div>
     }
+}
+else
+{
+    @await Component.InvokeAsync("VendorCategoryNotFound", new { category =  Model.Category })
 }

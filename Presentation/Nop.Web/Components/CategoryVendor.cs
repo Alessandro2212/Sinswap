@@ -18,17 +18,18 @@ namespace Nop.Web.Components
             this._vendorSettings = vendorSettings;
         }
 
-        public IViewComponentResult Invoke(int categoryId, TopMiniVendorModel modelAlreadyReady = null)
+        public IViewComponentResult Invoke(int categoryId, string categoryName, TopMiniVendorModel modelAlreadyReady = null)
         {
             if (_vendorSettings.VendorsBlockItemsToDisplay == 0)
                 return Content("");
 
             if (modelAlreadyReady != null)
             {
-                return View(modelAlreadyReady);
+                return View(new CategoryMiniVendorModel { MiniVendors = modelAlreadyReady.MiniVendors, Category = categoryName });
             }
 
-            var model = _miniVendorModelFactory.PrepareCategoryMiniVendorModel(categoryId);
+            var vendors = _miniVendorModelFactory.PrepareCategoryMiniVendorModel(categoryId);
+            var model = new CategoryMiniVendorModel { MiniVendors = vendors.MiniVendors, Category = categoryName };
 
             return View(model);
         }

@@ -62,9 +62,9 @@
         @*description*@
         @*@if (!string.IsNullOrWhiteSpace(Model.Description))
         {
-            <div class="category-description">
-                @Html.Raw(Model.Description)
-            </div>
+        <div class="category-description">
+        @Html.Raw(Model.Description)
+        </div>
         }*@
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeSubcategories, additionalData = Model })
         @*subcategories*@
@@ -92,7 +92,7 @@
 
         @if (Model.Products.Count == 0 && Model.SubCategories.Count == 0)
         {
-            <div class="container firstContainer topSellersContainer">
+           @* <div class="container firstContainer topSellersContainer">
                 <div class="row">
                     <div class="col-12">
                         <div class="no-data">
@@ -102,7 +102,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
+
+            @await Component.InvokeAsync("VendorCategoryNotFound", new { category =  Model.Name })
         }
 
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFeaturedProducts, additionalData = Model })
@@ -130,7 +132,7 @@
             @*static, needs to go to partial*@
             <div class="container firstContainer sellersContainer">
                 <div class="row">
-                    @await Component.InvokeAsync("CategoryVendor", new { categoryId = Model.Id, modelAlreadyReady = Model.MiniVendorsForCategory })
+                    @await Component.InvokeAsync("CategoryVendor", new { categoryId = Model.Id, categoryName = Model.Name, modelAlreadyReady = Model.MiniVendorsForCategory })
                 </div>
 
                 @{
@@ -145,7 +147,9 @@
 
             </div>
             @*@await Html.PartialAsync("_CatalogSelectors", Model.PagingFilteringContext)*@
-        } else {
+        }
+        else
+        {
             <div class="container firstContainer sellersContainer">
                 <div class="row">
                     <div class="no-data">
@@ -172,18 +176,18 @@
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeProductList, additionalData = Model })
 
         @*        @if (Model.Products.Count > 0)
-            {
-            <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
-            <div class="item-grid">
-            @foreach (var product in Model.Products)
-            {
-            <div class="item-box">
-            @await Html.PartialAsync("_ProductBox", product)
-            </div>
-            }
-            </div>
-            </div>
-            }*@
+        {
+        <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
+        <div class="item-grid">
+        @foreach (var product in Model.Products)
+        {
+        <div class="item-box">
+        @await Html.PartialAsync("_ProductBox", product)
+        </div>
+        }
+        </div>
+        </div>
+        }*@
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBottom, additionalData = Model })
     </div>
 </div>
