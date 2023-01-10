@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Nop.Core;
 using Nop.Core.Caching;
 using Nop.Core.Data;
-using Nop.Core.Data.Extensions;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Customers;
@@ -138,9 +138,14 @@ namespace Nop.Services.Catalog
                     showHidden);
                 categories = _staticCacheManager.Get(key, () =>
                 {
+                    //var result = new List<Category>();
+                    //foreach (var category in LoadCategoriesFunc())
+                    //    result.Add(new CategoryForCaching(category));
+                    //return result;
+
                     var result = new List<Category>();
                     foreach (var category in LoadCategoriesFunc())
-                        result.Add(new CategoryForCaching(category));
+                        result.Add(category);
                     return result;
                 });
             }
@@ -164,34 +169,34 @@ namespace Nop.Services.Catalog
         public virtual IPagedList<Category> GetAllCategories(string categoryName, int storeId = 0,
             int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false)
         {
-            if (_commonSettings.UseStoredProcedureForLoadingCategories)
-            {
-                //stored procedures are enabled for loading categories and supported by the database. 
-                //It's much faster with a large number of categories than the LINQ implementation below 
+            //if (_commonSettings.UseStoredProcedureForLoadingCategories)
+            //{
+            //    //stored procedures are enabled for loading categories and supported by the database. 
+            //    //It's much faster with a large number of categories than the LINQ implementation below 
 
-                //prepare parameters
-                var showHiddenParameter = _dataProvider.GetBooleanParameter("ShowHidden", showHidden);
-                var nameParameter = _dataProvider.GetStringParameter("Name", categoryName ?? string.Empty);
-                var storeIdParameter = _dataProvider.GetInt32Parameter("StoreId", !_catalogSettings.IgnoreStoreLimitations ? storeId : 0);
-                var pageIndexParameter = _dataProvider.GetInt32Parameter("PageIndex", pageIndex);
-                var pageSizeParameter = _dataProvider.GetInt32Parameter("PageSize", pageSize);
-                //pass allowed customer role identifiers as comma-delimited string
-                var customerRoleIdsParameter = _dataProvider.GetStringParameter("CustomerRoleIds", !_catalogSettings.IgnoreAcl ? string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()) : string.Empty);
+            //    //prepare parameters
+            //    var showHiddenParameter = _dataProvider.GetBooleanParameter("ShowHidden", showHidden);
+            //    var nameParameter = _dataProvider.GetStringParameter("Name", categoryName ?? string.Empty);
+            //    var storeIdParameter = _dataProvider.GetInt32Parameter("StoreId", !_catalogSettings.IgnoreStoreLimitations ? storeId : 0);
+            //    var pageIndexParameter = _dataProvider.GetInt32Parameter("PageIndex", pageIndex);
+            //    var pageSizeParameter = _dataProvider.GetInt32Parameter("PageSize", pageSize);
+            //    //pass allowed customer role identifiers as comma-delimited string
+            //    var customerRoleIdsParameter = _dataProvider.GetStringParameter("CustomerRoleIds", !_catalogSettings.IgnoreAcl ? string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()) : string.Empty);
 
-                var totalRecordsParameter = _dataProvider.GetOutputInt32Parameter("TotalRecords");
+            //    var totalRecordsParameter = _dataProvider.GetOutputInt32Parameter("TotalRecords");
 
-                //invoke stored procedure
-                var categories = _dbContext.EntityFromSql<Category>("CategoryLoadAllPaged",
-                    showHiddenParameter, nameParameter, storeIdParameter, customerRoleIdsParameter,
-                    pageIndexParameter, pageSizeParameter, totalRecordsParameter).ToList();
-                var totalRecords = totalRecordsParameter.Value != DBNull.Value ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
+            //    //invoke stored procedure
+            //    var categories = _dbContext.EntityFromSql<Category>("CategoryLoadAllPaged",
+            //        showHiddenParameter, nameParameter, storeIdParameter, customerRoleIdsParameter,
+            //        pageIndexParameter, pageSizeParameter, totalRecordsParameter).ToList();
+            //    var totalRecords = totalRecordsParameter.Value != DBNull.Value ? Convert.ToInt32(totalRecordsParameter.Value) : 0;
 
-                //paging
-                return new PagedList<Category>(categories, pageIndex, pageSize, totalRecords);
-            }
+            //    //paging
+            //    return new PagedList<Category>(categories, pageIndex, pageSize, totalRecords);
+            //}
 
             //don't use a stored procedure. Use LINQ
-            var query = _categoryRepository.Table;
+            var query = _categoryRepository.Table.Include(c => c.CategoryCategoryTagMappings).ThenInclude(ct => ct.CategoryTag).AsQueryable();
             if (!showHidden)
                 query = query.Where(c => c.Published);
             if (!string.IsNullOrWhiteSpace(categoryName))
@@ -236,7 +241,7 @@ namespace Nop.Services.Catalog
             return new PagedList<Category>(sortedCategories, pageIndex, pageSize);
         }
 
-        public virtual IPagedList<Category> GetAllCategoriesForList(string categoryName = "", int pageIndex = 0, int pageSize = int.MaxValue, 
+        public virtual IPagedList<Category> GetAllCategoriesForList(string categoryName = "", int pageIndex = 0, int pageSize = int.MaxValue,
             bool showHidden = false)
         {
             var query = _categoryRepository.Table;

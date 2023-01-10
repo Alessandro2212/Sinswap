@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
@@ -304,7 +305,8 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         {
             services.AddDbContext<NopObjectContext>(optionsBuilder =>
             {
-                optionsBuilder.UseSqlServerWithLazyLoading(services);
+                optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.LazyLoadOnDisposedContextWarning))
+                              .UseSqlServerWithLazyLoading(services);
             });
         }
 

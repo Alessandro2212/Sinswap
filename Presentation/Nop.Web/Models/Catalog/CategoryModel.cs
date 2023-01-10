@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Nop.Core.Domain.Catalog;
 using Nop.Web.Framework.Models;
 using Nop.Web.Models.Media;
 using Nop.Web.Models.MiniVendors;
@@ -15,6 +16,7 @@ namespace Nop.Web.Models.Catalog
             PagingFilteringContext = new CatalogPagingFilteringModel();
             SubCategories = new List<SubCategoryModel>();
             CategoryBreadcrumb = new List<CategoryModel>();
+            CategoryTags = new List<string>();
         }
 
         public string Name { get; set; }
@@ -37,6 +39,8 @@ namespace Nop.Web.Models.Catalog
         public IList<ProductOverviewModel> Products { get; set; }
 
         public TopMiniVendorModel MiniVendorsForCategory { get; set; }
+
+        public IList<string> CategoryTags { get; set; }
 
         #region Nested Classes
 

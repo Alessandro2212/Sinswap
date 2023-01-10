@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Nop.Core.Configuration;
 using Nop.Core.Data;
@@ -23,7 +24,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
             if (!dataSettings?.IsValid ?? true)
                 return;
 
-            var dbContextOptionsBuilder = optionsBuilder.UseLazyLoadingProxies();
+            var dbContextOptionsBuilder = optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.LazyLoadOnDisposedContextWarning)).UseLazyLoadingProxies();
 
             if (nopConfig.UseRowNumberForPaging)
                 dbContextOptionsBuilder.UseSqlServer(dataSettings.DataConnectionString, option => option.UseRowNumberForPaging());

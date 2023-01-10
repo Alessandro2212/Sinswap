@@ -1543,13 +1543,15 @@ namespace Nop.Web.Factories
                         MetaDescription = _localizationService.GetLocalized(c, x => x.MetaDescription),
                         MetaTitle = _localizationService.GetLocalized(c, x => x.MetaTitle),
                         SeName = _urlRecordService.GetSeName(c),
-                        PictureModel = pictureModel
+                        PictureModel = pictureModel,
+                        CategoryTags = c.CategoryCategoryTagMappings?.Select(cat => cat.CategoryTag?.Tag).ToList()
                     });
                 }
                 return categoriesModel;
             });
 
-            model.Categories = categories.Where(c => c.Name.Trim().ToLower().Contains(searchTerms.ToLower())).ToList();
+            model.Categories = categories.Where(c => c.Name.Trim().ToLower().Contains(searchTerms.ToLower()) ||
+                                                     c.CategoryTags.Any(ct => ct.Contains(searchTerms.ToLower()))).ToList();
 
             //search in products
             //var products = _productService.GetAllProducts();

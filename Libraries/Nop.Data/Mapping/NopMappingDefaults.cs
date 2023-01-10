@@ -41,6 +41,8 @@ namespace Nop.Data.Mapping
         /// </summary>
         public static string ProductReview_ReviewTypeTable => "ProductReview_ReviewType_Mapping";
 
+        public static string Category_CategoryTagTable => "Category_CategoryTag_Mapping";
+
         /// <summary>
         /// Gets a name of the Product-SpecificationAttribute mapping table
         /// </summary>
