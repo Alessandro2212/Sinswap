@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Nop.Core;
 using Nop.Core.Caching;
@@ -16,6 +17,7 @@ using Nop.Core.Domain.Vendors;
 using Nop.Services.Catalog;
 using Nop.Services.Common;
 using Nop.Services.Directory;
+using Nop.Services.EuropaCheckVatService;
 using Nop.Services.Events;
 using Nop.Services.Localization;
 using Nop.Services.Media;
@@ -1589,45 +1591,65 @@ namespace Nop.Web.Factories
                 var allVendors = _vendorService.GetAllVendors();
                 foreach (var v in allVendors)
                 {
-
-                    var pictureModel = this.GetPictureModel(v.PictureId, 800, v.Name);
-                    int age = 18;
-                    if (v.BirthDate != null)
-                    {
-                        age = DateTime.Today.Year - v.BirthDate.Year;
-                        // Go back to the year the person was born in case of a leap year
-                        if (v.BirthDate.Date > DateTime.Today.AddYears(-age)) age--;
-                    }
-                    vendorsModel.Add(new VendorModel
-                    {
-                        Id = v.Id,
-                        Name = _localizationService.GetLocalized(v, x => x.Name),
-                        Description = _localizationService.GetLocalized(v, x => x.Description),
-                        MetaKeywords = _localizationService.GetLocalized(v, x => x.MetaKeywords),
-                        MetaDescription = _localizationService.GetLocalized(v, x => x.MetaDescription),
-                        MetaTitle = _localizationService.GetLocalized(v, x => x.MetaTitle),
-                        SeName = _urlRecordService.GetSeName(v),
-                        AllowCustomersToContactVendors = _vendorSettings.AllowCustomersToContactVendors,
-                        IsPremium = v.IsPremium,
-                        VendorNotes = v.VendorNotes,
-                        PictureUrl = _pictureService.GetPictureUrl(v.PictureId),
-                        Age = age,
-                        City = v.City,
-                        Country = v.Country?.Name,
-                        PictureModel = pictureModel,
-                        ShopName = v.ShopName
-                    });
+                    vendorsModel.Add(GetVendorModel(v));
                 }
                 return vendorsModel;
             }, 120);
 
-            model.Vendors = vendors.Where(v => v.Name.Trim().ToLower().Contains(searchTerms.ToLower()) || (!string.IsNullOrEmpty(v.ShopName) && v.ShopName.Trim().ToLower().Contains(searchTerms.ToLower()))).ToList();
+            // if search by price is default, add the vendors searched by name or shop name
+            if (model.ProductPriceFrom == decimal.MinValue && model.ProductPriceTo == decimal.MaxValue)
+            {
+                model.Vendors = vendors.Where(v => v.Name.Trim().ToLower().Contains(searchTerms.ToLower()) || (!string.IsNullOrEmpty(v.ShopName) && v.ShopName.Trim().ToLower().Contains(searchTerms.ToLower()))).ToList();
+            }
+
+            var productVendors = _productService.GetAllVendorsForProductCategories(model.Categories.Select(c => c.Id).ToList());
+            foreach (var pv in productVendors)
+            {
+                if (pv.Product.Price >= model.ProductPriceFrom && pv.Product.Price <= model.ProductPriceTo)
+                {
+                    if (!model.Vendors.Any(v => v.Id == pv.VendorId))
+                    {
+                        model.Vendors.Add(GetVendorModel(pv.Vendor));
+                    }
+                }
+            }
 
             var searchElements = new PagedList<VendorModel>(model.Vendors.AsQueryable(), pageIndex: command.PageNumber - 1,
                 pageSize: 16);
             model.Vendors = searchElements.ToList();
             model.PagingFilteringContext.LoadPagedList(searchElements);
             return model;
+        }
+
+        private VendorModel GetVendorModel(Vendor vendor)
+        {
+            var pictureModel = this.GetPictureModel(vendor.PictureId, 800, vendor.Name);
+            int age = 18;
+            if (vendor.BirthDate != null)
+            {
+                age = DateTime.Today.Year - vendor.BirthDate.Year;
+                // Go back to the year the person was born in case of a leap year
+                if (vendor.BirthDate.Date > DateTime.Today.AddYears(-age)) age--;
+            }
+            return new VendorModel
+            {
+                Id = vendor.Id,
+                Name = _localizationService.GetLocalized(vendor, x => x.Name),
+                Description = _localizationService.GetLocalized(vendor, x => x.Description),
+                MetaKeywords = _localizationService.GetLocalized(vendor, x => x.MetaKeywords),
+                MetaDescription = _localizationService.GetLocalized(vendor, x => x.MetaDescription),
+                MetaTitle = _localizationService.GetLocalized(vendor, x => x.MetaTitle),
+                SeName = _urlRecordService.GetSeName(vendor),
+                AllowCustomersToContactVendors = _vendorSettings.AllowCustomersToContactVendors,
+                IsPremium = vendor.IsPremium,
+                VendorNotes = vendor.VendorNotes,
+                PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId),
+                Age = age,
+                City = vendor.City,
+                Country = vendor.Country?.Name,
+                PictureModel = pictureModel,
+                ShopName = vendor.ShopName
+            };
         }
 
         private PictureModel GetPictureModel(int id, int pictureSize, string name)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Nop.Core;
 using Nop.Core.Caching;
 using Nop.Core.Data;
@@ -13,6 +14,7 @@ using Nop.Core.Domain.Orders;
 using Nop.Core.Domain.Security;
 using Nop.Core.Domain.Shipping;
 using Nop.Core.Domain.Stores;
+using Nop.Core.Domain.Vendors;
 using Nop.Core.Infrastructure;
 using Nop.Data;
 using Nop.Services.Events;
@@ -48,6 +50,7 @@ namespace Nop.Services.Catalog
         private readonly IRepository<Product> _productRepository;
         private readonly IRepository<ProductPicture> _productPictureRepository;
         private readonly IRepository<ProductReview> _productReviewRepository;
+        private readonly IRepository<ProductCategory> _productCategoryRepository;
         private readonly IRepository<ProductWarehouseInventory> _productWarehouseInventoryRepository;
         private readonly IRepository<RelatedProduct> _relatedProductRepository;
         private readonly IRepository<StockQuantityHistory> _stockQuantityHistoryRepository;
@@ -79,6 +82,7 @@ namespace Nop.Services.Catalog
             IRepository<Product> productRepository,
             IRepository<ProductPicture> productPictureRepository,
             IRepository<ProductReview> productReviewRepository,
+            IRepository<ProductCategory> productCategoryRepository,
             IRepository<ProductWarehouseInventory> productWarehouseInventoryRepository,
             IRepository<RelatedProduct> relatedProductRepository,
             IRepository<StockQuantityHistory> stockQuantityHistoryRepository,
@@ -113,6 +117,7 @@ namespace Nop.Services.Catalog
             this._storeMappingService = storeMappingService;
             this._workContext = workContext;
             this._localizationSettings = localizationSettings;
+            this._productCategoryRepository = productCategoryRepository;
             this._entityName = typeof(Product).Name;
         }
 
@@ -347,6 +352,21 @@ namespace Nop.Services.Catalog
                         select p;
             var products = query.ToList();
             return products;
+        }
+
+        public virtual IList<ProductVendor> GetAllVendorsForProductCategories(List<int> categoryIds)
+        {
+            var query = from p in _productCategoryRepository.Table.Include(p => p.Product).ThenInclude(p => p.ProductVendors).ThenInclude(p => p.Vendor)
+                        where categoryIds.Contains(p.CategoryId)
+                        select p.Product.ProductVendors;
+            var products = query.ToList();
+            List<ProductVendor> productVendors = new List<ProductVendor>();
+            foreach (var p in products)
+            {
+                productVendors.AddRange(p);
+            }
+
+            return productVendors;
         }
 
         /// <summary>

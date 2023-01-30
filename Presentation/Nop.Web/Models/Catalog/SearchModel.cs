@@ -15,6 +15,24 @@ namespace Nop.Web.Models.Catalog
             this.AvailableCategories = new List<SelectListItem>();
             this.AvailableManufacturers = new List<SelectListItem>();
             this.AvailableVendors = new List<SelectListItem>();
+            this.ProductPriceFromOptions = new Dictionary<decimal, string>
+                                            {
+                                                { decimal.MinValue,"Min. price" },
+                                                { 5,"€ 5" },
+                                                { 10,"€ 10 " },
+                                                { 50,"€ 50" },
+                                                { 100,"€ 100" },
+                                            };
+
+            this.ProductPriceToOptions = new Dictionary<decimal, string>
+                                            {
+                                                { 200,"€ 200" },
+                                                { 500,"€ 500" },
+                                                { 1000,"€ 1000" },
+                                                { 2000,"€ 20000" },
+                                                { decimal.MaxValue,"No max. price" },
+                                            };
+
         }
 
         public string Warning { get; set; }
@@ -53,10 +71,16 @@ namespace Nop.Web.Models.Catalog
         /// </summary>
         public string pf { get; set; }
 
+        public decimal ProductPriceFrom { get; set; } = decimal.MinValue;
+        public Dictionary<decimal, string> ProductPriceFromOptions { get; set; }
+
         /// <summary>
         /// Price - To
         /// </summary>
         public string pt { get; set; }
+
+        public decimal ProductPriceTo { get; set; } = decimal.MaxValue;
+        public Dictionary<decimal, string> ProductPriceToOptions { get; set; }
 
         /// <summary>
         /// A value indicating whether to search in descriptions

@@ -5,6 +5,7 @@ using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Domain.Shipping;
+using Nop.Core.Domain.Vendors;
 
 namespace Nop.Services.Catalog
 {
@@ -34,6 +35,7 @@ namespace Nop.Services.Catalog
         IList<Product> GetAllProductsDisplayedOnHomePage();
 
         IList<Product> GetAllProducts();
+        IList<ProductVendor> GetAllVendorsForProductCategories(List<int> categoryIds);
 
         /// <summary>
         /// Gets product
