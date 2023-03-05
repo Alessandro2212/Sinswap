@@ -51,6 +51,18 @@
     margin-bottom: 10px;
 }
 
+form label.error {
+    color: $white;
+    padding: 5px 5px 0 5px;
+    font-size: 14px;
+    line-height: 15px;
+}
+
+form #divcaptch {
+    div {
+        margin: 20px auto 0 auto;
+    }
+}
 
 // Buyer / Seller toggle
 button:focus {

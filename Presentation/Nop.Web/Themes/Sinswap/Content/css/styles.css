@@ -728,6 +728,17 @@ a.more:hover {
   margin-bottom: 10px;
 }
 
+form label.error {
+  color: #fff;
+  padding: 5px 5px 0 5px;
+  font-size: 14px;
+  line-height: 15px;
+}
+
+form #divcaptch div {
+  margin: 20px auto 0 auto;
+}
+
 button:focus {
   outline: none;
 }
@@ -1929,14 +1940,21 @@ nav .cartFoldout {
 }
 .vendorRegistrationPage footer {
   min-height: 122px;
+  bottom: 0px;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 .vendorRegistrationPage footer .allCatagoryContainer {
   display: none;
 }
 
 header.vendorRegistration {
-  height: auto;
   max-height: none;
+  height: 100vh;
+}
+header.vendorRegistration .vendorRegistrationFormContainer {
+  padding: 0 0 150px 0;
 }
 header.vendorRegistration .swiper-slide {
   min-height: 900px;
@@ -2013,17 +2031,21 @@ header.vendorRegistration .fieldsetStepContainer .buttons input {
   border-radius: 0.5rem;
   transition: all 0.25s ease-in;
 }
-header.vendorRegistration .fieldsetStepContainer .buttons input:hover {
+header.vendorRegistration .fieldsetStepContainer .buttons input:hover:not([disabled]) {
   background-color: #fff;
   color: #171717;
   transition: all 0.25s ease-out;
+}
+header.vendorRegistration .fieldsetStepContainer .buttons input:hover:disabled {
+  cursor: default;
+  opacity: 0.5;
 }
 header.vendorRegistration .fieldsetStepContainer .buttons input.done {
   border-color: #0ebc39;
   background-color: #0ebc39;
 }
 header.vendorRegistration .stepIconContainer {
-  position: absolute;
+  position: relative;
   bottom: 0px;
   left: 0px;
   right: 0px;

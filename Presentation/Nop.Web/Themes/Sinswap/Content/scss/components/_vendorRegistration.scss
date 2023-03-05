@@ -6,6 +6,10 @@
 
     footer {
         min-height: 122px;
+        bottom: 0px;
+        position: fixed;
+        width: 100%;
+        z-index: 1;
 
         .allCatagoryContainer {
             display: none;
@@ -14,8 +18,12 @@
 }
 
 header.vendorRegistration {
-    height: auto;
     max-height: none;
+    height: 100vh;
+
+    .vendorRegistrationFormContainer {
+        padding: 0 0 150px 0;
+    }
 
     .swiper-slide {
         min-height: 900px;
@@ -105,10 +113,15 @@ header.vendorRegistration {
                 border-radius: 0.5rem;
                 transition: all .25s ease-in;
 
-                &:hover {
+                &:hover:not([disabled]) {
                     background-color: $white;
                     color: $black;
                     transition: all .25s ease-out;
+                }
+
+                &:hover:disabled {
+                    cursor: default;
+                    opacity: 0.5;
                 }
 
                 &.done {
@@ -120,7 +133,7 @@ header.vendorRegistration {
     }
 
     .stepIconContainer {
-        position: absolute;
+        position: relative;
         bottom: 0px;
         left: 0px;
         right: 0px;

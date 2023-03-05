@@ -35,10 +35,10 @@ $(function () {
 
     // Signup specific
     if ($('.vendorRegistration .swiper').length) {
-        var swiper = new Swiper(".swiper", {
-            navigation: {
-                nextEl: ".swipe-next",
-            },
+        const registrationSwiper = new Swiper(".swiper", {
+            //navigation: {
+            //    nextEl: ".swipe-next",
+            //},
             allowSlideNext: true,
             allowSlidePrev: false,
             allowTouchMove: false,
@@ -46,9 +46,136 @@ $(function () {
             grabCursor: false
         });
 
-        swiper.on('slideChange', function () {
+        if ($(registrationSwiper.slides[registrationSwiper.activeIndex]).find('.firstField').length) {
+            $(registrationSwiper.slides[registrationSwiper.activeIndex]).find('.firstField').focus();
+        }
+
+        registrationSwiper.on('slideChange', function () {
+            // set icon bar
             $(".stepIconContainer li").removeClass('active');
-            $(".stepIconContainer .icon" + swiper.activeIndex).addClass('active');
+            $(".stepIconContainer .icon" + registrationSwiper.activeIndex).addClass('active');
+
+            // include fields in form validation
+            $(registrationSwiper.slides[registrationSwiper.activeIndex]).find(".ignore").removeClass('ignore');
+
+            // set tab index for subform
+            $('.swiper-slide-active input').attr('tabindex', "-1");
+            $('.swiper-slide-next input, .swiper-slide-next select').attr('tabindex', "1");
+            if ($('.swiper-slide-next #txtcaptcha').length) {
+                $('.swiper-slide-next #divcaptch').show();
+            }
+
+            // focus on first field of subform
+            if ($('.swiper-slide-next .firstField').length) {
+                //$('.swiper-slide-next .firstField').focus();
+                var elemId = $('.swiper-slide-next .firstField').attr('id');
+                console.log("focus on " + elemId);
+                setTimeout(function () { $(elemId).focus(); }, 1000);
+            }
+        });
+
+        $(".vendorRegistrationForm").validate({
+            ignore: ".ignore",
+            rules: {
+                Password: {
+                    required: true,
+                    minlength: 8
+                },
+                ConfirmPassword: {
+                    required: true,
+                    minlength: 8,
+                    equalTo: "[name='Password']"
+                },
+                Gender: {
+                    required: true
+                },
+                FirstName: {
+                    required: true
+                },
+                LastName: {
+                    required: true
+                },
+                ShopName: {
+                    required: true
+                },
+                StreetAddress: {
+                    required: true
+                },
+                ZipPostalCode: {
+                    required: true
+                },
+                City: {
+                    required: true
+                },
+                County: {
+                    required: true
+                },
+                AcceptPrivacyPolicyEnabled: {
+                    required: true
+                },
+                txtcaptcha: {
+                    required: true
+                }
+            },
+            messages: {
+                Password: {
+                    required: "Sorry, I really need you to take the security of your shop more seriously",
+                    minlength: "Like my girlfriend said: I think this is a little bit too short (at least 8 characters please)"
+                },
+                ConfirmPassword: {
+                    required: "Please confirm your password so we're both sure you didn't make a typo",
+                    minlength: "That doesn't even remotely look like the previous password",
+                    equalTo: "The passwords are supposed to be the same... try harder"
+                },
+                Gender: {
+                    required: "I know it's gotten complicated, but please choose the one that you like best"
+                },
+                FirstName: {
+                    required: "How are we supposed to get to know you without a name?"
+                },
+                LastName: {
+                    required: "Sorry Cher, last name is required here"
+                },
+                ShopName: {
+                    required: "How would people even find your nameless shop?"
+                },
+                StreetAddress: {
+                    required: "This is for legal reasons, we won't show up the the next BBQ, we promise"
+                },
+                ZipPostalCode: {
+                    required: "No zip, no shop"
+                },
+                City: {
+                    required: "Seriously, we need to know all this stuff"
+                },
+                County: {
+                    required: "Yes, this field is also mandatory..."
+                },
+                AcceptPrivacyPolicyEnabled: {
+                    required: "A relationship without trust is like a car without gas. You can stay in it, but it won't go anywhere"
+                },
+                txtcaptcha: {
+                    required: "Sorry R2-D2, no market for robot panties..."
+                }
+            },
+            errorPlacement: function (error, element) {
+                if (element.is(":radio") || element.is(":checkbox")) {
+                    error.appendTo('.swiper-slide-active .form-fields');
+                }
+                else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                console.log('submitting form');
+                //form.submit();
+            }
+        });
+
+        $(".vendorRegistrationForm .swipe-next").click(function () {
+            if ($(".vendorRegistrationForm").valid()) {
+                registrationSwiper.slideNext();
+            }
         });
     }
 

@@ -35,7 +35,7 @@
 </script>
 
 <header class="vendorRegistration">
-    <div class="container-fluid p-0">
+    <div class="container-fluid vendorRegistrationFormContainer">
 
         <div class="row">
             <div class="col-12 col-md-4 logoContainer">
@@ -49,7 +49,7 @@
 
         </div>
 
-        @using (Html.BeginForm("register", "customer", FormMethod.Post))
+        @using (Html.BeginForm("register", "customer", FormMethod.Post, new { @class = "vendorRegistrationForm" }))
         {
             @*<form method="post" action="#">*@
 
@@ -84,14 +84,14 @@
                                         <div class="form-group">
                                             @*<input class="form-control" placeholder="Password" type="password" data-val="true" data-val-required="Password is required." id="Password" name="Password" value="">
                                         <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>*@
-                                            @Html.TextBoxFor(model => model.Password, new {@class = "form-control", placeholder="Password", type="password"})
-                                            @Html.ValidationMessageFor(model => model.Password)
+                                            @Html.TextBoxFor(model => model.Password, new {@class = "form-control firstField", placeholder="Password", type="password"})
+                                            @*@Html.ValidationMessageFor(model => model.Password)*@
                                         </div>
                                         <div class="form-group">
                                             @*<input class="form-control" placeholder="Re-type password" type="password" data-val="true" data-val-required="Password is required." id="Password2" name="Password2" value="">
                                         <span class="field-validation-valid" data-valmsg-for="Password2" data-valmsg-replace="true"></span>*@
                                             @Html.TextBoxFor(model => model.ConfirmPassword, new {@class = "form-control", placeholder="Re-type password", type="password"})
-                                            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                                            @*@Html.ValidationMessageFor(model => model.ConfirmPassword)*@
                                         </div>
                                     </div>
                                 </div>
@@ -127,36 +127,37 @@
                                 <div class="fieldset">
                                     <div class="form-fields">
                                         <div class="form-check">
+                                            <div class="customError"></div>
                                             @*<input class="form-check-input" type="radio" name="genderidentity" id="female" value="female">*@
-                                            @Html.RadioButtonFor(model => model.Gender, "Female", new {@class = "form-check-input", @checked = "" })
+                                            @Html.RadioButtonFor(model => model.Gender, "Female", new {@class = "form-check-input ignore", @tabindex = "-1", @id = "female", @checked = "" })
                                             <label class="form-check-label" for="female">
                                                 Female
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             @* <input class="form-check-input" type="radio" name="genderidentity" id="male" value="male">*@
-                                            @Html.RadioButtonFor(model => model.Gender, "Male", new {@class = "form-check-input"})
+                                            @Html.RadioButtonFor(model => model.Gender, "Male", new {@class = "form-check-input ignore", @tabindex = "-1", @id = "male"})
                                             <label class="form-check-label" for="male">
                                                 Male
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             @* <input class="form-check-input" type="radio" name="genderidentity" id="nonbinary" value="nonbinary">*@
-                                            @Html.RadioButtonFor(model => model.Gender, "Non-binary", new {@class = "form-check-input"})
+                                            @Html.RadioButtonFor(model => model.Gender, "Non-binary", new {@class = "form-check-input ignore", @tabindex = "-1", @id = "nonbinary"})
                                             <label class="form-check-label" for="nonbinary">
                                                 Non-binary
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             @*<input class="form-check-input" type="radio" name="genderidentity" id="furry" value="furry">*@
-                                            @Html.RadioButtonFor(model => model.Gender, "Furry", new {@class = "form-check-input"})
+                                            @Html.RadioButtonFor(model => model.Gender, "Furry", new {@class = "form-check-input ignore", @tabindex = "-1", @id = "furry"})
                                             <label class="form-check-label" for="furry">
                                                 Furry
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             @*<input class="form-check-input" type="radio" name="genderidentity" id="unknown" value="unknown">*@
-                                            @Html.RadioButtonFor(model => model.Gender, "None of your business", new {@class = "form-check-input"})
+                                            @Html.RadioButtonFor(model => model.Gender, "None of your business", new {@class = "form-check-input ignore", @tabindex = "-1", @id = "unknown"})
                                             <label class="form-check-label" for="unknown">
                                                 None of your business
                                             </label>
@@ -165,7 +166,7 @@
                                 </div>
 
                                 <div class="buttons">
-                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
+                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button" tabindex="-1">
                                 </div>
 
                             </div>
@@ -197,14 +198,14 @@
                                         <div class="form-group">
                                             @*<input class="form-control" placeholder="Your first name" type="text" data-val="true" data-val-required="Your first name is required." id="firstname" name="firstname" value="">
                                         <span class="field-validation-valid" data-valmsg-for="firstname" data-valmsg-replace="true"></span>*@
-                                            @Html.TextBoxFor(model => model.FirstName, new {@class = "form-control", placeholder="Your first name", type="text"})
-                                            @Html.ValidationMessageFor(model => model.FirstName)
+                                            @Html.TextBoxFor(model => model.FirstName, new {@class = "form-control ignore firstField", @tabindex = "-1", placeholder="Your first name", type="text"})
+                                            @*@Html.ValidationMessageFor(model => model.FirstName)*@
                                         </div>
                                         <div class="form-group">
                                             @* <input class="form-control" placeholder="Your last name" type="text" data-val="true" data-val-required="Your last name is required." id="lastname" name="lastname" value="">
                                         <span class="field-validation-valid" data-valmsg-for="lastname" data-valmsg-replace="true"></span>*@
-                                            @Html.TextBoxFor(model => model.LastName, new {@class = "form-control", placeholder="Your last name", type="text"})
-                                            @Html.ValidationMessageFor(model => model.LastName)
+                                            @Html.TextBoxFor(model => model.LastName, new {@class = "form-control ignore", @tabindex = "-1", placeholder="Your last name", type="text"})
+                                            @*@Html.ValidationMessageFor(model => model.LastName)*@
                                         </div>
                                     </div>
                                 </div>
@@ -212,31 +213,39 @@
                                 <div class="fieldset">
                                     <div class="form-fields">
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.DateOfBirthDay)
-                                            @Html.DropDownListFor(m => m.DateOfBirthDay, Enumerable.Range(1, 31).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
-                                            @Html.ValidationMessageFor(model => model.DateOfBirthDay)
-
-                                            @Html.DropDownListFor(m => m.DateOfBirthMonth, Enumerable.Range(1, 12).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
-                                            @Html.ValidationMessageFor(model => model.DateOfBirthMonth)
-
-                                            @Html.DropDownListFor(m => m.DateOfBirthYear, Enumerable.Range(1900, 105).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
-                                            @Html.ValidationMessageFor(model => model.DateOfBirthYear)
+                                            <label>Date of birth</label>
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-4 px-1">
+                                                        @Html.DropDownListFor(m => m.DateOfBirthDay, Enumerable.Range(1, 31).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new {@class = "form-control ignore", @tabindex = "-1"})
+                                                        @*@Html.ValidationMessageFor(model => model.DateOfBirthDay)*@
+                                                    </div>
+                                                    <div class="col-4 px-1">
+                                                        @Html.DropDownListFor(m => m.DateOfBirthMonth, Enumerable.Range(1, 12).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new {@class = "form-control ignore", @tabindex = "-1"})
+                                                        @*@Html.ValidationMessageFor(model => model.DateOfBirthMonth)*@
+                                                    </div>
+                                                    <div class="col-4 px-1">
+                                                        @Html.DropDownListFor(m => m.DateOfBirthYear, Enumerable.Range(1900, 105).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new {@class = "form-control ignore", @tabindex = "-1"})
+                                                        @*@Html.ValidationMessageFor(model => model.DateOfBirthYear)*@
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                @if (Model.IsVendor)
+@*                                @if (Model.IsVendor)
                                 {
                                     <div class="fieldset">
                                         <div class="form-fields">
                                             <div class="form-check">
-                                                @Html.RadioButtonFor(model => model.IsPremiumVendor, true, new {@class = "form-check-input"})
+                                                @Html.RadioButtonFor(model => model.IsPremiumVendor, true, new {@class = "form-check-input ignore"})
                                                 <label class="form-check-label" for="furry">
                                                     Premium
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                @Html.RadioButtonFor(model => model.IsPremiumVendor, false, new {@class = "form-check-input"})
+                                                @Html.RadioButtonFor(model => model.IsPremiumVendor, false, new {@class = "form-check-input ignore"})
                                                 <label class="form-check-label" for="unknown">
                                                     Regular
                                                 </label>
@@ -244,24 +253,25 @@
                                         </div>
                                     </div>
                                 }
-
+*@
                                 <div class="footnote">
                                     This info will NEVER be posted anywhere,
                                     but for legal reasons we need to know your
-                                    real name. We hope you understand.
+                                    real name and age. We hope you understand.
                                 </div>
 
                                 <div class="buttons">
-                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
+                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button" tabindex="-1">
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     @* /Step 3 *@
 
-                    @if (Model.IsVendor)
+@*                    @if (Model.IsVendor)
                     {
-                        @* Step 4 *@
+*@                      @* Step 4 *@
                         <div class="swiper-slide">
 
                             <div class="row justify-content-center">
@@ -283,15 +293,15 @@
                                         <div class="form-fields">
                                             <div class="form-group">
                                                 @*<input class="form-control" placeholder="sinswap.com/" type="text" data-val="true" data-val-required="This name is required." id="shopname" name="shopname" value="sinswap.com/">
-                                        <span class="field-validation-valid" data-valmsg-for="shopname" data-valmsg-replace="true"></span>*@
-                                                @Html.TextBoxFor(model => model.ShopName, new {@class = "form-control", placeholder="sinswap.com/", type="text"})
-                                                @Html.ValidationMessageFor(model => model.ShopName)
+                                                <span class="field-validation-valid" data-valmsg-for="shopname" data-valmsg-replace="true"></span>*@
+                                            @Html.TextBoxFor(model => model.ShopName, new {@class = "form-control ignore firstField", placeholder="sinswap.com/", @tabindex = "-1", type="text"})
+                                                @*@Html.ValidationMessageFor(model => model.ShopName)*@
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="buttons">
-                                        <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
+                                        <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button" tabindex="-1">
                                     </div>
 
                                 </div>
@@ -299,13 +309,13 @@
 
                         </div>
                         @* /Step 4 *@
-                    }
+  @*                  }
                     else
                     {
                         Model.ShopName = "buyer";
                         @Html.HiddenFor(m => m.ShopName )
                     }
-
+*@
                     @* Step 5 *@
                     <div class="swiper-slide">
 
@@ -329,38 +339,38 @@
                                         <div class="form-group">
                                             @*<input class="form-control" placeholder="Street address" type="text" data-val="true" data-val-required="Your address is required." id="streetaddress" name="streetaddress">
                                         <span class="field-validation-valid" data-valmsg-for="streetaddress" data-valmsg-replace="true"></span>*@
-                                            @Html.TextBoxFor(model => model.StreetAddress, new {@class = "form-control", placeholder="Street address", type="text"})
-                                            @Html.ValidationMessageFor(model => model.StreetAddress)
+                                            @Html.TextBoxFor(model => model.StreetAddress, new {@class = "form-control ignore firstField", @tabindex = "-1", placeholder="Street address", type="text"})
+                                            @*@Html.ValidationMessageFor(model => model.StreetAddress)*@
                                         </div>
                                         <div class="row p-0">
                                             <div class="col-5">
                                                 <div class="form-group">
                                                     @*<input class="form-control" placeholder="Zipcode" type="text" data-val="true" data-val-required="Your zipcode is required." id="zipcode" name="zipcode">
                                                 <span class="field-validation-valid" data-valmsg-for="zipcode" data-valmsg-replace="true"></span>*@
-                                                    @Html.TextBoxFor(model => model.ZipPostalCode, new {@class = "form-control", placeholder="Zipcode", type="text"})
-                                                    @Html.ValidationMessageFor(model => model.ZipPostalCode)
+                                                    @Html.TextBoxFor(model => model.ZipPostalCode, new {@class = "form-control ignore", @tabindex = "-1", placeholder="Zipcode", type="text"})
+                                                    @*@Html.ValidationMessageFor(model => model.ZipPostalCode)*@
                                                 </div>
                                             </div>
                                             <div class="col-7 pl-0">
                                                 <div class="form-group">
                                                     @*<input class="form-control" placeholder="City" type="text" data-val="true" data-val-required="Your city is required." id="city" name="city">
                                                 <span class="field-validation-valid" data-valmsg-for="city" data-valmsg-replace="true"></span>*@
-                                                    @Html.TextBoxFor(model => model.City, new {@class = "form-control", placeholder="City", type="text"})
-                                                    @Html.ValidationMessageFor(model => model.City)
+                                                    @Html.TextBoxFor(model => model.City, new {@class = "form-control ignore", @tabindex = "-1", placeholder="City", type="text"})
+                                                    @*@Html.ValidationMessageFor(model => model.City)*@
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             @*<input class="form-control" placeholder="Country" type="text" data-val="true" data-val-required="Your country is required." id="country" name="country">
                                         <span class="field-validation-valid" data-valmsg-for="country" data-valmsg-replace="true"></span>*@
-                                            @Html.TextBoxFor(model => model.County, new {@class = "form-control", placeholder="Country", type="text"})
-                                            @Html.ValidationMessageFor(model => model.County)
+                                            @Html.TextBoxFor(model => model.County, new {@class = "form-control ignore", @tabindex = "-1", placeholder="Country", type="text"})
+                                            @*@Html.ValidationMessageFor(model => model.County)*@
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="buttons">
-                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
+                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button" tabindex="-1">
                                 </div>
 
                             </div>
@@ -380,7 +390,7 @@
 
                                     <div class="subtitle">
                                         You succeed, we succeed!<br />
-                                        So we would like to help you out with tips, updates and more. Spam? No thanks!
+                                        So we would really like to help you out with like tips, updates, offers and more. Spam? Never!
                                     </div>
                                 </div>
 
@@ -388,20 +398,20 @@
                         </div>
 
                         <div class="row fieldsetStepContainer justify-content-center">
-                            <div class="col-12 col-md-3">
+                            <div class="col-12 col-md-4">
 
                                 <div class="fieldset">
                                     <div class="form-fields">
                                         <div class="form-check">
                                             @*<input class="form-check-input" type="radio" name="optin" id="optin" value="optin">*@
-                                            @Html.RadioButtonFor(model => model.EnteringEmailTwice, true, new {@class = "form-check-input"})
-                                            <label class="form-check-label" for="optin">
+                                            @Html.RadioButtonFor(model => model.EnteringEmailTwice, true, new {@class = "form-check-input ignore", @tabindex = "-1"})
+                                            <label class="form-check-label" for="EnteringEmailTwice">
                                                 You can e-mail me occasionally
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             @*<input class="form-check-input" type="radio" name="optin" id="optout" value="optout">*@
-                                            @Html.RadioButtonFor(model => model.EnteringEmailTwice, false, new {@class = "form-check-input"})
+                                            @Html.RadioButtonFor(model => model.EnteringEmailTwice, false, new {@class = "form-check-input ignore", @tabindex = "-1"})
                                             <label class="form-check-label" for="optout">
                                                 No thanks
                                             </label>
@@ -410,7 +420,7 @@
                                 </div>
 
                                 <div class="buttons">
-                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button">
+                                    <input type="button" class="btn btn-action register-next-step-button swipe-next" value="Continue" name="continue-button" tabindex="-1">
                                 </div>
 
                             </div>
@@ -441,8 +451,8 @@
                                     <div class="form-fields">
                                         <div class="form-check">
                                             @*<input class="form-check-input" type="checkbox" name="terms" id="terms" value="terms">*@
-                                            @Html.CheckBoxFor(model => model.AcceptPrivacyPolicyEnabled, new {@class = "form-check-input"})
-                                            <label class="form-check-label" for="terms">
+                                            @Html.CheckBoxFor(model => model.AcceptPrivacyPolicyEnabled, new {@class = "form-check-input ignore", @tabindex = "-1"})
+                                            <label class="form-check-label" for="AcceptPrivacyPolicyEnabled">
                                                 I trust you guys
                                             </label>
                                         </div>
@@ -450,15 +460,15 @@
                                 </div>
 
                                 <div class="footnote">
-                                    By accepting our <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a> and
-                                    <a href="#">GDPS concent</a> and continue our service. You agree with terms and policies.
+                                    By accepting our <a href="#" tabindex="-1">Terms of Service</a>, <a href="#" tabindex="-1">Privacy Policy</a> and
+                                    <a href="#" tabindex="-1">GDPR consent</a> and continue our service. You agree with terms and policies.
                                 </div>
 
-                                <div id="divcaptch"></div>
-                                <input id="txtcaptcha" type="text" style="display:none" required />
+                                <div id="divcaptch" style="display: none;"></div>
+                                <input id="txtcaptcha" class="ignore" type="text" style="display:none" required data-val-required="Sorry R2-D2, no market for robot panties..."  />
 
                                 <div class="buttons">
-                                    <button type="submit" class="btn btn-action done register-next-step-button">Create my Sinswap-account</button>
+                                    <input type="submit" class="btn btn-action done register-next-step-button" value="Create my Sinswap-account" tabindex="-1" />
                                     @*<input type="button" class="btn btn-action done register-next-step-button" value="Create my Sinswap-account" name="continue-button">*@
                                 </div>
 
