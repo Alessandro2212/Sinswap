@@ -722,6 +722,15 @@ a.more:hover {
   color: #ed2939;
 }
 
+/*.form-control {
+    &.valid {
+        background-color: #d2f8d2;
+    }
+
+    &.error {
+        background-color: #ffe7e7;
+    }
+}*/
 .result {
   font-weight: bold;
   text-align: center;
