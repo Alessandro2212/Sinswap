@@ -1664,8 +1664,8 @@ nav .cartFoldout {
   padding-top: 0px;
 }
 .category-page .topSellersContainer {
-  margin-top: 40px;
   margin-bottom: 60px;
+  padding: 45px 250px 0 250px;
 }
 .category-page .topSellersContainer .no-data {
   text-align: center;
@@ -3538,6 +3538,10 @@ header.blogDetail .page-title .date {
 .searchResultContainer .searchSubmit:hover {
   opacity: 1;
   transition: opacity 0.15s;
+}
+.searchResultContainer .search-results {
+  margin-top: 90px;
+  margin-bottom: 120px;
 }
 .searchResultContainer .topSellerCard {
   margin-top: 10px;
