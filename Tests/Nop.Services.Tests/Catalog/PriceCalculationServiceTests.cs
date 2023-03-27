@@ -462,7 +462,7 @@ namespace Nop.Services.Tests.Catalog
                 IProductAttributeParser productAttributeParser, IProductAttributeService productAttributeService,
                 IRepository<AclRecord> aclRepository, IRepository<CrossSellProduct> crossSellProductRepository,
                 IRepository<Product> productRepository, IRepository<ProductPicture> productPictureRepository,
-                IRepository<ProductReview> productReviewRepository,
+                IRepository<ProductReview> productReviewRepository, IRepository<ProductCategory> _productCategoryRepository,
                 IRepository<ProductWarehouseInventory> productWarehouseInventoryRepository,
                 IRepository<RelatedProduct> relatedProductRepository,
                 IRepository<StockQuantityHistory> stockQuantityHistoryRepository,
@@ -471,7 +471,7 @@ namespace Nop.Services.Tests.Catalog
                 LocalizationSettings localizationSettings) : base(catalogSettings, commonSettings, aclService,
                 cacheManager, dataProvider, dateRangeService, dbContext, eventPublisher, languageService,
                 localizationService, productAttributeParser, productAttributeService, aclRepository,
-                crossSellProductRepository, productRepository, productPictureRepository, productReviewRepository,
+                crossSellProductRepository, productRepository, productPictureRepository, productReviewRepository, _productCategoryRepository,
                 productWarehouseInventoryRepository, relatedProductRepository, stockQuantityHistoryRepository,
                 storeMappingRepository, tierPriceRepository, storeMappingService, workContext, localizationSettings)
             {
@@ -481,7 +481,7 @@ namespace Nop.Services.Tests.Catalog
             {
                 return new TestProductService(new CatalogSettings(), new CommonSettings(), null,
                     null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-                    null, null, null, null, null, new LocalizationSettings());
+                    null, null, null, null, null,null, new LocalizationSettings());
             }
         }
     }
