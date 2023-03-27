@@ -586,9 +586,9 @@ namespace Nop.Web.Controllers
             if (cac == null)
             {
                 //**inizio test**//
-                var m = new RegisterModel();
-                m = _customerModelFactory.PrepareRegisterModel(m, false, setDefaultValues: true);
-                return View(m);
+                //var m = new RegisterModel();
+                //m = _customerModelFactory.PrepareRegisterModel(m, false, setDefaultValues: true);
+                //return View(m);
                 //**fine test**//
 
                 return RedirectToRoute("HomePage"); //decide where
@@ -635,13 +635,22 @@ namespace Nop.Web.Controllers
             var customerId = _customerService.InsertCustomerActivationCode(cac); //check autogeneration id
 
             //send email with link
-            string verificationLink = $"http://localhost:15536/en/VerifyEmail/?customerId={customerId}&activationCode={code}";
+            //TEST
+            //string verificationLink = $"http://localhost:15536/en/VerifyEmail/?customerId={customerId}&activationCode={code}";
+            //var emailIsSent = _customerService.SendEmailForCustomerVerification("alessandro.zelli87@gmail.com", verificationLink);
+
+            //PROD
+            string verificationLink = $"http://sinswap.org/en/VerifyEmail/?customerId={customerId}&activationCode={code}";
+            //var emailIsSent = _customerService.SendEmailForCustomerVerification(model.Email, verificationLink);
             var emailIsSent = _customerService.SendEmailForCustomerVerification("alessandro.zelli87@gmail.com", verificationLink);
 
             if (emailIsSent)
                 return View();
             else
+            {
+                _customerService.DeleteCustomerActivationCode(customerId);
                 return RedirectToRoute("HomePage");
+            }
         }
 
         [HttpGet]
