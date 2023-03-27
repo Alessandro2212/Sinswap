@@ -167,8 +167,8 @@ $(function () {
                 }
             },
             submitHandler: function (form) {
-                console.log('submitting form');
-                //form.submit();
+                //console.log('submitting form');
+                form.submit();
             }
         });
 
