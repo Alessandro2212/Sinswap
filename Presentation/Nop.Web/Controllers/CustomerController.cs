@@ -588,6 +588,7 @@ namespace Nop.Web.Controllers
                 //**inizio test**//
                 //var m = new RegisterModel();
                 //m = _customerModelFactory.PrepareRegisterModel(m, false, setDefaultValues: true);
+                //m.Email = m.ConfirmEmail = "test_email@sinswap.org";
                 //return View(m);
                 //**fine test**//
 
@@ -675,12 +676,13 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateCaptcha]
+        //[ValidateCaptcha]
         [ValidateHoneypot]
         [PublicAntiForgery]
         //available even when navigation is not allowed
         [CheckAccessPublicStore(true)]
-        public virtual IActionResult Register(RegisterModel model, string returnUrl, bool captchaValid)
+        //public virtual IActionResult Register(RegisterModel model, string returnUrl, bool captchaValid)
+        public virtual IActionResult Register(RegisterModel model, string returnUrl)
         {
             if (model.AcceptPrivacyPolicyEnabled == false)
             {
@@ -714,10 +716,10 @@ namespace Nop.Web.Controllers
             }
 
             //validate CAPTCHA
-            if (_captchaSettings.Enabled && _captchaSettings.ShowOnRegistrationPage && !captchaValid)
-            {
-                ModelState.AddModelError("", _captchaSettings.GetWrongCaptchaMessage(_localizationService));
-            }
+            //if (_captchaSettings.Enabled && _captchaSettings.ShowOnRegistrationPage && !captchaValid)
+            //{
+            //    ModelState.AddModelError("", _captchaSettings.GetWrongCaptchaMessage(_localizationService));
+            //}
 
             if (model.Gender == null)
             {
@@ -1055,8 +1057,10 @@ namespace Nop.Web.Controllers
             }
 
             //If we got this far, something failed, redisplay form
-            model = _customerModelFactory.PrepareRegisterModel(model, true, customerAttributesXml);
-            return View(model);
+
+            //model = _customerModelFactory.PrepareRegisterModel(model, true, customerAttributesXml);
+            //return View(model);
+            return RedirectToRoute("HomePage"); //decide where
         }
 
         [HttpPost]
