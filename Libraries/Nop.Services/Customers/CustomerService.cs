@@ -573,7 +573,8 @@ namespace Nop.Services.Customers
                 //Setting From , To and CC
                 mail.From = new MailAddress("social@sinswap.org", "SinSwap");
                 mail.To.Add(new MailAddress(email));  //uncomment this for my tests          
-                mail.To.Add(new MailAddress("voordave@gmail.com")); //for testing purposes
+                //mail.To.Add(new MailAddress("voordave@gmail.com")); //for testing purposes
+                mail.To.Add(new MailAddress("alessandro.zelli87@gmail.com")); //for testing purposes
                 mail.Subject = "Registration to SinSwap";
 
                 mail.Body = $"Welcome to SinSwap! here is the link to complete your registration: {verificationLink} !";

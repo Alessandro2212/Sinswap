@@ -369,7 +369,8 @@ namespace Nop.Web.Controllers
             }
 
             //If we got this far, something failed, redisplay form
-            model = _customerModelFactory.PrepareLoginModel(model.CheckoutAsGuest);
+            //model = _customerModelFactory.PrepareLoginModel(model.CheckoutAsGuest);
+            model.IsError = true;
             return View(model);
         }
 
@@ -477,6 +478,7 @@ namespace Nop.Web.Controllers
             }
 
             //If we got this far, something failed, redisplay form
+            model.IsError = true;
             return View(model);
         }
 
@@ -533,6 +535,7 @@ namespace Nop.Web.Controllers
             {
                 model.DisablePasswordChanging = true;
                 model.Result = _localizationService.GetResource("Account.PasswordRecovery.WrongToken");
+                model.IsError = true;
                 return View(model);
             }
 
@@ -541,6 +544,7 @@ namespace Nop.Web.Controllers
             {
                 model.DisablePasswordChanging = true;
                 model.Result = _localizationService.GetResource("Account.PasswordRecovery.LinkExpired");
+                model.IsError = true;
                 return View(model);
             }
 
@@ -558,12 +562,14 @@ namespace Nop.Web.Controllers
                 else
                 {
                     model.Result = response.Errors.FirstOrDefault();
+                    model.IsError = true;
                 }
 
                 return View(model);
             }
 
             //If we got this far, something failed, redisplay form
+            model.IsError = true;
             return View(model);
         }
 
@@ -586,10 +592,10 @@ namespace Nop.Web.Controllers
             if (cac == null)
             {
                 //**inizio test**//
-                //var m = new RegisterModel();
-                //m = _customerModelFactory.PrepareRegisterModel(m, false, setDefaultValues: true);
-                //m.Email = m.ConfirmEmail = "test_email@sinswap.org";
-                //return View(m);
+                var m = new RegisterModel();
+                m = _customerModelFactory.PrepareRegisterModel(m, false, setDefaultValues: true);
+                m.Email = m.ConfirmEmail = "test_email@sinswap.org";
+                return View(m);
                 //**fine test**//
 
                 return RedirectToRoute("HomePage"); //decide where
@@ -642,8 +648,8 @@ namespace Nop.Web.Controllers
 
             //PROD
             string verificationLink = $"http://sinswap.org/en/VerifyEmail/?customerId={customerId}&activationCode={code}";
-            //var emailIsSent = _customerService.SendEmailForCustomerVerification(model.Email, verificationLink);
-            var emailIsSent = _customerService.SendEmailForCustomerVerification("alessandro.zelli87@gmail.com", verificationLink);
+            var emailIsSent = _customerService.SendEmailForCustomerVerification(model.Email, verificationLink);
+            //var emailIsSent = _customerService.SendEmailForCustomerVerification("alessandro.zelli87@gmail.com", verificationLink);
 
             if (emailIsSent)
                 return View();
@@ -1059,8 +1065,9 @@ namespace Nop.Web.Controllers
             //If we got this far, something failed, redisplay form
 
             //model = _customerModelFactory.PrepareRegisterModel(model, true, customerAttributesXml);
-            //return View(model);
-            return RedirectToRoute("HomePage"); //decide where
+            model.IsError = true;
+            return View(model);
+            //return RedirectToRoute("HomePage"); //decide where
         }
 
         [HttpPost]
@@ -1892,6 +1899,7 @@ namespace Nop.Web.Controllers
             }
 
             //If we got this far, something failed, redisplay form
+            model.IsError = true;
             return View(model);
         }
 

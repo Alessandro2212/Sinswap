@@ -172,5 +172,7 @@ namespace Nop.Web.Models.Customer
         public IList<CustomerAttributeModel> CustomerAttributes { get; set; }
 
         public IList<GdprConsentModel> GdprConsents { get; set; }
+
+        public bool IsError { get; set; }
     }
 }
