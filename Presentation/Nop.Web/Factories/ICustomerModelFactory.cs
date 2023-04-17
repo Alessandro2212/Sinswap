@@ -2,6 +2,7 @@
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Orders;
+using Nop.Web.Areas.Admin.Models.Customers;
 using Nop.Web.Models.Customer;
 
 namespace Nop.Web.Factories
@@ -17,7 +18,7 @@ namespace Nop.Web.Factories
         /// <param name="customer">Customer</param>
         /// <param name="overrideAttributesXml">Overridden customer attributes in XML format; pass null to use CustomCustomerAttributes of customer</param>
         /// <returns>List of the customer attribute model</returns>
-        IList<CustomerAttributeModel> PrepareCustomCustomerAttributes(Customer customer, string overrideAttributesXml = "");
+        IList<Models.Customer.CustomerAttributeModel> PrepareCustomCustomerAttributes(Customer customer, string overrideAttributesXml = "");
 
         /// <summary>
         /// Prepare the customer info model
@@ -78,7 +79,7 @@ namespace Nop.Web.Factories
         /// Prepare the customer address list model
         /// </summary>
         /// <returns>Customer address list model</returns>  
-        CustomerAddressListModel PrepareCustomerAddressListModel();
+        Models.Customer.CustomerAddressListModel PrepareCustomerAddressListModel();
 
         /// <summary>
         /// Prepare the customer downloadable products model
@@ -118,5 +119,7 @@ namespace Nop.Web.Factories
         /// </summary>
         /// <returns>check gift card balance model</returns>
         CheckGiftCardBalanceModel PrepareCheckGiftCardBalanceModel();
+
+        Models.Customer.CustomerModel PrepareCustomerModel(Models.Customer.CustomerModel model, Customer customer, bool excludeProperties = false);
     }
 }

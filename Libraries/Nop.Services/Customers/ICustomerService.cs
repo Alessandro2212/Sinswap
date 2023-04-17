@@ -131,6 +131,8 @@ namespace Nop.Services.Customers
 
         bool SendEmailForCustomerVerification(string email, string verificationLink);
 
+        bool SendEmailForCustomerRegistration(string email);
+
         int InsertCustomerActivationCode(CustomerActivationCode customerActivationCode);
 
         bool DeleteCustomerActivationCode(int customerActivationCodeId);
