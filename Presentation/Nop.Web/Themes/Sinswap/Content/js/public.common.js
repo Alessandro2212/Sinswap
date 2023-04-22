@@ -116,7 +116,8 @@ function displayBarNotification(message, messagetype, timeout) {
     }
     $('#bar-notification').append(htmlcode)
         .addClass(cssclass)
-        .fadeIn('slow')
+        .css("opacity", "1")
+        .fadeIn('fast')
         .on('mouseenter', function ()
             {
                 clearTimeout(barNotificationTimeout);
@@ -126,13 +127,13 @@ function displayBarNotification(message, messagetype, timeout) {
     $('#productModal').find('.modal-body').html($('#notifications').html());
 
     $('#bar-notification .close').off('click').on('click', function () {
-        $('#bar-notification').fadeOut('slow');
+        $('#bar-notification').fadeOut('fast');
     });
 
     //timeout (if set)
     if (timeout > 0) {
         barNotificationTimeout = setTimeout(function () {
-            $('#bar-notification').fadeOut('slow');
+            $('#bar-notification').fadeOut('fast');
         }, timeout);
     }
 }

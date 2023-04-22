@@ -60,6 +60,7 @@
                     margin-left: 0px;
                     margin-right: 0px;
                     padding-bottom: 7px;
+                    margin-bottom: 7px;
                 }
 
                 .price {
@@ -71,11 +72,13 @@
                 }
 
                 .btn-order {
-                    margin-top: 10px;
+                    margin-top: 7px;
                     color: $white;
                     background-color: #00E39A;
                     width: auto;
-                    float: right;
+                    float: left;
+                    font-size: 14px;
+                    padding: .375rem 1rem;
                 }
             }
         }
