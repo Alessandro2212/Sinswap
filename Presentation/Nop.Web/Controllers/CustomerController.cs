@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,10 +32,13 @@ using Nop.Services.Logging;
 using Nop.Services.Media;
 using Nop.Services.Messages;
 using Nop.Services.Orders;
+using Nop.Services.Security;
 using Nop.Services.Seo;
+using Nop.Services.Stores;
 using Nop.Services.Tax;
 using Nop.Services.Vendors;
 using Nop.Web.Areas.Admin.Infrastructure.Mapper.Extensions;
+using Nop.Web.Areas.Admin.Models.Customers;
 using Nop.Web.Areas.Admin.Models.Vendors;
 using Nop.Web.Extensions;
 using Nop.Web.Factories;
@@ -98,6 +102,8 @@ namespace Nop.Web.Controllers
         private readonly IVendorService _vendorService;
         private readonly ILocalizedEntityService _localizedEntityService;
         private readonly IUrlRecordService _urlRecordService;
+        private readonly IPermissionService _permissionService;
+        private readonly IStoreService _storeService;
 
         #endregion
 
@@ -148,7 +154,9 @@ namespace Nop.Web.Controllers
             IVendorModelFactory vendorModelFactory,
             IVendorService vendorService,
             ILocalizedEntityService localizedEntityService,
-            IUrlRecordService urlRecordService)
+            IUrlRecordService urlRecordService,
+            IPermissionService permissionService, 
+            IStoreService storeService)
         {
             this._addressSettings = addressSettings;
             this._captchaSettings = captchaSettings;
@@ -196,6 +204,8 @@ namespace Nop.Web.Controllers
             this._vendorService = vendorService;
             this._localizedEntityService = localizedEntityService;
             this._urlRecordService = urlRecordService;
+            this._permissionService = permissionService;
+            this._storeService = storeService;
         }
 
         #endregion
@@ -369,7 +379,8 @@ namespace Nop.Web.Controllers
             }
 
             //If we got this far, something failed, redisplay form
-            model = _customerModelFactory.PrepareLoginModel(model.CheckoutAsGuest);
+            //model = _customerModelFactory.PrepareLoginModel(model.CheckoutAsGuest);
+            model.IsError = true;
             return View(model);
         }
 
@@ -477,6 +488,7 @@ namespace Nop.Web.Controllers
             }
 
             //If we got this far, something failed, redisplay form
+            model.IsError = true;
             return View(model);
         }
 
@@ -533,6 +545,7 @@ namespace Nop.Web.Controllers
             {
                 model.DisablePasswordChanging = true;
                 model.Result = _localizationService.GetResource("Account.PasswordRecovery.WrongToken");
+                model.IsError = true;
                 return View(model);
             }
 
@@ -541,6 +554,7 @@ namespace Nop.Web.Controllers
             {
                 model.DisablePasswordChanging = true;
                 model.Result = _localizationService.GetResource("Account.PasswordRecovery.LinkExpired");
+                model.IsError = true;
                 return View(model);
             }
 
@@ -558,12 +572,14 @@ namespace Nop.Web.Controllers
                 else
                 {
                     model.Result = response.Errors.FirstOrDefault();
+                    model.IsError = true;
                 }
 
                 return View(model);
             }
 
             //If we got this far, something failed, redisplay form
+            model.IsError = true;
             return View(model);
         }
 
@@ -588,6 +604,7 @@ namespace Nop.Web.Controllers
                 //**inizio test**//
                 var m = new RegisterModel();
                 m = _customerModelFactory.PrepareRegisterModel(m, false, setDefaultValues: true);
+                m.Email = m.ConfirmEmail = "test_email@sinswap.org";
                 return View(m);
                 //**fine test**//
 
@@ -635,13 +652,22 @@ namespace Nop.Web.Controllers
             var customerId = _customerService.InsertCustomerActivationCode(cac); //check autogeneration id
 
             //send email with link
-            string verificationLink = $"http://localhost:15536/en/VerifyEmail/?customerId={customerId}&activationCode={code}";
-            var emailIsSent = _customerService.SendEmailForCustomerVerification("alessandro.zelli87@gmail.com", verificationLink);
+            //TEST
+            //string verificationLink = $"http://localhost:15536/en/VerifyEmail/?customerId={customerId}&activationCode={code}";
+            //var emailIsSent = _customerService.SendEmailForCustomerVerification("alessandro.zelli87@gmail.com", verificationLink);
+
+            //PROD
+            string verificationLink = $"http://sinswap.org/en/VerifyEmail/?customerId={customerId}&activationCode={code}";
+            var emailIsSent = _customerService.SendEmailForCustomerVerification(model.Email, verificationLink);
+            //var emailIsSent = _customerService.SendEmailForCustomerVerification("alessandro.zelli87@gmail.com", verificationLink);
 
             if (emailIsSent)
                 return View();
             else
+            {
+                _customerService.DeleteCustomerActivationCode(customerId);
                 return RedirectToRoute("HomePage");
+            }
         }
 
         [HttpGet]
@@ -666,12 +692,13 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateCaptcha]
+        //[ValidateCaptcha]
         [ValidateHoneypot]
         [PublicAntiForgery]
         //available even when navigation is not allowed
         [CheckAccessPublicStore(true)]
-        public virtual IActionResult Register(RegisterModel model, string returnUrl, bool captchaValid)
+        //public virtual IActionResult Register(RegisterModel model, string returnUrl, bool captchaValid)
+        public virtual IActionResult Register(RegisterModel model, string returnUrl)
         {
             if (model.AcceptPrivacyPolicyEnabled == false)
             {
@@ -705,10 +732,10 @@ namespace Nop.Web.Controllers
             }
 
             //validate CAPTCHA
-            if (_captchaSettings.Enabled && _captchaSettings.ShowOnRegistrationPage && !captchaValid)
-            {
-                ModelState.AddModelError("", _captchaSettings.GetWrongCaptchaMessage(_localizationService));
-            }
+            //if (_captchaSettings.Enabled && _captchaSettings.ShowOnRegistrationPage && !captchaValid)
+            //{
+            //    ModelState.AddModelError("", _captchaSettings.GetWrongCaptchaMessage(_localizationService));
+            //}
 
             if (model.Gender == null)
             {
@@ -1005,6 +1032,8 @@ namespace Nop.Web.Controllers
                         return CreateVendor(vendorModel, false, customer);
                     }
 
+                    _customerService.SendEmailForCustomerRegistration(model.Email);
+
                     switch (_customerSettings.UserRegistrationType)
                     {
                         case UserRegistrationType.EmailValidation:
@@ -1046,8 +1075,11 @@ namespace Nop.Web.Controllers
             }
 
             //If we got this far, something failed, redisplay form
-            model = _customerModelFactory.PrepareRegisterModel(model, true, customerAttributesXml);
+
+            //model = _customerModelFactory.PrepareRegisterModel(model, true, customerAttributesXml);
+            model.IsError = true;
             return View(model);
+            //return RedirectToRoute("HomePage"); //decide where
         }
 
         [HttpPost]
@@ -1116,6 +1148,8 @@ namespace Nop.Web.Controllers
                 //selected tab
                 SaveSelectedTabName();
 
+                _customerService.SendEmailForCustomerRegistration(model.Email);
+
                 return RedirectToAction("Edit", new { id = vendor.Id });
             }
 
@@ -1123,6 +1157,7 @@ namespace Nop.Web.Controllers
             //model = _vendorModelFactory.PrepareVendorModel(model, null, true);
 
             //if we got this far, something failed, redisplay form
+            model.IsError = true;
             return View(model);
         }
 
@@ -1879,6 +1914,7 @@ namespace Nop.Web.Controllers
             }
 
             //If we got this far, something failed, redisplay form
+            model.IsError = true;
             return View(model);
         }
 
@@ -2078,6 +2114,314 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
+        #endregion
+
+        #region CustomerForm
+        public virtual IActionResult Edit(string username)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
+                return AccessDeniedView();
+
+            //try to get a customer with the specified id
+            var customer = _customerService.GetCustomerByUsername(username);
+            if (customer == null || customer.Deleted)
+                return RedirectToAction("List");
+
+            //prepare model
+            var model = _customerModelFactory.PrepareCustomerModel(null, customer);
+
+            return View(model);
+        }
+
+        //public virtual IActionResult Edit(int id)
+        //{
+        //    if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
+        //        return AccessDeniedView();
+
+        //    //try to get a customer with the specified id
+        //    var customer = _customerService.GetCustomerById(id);
+        //    if (customer == null || customer.Deleted)
+        //        return RedirectToAction("List");
+
+        //    //prepare model
+        //    var model = _customerModelFactory.PrepareCustomerModel(null, customer);
+
+        //    return View(model);
+        //}
+
+        [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+        [FormValueRequired("save", "save-continue")]
+        public virtual IActionResult Edit(Nop.Web.Models.Customer.CustomerModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
+                return AccessDeniedView();
+
+            //try to get a customer with the specified id
+            var customer = _customerService.GetCustomerById(model.Id);
+            if (customer == null || customer.Deleted)
+                return RedirectToAction("List");
+
+            //validate customer roles
+            var allCustomerRoles = _customerService.GetAllCustomerRoles(true);
+            var newCustomerRoles = new List<CustomerRole>();
+            foreach (var customerRole in allCustomerRoles)
+                if (model.SelectedCustomerRoleIds.Contains(customerRole.Id))
+                    newCustomerRoles.Add(customerRole);
+            var customerRolesError = ValidateCustomerRoles(newCustomerRoles);
+            if (!string.IsNullOrEmpty(customerRolesError))
+            {
+                ModelState.AddModelError(string.Empty, customerRolesError);
+                ErrorNotification(customerRolesError, false);
+            }
+
+            // Ensure that valid email address is entered if Registered role is checked to avoid registered customers with empty email address
+            if (newCustomerRoles.Any() && newCustomerRoles.FirstOrDefault(c => c.SystemName == NopCustomerDefaults.RegisteredRoleName) != null &&
+                !CommonHelper.IsValidEmail(model.Email))
+            {
+                ModelState.AddModelError(string.Empty, _localizationService.GetResource("Admin.Customers.Customers.ValidEmailRequiredRegisteredRole"));
+                ErrorNotification(_localizationService.GetResource("Admin.Customers.Customers.ValidEmailRequiredRegisteredRole"), false);
+            }
+
+            //custom customer attributes
+            var customerAttributesXml = ParseCustomCustomerAttributes(model.Form);
+            if (newCustomerRoles.Any() && newCustomerRoles.FirstOrDefault(c => c.SystemName == NopCustomerDefaults.RegisteredRoleName) != null)
+            {
+                var customerAttributeWarnings = _customerAttributeParser.GetAttributeWarnings(customerAttributesXml);
+                foreach (var error in customerAttributeWarnings)
+                {
+                    ModelState.AddModelError(string.Empty, error);
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    customer.AdminComment = model.AdminComment;
+                    customer.IsTaxExempt = model.IsTaxExempt;
+
+                    //prevent deactivation of the last active administrator
+                    if (!customer.IsAdmin() || model.Active || SecondAdminAccountExists(customer))
+                        customer.Active = model.Active;
+                    else
+                        ErrorNotification(_localizationService.GetResource("Admin.Customers.Customers.AdminAccountShouldExists.Deactivate"));
+
+                    //email
+                    if (!string.IsNullOrWhiteSpace(model.Email))
+                        _customerRegistrationService.SetEmail(customer, model.Email, false);
+                    else
+                        customer.Email = model.Email;
+
+                    //username
+                    if (_customerSettings.UsernamesEnabled)
+                    {
+                        if (!string.IsNullOrWhiteSpace(model.Username))
+                            _customerRegistrationService.SetUsername(customer, model.Username);
+                        else
+                            customer.Username = model.Username;
+                    }
+
+                    //VAT number
+                    if (_taxSettings.EuVatEnabled)
+                    {
+                        var prevVatNumber = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.VatNumberAttribute);
+
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.VatNumberAttribute, model.VatNumber);
+                        //set VAT number status
+                        if (!string.IsNullOrEmpty(model.VatNumber))
+                        {
+                            if (!model.VatNumber.Equals(prevVatNumber, StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                _genericAttributeService.SaveAttribute(customer,
+                                    NopCustomerDefaults.VatNumberStatusIdAttribute,
+                                    (int)_taxService.GetVatNumberStatus(model.VatNumber));
+                            }
+                        }
+                        else
+                        {
+                            _genericAttributeService.SaveAttribute(customer,
+                                NopCustomerDefaults.VatNumberStatusIdAttribute,
+                                (int)VatNumberStatus.Empty);
+                        }
+                    }
+
+                    //vendor
+                    customer.VendorId = model.VendorId;
+
+                    //form fields
+                    if (_dateTimeSettings.AllowCustomersToSetTimeZone)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.TimeZoneIdAttribute, model.TimeZoneId);
+                    if (_customerSettings.GenderEnabled)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.GenderAttribute, model.Gender);
+                    _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.FirstNameAttribute, model.FirstName);
+                    _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.LastNameAttribute, model.LastName);
+                    if (_customerSettings.DateOfBirthEnabled)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.DateOfBirthAttribute, model.DateOfBirth);
+                    if (_customerSettings.CompanyEnabled)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.CompanyAttribute, model.Company);
+                    if (_customerSettings.StreetAddressEnabled)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.StreetAddressAttribute, model.StreetAddress);
+                    if (_customerSettings.StreetAddress2Enabled)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.StreetAddress2Attribute, model.StreetAddress2);
+                    if (_customerSettings.ZipPostalCodeEnabled)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.ZipPostalCodeAttribute, model.ZipPostalCode);
+                    if (_customerSettings.CityEnabled)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.CityAttribute, model.City);
+                    if (_customerSettings.CountyEnabled)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.CountyAttribute, model.County);
+                    if (_customerSettings.CountryEnabled)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.CountryIdAttribute, model.CountryId);
+                    if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.StateProvinceIdAttribute, model.StateProvinceId);
+                    if (_customerSettings.PhoneEnabled)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.PhoneAttribute, model.Phone);
+                    if (_customerSettings.FaxEnabled)
+                        _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.FaxAttribute, model.Fax);
+
+                    //custom customer attributes
+                    _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.CustomCustomerAttributes, customerAttributesXml);
+
+                    //newsletter subscriptions
+                    if (!string.IsNullOrEmpty(customer.Email))
+                    {
+                        var allStores = _storeService.GetAllStores();
+                        foreach (var store in allStores)
+                        {
+                            var newsletterSubscription = _newsLetterSubscriptionService
+                                .GetNewsLetterSubscriptionByEmailAndStoreId(customer.Email, store.Id);
+                            if (model.SelectedNewsletterSubscriptionStoreIds != null &&
+                                model.SelectedNewsletterSubscriptionStoreIds.Contains(store.Id))
+                            {
+                                //subscribed
+                                if (newsletterSubscription == null)
+                                {
+                                    _newsLetterSubscriptionService.InsertNewsLetterSubscription(new NewsLetterSubscription
+                                    {
+                                        NewsLetterSubscriptionGuid = Guid.NewGuid(),
+                                        Email = customer.Email,
+                                        Active = true,
+                                        StoreId = store.Id,
+                                        CreatedOnUtc = DateTime.UtcNow
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                //not subscribed
+                                if (newsletterSubscription != null)
+                                {
+                                    _newsLetterSubscriptionService.DeleteNewsLetterSubscription(newsletterSubscription);
+                                }
+                            }
+                        }
+                    }
+
+                    //customer roles
+                    foreach (var customerRole in allCustomerRoles)
+                    {
+                        //ensure that the current customer cannot add/remove to/from "Administrators" system role
+                        //if he's not an admin himself
+                        if (customerRole.SystemName == NopCustomerDefaults.AdministratorsRoleName &&
+                            !_workContext.CurrentCustomer.IsAdmin())
+                            continue;
+
+                        if (model.SelectedCustomerRoleIds.Contains(customerRole.Id))
+                        {
+                            //new role
+                            if (customer.CustomerCustomerRoleMappings.Count(mapping => mapping.CustomerRoleId == customerRole.Id) == 0)
+                                customer.CustomerCustomerRoleMappings.Add(new CustomerCustomerRoleMapping { CustomerRole = customerRole });
+                        }
+                        else
+                        {
+                            //prevent attempts to delete the administrator role from the user, if the user is the last active administrator
+                            if (customerRole.SystemName == NopCustomerDefaults.AdministratorsRoleName && !SecondAdminAccountExists(customer))
+                            {
+                                ErrorNotification(_localizationService.GetResource("Admin.Customers.Customers.AdminAccountShouldExists.DeleteRole"));
+                                continue;
+                            }
+
+                            //remove role
+                            if (customer.CustomerCustomerRoleMappings.Count(mapping => mapping.CustomerRoleId == customerRole.Id) > 0)
+                            {
+                                customer.CustomerCustomerRoleMappings
+                                    .Remove(customer.CustomerCustomerRoleMappings.FirstOrDefault(mapping => mapping.CustomerRoleId == customerRole.Id));
+                            }
+                        }
+                    }
+
+                    _customerService.UpdateCustomer(customer);
+
+                    //ensure that a customer with a vendor associated is not in "Administrators" role
+                    //otherwise, he won't have access to the other functionality in admin area
+                    if (customer.IsAdmin() && customer.VendorId > 0)
+                    {
+                        customer.VendorId = 0;
+                        _customerService.UpdateCustomer(customer);
+                        ErrorNotification(_localizationService.GetResource("Admin.Customers.Customers.AdminCouldNotbeVendor"));
+                    }
+
+                    //ensure that a customer in the Vendors role has a vendor account associated.
+                    //otherwise, he will have access to ALL products
+                    if (customer.IsVendor() && customer.VendorId == 0)
+                    {
+                        var vendorRole = customer
+                            .CustomerRoles
+                            .FirstOrDefault(x => x.SystemName == NopCustomerDefaults.VendorsRoleName);
+                        //customer.CustomerRoles.Remove(vendorRole);
+                        customer.CustomerCustomerRoleMappings
+                            .Remove(customer.CustomerCustomerRoleMappings.FirstOrDefault(mapping => mapping.CustomerRoleId == vendorRole.Id));
+                        _customerService.UpdateCustomer(customer);
+                        ErrorNotification(_localizationService.GetResource("Admin.Customers.Customers.CannotBeInVendoRoleWithoutVendorAssociated"));
+                    }
+
+                    //activity log
+                    _customerActivityService.InsertActivity("EditCustomer",
+                        string.Format(_localizationService.GetResource("ActivityLog.EditCustomer"), customer.Id), customer);
+
+                    SuccessNotification(_localizationService.GetResource("Admin.Customers.Customers.Updated"));
+
+                    //selected tab
+                    SaveSelectedTabName();
+
+                    return RedirectToAction("Edit", new { id = customer.Id });
+                }
+                catch (Exception exc)
+                {
+                    ErrorNotification(exc.Message, false);
+                }
+            }
+
+            //prepare model
+            model = _customerModelFactory.PrepareCustomerModel(model, customer, true);
+
+            //if we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        protected virtual string ValidateCustomerRoles(IList<CustomerRole> customerRoles)
+        {
+            if (customerRoles == null)
+                throw new ArgumentNullException(nameof(customerRoles));
+
+            //ensure a customer is not added to both 'Guests' and 'Registered' customer roles
+            //ensure that a customer is in at least one required role ('Guests' and 'Registered')
+            var isInGuestsRole = customerRoles.FirstOrDefault(cr => cr.SystemName == NopCustomerDefaults.GuestsRoleName) != null;
+            var isInRegisteredRole = customerRoles.FirstOrDefault(cr => cr.SystemName == NopCustomerDefaults.RegisteredRoleName) != null;
+            if (isInGuestsRole && isInRegisteredRole)
+                return _localizationService.GetResource("Admin.Customers.Customers.GuestsAndRegisteredRolesError");
+            if (!isInGuestsRole && !isInRegisteredRole)
+                return _localizationService.GetResource("Admin.Customers.Customers.AddCustomerToGuestsOrRegisteredRoleError");
+
+            //no errors
+            return string.Empty;
+        }
+
+        private bool SecondAdminAccountExists(Customer customer)
+        {
+            var customers = _customerService.GetAllCustomers(customerRoleIds: new[] { _customerService.GetCustomerRoleBySystemName(NopCustomerDefaults.AdministratorsRoleName).Id });
+
+            return customers.Any(c => c.Active && c.Id != customer.Id);
+        }
         #endregion
 
         #endregion

@@ -28,5 +28,7 @@ namespace Nop.Web.Models.Customer
         public bool RememberMe { get; set; }
 
         public bool DisplayCaptcha { get; set; }
+
+        public bool IsError { get; set; }
     }
 }

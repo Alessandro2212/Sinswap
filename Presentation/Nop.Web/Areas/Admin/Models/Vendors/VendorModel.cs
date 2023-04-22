@@ -98,6 +98,8 @@ namespace Nop.Web.Areas.Admin.Models.Vendors
 
         public int CountryId { get; set; }
 
+        public bool IsError { get; set; }
+
         public List<VendorAttributeModel> VendorAttributes { get; set; }
 
         public IList<VendorLocalizedModel> Locales { get; set; }

@@ -47,6 +47,10 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapLocalizedRoute("Logout", "logout/",
 				new { controller = "Customer", action = "Logout" });
 
+            //logout
+            routeBuilder.MapLocalizedRoute("Edit", "edit/{username}/",
+                new { controller = "Customer", action = "Edit" });
+
             //shopping cart
             routeBuilder.MapLocalizedRoute("ShoppingCart", "cart/",
 				new { controller = "ShoppingCart", action = "Cart" });            

@@ -21,7 +21,8 @@
     }
 }
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+@*uncomment this script if we want to use captcha*@
+@*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 <script>
     var onloadCallback = function () {
@@ -32,7 +33,7 @@
             }
         })
     }
-</script>
+</script>*@
 
 <header class="vendorRegistration">
     <div class="container-fluid vendorRegistrationFormContainer">
@@ -464,8 +465,8 @@
                                     <a href="#" tabindex="-1">GDPR consent</a> and continue our service. You agree with terms and policies.
                                 </div>
 
-                                <div id="divcaptch" style="display: none;"></div>
-                                <input id="txtcaptcha" class="ignore" type="text" style="display:none" required data-val-required="Sorry R2-D2, no market for robot panties..."  />
+                                @*<div id="divcaptch" style="display: none;"></div>
+                                <input id="txtcaptcha" class="ignore" type="text" style="display:none" required data-val-required="Sorry R2-D2, no market for robot panties..."  />*@
 
                                 <div class="buttons">
                                     <input type="submit" class="btn btn-action done register-next-step-button" value="Create my Sinswap-account" tabindex="-1" />

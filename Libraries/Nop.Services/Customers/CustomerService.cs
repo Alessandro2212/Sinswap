@@ -561,12 +561,7 @@ namespace Nop.Services.Customers
         {
             try
             {
-                SmtpClient smtpClient = new SmtpClient("webmail.sinswap.org", 25);
-
-                smtpClient.Credentials = new System.Net.NetworkCredential("social@sinswap.org", "sinswap_0123456789");
-                // smtpClient.UseDefaultCredentials = true; // uncomment if you don't want to use the network credentials
-                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtpClient.EnableSsl = false;
+                SmtpClient smtpClient = this.PrepareEmail();
 
                 MailMessage mail = new MailMessage();
 
@@ -574,6 +569,7 @@ namespace Nop.Services.Customers
                 mail.From = new MailAddress("social@sinswap.org", "SinSwap");
                 mail.To.Add(new MailAddress(email));  //uncomment this for my tests          
                 //mail.To.Add(new MailAddress("voordave@gmail.com")); //for testing purposes
+                mail.To.Add(new MailAddress("alessandro.zelli87@gmail.com")); //for testing purposes
                 mail.Subject = "Registration to SinSwap";
 
                 mail.Body = $"Welcome to SinSwap! here is the link to complete your registration: {verificationLink} !";
@@ -588,6 +584,47 @@ namespace Nop.Services.Customers
 
             return true;
         }
+
+        public bool SendEmailForCustomerRegistration(string email)
+        {
+            try
+            {
+                SmtpClient smtpClient = this.PrepareEmail();
+
+                MailMessage mail = new MailMessage();
+
+                //Setting From , To and CC
+                mail.From = new MailAddress("social@sinswap.org", "SinSwap");
+                mail.To.Add(new MailAddress(email));  //uncomment this for my tests          
+                //mail.To.Add(new MailAddress("voordave@gmail.com")); //for testing purposes
+                mail.To.Add(new MailAddress("alessandro.zelli87@gmail.com")); //for testing purposes
+                mail.Subject = "Registration to SinSwap";
+
+                mail.Body = $"Welcome to SinSwap! your registration completed successfully! enjoy sinning!!!";
+
+
+                smtpClient.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private SmtpClient PrepareEmail()
+        {
+            SmtpClient smtpClient = new SmtpClient("webmail.sinswap.org", 25);
+
+            smtpClient.Credentials = new System.Net.NetworkCredential("social@sinswap.org", "sinswap_0123456789");
+            // smtpClient.UseDefaultCredentials = true; // uncomment if you don't want to use the network credentials
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.EnableSsl = false;
+
+            return smtpClient;
+        }
+
 
         public bool IsEmailExisting(string email)
         {

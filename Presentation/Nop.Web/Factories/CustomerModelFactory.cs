@@ -13,6 +13,7 @@ using Nop.Core.Domain.Orders;
 using Nop.Core.Domain.Security;
 using Nop.Core.Domain.Tax;
 using Nop.Core.Domain.Vendors;
+using Nop.Services.Affiliates;
 using Nop.Services.Authentication.External;
 using Nop.Services.Common;
 using Nop.Services.Customers;
@@ -25,6 +26,9 @@ using Nop.Services.Messages;
 using Nop.Services.Orders;
 using Nop.Services.Seo;
 using Nop.Services.Stores;
+using Nop.Web.Areas.Admin.Factories;
+using Nop.Web.Areas.Admin.Models.Customers;
+using Nop.Web.Framework.Factories;
 using Nop.Web.Models.Common;
 using Nop.Web.Models.Customer;
 
@@ -71,6 +75,11 @@ namespace Nop.Web.Factories
         private readonly SecuritySettings _securitySettings;
         private readonly TaxSettings _taxSettings;
         private readonly VendorSettings _vendorSettings;
+        private readonly IStoreService _storeService;
+        private readonly IAffiliateService _affiliateService;
+        private readonly ICustomerService _customerService;
+        private readonly IBaseAdminModelFactory _baseAdminModelFactory;
+        private readonly IAclSupportedModelFactory _aclSupportedModelFactory;
 
         #endregion
 
@@ -109,7 +118,12 @@ namespace Nop.Web.Factories
             RewardPointsSettings rewardPointsSettings,
             SecuritySettings securitySettings,
             TaxSettings taxSettings,
-            VendorSettings vendorSettings)
+            VendorSettings vendorSettings,
+            IStoreService storeService,
+            IAffiliateService affiliateService,
+            ICustomerService customerService,
+            IBaseAdminModelFactory baseAdminModelFactory,
+            IAclSupportedModelFactory aclSupportedModelFactory)
         {
             this._addressSettings = addressSettings;
             this._captchaSettings = captchaSettings;
@@ -145,7 +159,12 @@ namespace Nop.Web.Factories
             this._securitySettings = securitySettings;
             this._taxSettings = taxSettings;
             this._vendorSettings = vendorSettings;
-        }
+            this._storeService = storeService;
+            this._affiliateService = affiliateService;
+            this._customerService = customerService;
+            this._baseAdminModelFactory = baseAdminModelFactory;
+            this._aclSupportedModelFactory = aclSupportedModelFactory;
+    }
 
         #endregion
 
@@ -176,17 +195,17 @@ namespace Nop.Web.Factories
         /// <param name="customer">Customer</param>
         /// <param name="overrideAttributesXml">Overridden customer attributes in XML format; pass null to use CustomCustomerAttributes of customer</param>
         /// <returns>List of the customer attribute model</returns>
-        public virtual IList<CustomerAttributeModel> PrepareCustomCustomerAttributes(Customer customer, string overrideAttributesXml = "")
+        public virtual IList<Models.Customer.CustomerAttributeModel> PrepareCustomCustomerAttributes(Customer customer, string overrideAttributesXml = "")
         {
             if (customer == null)
                 throw new ArgumentNullException(nameof(customer));
 
-            var result = new List<CustomerAttributeModel>();
+            var result = new List<Models.Customer.CustomerAttributeModel>();
 
             var customerAttributes = _customerAttributeService.GetAllCustomerAttributes();
             foreach (var attribute in customerAttributes)
             {
-                var attributeModel = new CustomerAttributeModel
+                var attributeModel = new Models.Customer.CustomerAttributeModel
                 {
                     Id = attribute.Id,
                     Name = _localizationService.GetLocalized(attribute, x => x.Name),
@@ -200,7 +219,7 @@ namespace Nop.Web.Factories
                     var attributeValues = _customerAttributeService.GetCustomerAttributeValues(attribute.Id);
                     foreach (var attributeValue in attributeValues)
                     {
-                        var valueModel = new CustomerAttributeValueModel
+                        var valueModel = new Models.Customer.CustomerAttributeValueModel
                         {
                             Id = attributeValue.Id,
                             Name = _localizationService.GetLocalized(attributeValue, x => x.Name),
@@ -785,14 +804,14 @@ namespace Nop.Web.Factories
         /// Prepare the customer address list model
         /// </summary>
         /// <returns>Customer address list model</returns>
-        public virtual CustomerAddressListModel PrepareCustomerAddressListModel()
+        public virtual Models.Customer.CustomerAddressListModel PrepareCustomerAddressListModel()
         {
             var addresses = _workContext.CurrentCustomer.Addresses
                 //enabled for the current store
                 .Where(a => a.Country == null || _storeMappingService.Authorize(a.Country))
                 .ToList();
 
-            var model = new CustomerAddressListModel();
+            var model = new Models.Customer.CustomerAddressListModel();
             foreach (var address in addresses)
             {
                 var addressModel = new AddressModel();
@@ -909,6 +928,392 @@ namespace Nop.Web.Factories
             var model = new CheckGiftCardBalanceModel();
             return model;
         }
+
+        /// <summary>
+        /// Prepare customer model
+        /// </summary>
+        /// <param name="model">Customer model</param>
+        /// <param name="customer">Customer</param>
+        /// <param name="excludeProperties">Whether to exclude populating of some properties of model</param>
+        /// <returns>Customer model</returns>
+        public virtual Models.Customer.CustomerModel PrepareCustomerModel(Models.Customer.CustomerModel model, Customer customer, bool excludeProperties = false)
+        {
+            if (customer != null)
+            {
+                //fill in model values from the entity
+                model = model ?? new Models.Customer.CustomerModel();
+
+                model.Id = customer.Id;
+                model.DisplayVatNumber = _taxSettings.EuVatEnabled;
+                model.AllowSendingOfWelcomeMessage = customer.IsRegistered() &&
+                    _customerSettings.UserRegistrationType == UserRegistrationType.AdminApproval;
+                model.AllowReSendingOfActivationMessage = customer.IsRegistered() && !customer.Active &&
+                    _customerSettings.UserRegistrationType == UserRegistrationType.EmailValidation;
+                model.GdprEnabled = _gdprSettings.GdprEnabled;
+
+                //whether to fill in some of properties
+                if (!excludeProperties)
+                {
+                    model.Email = customer.Email;
+                    model.Username = customer.Username;
+                    model.VendorId = customer.VendorId;
+                    model.AdminComment = customer.AdminComment;
+                    model.IsTaxExempt = customer.IsTaxExempt;
+                    model.Active = customer.Active;
+                    model.FirstName = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.FirstNameAttribute);
+                    model.LastName = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.LastNameAttribute);
+                    model.Gender = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.GenderAttribute);
+                    model.DateOfBirth = _genericAttributeService.GetAttribute<DateTime?>(customer, NopCustomerDefaults.DateOfBirthAttribute);
+                    model.Company = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.CompanyAttribute);
+                    model.StreetAddress = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.StreetAddressAttribute);
+                    model.StreetAddress2 = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.StreetAddress2Attribute);
+                    model.ZipPostalCode = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.ZipPostalCodeAttribute);
+                    model.City = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.CityAttribute);
+                    model.County = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.CountyAttribute);
+                    model.CountryId = _genericAttributeService.GetAttribute<int>(customer, NopCustomerDefaults.CountryIdAttribute);
+                    model.StateProvinceId = _genericAttributeService.GetAttribute<int>(customer, NopCustomerDefaults.StateProvinceIdAttribute);
+                    model.Phone = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.PhoneAttribute);
+                    model.Fax = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.FaxAttribute);
+                    model.TimeZoneId = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.TimeZoneIdAttribute);
+                    model.VatNumber = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.VatNumberAttribute);
+                    model.VatNumberStatusNote = _localizationService.GetLocalizedEnum((VatNumberStatus)_genericAttributeService
+                        .GetAttribute<int>(customer, NopCustomerDefaults.VatNumberStatusIdAttribute));
+                    model.CreatedOn = _dateTimeHelper.ConvertToUserTime(customer.CreatedOnUtc, DateTimeKind.Utc);
+                    model.LastActivityDate = _dateTimeHelper.ConvertToUserTime(customer.LastActivityDateUtc, DateTimeKind.Utc);
+                    model.LastIpAddress = customer.LastIpAddress;
+                    model.LastVisitedPage = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.LastVisitedPageAttribute);
+                    model.SelectedCustomerRoleIds = customer.CustomerCustomerRoleMappings.Select(mapping => mapping.CustomerRoleId).ToList();
+                    model.RegisteredInStore = _storeService.GetAllStores()
+                        .FirstOrDefault(store => store.Id == customer.RegisteredInStoreId)?.Name ?? string.Empty;
+
+                    //prepare model affiliate
+                    var affiliate = _affiliateService.GetAffiliateById(customer.AffiliateId);
+                    if (affiliate != null)
+                    {
+                        model.AffiliateId = affiliate.Id;
+                        model.AffiliateName = _affiliateService.GetAffiliateFullName(affiliate);
+                    }
+
+                    //prepare model newsletter subscriptions
+                    if (!string.IsNullOrEmpty(customer.Email))
+                    {
+                        model.SelectedNewsletterSubscriptionStoreIds = _storeService.GetAllStores()
+                            .Where(store => _newsLetterSubscriptionService.GetNewsLetterSubscriptionByEmailAndStoreId(customer.Email, store.Id) != null)
+                            .Select(store => store.Id).ToList();
+                    }
+                }
+                //prepare reward points model
+                model.DisplayRewardPointsHistory = _rewardPointsSettings.Enabled;
+                if (model.DisplayRewardPointsHistory)
+                    PrepareAddRewardPointsToCustomerModel(model.AddRewardPoints);
+
+                //prepare external authentication records
+                PrepareAssociatedExternalAuthModels(model.AssociatedExternalAuthRecords, customer);
+
+                //prepare nested search models
+                PrepareRewardPointsSearchModel(model.CustomerRewardPointsSearchModel, customer);
+                PrepareCustomerAddressSearchModel(model.CustomerAddressSearchModel, customer);
+                PrepareCustomerOrderSearchModel(model.CustomerOrderSearchModel, customer);
+                PrepareCustomerShoppingCartSearchModel(model.CustomerShoppingCartSearchModel, customer);
+                PrepareCustomerActivityLogSearchModel(model.CustomerActivityLogSearchModel, customer);
+                PrepareCustomerBackInStockSubscriptionSearchModel(model.CustomerBackInStockSubscriptionSearchModel, customer);
+            }
+            else
+            {
+                //whether to fill in some of properties
+                if (!excludeProperties)
+                {
+                    //precheck Registered Role as a default role while creating a new customer through admin
+                    var registeredRole = _customerService.GetCustomerRoleBySystemName(NopCustomerDefaults.RegisteredRoleName);
+                    if (registeredRole != null)
+                        model.SelectedCustomerRoleIds.Add(registeredRole.Id);
+                }
+            }
+
+            model.UsernamesEnabled = _customerSettings.UsernamesEnabled;
+            model.AllowCustomersToSetTimeZone = _dateTimeSettings.AllowCustomersToSetTimeZone;
+            model.GenderEnabled = _customerSettings.GenderEnabled;
+            model.DateOfBirthEnabled = _customerSettings.DateOfBirthEnabled;
+            model.CompanyEnabled = _customerSettings.CompanyEnabled;
+            model.StreetAddressEnabled = _customerSettings.StreetAddressEnabled;
+            model.StreetAddress2Enabled = _customerSettings.StreetAddress2Enabled;
+            model.ZipPostalCodeEnabled = _customerSettings.ZipPostalCodeEnabled;
+            model.CityEnabled = _customerSettings.CityEnabled;
+            model.CountyEnabled = _customerSettings.CountyEnabled;
+            model.CountryEnabled = _customerSettings.CountryEnabled;
+            model.StateProvinceEnabled = _customerSettings.StateProvinceEnabled;
+            model.PhoneEnabled = _customerSettings.PhoneEnabled;
+            model.FaxEnabled = _customerSettings.FaxEnabled;
+
+            //set default values for the new model
+            if (customer == null)
+            {
+                model.Active = true;
+                model.DisplayVatNumber = false;
+            }
+
+            //prepare available vendors
+            _baseAdminModelFactory.PrepareVendors(model.AvailableVendors,
+                defaultItemText: _localizationService.GetResource("Admin.Customers.Customers.Fields.Vendor.None"));
+
+            //prepare model customer attributes
+            PrepareCustomerAttributeModels(model.CustomerAttributes, customer);
+
+            //prepare model stores for newsletter subscriptions
+            model.AvailableNewsletterSubscriptionStores = _storeService.GetAllStores().Select(store => new SelectListItem
+            {
+                Value = store.Id.ToString(),
+                Text = store.Name,
+                Selected = model.SelectedNewsletterSubscriptionStoreIds.Contains(store.Id)
+            }).ToList();
+
+            //prepare model customer roles
+            _aclSupportedModelFactory.PrepareModelCustomerRoles(model);
+
+            //prepare available time zones
+            _baseAdminModelFactory.PrepareTimeZones(model.AvailableTimeZones, false);
+
+            //prepare available countries and states
+            if (_customerSettings.CountryEnabled)
+            {
+                _baseAdminModelFactory.PrepareCountries(model.AvailableCountries);
+                if (_customerSettings.StateProvinceEnabled)
+                    _baseAdminModelFactory.PrepareStatesAndProvinces(model.AvailableStates, model.CountryId == 0 ? null : (int?)model.CountryId);
+            }
+
+            return model;
+        }
+
+        protected virtual void PrepareAddRewardPointsToCustomerModel(Models.Customer.AddRewardPointsToCustomerModel model)
+        {
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
+
+            model.Message = _localizationService.GetResource("Admin.Customers.Customers.SomeComment");
+            model.ActivatePointsImmediately = true;
+            model.StoreId = _storeContext.CurrentStore.Id;
+
+            //prepare available stores
+            _baseAdminModelFactory.PrepareStores(model.AvailableStores, false);
+        }
+
+        protected virtual void PrepareAssociatedExternalAuthModels(IList<Models.Customer.CustomerAssociatedExternalAuthModel> models, Customer customer)
+        {
+            if (models == null)
+                throw new ArgumentNullException(nameof(models));
+
+            if (customer == null)
+                throw new ArgumentNullException(nameof(customer));
+
+            foreach (var record in customer.ExternalAuthenticationRecords)
+            {
+                var method = _externalAuthenticationService.LoadExternalAuthenticationMethodBySystemName(record.ProviderSystemName);
+                if (method == null)
+                    continue;
+
+                models.Add(new Models.Customer.CustomerAssociatedExternalAuthModel
+                {
+                    Id = record.Id,
+                    Email = record.Email,
+                    ExternalIdentifier = !string.IsNullOrEmpty(record.ExternalDisplayIdentifier)
+                        ? record.ExternalDisplayIdentifier : record.ExternalIdentifier,
+                    AuthMethodName = method.PluginDescriptor.FriendlyName
+                });
+            }
+        }
+
+        protected virtual Models.Customer.CustomerRewardPointsSearchModel PrepareRewardPointsSearchModel(Models.Customer.CustomerRewardPointsSearchModel searchModel, Customer customer)
+        {
+            if (searchModel == null)
+                throw new ArgumentNullException(nameof(searchModel));
+
+            if (customer == null)
+                throw new ArgumentNullException(nameof(customer));
+
+            searchModel.CustomerId = customer.Id;
+
+            //prepare page parameters
+            searchModel.SetGridPageSize();
+
+            return searchModel;
+        }
+
+        protected virtual Models.Customer.CustomerAddressSearchModel PrepareCustomerAddressSearchModel(Models.Customer.CustomerAddressSearchModel searchModel, Customer customer)
+        {
+            if (searchModel == null)
+                throw new ArgumentNullException(nameof(searchModel));
+
+            if (customer == null)
+                throw new ArgumentNullException(nameof(customer));
+
+            searchModel.CustomerId = customer.Id;
+
+            //prepare page parameters
+            searchModel.SetGridPageSize();
+
+            return searchModel;
+        }
+
+        protected virtual Models.Customer.CustomerOrderSearchModel PrepareCustomerOrderSearchModel(Models.Customer.CustomerOrderSearchModel searchModel, Customer customer)
+        {
+            if (searchModel == null)
+                throw new ArgumentNullException(nameof(searchModel));
+
+            if (customer == null)
+                throw new ArgumentNullException(nameof(customer));
+
+            searchModel.CustomerId = customer.Id;
+
+            //prepare page parameters
+            searchModel.SetGridPageSize();
+
+            return searchModel;
+        }
+
+        protected virtual Models.Customer.CustomerShoppingCartSearchModel PrepareCustomerShoppingCartSearchModel(Models.Customer.CustomerShoppingCartSearchModel searchModel,
+            Customer customer)
+        {
+            if (searchModel == null)
+                throw new ArgumentNullException(nameof(searchModel));
+
+            if (customer == null)
+                throw new ArgumentNullException(nameof(customer));
+
+            searchModel.CustomerId = customer.Id;
+
+            //prepare available shopping cart types (search shopping cart by default)
+            searchModel.ShoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
+            _baseAdminModelFactory.PrepareShoppingCartTypes(searchModel.AvailableShoppingCartTypes, false);
+
+            //prepare page parameters
+            searchModel.SetGridPageSize();
+
+            return searchModel;
+        }
+
+        protected virtual Models.Customer.CustomerActivityLogSearchModel PrepareCustomerActivityLogSearchModel(Models.Customer.CustomerActivityLogSearchModel searchModel, Customer customer)
+        {
+            if (searchModel == null)
+                throw new ArgumentNullException(nameof(searchModel));
+
+            if (customer == null)
+                throw new ArgumentNullException(nameof(customer));
+
+            searchModel.CustomerId = customer.Id;
+
+            //prepare page parameters
+            searchModel.SetGridPageSize();
+
+            return searchModel;
+        }
+
+        protected virtual Models.Customer.CustomerBackInStockSubscriptionSearchModel PrepareCustomerBackInStockSubscriptionSearchModel(
+            Models.Customer.CustomerBackInStockSubscriptionSearchModel searchModel, Customer customer)
+        {
+            if (searchModel == null)
+                throw new ArgumentNullException(nameof(searchModel));
+
+            if (customer == null)
+                throw new ArgumentNullException(nameof(customer));
+
+            searchModel.CustomerId = customer.Id;
+
+            //prepare page parameters
+            searchModel.SetGridPageSize();
+
+            return searchModel;
+        }
+
+        protected virtual void PrepareCustomerAttributeModels(IList<Models.Customer.CustomerModel.CustomerAttributeModel> models, Customer customer)
+        {
+            if (models == null)
+                throw new ArgumentNullException(nameof(models));
+
+            //get available customer attributes
+            var customerAttributes = _customerAttributeService.GetAllCustomerAttributes();
+            foreach (var attribute in customerAttributes)
+            {
+                var attributeModel = new Models.Customer.CustomerModel.CustomerAttributeModel
+                {
+                    Id = attribute.Id,
+                    Name = attribute.Name,
+                    IsRequired = attribute.IsRequired,
+                    AttributeControlType = attribute.AttributeControlType
+                };
+
+                if (attribute.ShouldHaveValues())
+                {
+                    //values
+                    var attributeValues = _customerAttributeService.GetCustomerAttributeValues(attribute.Id);
+                    foreach (var attributeValue in attributeValues)
+                    {
+                        var attributeValueModel = new Models.Customer.CustomerModel.CustomerAttributeValueModel
+                        {
+                            Id = attributeValue.Id,
+                            Name = attributeValue.Name,
+                            IsPreSelected = attributeValue.IsPreSelected
+                        };
+                        attributeModel.Values.Add(attributeValueModel);
+                    }
+                }
+
+                //set already selected attributes
+                if (customer != null)
+                {
+                    var selectedCustomerAttributes = _genericAttributeService
+                        .GetAttribute<string>(customer, NopCustomerDefaults.CustomCustomerAttributes);
+                    switch (attribute.AttributeControlType)
+                    {
+                        case AttributeControlType.DropdownList:
+                        case AttributeControlType.RadioList:
+                        case AttributeControlType.Checkboxes:
+                            {
+                                if (!string.IsNullOrEmpty(selectedCustomerAttributes))
+                                {
+                                    //clear default selection
+                                    foreach (var item in attributeModel.Values)
+                                        item.IsPreSelected = false;
+
+                                    //select new values
+                                    var selectedValues = _customerAttributeParser.ParseCustomerAttributeValues(selectedCustomerAttributes);
+                                    foreach (var attributeValue in selectedValues)
+                                        foreach (var item in attributeModel.Values)
+                                            if (attributeValue.Id == item.Id)
+                                                item.IsPreSelected = true;
+                                }
+                            }
+                            break;
+                        case AttributeControlType.ReadonlyCheckboxes:
+                            {
+                                //do nothing
+                                //values are already pre-set
+                            }
+                            break;
+                        case AttributeControlType.TextBox:
+                        case AttributeControlType.MultilineTextbox:
+                            {
+                                if (!string.IsNullOrEmpty(selectedCustomerAttributes))
+                                {
+                                    var enteredText = _customerAttributeParser.ParseValues(selectedCustomerAttributes, attribute.Id);
+                                    if (enteredText.Any())
+                                        attributeModel.DefaultValue = enteredText[0];
+                                }
+                            }
+                            break;
+                        case AttributeControlType.Datepicker:
+                        case AttributeControlType.ColorSquares:
+                        case AttributeControlType.ImageSquares:
+                        case AttributeControlType.FileUpload:
+                        default:
+                            //not supported attribute control types
+                            break;
+                    }
+                }
+
+                models.Add(attributeModel);
+            }
+        }
+
 
         #endregion
     }
