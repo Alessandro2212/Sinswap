@@ -918,6 +918,10 @@ div.btn-container .btn-color-mode-switch input[type=checkbox]:checked ~ .alert {
 .modal .modal-content .modal-body {
   padding: 1rem 2rem 2rem 2rem;
 }
+.modal .modal-content .modal-body .close {
+  position: absolute;
+  right: 2rem;
+}
 .modal .modal-content .modal-body .footnote {
   margin-top: 1rem;
   font-size: 10px;
@@ -942,6 +946,28 @@ div.btn-container .btn-color-mode-switch input[type=checkbox]:checked ~ .alert {
   padding: 0.5rem 2em;
   justify-content: center;
   font-size: 14px;
+}
+
+.bar-notification {
+  padding: 45px;
+}
+.bar-notification.success {
+  opacity: 1 !important;
+}
+.bar-notification .closeBtn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: #999999;
+  cursor: pointer;
+}
+.bar-notification .closeBtn:hover {
+  color: #171717;
+}
+.bar-notification .content {
+  margin: 0px;
+  text-align: center;
+  font-size: 20px;
 }
 
 @media (min-width: 576px) {
@@ -1664,8 +1690,8 @@ nav .cartFoldout {
   padding-top: 0px;
 }
 .category-page .topSellersContainer {
-  margin-top: 40px;
   margin-bottom: 60px;
+  padding: 45px 250px 0 250px;
 }
 .category-page .topSellersContainer .no-data {
   text-align: center;
@@ -3141,6 +3167,7 @@ header.vendorRegistration .stepIconContainer ul li.active {
   margin-left: 0px;
   margin-right: 0px;
   padding-bottom: 7px;
+  margin-bottom: 7px;
 }
 .productModal .modal-content .descColumn .orderContainer .price {
   text-align: right;
@@ -3149,11 +3176,13 @@ header.vendorRegistration .stepIconContainer ul li.active {
   top: -0.25em;
 }
 .productModal .modal-content .descColumn .orderContainer .btn-order {
-  margin-top: 10px;
+  margin-top: 7px;
   color: #fff;
   background-color: #00E39A;
   width: auto;
-  float: right;
+  float: left;
+  font-size: 14px;
+  padding: 0.375rem 1rem;
 }
 
 .cartContainer {
@@ -3538,6 +3567,10 @@ header.blogDetail .page-title .date {
 .searchResultContainer .searchSubmit:hover {
   opacity: 1;
   transition: opacity 0.15s;
+}
+.searchResultContainer .search-results {
+  margin-top: 90px;
+  margin-bottom: 120px;
 }
 .searchResultContainer .topSellerCard {
   margin-top: 10px;

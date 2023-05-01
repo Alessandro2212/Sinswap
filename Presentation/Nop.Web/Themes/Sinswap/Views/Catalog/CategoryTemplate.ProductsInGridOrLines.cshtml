@@ -150,7 +150,7 @@
         }
         else
         {
-            <div class="container firstContainer sellersContainer">
+@*            <div class="container firstContainer sellersContainer">
                 <div class="row">
                     <div class="no-data">
                         <i class="fas fa-sad-tear"></i><br />
@@ -158,7 +158,7 @@
                     </div>
                 </div>
             </div>
-        }
+*@        }
 
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsBeforeFilters, additionalData = Model })
         <div class="product-filters">

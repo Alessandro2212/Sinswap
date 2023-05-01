@@ -71,7 +71,7 @@
 </div>
 <div id="dialog-notifications-warning" title="@T("Common.Warning")" style="display:none;">
 </div>
-<div id="bar-notification" class="bar-notification">
-    <span class="close" title="@T("Common.Close")">&nbsp;</span>
+<div id="bar-notification" class="bar-notification" style="display:none;">
+    <div class="closeBtn" title="@T("Common.Close")" data-dismiss="modal" aria-label="Close"><i class="far fa-times-circle" aria-hidden="true"></i></div>
 </div>
 @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.Notifications })
