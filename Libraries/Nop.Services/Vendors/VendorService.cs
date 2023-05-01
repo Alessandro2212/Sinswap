@@ -2,6 +2,7 @@ using Nop.Core;
 using Nop.Core.Data;
 using Nop.Core.Data.Extensions;
 using Nop.Core.Domain.Catalog;
+using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Vendors;
 using Nop.Core.Html;
 using Nop.Data;
@@ -88,6 +89,20 @@ namespace Nop.Services.Vendors
                 return null;
 
             return _vendorRepository.GetById(vendorId);
+        }
+
+        public virtual Vendor GetVendorByEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return null;
+
+            var query = from v in _vendorRepository.Table
+                        orderby v.Id
+                        where v.Email == email
+                        select v;
+
+            var vendor = query.FirstOrDefault();
+            return vendor;
         }
 
         /// <summary>

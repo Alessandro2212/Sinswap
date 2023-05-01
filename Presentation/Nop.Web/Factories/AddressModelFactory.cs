@@ -67,7 +67,7 @@ namespace Nop.Web.Factories
             var attributes = _addressAttributeService.GetAllAddressAttributes();
             foreach (var attribute in attributes)
             {
-                var attributeModel = new AddressAttributeModel
+                var attributeModel = new AddressModel.AddressAttributeModel
                 {
                     Id = attribute.Id,
                     Name = _localizationService.GetLocalized(attribute, x => x.Name),
@@ -81,7 +81,7 @@ namespace Nop.Web.Factories
                     var attributeValues = _addressAttributeService.GetAddressAttributeValues(attribute.Id);
                     foreach (var attributeValue in attributeValues)
                     {
-                        var attributeValueModel = new AddressAttributeValueModel
+                        var attributeValueModel = new AddressModel.AddressAttributeValueModel
                         {
                             Id = attributeValue.Id,
                             Name = _localizationService.GetLocalized(attributeValue, x => x.Name),

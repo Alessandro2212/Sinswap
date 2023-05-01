@@ -12,7 +12,7 @@ namespace Nop.Web.Models.Customer
     /// <summary>
     /// Represents a customer model
     /// </summary>
-    //[Validator(typeof(Validators.Customer.CustomerValidator))]
+    [Validator(typeof(Validators.Customer.CustomerValidator))]
     public partial class CustomerModel : BaseNopEntityModel, IAclSupportedModel
     {
         #region Ctor

@@ -31,6 +31,7 @@ namespace Nop.Web.Factories
         VendorListModel PrepareVendorListModel(IPagedList<Vendor> vendors, VendorPagingFilteringModel command);
 
         VendorFeaturetteModel PrepareVendorFeaturetteModel(string name);
+        VendorEditModel PrepareVendorModel(VendorEditModel model, Vendor vendor, bool excludeProperties = false);
 
     }
 }

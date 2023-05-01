@@ -59,5 +59,7 @@ namespace Nop.Web.Areas.Admin.Factories
         /// <param name="models">List of address attribute models</param>
         /// <param name="address">Address</param>
         void PrepareCustomAddressAttributes(IList<AddressModel.AddressAttributeModel> models, Address address);
+
+        void PrepareCustomAddressAttributes(IList<Nop.Web.Models.Common.AddressModel.AddressAttributeModel> models, Address address);
     }
 }

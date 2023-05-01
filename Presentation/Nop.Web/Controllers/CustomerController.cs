@@ -2119,13 +2119,18 @@ namespace Nop.Web.Controllers
         #region CustomerForm
         public virtual IActionResult Edit(string username)
         {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
-                return AccessDeniedView();
+            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
+            //    return AccessDeniedView();
 
             //try to get a customer with the specified id
             var customer = _customerService.GetCustomerByUsername(username);
             if (customer == null || customer.Deleted)
-                return RedirectToAction("List");
+                return RedirectToAction("Edit", "Vendor", new { email = username });
+
+            if (customer.IsVendor())
+            {
+                return RedirectToAction("Edit", "Vendor", new { email = username });
+            }
 
             //prepare model
             var model = _customerModelFactory.PrepareCustomerModel(null, customer);

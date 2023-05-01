@@ -307,6 +307,92 @@ namespace Nop.Web.Areas.Admin.Factories
             }
         }
 
+
+        public virtual void PrepareCustomAddressAttributes(IList<Nop.Web.Models.Common.AddressModel.AddressAttributeModel> models, Address address)
+        {
+            if (models == null)
+                throw new ArgumentNullException(nameof(models));
+
+            var attributes = _addressAttributeService.GetAllAddressAttributes();
+            foreach (var attribute in attributes)
+            {
+                var attributeModel = new Nop.Web.Models.Common.AddressModel.AddressAttributeModel
+                {
+                    Id = attribute.Id,
+                    Name = attribute.Name,
+                    IsRequired = attribute.IsRequired,
+                    AttributeControlType = attribute.AttributeControlType,
+                };
+
+                if (attribute.ShouldHaveValues())
+                {
+                    //values
+                    var attributeValues = _addressAttributeService.GetAddressAttributeValues(attribute.Id);
+                    foreach (var attributeValue in attributeValues)
+                    {
+                        var attributeValueModel = new Nop.Web.Models.Common.AddressModel.AddressAttributeValueModel
+                        {
+                            Id = attributeValue.Id,
+                            Name = attributeValue.Name,
+                            IsPreSelected = attributeValue.IsPreSelected
+                        };
+                        attributeModel.Values.Add(attributeValueModel);
+                    }
+                }
+
+                //set already selected attributes
+                var selectedAddressAttributes = address?.CustomAttributes;
+                switch (attribute.AttributeControlType)
+                {
+                    case AttributeControlType.DropdownList:
+                    case AttributeControlType.RadioList:
+                    case AttributeControlType.Checkboxes:
+                        {
+                            if (!string.IsNullOrEmpty(selectedAddressAttributes))
+                            {
+                                //clear default selection
+                                foreach (var item in attributeModel.Values)
+                                    item.IsPreSelected = false;
+
+                                //select new values
+                                var selectedValues = _addressAttributeParser.ParseAddressAttributeValues(selectedAddressAttributes);
+                                foreach (var attributeValue in selectedValues)
+                                    foreach (var item in attributeModel.Values)
+                                        if (attributeValue.Id == item.Id)
+                                            item.IsPreSelected = true;
+                            }
+                        }
+                        break;
+                    case AttributeControlType.ReadonlyCheckboxes:
+                        {
+                            //do nothing
+                            //values are already pre-set
+                        }
+                        break;
+                    case AttributeControlType.TextBox:
+                    case AttributeControlType.MultilineTextbox:
+                        {
+                            if (!string.IsNullOrEmpty(selectedAddressAttributes))
+                            {
+                                var enteredText = _addressAttributeParser.ParseValues(selectedAddressAttributes, attribute.Id);
+                                if (enteredText.Any())
+                                    attributeModel.DefaultValue = enteredText[0];
+                            }
+                        }
+                        break;
+                    case AttributeControlType.ColorSquares:
+                    case AttributeControlType.ImageSquares:
+                    case AttributeControlType.Datepicker:
+                    case AttributeControlType.FileUpload:
+                    default:
+                        //not supported attribute control types
+                        break;
+                }
+
+                models.Add(attributeModel);
+            }
+        }
+
         #endregion
     }
 }

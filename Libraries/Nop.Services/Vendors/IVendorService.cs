@@ -16,6 +16,7 @@ namespace Nop.Services.Vendors
         /// <param name="vendorId">Vendor identifier</param>
         /// <returns>Vendor</returns>
         Vendor GetVendorById(int vendorId);
+        Vendor GetVendorByEmail(string email);
 
         /// <summary>
         /// Delete a vendor

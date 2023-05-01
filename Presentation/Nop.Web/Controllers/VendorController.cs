@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using Nop.Core;
 using Nop.Core.Domain.Catalog;
+using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Localization;
 using Nop.Core.Domain.Media;
@@ -13,10 +14,13 @@ using Nop.Core.Domain.Vendors;
 using Nop.Services.Common;
 using Nop.Services.Customers;
 using Nop.Services.Localization;
+using Nop.Services.Logging;
 using Nop.Services.Media;
 using Nop.Services.Messages;
+using Nop.Services.Security;
 using Nop.Services.Seo;
 using Nop.Services.Vendors;
+using Nop.Web.Areas.Admin.Infrastructure.Mapper.Extensions;
 using Nop.Web.Factories;
 using Nop.Web.Framework.Controllers;
 using Nop.Web.Framework.Mvc.Filters;
@@ -30,6 +34,7 @@ namespace Nop.Web.Controllers
     {
         #region Fields
 
+        private readonly IAddressService _addressService;
         private readonly CaptchaSettings _captchaSettings;
         private readonly ICustomerService _customerService;
         private readonly IDownloadService _downloadService;
@@ -45,12 +50,16 @@ namespace Nop.Web.Controllers
         private readonly IWorkflowMessageService _workflowMessageService;
         private readonly LocalizationSettings _localizationSettings;
         private readonly VendorSettings _vendorSettings;
+        private readonly IPermissionService _permissionService;
+        private readonly ICustomerActivityService _customerActivityService;
+        private readonly ILocalizedEntityService _localizedEntityService;
 
         #endregion
 
         #region Ctor
 
         public VendorController(CaptchaSettings captchaSettings,
+            IAddressService addressService,
             ICustomerService customerService,
             IDownloadService downloadService,
             IGenericAttributeService genericAttributeService,
@@ -64,7 +73,10 @@ namespace Nop.Web.Controllers
             IWorkContext workContext,
             IWorkflowMessageService workflowMessageService,
             LocalizationSettings localizationSettings,
-            VendorSettings vendorSettings)
+            VendorSettings vendorSettings,
+            IPermissionService permissionService,
+            ICustomerActivityService customerActivityService,
+            ILocalizedEntityService localizedEntityService)
         {
             this._captchaSettings = captchaSettings;
             this._customerService = customerService;
@@ -81,6 +93,10 @@ namespace Nop.Web.Controllers
             this._workflowMessageService = workflowMessageService;
             this._localizationSettings = localizationSettings;
             this._vendorSettings = vendorSettings;
+            this._permissionService = permissionService;
+            this._addressService = addressService;
+            this._customerActivityService = customerActivityService;
+            this._localizedEntityService = localizedEntityService;
         }
 
         #endregion
@@ -446,5 +462,157 @@ namespace Nop.Web.Controllers
         }
 
         #endregion
+
+        #region VendorForm
+        public virtual IActionResult Edit(string email)
+        {
+            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageVendors))
+            //    return AccessDeniedView();
+
+            var vendor = _vendorService.GetVendorByEmail(email);
+            if (vendor == null || vendor.Deleted)
+                return RedirectToAction("List");
+
+            //prepare model
+            var model = _vendorModelFactory.PrepareVendorModel(null, vendor);
+
+            return View(model);
+        }
+
+        [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+        public virtual IActionResult Edit(VendorEditModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageVendors))
+                return AccessDeniedView();
+
+            //try to get a vendor with the specified id
+            var vendor = _vendorService.GetVendorById(model.Id);
+            if (vendor == null || vendor.Deleted)
+                return RedirectToAction("List");
+
+            //parse vendor attributes
+            var vendorAttributesXml = ParseVendorAttributes(model.Form);
+            _vendorAttributeParser.GetAttributeWarnings(vendorAttributesXml).ToList()
+                .ForEach(warning => ModelState.AddModelError(string.Empty, warning));
+
+            if (ModelState.IsValid)
+            {
+                var prevPictureId = vendor.PictureId;
+                vendor = model.ToEntity(vendor);
+                _vendorService.UpdateVendor(vendor);
+
+                //vendor attributes
+                _genericAttributeService.SaveAttribute(vendor, NopVendorDefaults.VendorAttributes, vendorAttributesXml);
+
+                //activity log
+                _customerActivityService.InsertActivity("EditVendor",
+                    string.Format(_localizationService.GetResource("ActivityLog.EditVendor"), vendor.Id), vendor);
+
+                //search engine name
+                if (string.IsNullOrEmpty(vendor.ShopName))
+                {
+                    model.SeName = _urlRecordService.ValidateSeName(vendor, model.SeName, vendor.Name, true);
+                }
+                else
+                {
+                    model.SeName = _urlRecordService.ValidateSeName(vendor, model.ShopName, vendor.ShopName, true);
+                }
+                _urlRecordService.SaveSlug(vendor, model.SeName, 0);
+
+                //address
+                var address = _addressService.GetAddressById(vendor.AddressId);
+                if (address == null)
+                {
+                    address = model.Address.ToEntity<Address>();
+                    address.CreatedOnUtc = DateTime.UtcNow;
+
+                    //some validation
+                    if (address.CountryId == 0)
+                        address.CountryId = null;
+                    if (address.StateProvinceId == 0)
+                        address.StateProvinceId = null;
+
+                    _addressService.InsertAddress(address);
+                    vendor.AddressId = address.Id;
+                    _vendorService.UpdateVendor(vendor);
+                }
+                else
+                {
+                    address = model.Address.ToEntity(address);
+
+                    //some validation
+                    if (address.CountryId == 0)
+                        address.CountryId = null;
+                    if (address.StateProvinceId == 0)
+                        address.StateProvinceId = null;
+
+                    _addressService.UpdateAddress(address);
+                }
+
+                //locales
+                UpdateLocales(vendor, model);
+
+                //delete an old picture (if deleted or updated)
+                if (prevPictureId > 0 && prevPictureId != vendor.PictureId)
+                {
+                    var prevPicture = _pictureService.GetPictureById(prevPictureId);
+                    if (prevPicture != null)
+                        _pictureService.DeletePicture(prevPicture);
+                }
+                //update picture seo file name
+                UpdatePictureSeoNames(vendor);
+
+                SuccessNotification(_localizationService.GetResource("Admin.Vendors.Updated"));
+
+                //selected tab
+                SaveSelectedTabName();
+
+                return RedirectToAction("Edit", new { id = vendor.Id });
+            }
+
+            //prepare model
+            model = _vendorModelFactory.PrepareVendorModel(model, vendor, true);
+
+            //if we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        protected virtual void UpdateLocales(Vendor vendor, VendorEditModel model)
+        {
+            foreach (var localized in model.Locales)
+            {
+                _localizedEntityService.SaveLocalizedValue(vendor,
+                    x => x.Name,
+                    localized.Name,
+                    localized.LanguageId);
+
+                _localizedEntityService.SaveLocalizedValue(vendor,
+                    x => x.Description,
+                    localized.Description,
+                    localized.LanguageId);
+
+                _localizedEntityService.SaveLocalizedValue(vendor,
+                    x => x.MetaKeywords,
+                    localized.MetaKeywords,
+                    localized.LanguageId);
+
+                _localizedEntityService.SaveLocalizedValue(vendor,
+                    x => x.MetaDescription,
+                    localized.MetaDescription,
+                    localized.LanguageId);
+
+                _localizedEntityService.SaveLocalizedValue(vendor,
+                    x => x.MetaTitle,
+                    localized.MetaTitle,
+                    localized.LanguageId);
+
+                //search engine name
+                var seName = _urlRecordService.ValidateSeName(vendor, localized.SeName, localized.Name, false);
+                _urlRecordService.SaveSlug(vendor, seName, localized.LanguageId);
+            }
+        }
+
+        #endregion
+
     }
 }
