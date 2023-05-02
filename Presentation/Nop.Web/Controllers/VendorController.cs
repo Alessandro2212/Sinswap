@@ -498,7 +498,20 @@ namespace Nop.Web.Controllers
             if (ModelState.IsValid)
             {
                 var prevPictureId = vendor.PictureId;
-                vendor = model.ToEntity(vendor);
+                //vendor = model.ToEntity(vendor);
+
+                vendor.Active = model.Active;
+                vendor.BirthDate = model.BirthDate;
+                vendor.City = model.City;
+                vendor.CountryId = model.CountryId;
+                vendor.Description = model.Description;
+                vendor.Email = model.Email;
+                vendor.FollowersNumber = model.FollowersNumber;
+                vendor.Id = model.Id;
+                vendor.Name = model.Name;
+                vendor.PictureId = model.PictureId;
+                vendor.ShopName = model.ShopName;
+
                 _vendorService.UpdateVendor(vendor);
 
                 //vendor attributes
