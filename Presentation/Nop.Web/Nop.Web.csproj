@@ -41,6 +41,27 @@
     <Content Remove="compilerconfig.json" />
     <None Remove="Themes\Sinswap\Content\css\styles.scss" />
     <None Remove="Themes\Sinswap\Content\js\affix.js" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader-gallery.css" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader-gallery.min.css" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader-gallery.min.css.map" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader-new.css" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader-new.min.css" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader-new.min.css.map" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader.core.js" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader.core.js.map" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader.core.min.js" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader.core.min.js.map" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader.css" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader.js" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader.js.map" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader.min.css" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader.min.css.map" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader.min.js" />
+    <None Remove="Themes\Sinswap\Content\js\fine-uploader.min.js.map" />
+    <None Remove="Themes\Sinswap\Content\js\jquery.fine-uploader.js" />
+    <None Remove="Themes\Sinswap\Content\js\jquery.fine-uploader.js.map" />
+    <None Remove="Themes\Sinswap\Content\js\jquery.fine-uploader.min.js" />
+    <None Remove="Themes\Sinswap\Content\js\jquery.fine-uploader.min.js.map" />
     <None Remove="Themes\Sinswap\Content\js\public.accordion.js" />
     <None Remove="Themes\Sinswap\Content\js\public.ajaxcart.js" />
     <None Remove="Themes\Sinswap\Content\js\public.common.js" />
@@ -82,6 +103,69 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Themes\Sinswap\Content\css\fine-uploader-gallery.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\css\fine-uploader-gallery.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\css\fine-uploader-gallery.min.css.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\css\fine-uploader-new.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\css\fine-uploader-new.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\css\fine-uploader-new.min.css.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\fine-uploader.core.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\fine-uploader.core.js.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\fine-uploader.core.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\fine-uploader.core.min.js.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\css\fine-uploader.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\fine-uploader.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\fine-uploader.js.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\css\fine-uploader.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\css\fine-uploader.min.css.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\fine-uploader.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\fine-uploader.min.js.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\jquery.fine-uploader.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\jquery.fine-uploader.js.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\jquery.fine-uploader.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\jquery.fine-uploader.min.js.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Themes\Sinswap\Content\js\public.accordion.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

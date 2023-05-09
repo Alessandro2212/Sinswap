@@ -7,8 +7,8 @@
 
 @{
     //register CSS and JS
-    Html.AddCssFileParts("~/lib/fineuploader/fine-uploader.min.css");
-    Html.AddScriptParts("~/lib/fineuploader/jquery.fine-uploader.min.js");
+    //Html.AddCssFileParts("~/lib/fineuploader/fine-uploader.min.css");
+    //Html.AddScriptParts("~/lib/fineuploader/jquery.fine-uploader.min.js");
 
     //other variables
     var random = CommonHelper.GenerateRandomInteger();
@@ -39,11 +39,11 @@
         <div class="remove-image-button pull-left margin-t-5">
             @if (picture != null)
             {
-                <span id="@(clientId + "remove")" class="btn bg-red">@T("Admin.Picture.RemovePicture")</span>
+                <span id="@(clientId + "remove")" class="btn bg-red">Remove</span>
             }
             else
             {
-                <span id="@(clientId + "remove")" class="btn bg-red" style="display: none;">@T("Admin.Picture.RemovePicture")</span>
+                <span id="@(clientId + "remove")" class="btn bg-red" style="display: none;">Remove</span>
             }
         </div>
     </div>
