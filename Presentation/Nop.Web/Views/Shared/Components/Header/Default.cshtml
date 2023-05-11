@@ -15,9 +15,9 @@
         @if (this.User.Identity.IsAuthenticated)
         {
             <a href="@Url.RouteUrl("Logout")" class="btn btn-primary">Log out</a>
-@*            <a href="@Url.RouteUrl("Edit", new { username = this.User.Identity.Name })" class="btn btn-primary">Edit profile</a>
-        *@            <a href="@Url.RouteUrl("Edit", new { username = "charlottethewet@sinswap.com" })" class="btn btn-primary">Edit profile</a>
-            @await Component.InvokeAsync("FlyoutShoppingCart")
+            <a href="@Url.RouteUrl("Edit", new { username = this.User.Identity.Name })" class="btn btn-primary">Edit profile</a>
+@*            <a href="@Url.RouteUrl("Edit", new { username = "charlottethewet@sinswap.com" })" class="btn btn-primary">Edit profile</a>
+*@            @await Component.InvokeAsync("FlyoutShoppingCart")
         }
         else
         {

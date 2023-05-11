@@ -2125,9 +2125,9 @@ namespace Nop.Web.Controllers
             //try to get a customer with the specified id
             var customer = _customerService.GetCustomerByUsername(username);
             if (customer == null || customer.Deleted)
-                return RedirectToAction("Edit", "Vendor", new { email = username });
+                return RedirectToRoute("HomePage"); //decide where
 
-            if (customer.IsVendor())
+            if (customer.VendorId > 0)
             {
                 return RedirectToAction("Edit", "Vendor", new { email = username });
             }
@@ -2164,7 +2164,7 @@ namespace Nop.Web.Controllers
             //try to get a customer with the specified id
             var customer = _customerService.GetCustomerById(model.Id);
             if (customer == null || customer.Deleted)
-                return RedirectToAction("List");
+                return RedirectToRoute("HomePage"); //decide where
 
             //validate customer roles
             var allCustomerRoles = _customerService.GetAllCustomerRoles(true);
