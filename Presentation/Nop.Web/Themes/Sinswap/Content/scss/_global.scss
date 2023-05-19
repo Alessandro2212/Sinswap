@@ -235,37 +235,35 @@ a.more {
     box-shadow: none;
     transition: box-shadow 0.15s;
 
+    .sellers {
+        font-size: 16px;
+        font-weight: 600;
+        position: absolute;
+        bottom: 10px;
+        left: 15px;
+
+        span {
+            font-weight: 400;
+        }
+    }
+
     .category {
         font-size: 16px;
         font-weight: 600;
         position: absolute;
         bottom: 10px;
-        left: 0px;
-        width: 100%;
-        text-align: center;
+        right: 15px;
+
+        span {
+            font-weight: 400;
+        }
 
         a {
             color: $white;
 
-            span {
-                font-weight: 500;
-                font-size: 14px;
-                top: -7px;
-                opacity: 0.75;
-                position: relative;
-                display: inline-block
-            }
-
             &:hover {
                 text-decoration: none;
             }
-        }
-
-        span {
-            color: $white;
-            text-decoration: none;
-            opacity: 1;
-            transition: opacity 0.15s;
         }
     }
 
