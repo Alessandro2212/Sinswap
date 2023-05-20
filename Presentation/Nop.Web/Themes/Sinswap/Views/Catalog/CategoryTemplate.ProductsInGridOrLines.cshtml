@@ -56,7 +56,7 @@
     </div>
 </header>
 
-<div class="page category-page @(Model.Products.Count == 0 && Model.SubCategories.Count == 0 ? "empty" : "")">
+<div class="page category-page @(Model.Products.Count == 0  && Model.SubCategories.Count == 0 ? "empty" : "")">
     <div class="page-body">
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsTop, additionalData = Model })
         @*description*@
@@ -120,6 +120,12 @@
         {
             @*static, needs to go to partial*@
             <div class="container firstContainer sellersContainer">
+                <div class="row">
+                    <div class="col-12 breadcrumbContainer">
+                        <a href="/" class="home">Home</a> <div class="divider">/</div> <a href="#">Clothing</a> <div class="divider">/</div> @Model.Name
+                    </div>
+                </div>
+
                 <div class="row">
                     @await Component.InvokeAsync("CategoryVendor", new { categoryId = Model.Id, categoryName = Model.Name, modelAlreadyReady = Model.MiniVendorsForCategory })
                 </div>

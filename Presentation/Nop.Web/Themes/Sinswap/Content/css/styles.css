@@ -1679,6 +1679,29 @@ nav .cartFoldout {
   margin-left: 5px;
 }
 
+.category-page .breadcrumbContainer {
+  padding: 45px 15px;
+  font-weight: 600;
+}
+.category-page .breadcrumbContainer a {
+  font-weight: 500;
+  text-decoration: underline;
+  color: #171717;
+}
+.category-page .breadcrumbContainer a:hover {
+  text-decoration: none;
+}
+.category-page .breadcrumbContainer a.home {
+  text-decoration: none;
+  color: #999999;
+}
+.category-page .breadcrumbContainer a.home:hover {
+  color: #171717;
+}
+.category-page .breadcrumbContainer .divider {
+  color: #999999;
+  display: inline;
+}
 .category-page .popularCategoriesContainer {
   position: relative;
   background-color: #fff;
