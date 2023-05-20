@@ -1689,20 +1689,35 @@ nav .cartFoldout {
   margin-bottom: 60px;
   padding: 45px 250px 0 250px;
 }
-.category-page .topSellersContainer .no-data {
-  text-align: center;
-  padding: 100px 0 345px 0;
-  font-size: 22px;
-  color: #c4c4c4;
+.category-page.empty .topSellersContainer {
+  padding: 45px 30px 0 30px;
 }
-.category-page .topSellersContainer .no-data .fa-sad-tear {
-  font-size: 60px;
-  margin-bottom: 20px;
+.category-page.empty .topSellersContainer .no-data {
+  text-align: center;
+  padding: 45px 30px;
+  font-size: 56px;
+  font-weight: 500;
+  line-height: 62px;
+}
+.category-page.empty .topSellersContainer .no-data span {
+  font-size: 32px;
+  line-height: 34px;
 }
 
 @media (max-width: 768px) {
   .popularCategoriesContainer h2 {
     font-size: 18px;
+  }
+}
+@media (max-width: 576px) {
+  .category-page.empty .topSellersContainer .no-data {
+    padding: 45px;
+    font-size: 48px;
+    line-height: 50px;
+  }
+  .category-page.empty .topSellersContainer .no-data span {
+    font-size: 28px;
+    line-height: 30px;
   }
 }
 .popularMembersContainer {

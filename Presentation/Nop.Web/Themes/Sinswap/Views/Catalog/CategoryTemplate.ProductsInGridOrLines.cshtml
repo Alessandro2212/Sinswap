@@ -56,7 +56,7 @@
     </div>
 </header>
 
-<div class="page category-page">
+<div class="page category-page @(Model.Products.Count == 0 && Model.SubCategories.Count == 0 ? "empty" : "")">
     <div class="page-body">
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsTop, additionalData = Model })
         @*description*@
@@ -93,18 +93,6 @@
 
         @if (Model.Products.Count == 0 && Model.SubCategories.Count == 0)
         {
-           @* <div class="container firstContainer topSellersContainer">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="no-data">
-                            <i class="fas fa-sad-tear"></i><br />
-                            What?! How come nobody is selling @Model.Name yet?<br />
-                            We'll let our sellers know you're interested, check back soon!
-                        </div>
-                    </div>
-                </div>
-            </div>*@
-
             @await Component.InvokeAsync("VendorCategoryNotFound", new { category =  Model.Name })
         }
 

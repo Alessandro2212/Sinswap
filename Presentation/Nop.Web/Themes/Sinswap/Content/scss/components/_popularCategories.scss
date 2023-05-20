@@ -26,16 +26,23 @@
     .topSellersContainer {
         margin-bottom: 60px;
         padding: 45px 250px 0 250px;
+    }
 
-        .no-data {
-            text-align: center;
-            padding: 100px 0 345px 0;
-            font-size: 22px;
-            color: $grey9;
+    &.empty {
+        .topSellersContainer {
+            padding: 45px 30px 0 30px;
 
-            .fa-sad-tear {
-                font-size: 60px;
-                margin-bottom: 20px;
+            .no-data {
+                text-align: center;
+                padding: 45px 30px;
+                font-size: 56px;
+                font-weight: 500;
+                line-height: 62px;
+
+                span {
+                    font-size: 32px;
+                    line-height: 34px;
+                }
             }
         }
     }
@@ -60,6 +67,22 @@
 
 // Small devices (landscape phones, 576px and up)
 @media (max-width: 576px) {
+    .category-page {
+        &.empty {
+            .topSellersContainer {
+                .no-data {
+                    padding: 45px;
+                    font-size: 48px;
+                    line-height: 50px;
+
+                    span {
+                        font-size: 28px;
+                        line-height: 30px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 // Extra small devices (portrait phones, less than 576px)
