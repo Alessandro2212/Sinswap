@@ -325,6 +325,17 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+body.modalActive:before {
+  content: "";
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1;
+}
+
 :focus {
   outline: none;
 }
@@ -850,11 +861,11 @@ div.btn-container .btn-color-mode-switch input[type=checkbox]:checked ~ .alert {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
 }
 .btn.btn-action {
-  background-color: #0ebc39;
+  background-color: #0ebc39 !important;
   color: #fff;
 }
 .btn.btn-light {
-  border: 1px solid #171717;
+  border: 1px solid #171717 !important;
   background-color: #fff;
   color: #171717;
   font-weight: 500;
@@ -1059,7 +1070,7 @@ header.blogDetail {
   left: 0px;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 .searchModal .searchContainer {
   text-align: center;
@@ -1134,6 +1145,94 @@ nav.service {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+nav.service .cartFoldout {
+  position: fixed;
+  width: 100%;
+  background-color: #f5f5f5;
+  padding-bottom: 30px;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  color: #171717;
+}
+nav.service .cartFoldout .serviceMenu nav.service .icon {
+  color: #171717;
+}
+nav.service .cartFoldout .cartHeader {
+  font-size: 28px;
+  font-weight: 500;
+  text-align: center;
+  padding: 0px 20px 20px 20px;
+  border-bottom: 2px solid #dedede;
+}
+nav.service .cartFoldout .items {
+  color: #171717;
+  padding-top: 10px;
+}
+nav.service .cartFoldout .items .item {
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 2px solid #ededed;
+  width: 50%;
+  float: left;
+}
+nav.service .cartFoldout .items .item.first {
+  border-top: none;
+  margin-top: 0px;
+}
+nav.service .cartFoldout .items .item .picture {
+  float: left;
+  margin-right: 20px;
+}
+nav.service .cartFoldout .items .item .product {
+  padding: 3px;
+}
+nav.service .cartFoldout .items .item .product a {
+  font-size: 18px;
+  font-weight: 500;
+  color: #171717;
+}
+nav.service .cartFoldout .items .item .product .name .seller {
+  font-size: 12px;
+}
+nav.service .cartFoldout .items .item .product .name .seller a {
+  font-size: 12px;
+  font-weight: 700;
+}
+nav.service .cartFoldout .items .item .product .price {
+  font-weight: 500;
+  font-size: 14px;
+  float: right;
+}
+nav.service .cartFoldout .items .item.even {
+  padding-right: 50px;
+}
+nav.service .cartFoldout .items .item.odd {
+  padding-left: 50px;
+}
+nav.service .cartFoldout .totals {
+  clear: both;
+  padding-top: 20px;
+  text-align: right;
+}
+nav.service .cartFoldout .buttons {
+  padding-top: 20px;
+}
+nav.service .cartFoldout .buttons .close-button {
+  float: left;
+  margin: 0px;
+}
+nav.service .cartFoldout .buttons .checkout-button {
+  float: right;
+  margin: 0px;
+}
+nav.service .cartFoldout .buttons .cart-button {
+  float: right;
+  margin: 0px;
+}
+nav.service .cartFoldout.active {
+  display: block;
 }
 nav a.menuLink {
   margin: 0px 7px;
@@ -1232,6 +1331,9 @@ nav .cartFoldout {
   }
   header .row nav.service {
     padding-top: 0px;
+  }
+  header .row nav.service .cartFoldout .items .item .product a {
+    font-size: 14px;
   }
   header .row .serviceMenu {
     position: absolute;
@@ -3654,6 +3756,7 @@ header.blogDetail .page-title .date {
   text-align: center;
   padding: 60px;
   font-weight: 600;
+  margin-bottom: 200px;
 }
 
 @media (max-width: 1200px) {

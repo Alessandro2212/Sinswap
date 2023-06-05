@@ -195,12 +195,12 @@ div.btn-container {
     }
 
     &.btn-action {
-        background-color: $signin;
+        background-color: $signin!important;
         color: $white;
     }
 
     &.btn-light {
-        border: 1px solid $black;
+        border: 1px solid $black!important;
         background-color: $white;
         color: $black;
         font-weight: 500;

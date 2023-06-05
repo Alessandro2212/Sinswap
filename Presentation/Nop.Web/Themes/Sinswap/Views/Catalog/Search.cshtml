@@ -123,11 +123,17 @@
                                     @*<div class="categoryCard @{if (!string.IsNullOrEmpty(@element.ParentCategoryName)) {@element.ParentCategoryName.ToLower()}}" style="background-image: url('@element.PictureModel?.ImageUrl')">*@
                                     <div class="categoryCard" style="background-image: url('@element.PictureModel?.ImageUrl')">
                                         <div class="sellers"><i class="fa fa-user"></i> <span>2.032</span></div>
-                                        <div class="category"><a href="@Url.RouteUrl("Category", new { SeName = element.SeName })" title="@element.PictureModel.Title">@element.Name <span>@element.NumberOfVendorsForSubCategory</span></a></div>
+                                        <div class="category"><a href="@Url.RouteUrl("Category", new { SeName = element.SeName })" title="@element.PictureModel.Title">@element.Name <span>123@*@element.NumberOfVendorsForSubCategory*@</span></a></div>
                                     </div>
                                 </div>
 
                             }
+                        </div>
+                    } else
+                    {
+                        <div class="no-result">
+                            Sorry, but we couldn't find any... '@Model.q'.<br />
+                            Try again using another keyword
                         </div>
                     }
 

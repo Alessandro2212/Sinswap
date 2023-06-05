@@ -1,4 +1,36 @@
+$(window).on("scroll", function () {
+    $('.cartFoldout').slideUp(100).removeClass('active');
+    $('body').removeClass('modalActive');
+});
+
 $(function () {
+
+    // header init
+    if ($('.cartFoldout').length && !$('.cartContainer').length) {
+        $('.icon.cart').click(function (e) {
+            e.preventDefault();
+            $('body').toggleClass('modalActive');
+            $('.cartFoldout').slideToggle('fast').toggleClass('active');
+
+            //    $("body.modalActive").click(function (e) {
+            //        console.log('body clicked:' + $(e.target).attr('class'));
+            //        if (!$(e.target).hasClass("fa-shopping-cart")) {
+            //            $('.cartFoldout').slideUp(100).removeClass('active');
+            //            $('body').removeClass('modalActive');
+            //        }
+            //    });
+            //    $(".cartFoldout, .btn.icon.cart, .fa.fa-shopping-cart").click(function (e) {
+            //        console.log('cart clicked:' + $(e.target).attr('class'));
+            //        e.stopPropagation();
+            //    });
+        })
+
+        $('.close-button').click(function (e) {
+            e.preventDefault();
+            $('.cartFoldout').slideUp(100).removeClass('active');
+            $('body').removeClass('modalActive');
+        })
+    }
 
 
     // Search init

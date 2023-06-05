@@ -98,7 +98,7 @@ header {
         left: 0px;
         width: 100%;
         height: 100%;
-        background-color: rgba(0,0,0,0.95); 
+        background-color: rgba(0,0,0,0.9); 
     }
 
     .searchContainer {
@@ -186,6 +186,118 @@ nav {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+
+        .cartFoldout {
+            position: fixed;
+            width: 100%;
+            background-color: $grey2;
+            padding-bottom: 30px;
+            top: 0px;
+            left: 0px;
+            z-index: 1;
+            color: $black;
+
+            .serviceMenu {
+                nav.service .icon {
+                    color: $black;
+                }
+            }
+
+            .cartHeader {
+                font-size: 28px;
+                font-weight: 500;
+                text-align: center;
+                padding: 0px 20px 20px 20px;
+                border-bottom: 2px solid $grey5;
+            }
+
+            .items {
+                color: $black;
+                padding-top: 10px;
+
+                .item {
+                    padding-top: 20px;
+                    margin-top: 20px;
+                    border-top: 2px solid $grey3;
+                    width: 50%;
+                    float: left;
+
+                    &.first {
+                        border-top: none;
+                        margin-top: 0px;
+                    }
+
+                    .picture {
+                        float: left;
+                        margin-right: 20px;
+                    }
+
+                    .product {
+                        padding: 3px;
+
+                        a {
+                            font-size: 18px;
+                            font-weight: 500;
+                            color: $black;
+                        }
+
+                        .name {
+                            .seller {
+                                font-size: 12px;
+
+                                a {
+                                    font-size: 12px;
+                                    font-weight: 700;
+                                }
+                            }
+                        }
+
+                        .price {
+                            font-weight: 500;
+                            font-size: 14px;
+                            float: right;
+                        }
+                    }
+
+                    &.even {
+                        padding-right: 50px;
+                    }
+
+                    &.odd {
+                        padding-left: 50px;
+                    }
+                }
+            }
+
+            .totals {
+                clear: both;
+                padding-top: 20px;
+                text-align: right;
+            }
+
+            .buttons {
+                padding-top: 20px;
+
+                .close-button {
+                    float: left;
+                    margin: 0px;
+                }
+
+                .checkout-button {
+                    float: right;
+                    margin: 0px;
+                }
+
+                .cart-button {
+                    float: right;
+                    margin: 0px;
+                }
+            }
+
+            &.active {
+                display: block;
+            }
+        }
     }
 
     a.menuLink {
@@ -325,6 +437,18 @@ nav {
 
                 &.service {
                     padding-top: 0px;
+
+                    .cartFoldout {
+                        .items {
+                            .item {
+                                .product {
+                                    a {
+                                        font-size: 14px;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
