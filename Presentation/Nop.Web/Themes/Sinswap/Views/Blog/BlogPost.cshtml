@@ -72,127 +72,238 @@
     <div class="page-body blogPostContainer">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-8 blogPostBody">
-                    @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.BlogPostPageBeforeBody, additionalData = Model })
+                @*FIXME: Needs to check for category or tags*@
+                @if ("news" == "news")
+                {
+                    <div class="col-12 blogPostBody">
+                        @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.BlogPostPageBeforeBody, additionalData = Model })
 
-                    @if (!string.IsNullOrEmpty(Model.PictureUrl)) {
-                        <img src="@Model.PictureUrl" class="blogImg img-fluid" />
-                        <div class="photoCredits">Photo: @Model.PictureCredit</div>
-                    }
-        
-                    <div class="socialShareContainer" data-spy="affix">
-                        <a href="#" title="Share on Facebook"><i class="lab la-facebook-square"></i></a>
-                        <a href="#" title="Share on Twitter"><i class="lab la-twitter"></i></a>
-                        <a href="#" title="Share on LinkedIn"><i class="lab la-linkedin"></i></a>
-                        <a href="#" title="Share on Snapchat"><i class="lab la-snapchat"></i></a>
-                        <a href="#" title="Share on WhatsApp"><i class="lab la-whatsapp"></i></a>
-                        <a href="#" title="Share on Telegram"><i class="lab la-telegram"></i></a>
-                        <a href="#" title="Share with Email"><i class="lar la-envelope"></i></a>
-                    </div>
+                        @if (!string.IsNullOrEmpty(Model.PictureUrl))
+                        {
+                            <img src="@Model.PictureUrl" class="blogImg img-fluid" />
+                            <div class="photoCredits">Photo: @Model.PictureCredit</div>
+                        }
 
-                    <div class="post-body">
-                        @Html.Raw(Model.Body)
-                        <!-- Start: Dummy article -->
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit 
-                            viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae 
-                            feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem, 
-                            sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos 
-                            himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis 
-                            consequat. Donec sed mollis nunc, vitae eleifend odio.
-                        </p>
+                        <div class="socialShareContainer" data-spy="affix">
+                            <a href="#" title="Share on Facebook"><i class="lab la-facebook-square"></i></a>
+                            <a href="#" title="Share on Twitter"><i class="lab la-twitter"></i></a>
+                            <a href="#" title="Share on LinkedIn"><i class="lab la-linkedin"></i></a>
+                            <a href="#" title="Share on Snapchat"><i class="lab la-snapchat"></i></a>
+                            <a href="#" title="Share on WhatsApp"><i class="lab la-whatsapp"></i></a>
+                            <a href="#" title="Share on Telegram"><i class="lab la-telegram"></i></a>
+                            <a href="#" title="Share with Email"><i class="lar la-envelope"></i></a>
+                        </div>
 
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit 
-                            viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae 
-                            feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem, 
-                            sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos 
-                            himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis 
-                            consequat. Donec sed mollis nunc, vitae eleifend odio.
-                        </p>
+                        <div class="post-body">
+                            @Html.Raw(Model.Body)
+                            <!-- Start: Dummy article -->
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit
+                                viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae
+                                feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem,
+                                sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis
+                                consequat. Donec sed mollis nunc, vitae eleifend odio.
+                            </p>
 
-                        <img src="https://dummyimage.com/1000x400/ddd/aaa" class="blogImg img-fluid" />
-                        <div class="photoCredits">Photo: @Model.PictureCredit</div>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit
+                                viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae
+                                feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem,
+                                sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis
+                                consequat. Donec sed mollis nunc, vitae eleifend odio.
+                            </p>
 
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit 
-                            viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae 
-                            feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem, 
-                            sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos 
-                            himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis 
-                            consequat. Donec sed mollis nunc, vitae eleifend odio.
-                        </p>
+                            <img src="https://dummyimage.com/1000x400/ddd/aaa" class="blogImg img-fluid" />
+                            <div class="photoCredits">Photo: @Model.PictureCredit</div>
 
-                        <div class="row p-0">
-                            <div class="col-12 col-sm-6">
-                                <p>
-                                    Nam sed odio pellentesque, finibus orci eu, fringilla mauris. Phasellus magna sapien, malesuada id 
-                                    consectetur quis, vulputate vel dui. Nulla sed velit sed neque congue varius. Quisque interdum ante 
-                                    vel rutrum viverra. Donec eget sapien arcu. Etiam ipsum eros, dapibus ut odio non, porttitor ultrices 
-                                    sem. Suspendisse ut ante elit. Vivamus ullamcorper cursus tortor, accumsan rhoncus neque volutpat ac.
-                                    Ut nec pellentesque purus. Integer vel nulla sed risus varius consectetur. Mauris pulvinar metus in 
-                                    turpis vehicula tristique.
-                                </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit
+                                viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae
+                                feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem,
+                                sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis
+                                consequat. Donec sed mollis nunc, vitae eleifend odio.
+                            </p>
+
+                            <div class="row p-0">
+                                <div class="col-12 col-sm-6">
+                                    <p>
+                                        Nam sed odio pellentesque, finibus orci eu, fringilla mauris. Phasellus magna sapien, malesuada id
+                                        consectetur quis, vulputate vel dui. Nulla sed velit sed neque congue varius. Quisque interdum ante
+                                        vel rutrum viverra. Donec eget sapien arcu. Etiam ipsum eros, dapibus ut odio non, porttitor ultrices
+                                        sem. Suspendisse ut ante elit. Vivamus ullamcorper cursus tortor, accumsan rhoncus neque volutpat ac.
+                                        Ut nec pellentesque purus. Integer vel nulla sed risus varius consectetur. Mauris pulvinar metus in
+                                        turpis vehicula tristique.
+                                    </p>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <blockquote>
+                                        Proin egestas, erat quis viverra lacinia, massa magna aliquet purus. Integer vel nulla sed risus varius
+                                        consectetur.
+                                    </blockquote>
+                                </div>
                             </div>
-                            <div class="col-12 col-sm-6">
-                                <blockquote>
-                                    Proin egestas, erat quis viverra lacinia, massa magna aliquet purus. Integer vel nulla sed risus varius 
-                                    consectetur.
-                                </blockquote>
+                            <!-- End: Dummy article -->
+                        </div>
+
+                        <div class="advertisement">
+                            <div class="label">advertisement</div>
+                            <div class="bannerContainer">
+                                <img src="https://dummyimage.com/1000x900/ddd/aaa" class="img-fluid" />
                             </div>
                         </div>
-                        <!-- End: Dummy article -->
-                    </div>
 
-                    <div class="advertisement">
-                        <div class="label">advertisement</div>
-                        <div class="bannerContainer">
-                            <img src="https://dummyimage.com/1000x900/ddd/aaa" class="img-fluid" />
-                        </div>
-                    </div>
-                </div>
+                        <div class="blogPostSidebar mt-5">
+                            <h4>Other articles</h4>
 
-                <div class="col-12 col-md-4 blogPostSidebar">
-                    <h4>Other articles</h4>
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 p-0 otherArticleCard seller">
-                                <img src="https://dummyimage.com/550x360/eee/aaa" class="img-fluid" />
-                                <h5>Wow! 5 orders of Asa Akara's 5k pussy juice already!</h5>
-                                <div class="category">
-                                    News
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-5 p-0 otherArticleCard seller">
+                                        <img src="https://dummyimage.com/550x360/eee/aaa" class="img-fluid" />
+                                        <h5>Wow! 5 orders of Asa Akara's 5k pussy juice already!</h5>
+                                        <div class="category">
+                                            News
+                                        </div>
+                                    </div>
+                                    <div class="col-2"></div>
+                                    <div class="col-5 p-0 otherArticleCard seller">
+                                        <img src="https://dummyimage.com/550x360/eee/aaa" class="img-fluid" />
+                                        <h5>Wow! 5 orders of Asa Akara's 5k pussy juice already!</h5>
+                                        <div class="category">
+                                            News
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12 p-0 otherArticleCard seller">
-                                <img src="https://dummyimage.com/550x360/eee/aaa" class="img-fluid" />
-                                <h5>Wow! 5 orders of Asa Akara's 5k pussy juice already!</h5>
-                                <div class="category">
-                                    News
+
+                    </div>
+                } else
+                {
+                    <div class="col-12 col-md-8 blogPostBody">
+                        @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.BlogPostPageBeforeBody, additionalData = Model })
+
+                        @if (!string.IsNullOrEmpty(Model.PictureUrl))
+                        {
+                            <img src="@Model.PictureUrl" class="blogImg img-fluid" />
+                            <div class="photoCredits">Photo: @Model.PictureCredit</div>
+                        }
+
+                        <div class="socialShareContainer" data-spy="affix">
+                            <a href="#" title="Share on Facebook"><i class="lab la-facebook-square"></i></a>
+                            <a href="#" title="Share on Twitter"><i class="lab la-twitter"></i></a>
+                            <a href="#" title="Share on LinkedIn"><i class="lab la-linkedin"></i></a>
+                            <a href="#" title="Share on Snapchat"><i class="lab la-snapchat"></i></a>
+                            <a href="#" title="Share on WhatsApp"><i class="lab la-whatsapp"></i></a>
+                            <a href="#" title="Share on Telegram"><i class="lab la-telegram"></i></a>
+                            <a href="#" title="Share with Email"><i class="lar la-envelope"></i></a>
+                        </div>
+
+                        <div class="post-body">
+                            @Html.Raw(Model.Body)
+                            <!-- Start: Dummy article -->
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit
+                                viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae
+                                feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem,
+                                sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis
+                                consequat. Donec sed mollis nunc, vitae eleifend odio.
+                            </p>
+
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit
+                                viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae
+                                feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem,
+                                sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis
+                                consequat. Donec sed mollis nunc, vitae eleifend odio.
+                            </p>
+
+                            <img src="https://dummyimage.com/1000x400/ddd/aaa" class="blogImg img-fluid" />
+                            <div class="photoCredits">Photo: @Model.PictureCredit</div>
+
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor est et mi interdum, nec ultricies velit
+                                viverra. Nulla ac nisi congue, fermentum turpis sit amet, sodales ante. Nulla nisl urna, pulvinar vitae
+                                feugiat et, dignissim a nulla. Ut eleifend vehicula mauris id faucibus. Vestibulum lobortis aliquam sem,
+                                sed viverra nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                himenaeos. Maecenas feugiat vehicula arcu, quis tincidunt magna iaculis id. Donec auctor metus in facilisis
+                                consequat. Donec sed mollis nunc, vitae eleifend odio.
+                            </p>
+
+                            <div class="row p-0">
+                                <div class="col-12 col-sm-6">
+                                    <p>
+                                        Nam sed odio pellentesque, finibus orci eu, fringilla mauris. Phasellus magna sapien, malesuada id
+                                        consectetur quis, vulputate vel dui. Nulla sed velit sed neque congue varius. Quisque interdum ante
+                                        vel rutrum viverra. Donec eget sapien arcu. Etiam ipsum eros, dapibus ut odio non, porttitor ultrices
+                                        sem. Suspendisse ut ante elit. Vivamus ullamcorper cursus tortor, accumsan rhoncus neque volutpat ac.
+                                        Ut nec pellentesque purus. Integer vel nulla sed risus varius consectetur. Mauris pulvinar metus in
+                                        turpis vehicula tristique.
+                                    </p>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <blockquote>
+                                        Proin egestas, erat quis viverra lacinia, massa magna aliquet purus. Integer vel nulla sed risus varius
+                                        consectetur.
+                                    </blockquote>
                                 </div>
                             </div>
+                            <!-- End: Dummy article -->
                         </div>
-                        <div class="row">
-                            <div class="col-12 p-0 otherArticleCard buyer">
-                                <img src="https://dummyimage.com/550x360/eee/aaa" class="img-fluid" />
-                                <h5>Wow! 5 orders of Asa Akara's 5k pussy juice already!</h5>
-                                <div class="category">
-                                    News
-                                </div>
+
+                        <div class="advertisement">
+                            <div class="label">advertisement</div>
+                            <div class="bannerContainer">
+                                <img src="https://dummyimage.com/1000x900/ddd/aaa" class="img-fluid" />
                             </div>
                         </div>
                     </div>
 
-                    <div class="advertisement" @*data-spy="affix"*@>
-                        <div class="label">advertisement</div>
-                        <div class="bannerContainer">
-                            <img src="https://dummyimage.com/550x900/ddd/aaa" class="img-fluid" />
+                    <div class="col-12 col-md-4 blogPostSidebar">
+                        <h4>Other articles</h4>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 p-0 otherArticleCard seller">
+                                    <img src="https://dummyimage.com/550x360/eee/aaa" class="img-fluid" />
+                                    <h5>Wow! 5 orders of Asa Akara's 5k pussy juice already!</h5>
+                                    <div class="category">
+                                        News
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 p-0 otherArticleCard seller">
+                                    <img src="https://dummyimage.com/550x360/eee/aaa" class="img-fluid" />
+                                    <h5>Wow! 5 orders of Asa Akara's 5k pussy juice already!</h5>
+                                    <div class="category">
+                                        News
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 p-0 otherArticleCard buyer">
+                                    <img src="https://dummyimage.com/550x360/eee/aaa" class="img-fluid" />
+                                    <h5>Wow! 5 orders of Asa Akara's 5k pussy juice already!</h5>
+                                    <div class="category">
+                                        News
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="advertisement" @*data-spy="affix"*@>
+                            <div class="label">advertisement</div>
+                            <div class="bannerContainer">
+                                <img src="https://dummyimage.com/550x900/ddd/aaa" class="img-fluid" />
+                            </div>
                         </div>
                     </div>
-
-                </div>
+                }
             </div>
         </div>
 
