@@ -56,6 +56,14 @@ $(function () {
         });
     }
 
+    // Blog cards are fully clickeable
+    if ($('.blogCard').length) {
+        $('.blogCard').click(function (e) {
+            var url = $(e.target).closest('.blogCard').find('a').attr('href');
+            window.location.href = url;
+        });
+    }
+
     // Blog detail specific
     if ($('.blogPostContainer').length) {
         $(window).resize(function () {

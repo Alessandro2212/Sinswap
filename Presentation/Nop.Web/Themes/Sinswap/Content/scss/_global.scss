@@ -4,7 +4,7 @@ body {
     font-family: $fontBody;
 }
 
-body.modalActive{
+/*body.modalActive{
     &:before {
         content: "";
         position: fixed;
@@ -16,7 +16,7 @@ body.modalActive{
         z-index: 1;
     }
 }
-
+*/
 :focus {
     outline: none;
 }
@@ -231,6 +231,49 @@ a.more {
         text-decoration: none;
         color: $seller;
         transition: color 0.15s;
+    }
+}
+
+// Breadcrumb
+.breadcrumbRow {
+    border-bottom: 2px solid $grey5;
+    padding: 45px 0 0 0;
+    margin: 0 0 45px 0;
+
+    .breadcrumbContainer {
+        margin-bottom: -2px;
+        font-weight: 600;
+        padding: 0px;
+
+        .breadcrumbBg {
+            background-color: $white;
+            padding: 0 90px 0 0;
+            display: inline-block;
+        }
+
+        a {
+            font-weight: 500;
+            text-decoration: underline;
+            color: $black;
+
+            &:hover {
+                text-decoration: none;
+            }
+
+            &.home {
+                text-decoration: none;
+                color: $grey15;
+
+                &:hover {
+                    color: $black;
+                }
+            }
+        }
+
+        .divider {
+            color: $grey15;
+            display: inline;
+        }
     }
 }
 

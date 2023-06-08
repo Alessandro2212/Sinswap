@@ -72,6 +72,14 @@
         {
 
             <div class="container firstContainer popularCategoriesContainer">
+                <div class="row breadcrumbRow">
+                    <div class="col-12 breadcrumbContainer">
+                        <div class="breadcrumbBg">
+                            <a href="/" class="home">Home</a> <div class="divider">/</div> @Model.Name
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-12 pt-4">
                         <div class="flex-row row no-gutters">
@@ -120,9 +128,11 @@
         {
             @*static, needs to go to partial*@
             <div class="container firstContainer sellersContainer">
-                <div class="row">
+                <div class="row breadcrumbRow">
                     <div class="col-12 breadcrumbContainer">
-                        <a href="/" class="home">Home</a> <div class="divider">/</div> <a href="#">Clothing</a> <div class="divider">/</div> @Model.Name
+                        <div class="breadcrumbBg">
+                            <a href="/" class="home">Home</a> <div class="divider">/</div> <a href="#">Clothing</a> <div class="divider">/</div> @Model.Name
+                        </div>
                     </div>
                 </div>
 

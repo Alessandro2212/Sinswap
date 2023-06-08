@@ -16,40 +16,10 @@
 }
 
 .category-page {
-    .breadcrumbContainer {
-        padding: 45px 15px;
-        font-weight: 600;
-
-        a {
-            font-weight: 500;
-            text-decoration: underline;
-            color: $black;
-
-            &:hover {
-                text-decoration: none;
-            }
-
-            &.home {
-                text-decoration: none;
-                color: $grey15; 
-
-                &:hover {
-                    color: $black;
-                }
-            }
-        }
-
-        .divider {
-            color: $grey15;
-            display: inline;
-        }
-    }
-
     .popularCategoriesContainer {
         position: relative;
         background-color: $white;
         border-radius: 5px;
-        padding-top: 0px;
     }
 
     .topSellersContainer {

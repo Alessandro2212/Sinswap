@@ -1,0 +1,193 @@
+﻿// Blog List
+header.blogList {
+    .page-title {
+        margin-top: 40px;
+        text-align: center;
+
+        .tags {
+            font-weight: 600;
+            opacity: 0.75;
+            font-size: 22px;
+
+            span {
+                color: $white;
+            }
+        }
+
+        .title {
+            display: table-cell;
+            vertical-align: middle;
+            width: 100vw;
+            font-weight: 700;
+            font-size: 70px;
+            line-height: 70px;
+            text-align: center;
+            padding: 30px 0;
+        }
+    }
+}
+
+.bloglist-page {
+    position: relative;
+
+    .seachBlogRow {
+        padding: 20px 0 40px 0;
+
+        .search-text {
+            border-width: 0px 0px 2px 0px;
+            border-radius: 0px;
+            box-shadow: none;
+            font-size: 28px;
+            font-weight: 600;
+            padding: 1px 0;
+        }
+
+        .searchSubmit {
+            font-size: 30px;
+            display: block;
+            text-align: center;
+            line-height: 47px;
+            position: absolute;
+            top: 0px;
+            right: 15px;
+            color: $black;
+            background-color: transparent;
+            border: 0 none;
+            cursor: pointer;
+            outline: none;
+            opacity: .5;
+            transition: opacity .15s;
+
+            &:hover {
+                opacity: 1;
+                transition: opacity .15s;
+            }
+        }
+    }
+
+    .blogContainer {
+        .container {
+            .blogCard {
+                border-radius: 5px;
+                margin: 20px;
+                height: 100%;
+                padding-bottom: 60px;
+                box-shadow: none;
+                border: 1px solid $grey5;
+                transition: box-shadow 0.15s;
+
+                &:hover {
+                    cursor: pointer;
+                    box-shadow: 0px 4px 15px -5px rgba(0,0,0,1);
+                    transition: box-shadow 0.15s;
+
+                    p {
+                        opacity: 0.8;
+                        transition: opacity 0.15s;
+                    }
+                }
+
+                .blogImgContainer {
+                    border-radius: 5px 5px 0 0;
+                    width: 100%;
+                    height: 135px;
+                    background-position: center center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+
+                p {
+                    font-size: 20px;
+                    font-weight: 500;
+                    padding: 30px;
+                    margin: 0px;
+                    text-align: center;
+                    opacity: 1;
+                    transition: opacity 0.15s;
+
+                    a {
+                        color: $black;
+                        text-decoration: none;
+                    }
+                }
+
+                .category {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    bottom: 40px;
+                    font-size: 12px;
+                    opacity: 0.7;
+                    color: $white;
+
+                    .tags {
+                        a {
+                            font-weight: 700;
+                            text-decoration: none;
+                        }
+                    }
+                }
+
+                &.noImg {
+                    p {
+                        padding: 60px;
+                    }
+                }
+
+                &.seller {
+                    .category {
+                        color: $seller;
+
+                        .tags {
+                            a {
+                                color: $seller;
+                            }
+                        }
+                    }
+                }
+
+                &.news {
+                    .category {
+                        color: $news;
+
+                        .tags {
+                            a {
+                                color: $news;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Extra extra large devices (large desktops, 1200px and up)
+@media (min-width: 1660px) {
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+    .blogListContainer {
+        .blogPostBody {
+            padding-right: 0px;
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (min-width: 576px) {
+}

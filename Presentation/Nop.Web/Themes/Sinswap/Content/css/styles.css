@@ -325,17 +325,19 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-body.modalActive:before {
-  content: "";
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 1;
+/*body.modalActive{
+    &:before {
+        content: "";
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        z-index: 1;
+    }
 }
-
+*/
 :focus {
   outline: none;
 }
@@ -523,6 +525,41 @@ a.more:hover {
   text-decoration: none;
   color: #2d7de4;
   transition: color 0.15s;
+}
+
+.breadcrumbRow {
+  border-bottom: 2px solid #dedede;
+  padding: 45px 0 0 0;
+  margin: 0 0 45px 0;
+}
+.breadcrumbRow .breadcrumbContainer {
+  margin-bottom: -2px;
+  font-weight: 600;
+  padding: 0px;
+}
+.breadcrumbRow .breadcrumbContainer .breadcrumbBg {
+  background-color: #fff;
+  padding: 0 90px 0 0;
+  display: inline-block;
+}
+.breadcrumbRow .breadcrumbContainer a {
+  font-weight: 500;
+  text-decoration: underline;
+  color: #171717;
+}
+.breadcrumbRow .breadcrumbContainer a:hover {
+  text-decoration: none;
+}
+.breadcrumbRow .breadcrumbContainer a.home {
+  text-decoration: none;
+  color: #999999;
+}
+.breadcrumbRow .breadcrumbContainer a.home:hover {
+  color: #171717;
+}
+.breadcrumbRow .breadcrumbContainer .divider {
+  color: #999999;
+  display: inline;
 }
 
 .categoryCard {
@@ -1155,6 +1192,9 @@ nav.service .cartFoldout {
   left: 0px;
   z-index: 1;
   color: #171717;
+  -webkit-box-shadow: 0px -5px 50px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px -5px 50px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px -5px 50px 0px rgba(0, 0, 0, 0.75);
 }
 nav.service .cartFoldout .serviceMenu nav.service .icon {
   color: #171717;
@@ -1309,6 +1349,12 @@ nav .cartFoldout {
     margin: 0 5px;
     font-size: 14px;
   }
+  header nav.service {
+    padding-top: 0px;
+  }
+  header nav.service .cartFoldout .items .item .product a {
+    font-size: 14px;
+  }
 }
 @media (max-width: 768px) {
   header {
@@ -1328,12 +1374,6 @@ nav .cartFoldout {
   }
   header .row nav .btn {
     margin: 0px 5px;
-  }
-  header .row nav.service {
-    padding-top: 0px;
-  }
-  header .row nav.service .cartFoldout .items .item .product a {
-    font-size: 14px;
   }
   header .row .serviceMenu {
     position: absolute;
@@ -1781,34 +1821,10 @@ nav .cartFoldout {
   margin-left: 5px;
 }
 
-.category-page .breadcrumbContainer {
-  padding: 45px 15px;
-  font-weight: 600;
-}
-.category-page .breadcrumbContainer a {
-  font-weight: 500;
-  text-decoration: underline;
-  color: #171717;
-}
-.category-page .breadcrumbContainer a:hover {
-  text-decoration: none;
-}
-.category-page .breadcrumbContainer a.home {
-  text-decoration: none;
-  color: #999999;
-}
-.category-page .breadcrumbContainer a.home:hover {
-  color: #171717;
-}
-.category-page .breadcrumbContainer .divider {
-  color: #999999;
-  display: inline;
-}
 .category-page .popularCategoriesContainer {
   position: relative;
   background-color: #fff;
   border-radius: 5px;
-  padding-top: 0px;
 }
 .category-page .topSellersContainer {
   margin-bottom: 60px;
@@ -3440,6 +3456,136 @@ header.vendorRegistration .stepIconContainer ul li.active {
 @media (min-width: 1660px) {
   .cartContainer {
     padding: 45px 250px 0 250px;
+  }
+}
+header.blogList .page-title {
+  margin-top: 40px;
+  text-align: center;
+}
+header.blogList .page-title .tags {
+  font-weight: 600;
+  opacity: 0.75;
+  font-size: 22px;
+}
+header.blogList .page-title .tags span {
+  color: #fff;
+}
+header.blogList .page-title .title {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100vw;
+  font-weight: 700;
+  font-size: 70px;
+  line-height: 70px;
+  text-align: center;
+  padding: 30px 0;
+}
+
+.bloglist-page {
+  position: relative;
+}
+.bloglist-page .seachBlogRow {
+  padding: 20px 0 40px 0;
+}
+.bloglist-page .seachBlogRow .search-text {
+  border-width: 0px 0px 2px 0px;
+  border-radius: 0px;
+  box-shadow: none;
+  font-size: 28px;
+  font-weight: 600;
+  padding: 1px 0;
+}
+.bloglist-page .seachBlogRow .searchSubmit {
+  font-size: 30px;
+  display: block;
+  text-align: center;
+  line-height: 47px;
+  position: absolute;
+  top: 0px;
+  right: 15px;
+  color: #171717;
+  background-color: transparent;
+  border: 0 none;
+  cursor: pointer;
+  outline: none;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+.bloglist-page .seachBlogRow .searchSubmit:hover {
+  opacity: 1;
+  transition: opacity 0.15s;
+}
+.bloglist-page .blogContainer .container .blogCard {
+  border-radius: 5px;
+  margin: 20px;
+  height: 100%;
+  padding-bottom: 60px;
+  box-shadow: none;
+  border: 1px solid #dedede;
+  transition: box-shadow 0.15s;
+}
+.bloglist-page .blogContainer .container .blogCard:hover {
+  cursor: pointer;
+  box-shadow: 0px 4px 15px -5px rgb(0, 0, 0);
+  transition: box-shadow 0.15s;
+}
+.bloglist-page .blogContainer .container .blogCard:hover p {
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+.bloglist-page .blogContainer .container .blogCard .blogImgContainer {
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  height: 135px;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.bloglist-page .blogContainer .container .blogCard p {
+  font-size: 20px;
+  font-weight: 500;
+  padding: 30px;
+  margin: 0px;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.15s;
+}
+.bloglist-page .blogContainer .container .blogCard p a {
+  color: #171717;
+  text-decoration: none;
+}
+.bloglist-page .blogContainer .container .blogCard .category {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 40px;
+  font-size: 12px;
+  opacity: 0.7;
+  color: #fff;
+}
+.bloglist-page .blogContainer .container .blogCard .category .tags a {
+  font-weight: 700;
+  text-decoration: none;
+}
+.bloglist-page .blogContainer .container .blogCard.noImg p {
+  padding: 60px;
+}
+.bloglist-page .blogContainer .container .blogCard.seller .category {
+  color: #2d7de4;
+}
+.bloglist-page .blogContainer .container .blogCard.seller .category .tags a {
+  color: #2d7de4;
+}
+.bloglist-page .blogContainer .container .blogCard.news .category {
+  color: #e4007c;
+}
+.bloglist-page .blogContainer .container .blogCard.news .category .tags a {
+  color: #e4007c;
+}
+
+@media (max-width: 768px) {
+  .blogListContainer .blogPostBody {
+    padding-right: 0px;
   }
 }
 header.blogDetail .page-title {
