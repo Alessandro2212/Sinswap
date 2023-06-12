@@ -116,6 +116,10 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapLocalizedRoute("ChangeTaxType", "changetaxtype/{customertaxtype:min(0)}",
 				new { controller = "Common", action = "SetTaxType" });
 
+            //change language (AJAX link)
+            routeBuilder.MapLocalizedRoute("VendorProductList", "vendorproductlist",
+                new { controller = "Vendor", action = "VendorProductList" });
+
             //recently viewed products
             routeBuilder.MapLocalizedRoute("RecentlyViewedProducts", "recentlyviewedproducts/",
 				new { controller = "Product", action = "RecentlyViewedProducts" });

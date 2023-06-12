@@ -21,6 +21,7 @@ using Nop.Services.Security;
 using Nop.Services.Seo;
 using Nop.Services.Vendors;
 using Nop.Web.Areas.Admin.Infrastructure.Mapper.Extensions;
+using Nop.Web.Areas.Admin.Models.Catalog;
 using Nop.Web.Factories;
 using Nop.Web.Framework.Controllers;
 using Nop.Web.Framework.Mvc.Filters;
@@ -53,6 +54,7 @@ namespace Nop.Web.Controllers
         private readonly IPermissionService _permissionService;
         private readonly ICustomerActivityService _customerActivityService;
         private readonly ILocalizedEntityService _localizedEntityService;
+        private readonly Areas.Admin.Factories.IProductModelFactory _productModelFactory;
 
         #endregion
 
@@ -76,7 +78,8 @@ namespace Nop.Web.Controllers
             VendorSettings vendorSettings,
             IPermissionService permissionService,
             ICustomerActivityService customerActivityService,
-            ILocalizedEntityService localizedEntityService)
+            ILocalizedEntityService localizedEntityService,
+            Areas.Admin.Factories.IProductModelFactory productModelFactory)
         {
             this._captchaSettings = captchaSettings;
             this._customerService = customerService;
@@ -97,6 +100,7 @@ namespace Nop.Web.Controllers
             this._addressService = addressService;
             this._customerActivityService = customerActivityService;
             this._localizedEntityService = localizedEntityService;
+            this._productModelFactory = productModelFactory;
         }
 
         #endregion
@@ -623,6 +627,22 @@ namespace Nop.Web.Controllers
                 var seName = _urlRecordService.ValidateSeName(vendor, localized.SeName, localized.Name, false);
                 _urlRecordService.SaveSlug(vendor, seName, localized.LanguageId);
             }
+        }
+
+        #endregion
+
+        #region VendorProduct
+
+        [HttpPost]
+        public virtual IActionResult VendorProductList(ProductSearchModel searchModel)
+        {
+            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+            //    return AccessDeniedKendoGridJson();
+
+            //prepare model
+            var model = _productModelFactory.PrepareProductListModel(searchModel);
+
+            return Json(model);
         }
 
         #endregion

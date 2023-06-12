@@ -1,0 +1,11 @@
+@model VendorEditModel
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div>
+                @await Component.InvokeAsync("VendorProductEdit", new { vendorId = Model.Id })
+            </div>         
+        </div>
+    </div>
+</div>

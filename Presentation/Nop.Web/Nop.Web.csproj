@@ -39,6 +39,9 @@
     <!-- We copy the \Logs directory -->
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
     <Content Remove="compilerconfig.json" />
+    <None Remove="Themes\Sinswap\Content\css\kendo.common.min.css" />
+    <None Remove="Themes\Sinswap\Content\css\kendo.default.min.css" />
+    <None Remove="Themes\Sinswap\Content\css\kendo.rtl.min.css" />
     <None Remove="Themes\Sinswap\Content\css\styles.scss" />
     <None Remove="Themes\Sinswap\Content\js\affix.js" />
     <None Remove="Themes\Sinswap\Content\js\fine-uploader-gallery.css" />
@@ -62,6 +65,8 @@
     <None Remove="Themes\Sinswap\Content\js\jquery.fine-uploader.js.map" />
     <None Remove="Themes\Sinswap\Content\js\jquery.fine-uploader.min.js" />
     <None Remove="Themes\Sinswap\Content\js\jquery.fine-uploader.min.js.map" />
+    <None Remove="Themes\Sinswap\Content\js\kendo.web.min.js" />
+    <None Remove="Themes\Sinswap\Content\js\kendo.web.min.js.map" />
     <None Remove="Themes\Sinswap\Content\js\public.accordion.js" />
     <None Remove="Themes\Sinswap\Content\js\public.ajaxcart.js" />
     <None Remove="Themes\Sinswap\Content\js\public.common.js" />
@@ -121,6 +126,15 @@
     <Content Update="Themes\Sinswap\Content\css\fine-uploader-new.min.css.map">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
+    <Content Update="Themes\Sinswap\Content\css\kendo.common.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\css\kendo.default.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\css\kendo.rtl.min.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Themes\Sinswap\Content\js\fine-uploader.core.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
@@ -164,6 +178,12 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Themes\Sinswap\Content\js\jquery.fine-uploader.min.js.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\kendo.web.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Sinswap\Content\js\kendo.web.min.js.map">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Themes\Sinswap\Content\js\public.accordion.js">
