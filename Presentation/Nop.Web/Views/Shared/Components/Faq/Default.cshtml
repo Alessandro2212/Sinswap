@@ -1,0 +1,33 @@
+﻿@using Nop.Web.Models.Common
+@model Nop.Web.Models.Common.FaqViewModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+
+<a id="faq"></a>
+<div class="container-fluid vendorFaqContainer">
+    <div class="row">
+        <div class="col-12">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Frequently Asked Questions</h2>
+                        <div id="accordionFaq">
+                            @foreach(var catfaq in Model.FrequentCategoryFaqs)
+                            {
+                                <h1>Category</h1>
+                                <h2>@catfaq.Name</h2>
+
+                                <h1>Faq</h1>
+                                @foreach(var faq in Model.FrequentCategoryFaqViewModels.Where(x=>x.CategoryFaqId == catfaq.Id).ToList())
+                                {
+                                    <h2>@faq.Title</h2>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,6 +11,7 @@
         <h1>F.A.Q.</h1>
     </div>
     <div class="page-body">
+        @await Component.InvokeAsync("Faq")
         @*@await Component.InvokeAsync("TopicBlock", new { systemName = "ContactUs" })
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContactUsTop })
         @if (Model.SuccessfullySent)
