@@ -262,6 +262,16 @@ $(function () {
         });
     }
 
+    /*if ($('#productVendorModal').length) {*/     
+        $('#productVendorModal').on('show.bs.modal', function (e) {
+            $('#productVendorModal').find('.modal-body').html("");
+            var prodVendorUrl = $(e.relatedTarget).closest('.categoryCard').attr('data-url');
+            $.get(prodVendorUrl, function (data) {
+                $('#productVendorModal').find('.modal-body').html(data);
+            })
+        });
+    //}
+
     if ($('.topSellersSlide').length) {
         $('.topSellersSlide').slick({
             prevArrow: "<button type='button' class='slick-prev'><i class='las la-angle-left'></i></button>",

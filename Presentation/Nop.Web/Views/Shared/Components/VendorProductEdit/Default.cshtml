@@ -136,7 +136,8 @@
                                     width: 100,
                                     headerAttributes: { style: "text-align:center" },
                                     attributes: { style: "text-align:center" },
-                                    template: '<a class="btn btn-default" href="Edit/#=Id#"><i class="fa fa-pencil"></i>@T("Admin.Common.Edit")</a>'
+                                    //template: '<a class="btn btn-default" href="Edit/#=Id#"><i class="fa fa-pencil"></i>@T("Admin.Common.Edit")</a>'
+                                    template: '<div class="categoryCard btn btn-default" data-url="VendorProduct/#=Id#" data-dismiss="modal" data-toggle="modal" data-target=".productVendorModal"><i class="fa fa-pencil"></i>@T("Admin.Common.Edit")</div>'
                                 }
                             ]
                             });
@@ -320,3 +321,12 @@
         });
     });
 </script>
+
+<div class="modal fade productVendorModal" id="productVendorModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,7 +17,6 @@
                             {
                                 <h1>Category</h1>
                                 <h2>@catfaq.Name</h2>
-
                                 <h1>Faq</h1>
                                 @foreach(var faq in Model.FrequentCategoryFaqViewModels.Where(x=>x.CategoryFaqId == catfaq.Id).ToList())
                                 {

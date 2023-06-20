@@ -11,6 +11,7 @@ using Nop.Core.Domain.Localization;
 using Nop.Core.Domain.Media;
 using Nop.Core.Domain.Security;
 using Nop.Core.Domain.Vendors;
+using Nop.Services.Catalog;
 using Nop.Services.Common;
 using Nop.Services.Customers;
 using Nop.Services.Localization;
@@ -55,6 +56,7 @@ namespace Nop.Web.Controllers
         private readonly ICustomerActivityService _customerActivityService;
         private readonly ILocalizedEntityService _localizedEntityService;
         private readonly Areas.Admin.Factories.IProductModelFactory _productModelFactory;
+        private readonly IProductService _productService;
 
         #endregion
 
@@ -79,7 +81,8 @@ namespace Nop.Web.Controllers
             IPermissionService permissionService,
             ICustomerActivityService customerActivityService,
             ILocalizedEntityService localizedEntityService,
-            Areas.Admin.Factories.IProductModelFactory productModelFactory)
+            Areas.Admin.Factories.IProductModelFactory productModelFactory,
+            IProductService productService)
         {
             this._captchaSettings = captchaSettings;
             this._customerService = customerService;
@@ -101,6 +104,7 @@ namespace Nop.Web.Controllers
             this._customerActivityService = customerActivityService;
             this._localizedEntityService = localizedEntityService;
             this._productModelFactory = productModelFactory;
+            this._productService = productService;
         }
 
         #endregion
@@ -644,6 +648,29 @@ namespace Nop.Web.Controllers
 
             return Json(model);
         }
+
+
+        public virtual IActionResult VendorProduct(int id)
+        {
+            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+            //    return AccessDeniedView();
+
+            //try to get a product with the specified id
+            var product = _productService.GetProductById(id);
+            if (product == null || product.Deleted)
+                return RedirectToAction("List");
+
+            //a vendor should have access only to his products
+            if (_workContext.CurrentVendor != null && product.VendorId != _workContext.CurrentVendor.Id)
+                return RedirectToAction("List");
+
+            //prepare model
+            var model = _productModelFactory.PrepareProductModel(null, product);
+
+            //return View(model);
+            return View(model);
+        }
+
 
         #endregion
 
