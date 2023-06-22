@@ -57,6 +57,7 @@ namespace Nop.Web.Factories
                     Title = catFaq.Name,
                     SubTitle = catFaq.SubName,
                     PictureUrl = _pictureService.GetPictureUrl(catFaq.PictureId),
+                    Color = catFaq.Color
                 };
                 model.CategoryFaqViewModels.Add(catFaqModel);
             }

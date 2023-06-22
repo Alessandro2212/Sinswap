@@ -12,6 +12,8 @@ namespace Nop.Core.Domain.Faq
 
         public int PictureId { get; set; }
 
+        public string Color { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime UpdatedOn { get; set; }

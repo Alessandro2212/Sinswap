@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -670,6 +671,314 @@ namespace Nop.Web.Controllers
             //return View(model);
             return View(model);
         }
+
+        //[HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+        //public virtual IActionResult VendorProduct(ProductModel model, bool continueEditing)
+        //{
+        //    if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+        //        return AccessDeniedView();
+
+        //    //try to get a product with the specified id
+        //    var product = _productService.GetProductById(model.Id);
+        //    if (product == null || product.Deleted)
+        //        return RedirectToAction("List");
+
+        //    //a vendor should have access only to his products
+        //    if (_workContext.CurrentVendor != null && product.VendorId != _workContext.CurrentVendor.Id)
+        //        return RedirectToAction("List");
+
+        //    //check if the product quantity has been changed while we were editing the product
+        //    //and if it has been changed then we show error notification
+        //    //and redirect on the editing page without data saving
+        //    if (product.StockQuantity != model.LastStockQuantity)
+        //    {
+        //        ErrorNotification(_localizationService.GetResource("Admin.Catalog.Products.Fields.StockQuantity.ChangedWarning"));
+        //        return RedirectToAction("Edit", new { id = product.Id });
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        //a vendor should have access only to his products
+        //        if (_workContext.CurrentVendor != null)
+        //            model.VendorId = _workContext.CurrentVendor.Id;
+
+        //        //we do not validate maximum number of products per vendor when editing existing products (only during creation of new products)
+        //        //vendors cannot edit "Show on home page" property
+        //        if (_workContext.CurrentVendor != null && model.ShowOnHomePage != product.ShowOnHomePage)
+        //            model.ShowOnHomePage = product.ShowOnHomePage;
+
+        //        //some previously used values
+        //        var prevTotalStockQuantity = _productService.GetTotalStockQuantity(product);
+        //        var prevDownloadId = product.DownloadId;
+        //        var prevSampleDownloadId = product.SampleDownloadId;
+        //        var previousStockQuantity = product.StockQuantity;
+        //        var previousWarehouseId = product.WarehouseId;
+
+        //        //product
+        //        var amountSold = product.AmountSold;
+        //        product = model.ToEntity(product);
+        //        product.AmountSold = amountSold;
+        //        product.UpdatedOnUtc = DateTime.UtcNow;
+        //        _productService.UpdateProduct(product);
+
+        //        //search engine name
+        //        model.SeName = _urlRecordService.ValidateSeName(product, model.SeName, product.Name, true);
+        //        _urlRecordService.SaveSlug(product, model.SeName, 0);
+
+        //        //locales
+        //        UpdateLocales(product, model);
+
+        //        //tags
+        //        _productTagService.UpdateProductTags(product, ParseProductTags(model.ProductTags));
+
+        //        //warehouses
+        //        SaveProductWarehouseInventory(product, model);
+
+        //        //categories
+        //        SaveCategoryMappings(product, model);
+
+        //        //manufacturers
+        //        SaveManufacturerMappings(product, model);
+
+        //        //ACL (customer roles)
+        //        SaveProductAcl(product, model);
+
+        //        //stores
+        //        SaveStoreMappings(product, model);
+
+        //        //discounts
+        //        SaveDiscountMappings(product, model);
+
+        //        //picture seo names
+        //        UpdatePictureSeoNames(product);
+
+        //        //back in stock notifications
+        //        if (product.ManageInventoryMethod == ManageInventoryMethod.ManageStock &&
+        //            product.BackorderMode == BackorderMode.NoBackorders &&
+        //            product.AllowBackInStockSubscriptions &&
+        //            _productService.GetTotalStockQuantity(product) > 0 &&
+        //            prevTotalStockQuantity <= 0 &&
+        //            product.Published &&
+        //            !product.Deleted)
+        //        {
+        //            _backInStockSubscriptionService.SendNotificationsToSubscribers(product);
+        //        }
+
+        //        //delete an old "download" file (if deleted or updated)
+        //        if (prevDownloadId > 0 && prevDownloadId != product.DownloadId)
+        //        {
+        //            var prevDownload = _downloadService.GetDownloadById(prevDownloadId);
+        //            if (prevDownload != null)
+        //                _downloadService.DeleteDownload(prevDownload);
+        //        }
+
+        //        //delete an old "sample download" file (if deleted or updated)
+        //        if (prevSampleDownloadId > 0 && prevSampleDownloadId != product.SampleDownloadId)
+        //        {
+        //            var prevSampleDownload = _downloadService.GetDownloadById(prevSampleDownloadId);
+        //            if (prevSampleDownload != null)
+        //                _downloadService.DeleteDownload(prevSampleDownload);
+        //        }
+
+        //        //quantity change history
+        //        if (previousWarehouseId != product.WarehouseId)
+        //        {
+        //            //warehouse is changed 
+        //            //compose a message
+        //            var oldWarehouseMessage = string.Empty;
+        //            if (previousWarehouseId > 0)
+        //            {
+        //                var oldWarehouse = _shippingService.GetWarehouseById(previousWarehouseId);
+        //                if (oldWarehouse != null)
+        //                    oldWarehouseMessage = string.Format(_localizationService.GetResource("Admin.StockQuantityHistory.Messages.EditWarehouse.Old"), oldWarehouse.Name);
+        //            }
+
+        //            var newWarehouseMessage = string.Empty;
+        //            if (product.WarehouseId > 0)
+        //            {
+        //                var newWarehouse = _shippingService.GetWarehouseById(product.WarehouseId);
+        //                if (newWarehouse != null)
+        //                    newWarehouseMessage = string.Format(_localizationService.GetResource("Admin.StockQuantityHistory.Messages.EditWarehouse.New"), newWarehouse.Name);
+        //            }
+
+        //            var message = string.Format(_localizationService.GetResource("Admin.StockQuantityHistory.Messages.EditWarehouse"), oldWarehouseMessage, newWarehouseMessage);
+
+        //            //record history
+        //            _productService.AddStockQuantityHistoryEntry(product, -previousStockQuantity, 0, previousWarehouseId, message);
+        //            _productService.AddStockQuantityHistoryEntry(product, product.StockQuantity, product.StockQuantity, product.WarehouseId, message);
+        //        }
+        //        else
+        //        {
+        //            _productService.AddStockQuantityHistoryEntry(product, product.StockQuantity - previousStockQuantity, product.StockQuantity,
+        //                product.WarehouseId, _localizationService.GetResource("Admin.StockQuantityHistory.Messages.Edit"));
+        //        }
+
+        //        //activity log
+        //        _customerActivityService.InsertActivity("EditProduct",
+        //            string.Format(_localizationService.GetResource("ActivityLog.EditProduct"), product.Name), product);
+
+        //        SuccessNotification(_localizationService.GetResource("Admin.Catalog.Products.Updated"));
+
+        //        if (!continueEditing)
+        //            return RedirectToAction("List");
+
+        //        //selected tab
+        //        SaveSelectedTabName();
+
+        //        return RedirectToAction("Edit", new { id = product.Id });
+        //    }
+
+        //    //prepare model
+        //    model = _productModelFactory.PrepareProductModel(model, product, true);
+
+        //    //if we got this far, something failed, redisplay form
+        //    return View(model);
+        //}
+
+        //public virtual IActionResult Create()
+        //{
+        //    if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+        //        return AccessDeniedView();
+
+        //    //validate maximum number of products per vendor
+        //    if (_vendorSettings.MaximumProductNumber > 0 && _workContext.CurrentVendor != null
+        //        && _productService.GetNumberOfProductsByVendorId(_workContext.CurrentVendor.Id) >= _vendorSettings.MaximumProductNumber)
+        //    {
+        //        ErrorNotification(string.Format(_localizationService.GetResource("Admin.Catalog.Products.ExceededMaximumNumber"),
+        //            _vendorSettings.MaximumProductNumber));
+        //        return RedirectToAction("List");
+        //    }
+
+        //    //prepare model
+        //    var model = _productModelFactory.PrepareProductModel(new ProductModel(), null);
+
+        //    return View(model);
+        //}
+
+        //[HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+        //public virtual IActionResult Create(ProductModel model, bool continueEditing)
+        //{
+        //    if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+        //        return AccessDeniedView();
+
+        //    //validate maximum number of products per vendor
+        //    if (_vendorSettings.MaximumProductNumber > 0 && _workContext.CurrentVendor != null
+        //        && _productService.GetNumberOfProductsByVendorId(_workContext.CurrentVendor.Id) >= _vendorSettings.MaximumProductNumber)
+        //    {
+        //        ErrorNotification(string.Format(_localizationService.GetResource("Admin.Catalog.Products.ExceededMaximumNumber"),
+        //            _vendorSettings.MaximumProductNumber));
+        //        return RedirectToAction("List");
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        //a vendor should have access only to his products
+        //        if (_workContext.CurrentVendor != null)
+        //            model.VendorId = _workContext.CurrentVendor.Id;
+
+        //        //vendors cannot edit "Show on home page" property
+        //        if (_workContext.CurrentVendor != null && model.ShowOnHomePage)
+        //            model.ShowOnHomePage = false;
+
+        //        //product
+        //        var product = model.ToEntity<Product>();
+        //        product.CreatedOnUtc = DateTime.UtcNow;
+        //        product.UpdatedOnUtc = DateTime.UtcNow;
+        //        _productService.InsertProduct(product);
+
+        //        //search engine name
+        //        model.SeName = _urlRecordService.ValidateSeName(product, model.SeName, product.Name, true);
+        //        _urlRecordService.SaveSlug(product, model.SeName, 0);
+
+        //        //locales
+        //        UpdateLocales(product, model);
+
+        //        //categories
+        //        SaveCategoryMappings(product, model);
+
+        //        //manufacturers
+        //        SaveManufacturerMappings(product, model);
+
+        //        //ACL (customer roles)
+        //        SaveProductAcl(product, model);
+
+        //        //stores
+        //        SaveStoreMappings(product, model);
+
+        //        //discounts
+        //        SaveDiscountMappings(product, model);
+
+        //        //tags
+        //        _productTagService.UpdateProductTags(product, ParseProductTags(model.ProductTags));
+
+        //        //warehouses
+        //        SaveProductWarehouseInventory(product, model);
+
+        //        //quantity change history
+        //        _productService.AddStockQuantityHistoryEntry(product, product.StockQuantity, product.StockQuantity, product.WarehouseId,
+        //            _localizationService.GetResource("Admin.StockQuantityHistory.Messages.Edit"));
+
+        //        //activity log
+        //        _customerActivityService.InsertActivity("AddNewProduct",
+        //            string.Format(_localizationService.GetResource("ActivityLog.AddNewProduct"), product.Name), product);
+
+        //        SuccessNotification(_localizationService.GetResource("Admin.Catalog.Products.Added"));
+
+        //        if (!continueEditing)
+        //            return RedirectToAction("List");
+
+        //        //selected tab
+        //        SaveSelectedTabName();
+
+        //        return RedirectToAction("Edit", new { id = product.Id });
+        //    }
+
+        //    //prepare model
+        //    model = _productModelFactory.PrepareProductModel(model, null, true);
+
+        //    //if we got this far, something failed, redisplay form
+        //    return View(model);
+        //}
+
+        //[HttpPost]
+        //public virtual IActionResult Delete(int id)
+        //{
+        //    if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+        //        return AccessDeniedView();
+
+        //    //try to get a product with the specified id
+        //    var product = _productService.GetProductById(id);
+        //    if (product == null)
+        //        return RedirectToAction("List");
+
+        //    //a vendor should have access only to his products
+        //    if (_workContext.CurrentVendor != null && product.VendorId != _workContext.CurrentVendor.Id)
+        //        return RedirectToAction("List");
+
+        //    _productService.DeleteProduct(product);
+
+        //    //activity log
+        //    _customerActivityService.InsertActivity("DeleteProduct",
+        //        string.Format(_localizationService.GetResource("ActivityLog.DeleteProduct"), product.Name), product);
+
+        //    SuccessNotification(_localizationService.GetResource("Admin.Catalog.Products.Deleted"));
+
+        //    return RedirectToAction("List");
+        //}
+
+        //[HttpPost]
+        //public virtual IActionResult DeleteSelected(ICollection<int> selectedIds)
+        //{
+        //    if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+        //        return AccessDeniedView();
+
+        //    if (selectedIds != null)
+        //    {
+        //        _productService.DeleteProducts(_productService.GetProductsByIds(selectedIds.ToArray()).Where(p => _workContext.CurrentVendor == null || p.VendorId == _workContext.CurrentVendor.Id).ToList());
+        //    }
+
+        //    return Json(new { Result = true });
+        //}
 
 
         #endregion
