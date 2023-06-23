@@ -262,14 +262,14 @@ $(function () {
         });
     }
 
-    /*if ($('#productVendorModal').length) {*/     
-        $('#productVendorModal').on('show.bs.modal', function (e) {
-            $('#productVendorModal').find('.modal-body').html("");
-            var prodVendorUrl = $(e.relatedTarget).closest('.categoryCard').attr('data-url');
-            $.get(prodVendorUrl, function (data) {
-                $('#productVendorModal').find('.modal-body').html(data);
-            })
-        });
+    /*if ($('#productVendorModal').length) {*/
+    $('#productVendorModal').on('show.bs.modal', function (e) {
+        $('#productVendorModal').find('.modal-body').html("");
+        var prodVendorUrl = $(e.relatedTarget).closest('.categoryCard').attr('data-url');
+        $.get(prodVendorUrl, function (data) {
+            $('#productVendorModal').find('.modal-body').html(data);
+        })
+    });
     //}
 
     if ($('.topSellersSlide').length) {
