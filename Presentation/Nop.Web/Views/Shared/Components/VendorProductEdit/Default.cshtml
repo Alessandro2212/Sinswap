@@ -16,10 +16,12 @@
             @T("Admin.Catalog.Products")
         </h1>
         <div class="pull-right">
-            <a asp-action="Create" class="btn bg-blue">
+            @*<a asp-action="Create" class="btn bg-blue">
                 <i class="fa fa-plus-square"></i>
                 @T("Admin.Common.AddNew")
-            </a>
+            </a>*@
+            <div class="categoryCard btn btn-default" type="button" data-url="CreateVendorProduct" data-dismiss="modal" data-toggle="modal" data-target=".productVendorModal"><i class="fa fa-pencil"></i>@T("Admin.Common.AddNew")</div>
+
             <button type="button" id="delete-selected" class="btn bg-red">
                 <i class="fa fa-trash-o"></i>
                 @T("Admin.Common.Delete.Selected")
@@ -187,7 +189,7 @@
                 $.ajax({
                     cache: false,
                     type: "POST",
-                    url: "@(Url.Action("DeleteSelected", "Product"))",
+                    url: "@(Url.Action("DeleteSelected", "Vendor"))",
                     data: postData,
                     complete: function (data) {
                         //reload grid
