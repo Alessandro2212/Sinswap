@@ -273,6 +273,7 @@ $(function () {
         var prodVendorUrl = $(e.relatedTarget).closest('.categoryCard').attr('data-url');
         $.get(prodVendorUrl, function (data) {
             $('#productVendorModal').find('.modal-body').html(data);
+            window.stop();
         })
     });
     //}

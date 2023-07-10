@@ -1,0 +1,29 @@
+﻿@model Nop.Web.Areas.Admin.Models.Catalog.ProductModel
+
+@inject  Nop.Services.Events.IEventPublisher eventPublisher
+
+<div asp-validation-summary="All"></div>
+<input asp-for="Id" type="hidden" />
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-md-12 clearfix">
+                <div class="pull-left">
+@*                    @await Component.InvokeAsync("SettingMode", new { modeName = "product-advanced-mode" })
+*@                </div>
+                @if (!Model.IsLoggedInAsVendor)
+                {
+                    <button type="button" class="btn btn-info pull-left margin-l-10" id="product-editor-settings" data-toggle="modal" data-target="#productsettings-window">
+                        <i class="fa fa-gear"></i>
+                        @T("Admin.Configuration.Settings.ProductEditor.Button")
+                    </button>
+                }
+            </div>
+        </div>
+
+        <nop-tabs id="product-edit">
+            <nop-tab asp-name="tab-info" asp-title="@T("Admin.Catalog.Products.Info")" asp-default="true">@await Html.PartialAsync("_CreateOrUpdateProduct.Info", Model)</nop-tab>         
+        </nop-tabs>
+    </div>
+</div>

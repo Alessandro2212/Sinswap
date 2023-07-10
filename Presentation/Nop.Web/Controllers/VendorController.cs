@@ -706,8 +706,8 @@ namespace Nop.Web.Controllers
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         public virtual IActionResult VendorProduct(ProductModel model, bool continueEditing)
         {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
-                return AccessDeniedView();
+            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+            //    return AccessDeniedView();
 
             //try to get a product with the specified id
             var product = _productService.GetProductById(model.Id);
@@ -850,13 +850,15 @@ namespace Nop.Web.Controllers
 
                 SuccessNotification(_localizationService.GetResource("Admin.Catalog.Products.Updated"));
 
-                if (!continueEditing)
-                    return RedirectToAction("List");
+                //if (!continueEditing)
+                //    return RedirectToAction("List");
 
                 //selected tab
                 SaveSelectedTabName();
 
-                return RedirectToAction("Edit", new { id = product.Id });
+                var vendor = _vendorService.GetVendorById(product.VendorId);
+
+                return RedirectToAction("Edit", "Vendor", new { email = vendor.Email });
             }
 
             //prepare model
@@ -1153,10 +1155,10 @@ namespace Nop.Web.Controllers
             }
         }
 
-        public virtual IActionResult Create()
+        public virtual IActionResult CreateVendorProduct()
         {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
-                return AccessDeniedView();
+            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+            //    return AccessDeniedView();
 
             //validate maximum number of products per vendor
             if (_vendorSettings.MaximumProductNumber > 0 && _workContext.CurrentVendor != null
@@ -1174,10 +1176,10 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
-        public virtual IActionResult Create(ProductModel model, bool continueEditing)
+        public virtual IActionResult CreateVendorProduct(ProductModel model, bool continueEditing)
         {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
-                return AccessDeniedView();
+            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+            //    return AccessDeniedView();
 
             //validate maximum number of products per vendor
             if (_vendorSettings.MaximumProductNumber > 0 && _workContext.CurrentVendor != null
@@ -1242,13 +1244,17 @@ namespace Nop.Web.Controllers
 
                 SuccessNotification(_localizationService.GetResource("Admin.Catalog.Products.Added"));
 
-                if (!continueEditing)
-                    return RedirectToAction("List");
+                //if (!continueEditing)
+                //    return RedirectToAction("List");
 
                 //selected tab
                 SaveSelectedTabName();
 
-                return RedirectToAction("Edit", new { id = product.Id });
+                var vendor = _vendorService.GetVendorById(product.VendorId);
+
+                //return RedirectToAction("Edit", new { id = product.Id });
+
+                return RedirectToAction("Edit", "Vendor", new { email = vendor.Email });
             }
 
             //prepare model
@@ -1287,8 +1293,8 @@ namespace Nop.Web.Controllers
         [HttpPost]
         public virtual IActionResult DeleteSelected(ICollection<int> selectedIds)
         {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
-                return AccessDeniedView();
+            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+            //    return AccessDeniedView();
 
             if (selectedIds != null)
             {
