@@ -33,6 +33,11 @@ $(function () {
     }
 
 
+    // Tabs init
+    $('.nav-tabs .nav-link').click(function () {
+        $(this).tab('show');
+    })
+
     // Search init
     if ($('.service').length) {
         $('.search').click(function (e) {

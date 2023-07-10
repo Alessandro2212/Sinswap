@@ -930,6 +930,15 @@ div.btn-container .btn-color-mode-switch input[type=checkbox]:checked ~ .alert {
   background-color: rgba(0, 0, 0, 0.35);
   transition: background-color 0.15s;
 }
+.btn.btn-black {
+  background-color: #171717;
+  border: #171717;
+  color: #fff;
+}
+.btn.btn-black:hover {
+  background-color: rgba(15, 15, 15, 0.35);
+  transition: background-color 0.15s;
+}
 
 .modal .btn {
   width: 100%;
@@ -1695,6 +1704,194 @@ nav .cartFoldout {
 @media (max-width: 768px) {
   .newsContainer .container .newsCard {
     font-size: 14px;
+  }
+}
+header.blogDetail.faqHome {
+  min-height: 440px;
+  height: 440px;
+}
+
+.faqHomeContainer h3 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 600;
+  margin: 40px 0 10px 0;
+}
+.faqHomeContainer .faqTabs {
+  margin: 20px 0 100px 0;
+}
+.faqHomeContainer .faqTabs .nav {
+  margin: 30px 0 0 0;
+}
+.faqHomeContainer .faqTabs .nav.nav-tabs {
+  border-bottom: none;
+}
+.faqHomeContainer .faqTabs .nav .nav-item {
+  width: 25%;
+}
+.faqHomeContainer .faqTabs .nav .nav-link {
+  border: 2px solid #fff;
+  border-radius: 10px 10px 0 0;
+  color: #171717;
+  background-color: #f5f5f5;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  padding: 1rem;
+}
+.faqHomeContainer .faqTabs .nav .nav-link.active {
+  border-bottom: 2px solid #f5f5f5;
+  background-color: #f5f5f5;
+}
+.faqHomeContainer .faqTabs .tab-content .tab-pane {
+  border-radius: 0px 0px 10px 10px;
+  border: 1px solid #fff;
+  border-top: none;
+  background-color: #f5f5f5;
+  padding: 40px;
+}
+.faqHomeContainer .faqTabs .tab-content .tab-pane .categoryButton {
+  text-align: center;
+  border: 2px solid #dedede;
+  border-radius: 10px;
+  background-color: #fafafa;
+  padding: 40px;
+  margin: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.faqHomeContainer .faqTabs .tab-content .tab-pane .categoryButton:hover {
+  border: 2px solid #b0b0b0;
+  cursor: pointer;
+  transition: border 0.15s;
+}
+.faqHomeContainer .faqCategories {
+  margin-bottom: 100px;
+  border-top: 1px solid #dedede;
+}
+.faqHomeContainer .faqCategories .faqCategoryCard {
+  text-align: center;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  background-color: #fafafa;
+  padding: 50px 40px;
+  margin: 20px;
+}
+.faqHomeContainer .faqCategories .faqCategoryCard .fa {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+.faqHomeContainer .faqCategories .faqCategoryCard .btn {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 40px;
+}
+.faqHomeContainer .faqCategories .faqCategoryCard.general {
+  color: #171717;
+}
+.faqHomeContainer .faqCategories .faqCategoryCard.general .btn {
+  background-color: #171717;
+}
+.faqHomeContainer .faqCategories .faqCategoryCard.general .btn:hover {
+  background-color: rgba(15, 15, 15, 0.75);
+  transition: background-color 0.15s;
+}
+.faqHomeContainer .faqCategories .faqCategoryCard.seller .btn {
+  background-color: #2d7de4;
+}
+.faqHomeContainer .faqCategories .faqCategoryCard.seller .btn:hover {
+  background-color: rgba(45, 125, 228, 0.75);
+  transition: background-color 0.15s;
+}
+.faqHomeContainer .faqCategories .faqCategoryCard.buyer .btn {
+  background-color: #fd6721;
+}
+.faqHomeContainer .faqCategories .faqCategoryCard.buyer .btn:hover {
+  background-color: rgba(253, 103, 33, 0.75);
+  transition: background-color 0.15s;
+}
+
+header.blogDetail.faqItemDetail {
+  min-height: 330px;
+  height: 330px;
+}
+
+.faqItemContainer {
+  margin-top: 75px;
+}
+.faqItemContainer .container {
+  margin-bottom: 55px;
+  padding: 0 25px;
+}
+.faqItemContainer .container .faqMenu ul {
+  padding: 0px;
+  margin: 0px;
+}
+.faqItemContainer .container .faqMenu ul li {
+  list-style: none;
+  margin-bottom: 40px;
+}
+.faqItemContainer .container .faqMenu ul li a {
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #171717;
+}
+.faqItemContainer .container .faqMenu ul li a:hover {
+  text-decoration: underline;
+}
+.faqItemContainer .container .faqItems .faqItemsContainer {
+  margin-bottom: 100px;
+}
+.faqItemContainer .container .faqItems .faqItemsContainer h3 {
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.faqItemContainer .container .faqItems .faqItemsContainer .faqCategoryRow {
+  margin-bottom: 20px;
+}
+.faqItemContainer .container .faqItems .faqItemsContainer .faqCategoryRow a {
+  color: #171717;
+  font-size: 20px;
+}
+
+.faqItemModal .modal-header {
+  padding: 1rem 3rem 0.5rem 3rem !important;
+}
+.faqItemModal .modal-header h5 {
+  padding: 40px 0px 10px 0px;
+  text-align: left;
+}
+.faqItemModal .modal-body {
+  padding: 1rem 3rem 6rem 3rem !important;
+}
+.faqItemModal .modal-footer {
+  padding: 0.5rem 3rem !important;
+}
+.faqItemModal .modal-footer .relatedItems {
+  margin: 40px 0;
+  width: 100%;
+}
+.faqItemModal .modal-footer .relatedItems ul {
+  padding: 0;
+  margin: 20px 0 0 0;
+}
+.faqItemModal .modal-footer .relatedItems ul li {
+  margin-bottom: 10px;
+  list-style: none;
+}
+.faqItemModal .modal-footer .relatedItems ul li a {
+  text-decoration: none;
+  color: #171717;
+}
+.faqItemModal .modal-footer .relatedItems ul li a:hover {
+  text-decoration: none;
+}
+
+@media (max-width: 992px) {
+  .faqHomeContainer .faqTabs .nav .nav-item {
+    width: 33%;
   }
 }
 .featuredContainer {

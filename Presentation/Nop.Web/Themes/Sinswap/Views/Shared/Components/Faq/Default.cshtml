@@ -1,0 +1,75 @@
+﻿@using Nop.Web.Models.Common
+@model Nop.Web.Models.Common.FaqViewModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+
+@*<div class="container-fluid vendorFaqContainer">
+    <div class="row">
+        <div class="col-12">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Frequently Asked Questions</h2>
+                        <div id="accordionFaq">
+                            @foreach(var catfaq in Model.FrequentCategoryFaqs)
+                            {
+                                <h1>Category</h1>
+                                <h2>@catfaq.Name</h2>
+                                <h1>Faq</h1>
+                                @foreach(var faq in Model.FrequentCategoryFaqViewModels.Where(x=>x.CategoryFaqId == catfaq.Id).ToList())
+                                {
+                                    <h2>@faq.Title</h2>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+*@
+
+<div class="container-fluid faqItemContainer">
+    <div class="row">
+        <div class="col-12">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 faqMenu">
+                        <ul>
+                            @foreach(var catfaq in Model.FrequentCategoryFaqs) {
+                                <li><a href="#cat_@catfaq.Name">@catfaq.Name</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-9 faqItems">
+                        <div class="container-fluid">
+                            @foreach(var catfaq in Model.FrequentCategoryFaqs)
+                            {
+                                <div class="faqItemsContainer">
+                                    <div id="cat_@catfaq.Name" class="row">
+                                        <div class="col-12">
+                                            <h3>@catfaq.Name</h3>
+                                        </div>
+                                    </div>
+                                    @foreach(var faq in Model.FrequentCategoryFaqViewModels.Where(x=>x.CategoryFaqId == catfaq.Id).ToList())
+                                    {
+                                        <div class="row faqCategoryRow">
+                                            <div class="col-6">
+                                                <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#faqItemModal">@faq.Title</a>
+                                            </div>
+                                            <div class="col-6">
+                                                <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#faqItemModal">@faq.Title</a>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

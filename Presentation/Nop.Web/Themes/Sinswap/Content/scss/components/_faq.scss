@@ -1,0 +1,264 @@
+﻿// Faq homepage
+header.blogDetail.faqHome {
+    min-height: 440px;
+    height: 440px;
+}
+
+.faqHomeContainer {
+    h3 {
+        text-align: center;
+        font-size: 40px;
+        font-weight: 600;
+        margin: 40px 0 10px 0;
+    }
+
+    .faqTabs {
+        margin: 20px 0 100px 0;
+
+        .nav {
+            margin: 30px 0 0 0;
+
+            &.nav-tabs {
+                border-bottom: none;
+            }
+
+            .nav-item {
+                width: 25%;
+            }
+
+            .nav-link {
+                border: 2px solid $white;
+                border-radius: 10px 10px 0 0;
+                color: $black;
+                background-color: $grey4;
+                font-size: 20px;
+                font-weight: 600;
+                text-align: center;
+                padding: 1rem;
+
+                &.active {
+                    border-bottom: 2px solid $grey4;
+                    background-color: $grey4;
+                }
+            }
+        }
+
+        .tab-content {
+            .tab-pane {
+                border-radius: 0px 0px 10px 10px;
+                border: 1px solid $white;
+                border-top: none;
+                background-color: $grey4;
+                padding: 40px;
+
+                .categoryButton {
+                    text-align: center;
+                    border: 2px solid $grey5;
+                    border-radius: 10px;
+                    background-color: $grey1;
+                    padding: 40px;
+                    margin: 20px;
+                    font-size: 20px;
+                    font-weight: 600;
+
+                    &:hover {
+                        border: 2px solid $grey12;
+                        cursor: pointer;
+                        transition: border 0.15s;
+                    }
+                }
+            }
+        }
+    }
+
+    .faqCategories {
+        margin-bottom: 100px;
+        border-top: 1px solid $grey5;
+
+        .faqCategoryCard {
+            text-align: center;
+            border: 1px solid $grey5;
+            border-radius: 10px;
+            background-color: $grey1;
+            padding: 50px 40px;
+            margin: 20px;
+
+            .fa {
+                font-size: 50px;
+                margin-bottom: 20px;
+            }
+
+            .btn {
+                font-size: 20px;
+                font-weight: 600;
+                padding: 10px 40px;
+            }
+
+            &.general {
+                color: $black;
+
+                .btn {
+                    background-color: $black;
+
+                    &:hover {
+                        background-color: rgba(15,15,15,.75);
+                        transition: background-color .15s;
+                    }
+                }
+            }
+
+            &.seller {
+                .btn {
+                    background-color: $seller;
+
+                    &:hover {
+                        background-color: rgba(45, 125, 228, .75);
+                        transition: background-color .15s;
+                    }
+                }
+            }
+
+            &.buyer {
+                .btn {
+                    background-color: $buyer;
+
+                    &:hover {
+                        background-color: rgba(253, 103, 33, .75);
+                        transition: background-color .15s;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Faq item page
+header.blogDetail.faqItemDetail {
+    min-height: 330px;
+    height: 330px;
+}
+
+.faqItemContainer {
+    margin-top: 75px;
+
+    .container {
+        margin-bottom: 55px;
+        padding: 0 25px;
+
+        .faqMenu {
+            ul {
+                padding: 0px;
+                margin: 0px;
+
+                li {
+                    list-style: none;
+                    margin-bottom: 40px;
+
+                    a {
+                        font-size: 20px;
+                        font-weight: 600;
+                        text-decoration: none;
+                        color: $black;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+
+        .faqItems {
+            .faqItemsContainer {
+                margin-bottom: 100px;
+
+                h3 {
+                    font-weight: 600;
+                    font-size: 24px;
+                    margin-bottom: 20px;
+                }
+
+                .faqCategoryRow {
+                    margin-bottom: 20px;
+
+                    a {
+                        color: $black;
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.faqItemModal {
+    .modal-header {
+        padding: 1rem 3rem 0.5rem 3rem!important;
+
+        h5 {
+            padding: 40px 0px 10px 0px;
+            text-align: left;
+        }
+    }
+
+    .modal-body {
+        padding: 1rem 3rem 6rem 3rem!important;
+    }
+
+    .modal-footer {
+        padding: 0.5rem 3rem!important;
+
+        .relatedItems {
+            margin: 40px 0;
+            width: 100%;
+
+            ul {
+                padding: 0;
+                margin: 20px 0 0 0;
+
+                li {
+                    margin-bottom: 10px;
+                    list-style: none;
+
+                    a {
+                        text-decoration: none;
+                        color: $black;
+
+                        &:hover {
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+    .faqHomeContainer {
+        .faqTabs {
+            .nav {
+                .nav-item {
+                    width: 33%;
+                }
+            }
+        }
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 576px) {
+}
