@@ -62,7 +62,7 @@
                             <div class="col-6 col-lg-3">
                                 <div class="categoryCard @{if (!string.IsNullOrEmpty(@item.ParentCategoryName)) {@item.ParentCategoryName.ToLower()}}" style="background-image: url('@item.PictureModel.ImageUrl')">
                                     <div class="sellers"><i class="fa fa-user"></i> <span>2.032</span></div>
-                                    <div class="category"><a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">@item.Name <span>@item.NumberOfVendorsForSubCategory</span></a></div>
+                                    <div class="category"><a href="@Url.RouteUrl("Category", new { SeName = item.SeName })" title="@item.PictureModel.Title">@item.Name <span>123</span></a></div>
                                 </div>
                             </div>
                         }

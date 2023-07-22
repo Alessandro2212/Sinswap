@@ -59,6 +59,10 @@
                 font-size: 12px;
                 opacity: 0.7;
                 color: $white;
+
+                a {
+                    color: $white;
+                }
             }
 
             &.noImg {
@@ -74,6 +78,10 @@
             &.news {
                 background: $news;
             }
+        }
+
+        .more {
+            color: $white;
         }
     }
 }

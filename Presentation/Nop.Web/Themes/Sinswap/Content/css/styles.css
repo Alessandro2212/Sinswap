@@ -320,6 +320,22 @@ template {
     background-position: 0% 84%;
   }
 }
+@-webkit-keyframes flash {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes flash {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 html,
 body {
   font-family: "Montserrat", sans-serif;
@@ -560,6 +576,15 @@ a.more:hover {
 .breadcrumbRow .breadcrumbContainer .divider {
   color: #999999;
   display: inline;
+}
+
+.slick-slide a:hover,
+.newsCard:hover .newsImgContainer,
+.featuredCard:hover,
+.popularMemberCard a:hover .miniVendorImg {
+  opacity: 1;
+  -webkit-animation: flash 1.5s;
+  animation: flash 1.5s;
 }
 
 .categoryCard {
@@ -902,7 +927,7 @@ div.btn-container .btn-color-mode-switch input[type=checkbox]:checked ~ .alert {
   color: #fff;
 }
 .btn.btn-light {
-  border: 1px solid #171717 !important;
+  /*border: 1px solid $black !important;*/
   background-color: #fff;
   color: #171717;
   font-weight: 500;
@@ -921,6 +946,9 @@ div.btn-container .btn-color-mode-switch input[type=checkbox]:checked ~ .alert {
   background: #fff url("../images/social/btn-apple.svg") 17px center no-repeat;
   background-size: 16.3px 20px;
 }
+.btn.btn-light:focus {
+  box-shadow: none;
+}
 .btn.btn-grey {
   background-color: #c4c4c4;
   border: #c4c4c4;
@@ -938,6 +966,13 @@ div.btn-container .btn-color-mode-switch input[type=checkbox]:checked ~ .alert {
 .btn.btn-black:hover {
   background-color: rgba(15, 15, 15, 0.35);
   transition: background-color 0.15s;
+}
+.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+  box-shadow: none;
+}
+.btn.btn-primary:not(:disabled):not(.disabled):active {
+  background-color: inherit;
+  border-color: inherit;
 }
 
 .modal .btn {
@@ -1691,6 +1726,9 @@ nav .cartFoldout {
   opacity: 0.7;
   color: #fff;
 }
+.newsContainer .container .newsCard .category a {
+  color: #fff;
+}
 .newsContainer .container .newsCard.noImg p {
   padding: 60px;
 }
@@ -1699,6 +1737,9 @@ nav .cartFoldout {
 }
 .newsContainer .container .newsCard.news {
   background: #e4007c;
+}
+.newsContainer .container .more {
+  color: #fff;
 }
 
 @media (max-width: 768px) {

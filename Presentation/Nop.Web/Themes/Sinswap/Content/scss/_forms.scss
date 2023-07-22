@@ -200,7 +200,7 @@ div.btn-container {
     }
 
     &.btn-light {
-        border: 1px solid $black !important;
+        /*border: 1px solid $black !important;*/
         background-color: $white;
         color: $black;
         font-weight: 500;
@@ -220,6 +220,10 @@ div.btn-container {
         &.btn-apple {
             background: $white url("../images/social/btn-apple.svg") 17px center no-repeat;
             background-size: 16.3px 20px;
+        }
+
+        &:focus {
+            box-shadow: none;
         }
     }
 
@@ -243,6 +247,15 @@ div.btn-container {
             background-color: rgba(15,15,15,.35);
             transition: background-color .15s;
         }
+    }
+
+    &.btn-primary:not(:disabled):not(.disabled):active:focus {
+        box-shadow: none;
+    }
+
+    &.btn-primary:not(:disabled):not(.disabled):active {
+        background-color: inherit;
+        border-color: inherit;
     }
 }
 

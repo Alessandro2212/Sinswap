@@ -277,6 +277,16 @@ a.more {
     }
 }
 
+// Images
+.slick-slide a:hover,
+.newsCard:hover .newsImgContainer,
+.featuredCard:hover,
+.popularMemberCard a:hover .miniVendorImg {
+    opacity: 1;
+    -webkit-animation: flash 1.5s;
+    animation: flash 1.5s;
+}
+
 // Category card
 .categoryCard {
     border-radius: 5px;
