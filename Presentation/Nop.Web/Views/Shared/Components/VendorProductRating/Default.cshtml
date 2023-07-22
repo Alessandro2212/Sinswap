@@ -11,16 +11,30 @@
         }
         @for (int i = 0; i < Math.Truncate(@Model.ReviewAvgStars); i++)
         {
-            <i class="fas fa-star"></i>
+            <a href="#vendorReviews"><i class="fas fa-star"></i></a>
         }
         @if (hasHalf)
         {
-            <i class="fas fa-star-half-alt"></i>
-        }      
+            <a href="#vendorReviews"><i class="fas fa-star-half-alt"></i></a>
+        }
+        @if (@Model.ReviewAvgStars == 0 || Double.IsNaN(@Model.ReviewAvgStars))
+        {
+            <i class="fa fa-star-o" aria-hidden="true"></i>
+            <i class="fa fa-star-o" aria-hidden="true"></i>
+            <i class="fa fa-star-o" aria-hidden="true"></i>
+            <i class="fa fa-star-o" aria-hidden="true"></i>
+            <i class="fa fa-star-o" aria-hidden="true"></i>
+        }
     </div>
 
     <div class="ratingStats">
-        <a href="#">@Model.NumberOfReviews Reviews</a>
-        <a href="#">@Model.NumberOfSoldProducts items sold</a>
+        @if (@Model.NumberOfReviews > 0) {
+            <a href="#vendorReviews">@Model.NumberOfReviews Reviews</a>
+        } else
+        {
+            <p>@Model.NumberOfReviews Reviews</p>
+        }
+
+        @Model.NumberOfSoldProducts items sold
     </div>
 </div>

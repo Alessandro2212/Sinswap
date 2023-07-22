@@ -2,7 +2,7 @@
 @{
     Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
 }
-@if (Model.VendorPictureUrls?.ToList().Count > 0)
+@if (Model.VendorPictureUrls?.ToList().Count > 1)
 {   
     <a id="media"></a>
     <div class="container-fluid vendorMediaContainer bgGrey2">
@@ -13,13 +13,13 @@
                         <div class="col-12">
                             <div id="lg_vendorMedia" class="vendorMediaSlide">
                                 @foreach (var vendorPicture in Model.VendorPictureUrls)
-                                {                               
+                                {
                                     <div class="vendorMediaCard" data-src="@vendorPicture">
                                         <a href="@vendorPicture" data-lg-size="1600-800">
                                             <img src="@vendorPicture" />
                                         </a>
                                     </div>
-                                }                            
+                                }
                             </div>
                         </div>
                     </div>

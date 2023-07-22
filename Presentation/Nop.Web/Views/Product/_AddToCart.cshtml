@@ -78,7 +78,12 @@
                     //<input type="button" id="add-to-cart-button-@Model.ProductId" class="button-1 add-to-cart-button btn btn-order" value="@addToCartText" data-productid="@Model.ProductId" onclick="AjaxCart.addproducttocart_details('@Url.RouteUrl("AddProductToCart-Details", new {productId = Model.ProductId, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})', '#product-details-form');return false;" />
                     <input type="button" id="add-to-cart-button-@Model.ProductId" class="button-1 add-to-cart-button btn btn-order" value="@addToCartText" data-productid="@Model.ProductId" onclick="AjaxCart.addproducttocart_catalog_with_amount('@addtocartlink');return false;" />
                 }
+                <div class="cartTotal">
+                    <span>Total</span>
+                    &euro;35,<sup>95</sup>
+                </div>
             </div>
+
             if (!string.IsNullOrEmpty(Model.PreOrderAvailabilityStartDateTimeUserTime))
             {
                 <div class="pre-order-availability-date">

@@ -8,13 +8,14 @@
     <div class="container vendorCategoriesContainer">
         <div class="row">
             <div class="col-12">
-                <h2>You can buy all of these from me</h2>
+                @*<h2>You can buy all of these from me</h2>*@
                 <div class="flex-row row no-gutters">
                     @foreach (var vendorProduct in Model.VendorProducts)
                     {
                         <div class="col-6 col-lg-3">
                             <div class="categoryCard clothing" style="background-image: url('@vendorProduct.DefaultPictureModel.ImageUrl')" data-url="/@vendorProduct.SeName" data-dismiss="modal" data-toggle="modal" data-target="#productModal">
                                 <div class="category">
+                                    <div class="mainCat">Categoryname</div>
                                     <span>@vendorProduct.Name</span>
                                     <div class="priceLabel">from</div>
                                     <div class="price">@vendorProduct.Price</div>

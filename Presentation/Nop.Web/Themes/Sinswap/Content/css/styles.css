@@ -339,6 +339,7 @@ template {
 html,
 body {
   font-family: "Montserrat", sans-serif;
+  scroll-behavior: smooth;
 }
 
 /*body.modalActive{
@@ -544,19 +545,19 @@ a.more:hover {
 }
 
 .breadcrumbRow {
-  border-bottom: 2px solid #dedede;
-  padding: 45px 0 0 0;
-  margin: 0 0 45px 0;
+  padding: 5px 0 0 5px;
+  margin: 0;
 }
 .breadcrumbRow .breadcrumbContainer {
   margin-bottom: -2px;
   font-weight: 600;
   padding: 0px;
-}
-.breadcrumbRow .breadcrumbContainer .breadcrumbBg {
-  background-color: #fff;
-  padding: 0 90px 0 0;
-  display: inline-block;
+  /*        .breadcrumbBg {
+              background-color: $white;
+              padding: 0 90px 0 0;
+              display: inline-block;
+          }
+  */
 }
 .breadcrumbRow .breadcrumbContainer a {
   font-weight: 500;
@@ -576,6 +577,10 @@ a.more:hover {
 .breadcrumbRow .breadcrumbContainer .divider {
   color: #999999;
   display: inline;
+}
+.breadcrumbRow .categoryInfoBtn {
+  float: right;
+  margin-top: -11px;
 }
 
 .slick-slide a:hover,
@@ -675,6 +680,10 @@ a.more:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   transition: top 0.15s, opacity 0.15s;
+}
+.vendorCategoriesContainer .categoryCard .category .mainCat {
+  font-size: 14px;
+  font-weight: 300;
 }
 .vendorCategoriesContainer .categoryCard .category span {
   display: block;
@@ -1582,6 +1591,7 @@ nav .cartFoldout {
 .sellersContainer .topSellerCard,
 .topSellersContainer .topSellerCard {
   margin-top: 10px;
+  padding: 0 5px;
 }
 .sellersContainer .topSellerCard .miniVendorImg,
 .topSellersContainer .topSellerCard .miniVendorImg {
@@ -1637,7 +1647,10 @@ nav .cartFoldout {
 }
 
 .sellersContainer {
-  padding: 20px 30px 0 30px;
+  padding: 35px 25px 0 25px;
+}
+.sellersContainer .breadcrumbRow {
+  margin-bottom: 20px;
 }
 .sellersContainer .categoryDesc h1 {
   font-size: 42px;
@@ -1740,6 +1753,7 @@ nav .cartFoldout {
 }
 .newsContainer .container .more {
   color: #fff;
+  padding-left: 5px;
 }
 
 @media (max-width: 768px) {
@@ -2069,7 +2083,7 @@ header.blogDetail.faqItemDetail {
   padding: 45px 250px 0 250px;
 }
 .category-page.empty .topSellersContainer {
-  padding: 45px 30px 0 30px;
+  padding: 35px 25px 0 25px;
 }
 .category-page.empty .topSellersContainer .no-data {
   text-align: center;
@@ -2508,25 +2522,29 @@ header.vendorRegistration .stepIconContainer ul li.active {
 .vendorInfoContainer .starsContainer .ratingStars {
   float: left;
 }
-.vendorInfoContainer .starsContainer .ratingStars .fas {
+.vendorInfoContainer .starsContainer .ratingStars .fas, .vendorInfoContainer .starsContainer .ratingStars .fa {
   color: #feb32b;
   font-size: 30px;
 }
 .vendorInfoContainer .starsContainer .ratingStats {
   padding-left: 15px;
   float: left;
+  font-size: 12px;
+  color: #919191;
+  margin-top: -1px;
 }
 .vendorInfoContainer .starsContainer .ratingStats a {
-  font-size: 12px;
   color: #919191;
   transition: color 0.15s ease-in-out;
   display: block;
-  margin-top: -1px;
 }
 .vendorInfoContainer .starsContainer .ratingStats a:hover {
   color: #171717;
   text-decoration: none;
   transition: color 0.15s ease-in-out;
+}
+.vendorInfoContainer .starsContainer .ratingStats p {
+  margin-bottom: 0px;
 }
 .vendorInfoContainer .avatarContainer .avatar {
   position: absolute;
@@ -2571,7 +2589,7 @@ header.vendorRegistration .stepIconContainer ul li.active {
 }
 
 @media (max-width: 1660px) {
-  .vendorInfoContainer .starsContainer .ratingStars .fas {
+  .vendorInfoContainer .starsContainer .ratingStars .fas, .vendorInfoContainer .starsContainer .ratingStars .fa {
     font-size: 25px;
   }
   .vendorInfoContainer .starsContainer .ratingStats {
@@ -2611,7 +2629,7 @@ header.vendorRegistration .stepIconContainer ul li.active {
   }
 }
 @media (max-width: 576px) {
-  .vendorInfoContainer .starsContainer .ratingStars .fas {
+  .vendorInfoContainer .starsContainer .ratingStars .fas, .vendorInfoContainer .starsContainer .ratingStars .fa {
     font-size: 20px;
   }
   .vendorInfoContainer .metaContainer {
@@ -3149,9 +3167,25 @@ header.vendorRegistration .stepIconContainer ul li.active {
   box-shadow: 0 4px 15px -5px #171717;
   font-size: 20px;
   font-weight: 100;
+  /*            img {
+                  margin-top: 60px;
+                  width: 100%;
+                  max-width: 205px;
+              }
+  */
 }
 .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer span {
   color: #fd6721;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer span i {
+  color: #171717;
+  font-style: normal;
+  display: inline-block;
+  width: 25px;
 }
 .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer .top3 {
   padding: 0 15px;
@@ -3163,16 +3197,11 @@ header.vendorRegistration .stepIconContainer ul li.active {
   padding: 0 15px;
   font-size: 24px;
   font-weight: 700;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 .vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer .top10 {
   padding: 0 15px;
-  opacity: 0.6;
-}
-.vendorPremiumContentContainer .vendorReviewFavoriteContainer .vendorFavouritesContainer img {
-  margin-top: 60px;
-  width: 100%;
-  max-width: 205px;
+  opacity: 0.8;
 }
 
 @media (max-width: 1660px) {
@@ -3574,6 +3603,19 @@ header.vendorRegistration .stepIconContainer ul li.active {
   font-size: 14px;
   padding: 0.375rem 1rem;
 }
+.productModal .modal-content .descColumn .orderContainer .cartTotal {
+  float: right;
+  font-size: 30px;
+  font-weight: 600;
+}
+.productModal .modal-content .descColumn .orderContainer .cartTotal span {
+  font-size: 20px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+.productModal .modal-content .descColumn .orderContainer .cartTotal sup {
+  font-size: 18px;
+}
 
 .cartContainer {
   position: relative;
@@ -3868,7 +3910,7 @@ header.blogDetail .page-title .date {
   padding-top: 40px;
 }
 .blogpost-page .blogPostContainer .blogPostBody {
-  padding-right: 80px;
+  /*padding-right: 80px;*/
 }
 .blogpost-page .blogPostContainer .blogPostBody .blogImg {
   width: 100%;
@@ -3915,22 +3957,24 @@ header.blogDetail .page-title .date {
   text-align: center;
   margin-bottom: 20px;
 }
-.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard {
+.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard .articleContainer {
   text-align: center;
   margin-bottom: 40px;
   border-radius: 6px 6px 5px 5px;
+  padding-bottom: 10px;
 }
-.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard.seller {
+.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard .articleContainer.seller {
   background-color: #2d7de4;
 }
-.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard.buyer {
+.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard .articleContainer.buyer {
   background-color: #fd6721;
 }
-.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard img {
+.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard .articleContainer img {
   border-radius: 5px 5px 0 0;
   margin-bottom: 10px;
+  width: 100%;
 }
-.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard h5 {
+.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard .articleContainer h5 {
   font-size: 20px;
   font-weight: 200;
   color: #fff;
@@ -3938,7 +3982,7 @@ header.blogDetail .page-title .date {
   margin: 0px;
   line-height: 30px;
 }
-.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard .category {
+.blogpost-page .blogPostContainer .blogPostSidebar .otherArticleCard .articleContainer .category {
   color: #fff;
   font-size: 20px;
   font-weight: 600;
@@ -4094,6 +4138,7 @@ header.blogDetail .page-title .date {
 }
 .searchResultContainer .topSellerCard {
   margin-top: 10px;
+  padding: 0 5px;
 }
 .searchResultContainer .topSellerCard .miniVendorImg {
   width: 100%;

@@ -14,10 +14,10 @@
                     {
                         if ( i < 3 )
                         {
-                            <div class="top3">@(i+1). <span>@vc.CustomerName</span></div>
+                            <div class="top3"><span title="@vc.CustomerName"><i>@(i + 1).</i> @vc.CustomerName</span></div>
                         } else
                         {
-                            <div class="top5">@(i+1). <span>@vc.CustomerName</span></div>
+                            <div class="top5"><span title="@vc.CustomerName"><i>@(i + 1).</i> @vc.CustomerName</span></div>
                         }
                         <div style="display: none;">@(i++)</div>                       
                     }
@@ -25,10 +25,10 @@
                 <div class="col-12 col-md-5">
                     @foreach (var vc in Model.VendorCustomers.Skip(5).Take(5))
                     {
-                        <div class="top10">@(i+1). <span>@vc.CustomerName</span></div>
+                        <div class="top10"><span title="@vc.CustomerName"><i>@(i + 1).</i> @vc.CustomerName</span></div>
                         <div style="display: none;">@(i++)</div>
                     }
-                    <img src="/Themes/Sinswap/Content/images/favoriteSignature.gif" />
+                    @*<img src="/Themes/Sinswap/Content/images/favoriteSignature.gif" />*@
                 </div>
             </div>
         </div>

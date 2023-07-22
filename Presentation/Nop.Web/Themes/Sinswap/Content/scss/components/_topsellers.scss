@@ -26,6 +26,7 @@
 
     .topSellerCard {
         margin-top: 10px;
+        padding: 0 5px;
 
         .miniVendorImg {
             width: 100%;
@@ -78,7 +79,11 @@
 }
 
 .sellersContainer {
-    padding: 20px 30px 0 30px;
+    padding: 35px 25px 0 25px;
+
+    .breadcrumbRow {
+        margin-bottom: 20px;
+    }
 
     .categoryDesc {
         h1 {

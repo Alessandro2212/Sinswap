@@ -11,7 +11,7 @@
         .ratingStars {
             float: left;
 
-            .fas {
+            .fas, .fa {
                 color: $gold;
                 font-size: 30px;
             }
@@ -20,19 +20,24 @@
         .ratingStats {
             padding-left: 15px;
             float: left;
+            font-size: 12px;
+            color: $grey16;
+            margin-top: -1px;
 
             a {
-                font-size: 12px;
                 color: $grey16;
                 transition: color .15s ease-in-out;
                 display: block;
-                margin-top: -1px;
 
                 &:hover {
                     color: $black;
                     text-decoration: none;
                     transition: color .15s ease-in-out;
                 }
+            }
+
+            p {
+                margin-bottom: 0px;
             }
         }
     }
@@ -93,7 +98,7 @@
     .vendorInfoContainer {
         .starsContainer {
             .ratingStars {
-                .fas {
+                .fas, .fa {
                     font-size: 25px;
                 }
             }
@@ -162,7 +167,7 @@
     .vendorInfoContainer {
         .starsContainer {
             .ratingStars {
-                .fas {
+                .fas, .fa {
                     font-size: 20px;
                 }
             }

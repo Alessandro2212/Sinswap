@@ -222,6 +222,17 @@
 
             span {
                 color: $buyer;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
+
+                i {
+                    color: $black;
+                    font-style: normal;
+                    display: inline-block;
+                    width: 25px;
+                }
             }
 
             .top3 {
@@ -235,20 +246,20 @@
                 padding: 0 15px;
                 font-size: 24px;
                 font-weight: 700;
-                opacity: 0.8;
+                opacity: 0.9;
             }
 
             .top10 {
                 padding: 0 15px;
-                opacity: 0.6;
+                opacity: 0.8;
             }
 
-            img {
+/*            img {
                 margin-top: 60px;
                 width: 100%;
                 max-width: 205px;
             }
-        }
+*/        }
     }
 }
 

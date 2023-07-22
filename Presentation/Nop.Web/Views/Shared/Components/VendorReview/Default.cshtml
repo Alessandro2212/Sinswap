@@ -4,7 +4,7 @@
 }
 @if (Model.VendorReviews.ToList().Count > 0)
 {
-    <div class="col-12 vendorReviewsContainer">
+    <div id="vendorReviews" class="col-12 vendorReviewsContainer">
         <h2>Reviews</h2>
         <ul class="reviewList">
             @foreach (var vendorReview in Model.VendorReviews)
@@ -16,7 +16,7 @@
                                 int i = vendorReview.Rating;
                                 while (i > 0)
                                 {
-                                    <i class="fas fa-star" aria-hidden="true"></i>
+                                    <a href="#vendorReviews"><i class="fas fa-star" aria-hidden="true"></i></a>
                                     i--;
                                 }
                             }

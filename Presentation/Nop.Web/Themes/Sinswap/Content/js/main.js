@@ -388,10 +388,11 @@ $(function () {
             nextArrow: "<button type='button' class='slick-next'><i class='las la-angle-right'></i></button>",
             speed: 300,
             slidesToScroll: 3,
-            dots: true,
+            dots: false,
             arrows: true,
             infinite: true,
             variableWidth: true,
+            centerMode: true,
             //responsive: [
             //    {
             //        breakpoint: 1200,

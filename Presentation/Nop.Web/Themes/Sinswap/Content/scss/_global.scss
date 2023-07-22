@@ -2,6 +2,7 @@
 html,
 body {
     font-family: $fontBody;
+    scroll-behavior: smooth;
 }
 
 /*body.modalActive{
@@ -236,21 +237,19 @@ a.more {
 
 // Breadcrumb
 .breadcrumbRow {
-    border-bottom: 2px solid $grey5;
-    padding: 45px 0 0 0;
-    margin: 0 0 45px 0;
+    padding: 5px 0 0 5px;
+    margin: 0;
 
     .breadcrumbContainer {
         margin-bottom: -2px;
         font-weight: 600;
         padding: 0px;
-
-        .breadcrumbBg {
+        /*        .breadcrumbBg {
             background-color: $white;
             padding: 0 90px 0 0;
             display: inline-block;
         }
-
+*/
         a {
             font-weight: 500;
             text-decoration: underline;
@@ -274,6 +273,11 @@ a.more {
             color: $grey15;
             display: inline;
         }
+    }
+
+    .categoryInfoBtn {
+        float: right;
+        margin-top: -11px;
     }
 }
 
@@ -391,6 +395,11 @@ a.more {
         left: 50%;
         transform: translate(-50%, -50%);
         transition: top 0.15s, opacity 0.15s;
+
+        .mainCat {
+            font-size: 14px;
+            font-weight: 300;
+        }
 
         span {
             display: block;
