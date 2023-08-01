@@ -1,0 +1,232 @@
+﻿@using Nop.Web.Models.Common
+@model Nop.Web.Models.Common.FaqViewModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+
+<div class="container-fluid faqHomeContainer">
+    <div class="row">
+        <div class="col-12">
+            <div class="container">
+                <div class="row faqTabs">
+                    <div class="col-12">
+                        <h3>What do people ask us a lot?</h3>
+
+                        <ul class="nav nav-tabs">
+                            @{
+                                int i = 0;
+                            }
+                            @foreach (var catfaq in Model.FrequentCategoryFaqs)
+                            {
+                                var isActive = i == 0 ? "active" : "";
+                                <li class="nav-item">
+                                    <a class="nav-link @isActive" href="#tab_@catfaq.Name" id="@catfaq.Name-tab" data-toggle="tab" role="tab" aria-controls="tab_@catfaq.Name" aria-selected="true">@catfaq.Name</a>
+                                </li>
+                                i++;
+                            }
+                            @* <li class="nav-item">
+                            <a class="nav-link active" href="#tabGeneral" id="general-tab" data-toggle="tab" role="tab" aria-controls="tabGeneral" aria-selected="true">In general</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="#tabSeller" id="seller-tab" data-toggle="tab" role="tab" aria-controls="tabSeller" aria-selected="false">For sellers</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="#tabBuyer" id="buyer-tab" data-toggle="tab" role="tab" aria-controls="tabBuyer" aria-selected="false">For buyers</a>
+                            </li>*@
+                        </ul>
+
+                        <div class="tab-content" id="faqTabContent">
+                            @{
+                                int count = 0;
+                            }
+                            @foreach (var catfaq in Model.FrequentCategoryFaqs)
+                            {
+                                var classFirst = count == 0 ? "active" : "";
+                                var isShown = count == 0 ? "show" : "";
+                                <div class="tab-pane fade @isShown @classFirst" id="tab_@catfaq.Name" role="tabpanel" aria-labelledby="@catfaq.Name-tab">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            @foreach (var faq in Model.FrequentCategoryFaqViewModels.Where(x => x.CategoryFaqId == catfaq.Id).ToList())
+                                            {
+                                                <div class="col-12 col-md-6 col-lg-4">
+                                                    <div class="categoryButton">
+                                                        @faq.Title
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                count++;
+                            }
+                            @*<div class="tab-pane fade show active" id="tabGeneral" role="tabpanel" aria-labelledby="general-tab">
+                            <div class="container-fluid">
+                            <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            What is Sinswap?
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Can I join when I am 18?
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Do I have to show my face?
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            What's the meaning of life?
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            If roses are red and violets are blue, are you crazy too?
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            How do I contact sales dept.
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" id="tabSeller" role="tabpanel" aria-labelledby="seller-tab">
+                            <div class="container-fluid">
+                            <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Seller question
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Seller question
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Seller question
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Seller question
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Seller question
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Seller question
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="tabBuyer" role="tabpanel" aria-labelledby="buyer-tab">
+                            <div class="container-fluid">
+                            <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Buyer question
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Buyer question
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Buyer question
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Buyer question
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Buyer question
+                            </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="categoryButton">
+                            Buyer question
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="row faqCategories">
+                    <div class="col-12">
+                        <h3>These categories might also help you</h3>
+                        <div class="container-fluid categoryCardContainer">
+                            <div class="row">
+                                @foreach (var faq in Model.CategoryFaqs)
+                                {
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <div class="faqCategoryCard general">
+                                            <i class="fa @faq.Color"></i><br />
+                                            <a href="#" class="btn btn-black">@faq.Title</a>
+                                        </div>
+                                    </div>
+                                }
+                                @*<div class="col-12 col-md-6 col-lg-4">
+                                <div class="faqCategoryCard general">
+                                <i class="fa fa-globe"></i><br />
+                                <a href="#" class="btn btn-black">General</a>
+                                </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                <div class="faqCategoryCard general">
+                                <i class="fa fa-lock"></i><br />
+                                <a href="#" class="btn btn-black">Privacy</a>
+                                </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                <div class="faqCategoryCard general">
+                                <i class="fa fa-users"></i><br />
+                                <a href="#" class="btn btn-black">Accounts</a>
+                                </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                <div class="faqCategoryCard general">
+                                <i class="fa fa-wallet"></i><br />
+                                <a href="#" class="btn btn-black">Payments</a>
+                                </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                <div class="faqCategoryCard seller">
+                                <i class="fa fa-cloud-upload-alt"></i><br />
+                                <a href="#" class="btn btn-black">Sellers</a>
+                                </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                <div class="faqCategoryCard buyer">
+                                <i class="fa fa-cloud-download-alt"></i><br />
+                                <a href="#" class="btn btn-black">Buyers</a>
+                                </div>
+                                </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

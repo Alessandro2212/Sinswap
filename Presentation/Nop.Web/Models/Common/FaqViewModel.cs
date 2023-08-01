@@ -9,11 +9,14 @@ namespace Nop.Web.Models.Common
         {
             FrequentCategoryFaqs = new List<CategoryFaq>();
             FrequentCategoryFaqViewModels = new List<CategoryFaqViewModel>();
+            CategoryFaqs = new List<CategoryFaqViewModel>();
             CategoryFaqViewModels = new List<CategoryFaqViewModel>();
         }
 
         public List<CategoryFaq>  FrequentCategoryFaqs { get; set; }
         public List<CategoryFaqViewModel> FrequentCategoryFaqViewModels { get; set; }
+
+        public List<CategoryFaqViewModel> CategoryFaqs { get; set; }
         public List<CategoryFaqViewModel> CategoryFaqViewModels { get; set; }
     }
 }

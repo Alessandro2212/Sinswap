@@ -24,7 +24,45 @@ namespace Nop.Web.Factories
             this._categoryFaqRepository = categoryFaqRepository;
         }
 
-        public FaqViewModel PrepareFaqViewModel(IEnumerable<string> faqForFrequently)
+
+        public FaqViewModel PrepareFaqViewModel()
+        {
+            FaqViewModel model = new FaqViewModel();
+            var categoryFaqs = _categoryFaqRepository.Table.Include(c => c.Faqs).ToList();
+            
+            foreach (var catFaq in categoryFaqs)
+            {
+                var catFaqModel = new CategoryFaqViewModel
+                {
+                    CategoryFaqId = catFaq.Id,
+                    Title = catFaq.Name,
+                    SubTitle = catFaq.SubName,
+                    PictureUrl = _pictureService.GetPictureUrl(catFaq.PictureId),
+                    Color = catFaq.Color
+                };
+                model.CategoryFaqs.Add(catFaqModel);
+
+                var faqs = categoryFaqs.Where(cf => cf.Name.Equals(catFaq.Name))
+                   .SelectMany(cf => cf.Faqs)
+                   .OrderByDescending(f => f.NumberOfReadings);
+
+                foreach (var f in faqs)
+                {
+                    var faqModel = new CategoryFaqViewModel
+                    {
+                        CategoryFaqId = catFaq.Id,
+                        FaqId = f.Id,
+                        Title = f.QuestionText
+                    };
+                    model.CategoryFaqViewModels.Add(faqModel);
+                }
+
+            }
+
+            return model;
+        }
+
+        public FaqViewModel PrepareFrequentFaqViewModel(IEnumerable<string> faqForFrequently)
         {
             FaqViewModel model = new FaqViewModel();
             var categoryFaqs = _categoryFaqRepository.Table.Include(c => c.Faqs).ToList();
@@ -35,7 +73,7 @@ namespace Nop.Web.Factories
                 var faqs = categoryFaqs.Where(cf => cf.Name.Equals(ff))
                     .SelectMany(cf => cf.Faqs)
                     .OrderByDescending(f => f.NumberOfReadings)
-                    .Take(2);
+                    .Take(6);
 
                 foreach (var f in faqs)
                 {
@@ -59,10 +97,27 @@ namespace Nop.Web.Factories
                     PictureUrl = _pictureService.GetPictureUrl(catFaq.PictureId),
                     Color = catFaq.Color
                 };
-                model.CategoryFaqViewModels.Add(catFaqModel);
+                model.CategoryFaqs.Add(catFaqModel);
+
+                var faqs = categoryFaqs.Where(cf => cf.Name.Equals(catFaq.Name))
+                   .SelectMany(cf => cf.Faqs)
+                   .OrderByDescending(f => f.NumberOfReadings);
+
+                foreach (var f in faqs)
+                {
+                    var faqModel = new CategoryFaqViewModel
+                    {
+                        CategoryFaqId = f.CategoryFaqId,
+                        FaqId = f.Id,
+                        Title = f.QuestionText
+                    };
+                    model.CategoryFaqViewModels.Add(faqModel);
+                }
+
             }
 
             return model;
         }
+
     }
 }

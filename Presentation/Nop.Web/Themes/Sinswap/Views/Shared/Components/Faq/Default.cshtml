@@ -4,33 +4,6 @@
     Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
 }
 
-@*<div class="container-fluid vendorFaqContainer">
-    <div class="row">
-        <div class="col-12">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h2>Frequently Asked Questions</h2>
-                        <div id="accordionFaq">
-                            @foreach(var catfaq in Model.FrequentCategoryFaqs)
-                            {
-                                <h1>Category</h1>
-                                <h2>@catfaq.Name</h2>
-                                <h1>Faq</h1>
-                                @foreach(var faq in Model.FrequentCategoryFaqViewModels.Where(x=>x.CategoryFaqId == catfaq.Id).ToList())
-                                {
-                                    <h2>@faq.Title</h2>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-*@
-
 <div class="container-fluid faqItemContainer">
     <div class="row">
         <div class="col-12">
@@ -38,22 +11,22 @@
                 <div class="row">
                     <div class="col-3 faqMenu">
                         <ul>
-                            @foreach(var catfaq in Model.FrequentCategoryFaqs) {
-                                <li><a href="#cat_@catfaq.Name">@catfaq.Name</a></li>
+                            @foreach(var catfaq in Model.CategoryFaqs) {
+                                <li><a href="#cat_@catfaq.Title">@catfaq.Title</a></li>
                             }
                         </ul>
                     </div>
                     <div class="col-9 faqItems">
                         <div class="container-fluid">
-                            @foreach(var catfaq in Model.FrequentCategoryFaqs)
+                            @foreach(var catfaq in Model.CategoryFaqs)
                             {
                                 <div class="faqItemsContainer">
-                                    <div id="cat_@catfaq.Name" class="row">
+                                    <div id="cat_@catfaq.Title" class="row">
                                         <div class="col-12">
-                                            <h3>@catfaq.Name</h3>
+                                            <h3>@catfaq.Title</h3>
                                         </div>
                                     </div>
-                                    @foreach(var faq in Model.FrequentCategoryFaqViewModels.Where(x=>x.CategoryFaqId == catfaq.Id).ToList())
+                                    @*@foreach(var faq in Model.CategoryFaqViewModels.Where(x=>x.CategoryFaqId == catfaq.CategoryFaqId).ToList())
                                     {
                                         <div class="row faqCategoryRow">
                                             <div class="col-6">
@@ -61,6 +34,19 @@
                                             </div>
                                             <div class="col-6">
                                                 <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#faqItemModal">@faq.Title</a>
+                                            </div>
+                                        </div>
+                                    }*@
+                                    @for(int i = 0; i < Model.CategoryFaqViewModels.Where(x=>x.CategoryFaqId == catfaq.CategoryFaqId).ToList().Count()-1; i=i+2)
+                                    {
+                                        var faq1 = Model.CategoryFaqViewModels.Where(x => x.CategoryFaqId == catfaq.CategoryFaqId).ToArray()[i];
+                                        var faq2 = Model.CategoryFaqViewModels.Where(x => x.CategoryFaqId == catfaq.CategoryFaqId).ToArray()[i+1];
+                                        <div class="row faqCategoryRow">
+                                            <div class="col-6">
+                                                <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#faqItemModal">@faq1.Title</a>
+                                            </div>
+                                            <div class="col-6">
+                                                <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#faqItemModal">@faq2.Title</a>
                                             </div>
                                         </div>
                                     }

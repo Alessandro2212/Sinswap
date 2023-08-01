@@ -5,6 +5,7 @@ namespace Nop.Web.Factories
 {
     public partial interface IFaqModelFactory
     {
-        FaqViewModel PrepareFaqViewModel(IEnumerable<string> strings);
+        FaqViewModel PrepareFrequentFaqViewModel(IEnumerable<string> strings);
+        FaqViewModel PrepareFaqViewModel();
     }
 }
