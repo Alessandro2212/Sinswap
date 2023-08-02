@@ -1,0 +1,79 @@
+﻿@using Nop.Web.Framework.Infrastructure
+@model FAQModel
+
+@{
+    Layout = "_ColumnsOne";
+
+    //page class
+    Html.AppendPageCssClassParts("html-contact-page");
+}
+
+<header class="blogDetail faqItemDetail">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                <a href="@Url.RouteUrl("HomePage")">
+                    <img class="logo" title="Sinning is Winning" alt="Sinswap" src="/Themes/Sinswap/content/images/logoVendor.svg">
+                </a>
+            </div>
+            @await Component.InvokeAsync("Header")
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8">
+                @await Component.InvokeAsync("Widget", new { widgetZone = Nop.Web.Framework.Infrastructure.PublicWidgetZones.BlogPostPageTop, additionalData = Model })
+                <div class="page-title">
+                    <div class="tags">
+                        <a href="#">Got questions?</a>
+                    </div>
+                    <div class="title">Find the answers here!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="page faq-page">
+    <div class="page-body">
+        @await Component.InvokeAsync("Faq")
+    </div>
+</div>
+
+<div class="modal fade faqItemModal" id="faqItemModal" tabindex="-1" role="dialog" aria-labelledby="faqItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title w-100">
+                    <h5 id="faqItemModalLabel">Report an account</h5>
+                </div>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="text">
+                    To report an account, go to their profile page, click on the three dots in the upper right-hand corner and select "Report (user)".<br />
+                    <br />
+                    To report an individual post, click on the three dots in the top right of the post and select "Report".
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="relatedItems">
+                    <div class="text">
+                        <h5>Related articles</h5>
+                        <ul>
+                            <li><a href="#">I am unable to login to my account</a></li>
+                            <li><a href="#">Deleting your account</a></li>
+                            <li><a href="#">Who van use Sinswap?</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@* end: Faq item page*@
+@* end piece in other page*@

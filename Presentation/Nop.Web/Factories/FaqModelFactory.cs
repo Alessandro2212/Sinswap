@@ -29,7 +29,7 @@ namespace Nop.Web.Factories
         {
             FaqViewModel model = new FaqViewModel();
             var categoryFaqs = _categoryFaqRepository.Table.Include(c => c.Faqs).ToList();
-            
+
             foreach (var catFaq in categoryFaqs)
             {
                 var catFaqModel = new CategoryFaqViewModel
@@ -52,7 +52,8 @@ namespace Nop.Web.Factories
                     {
                         CategoryFaqId = catFaq.Id,
                         FaqId = f.Id,
-                        Title = f.QuestionText
+                        Title = f.QuestionText,
+                        SubTitle = f.ReplyText
                     };
                     model.CategoryFaqViewModels.Add(faqModel);
                 }
@@ -81,7 +82,8 @@ namespace Nop.Web.Factories
                     {
                         CategoryFaqId = f.CategoryFaqId,
                         FaqId = f.Id,
-                        Title = f.QuestionText
+                        Title = f.QuestionText,
+                        SubTitle = f.ReplyText
                     };
                     model.FrequentCategoryFaqViewModels.Add(catFaqModel);
                 }
@@ -109,7 +111,8 @@ namespace Nop.Web.Factories
                     {
                         CategoryFaqId = f.CategoryFaqId,
                         FaqId = f.Id,
-                        Title = f.QuestionText
+                        Title = f.QuestionText,
+                        SubTitle = f.ReplyText
                     };
                     model.CategoryFaqViewModels.Add(faqModel);
                 }
