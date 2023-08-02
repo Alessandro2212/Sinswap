@@ -43,10 +43,10 @@
                                         var faq2 = Model.CategoryFaqViewModels.Where(x => x.CategoryFaqId == catfaq.CategoryFaqId).ToArray()[i+1];
                                         <div class="row faqCategoryRow">
                                             <div class="col-6">
-                                                <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#faqItemModal">@faq1.Title</a>
+                                                <a href="#" class="detailed-faq" data-dismiss="modal" data-toggle="modal" data-target="#faqItemModal" data-title="@faq1.Title" data-subtitle="@faq1.SubTitle">@faq1.Title</a>
                                             </div>
                                             <div class="col-6">
-                                                <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#faqItemModal">@faq2.Title</a>
+                                                <a href="#" class="detailed-faq" data-dismiss="modal" data-toggle="modal" data-target="#faqItemModal" data-title="@faq2.Title" data-subtitle="@faq2.SubTitle">@faq2.Title</a>
                                             </div>
                                         </div>
                                     }

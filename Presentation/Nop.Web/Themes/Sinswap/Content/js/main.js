@@ -278,6 +278,17 @@ $(function () {
     });
     //}
 
+    $('#faqItemModal').on('show.bs.modal', function (e) {
+        $('#faqItemModal').find('.modal-body').html("");
+        $('#faqItemModal').find('#faqItemModalLabel').html("");
+
+        var faqTitle = $(e.relatedTarget).closest('.detailed-faq').attr('data-title');
+        var faqSubTitle = $(e.relatedTarget).closest('.detailed-faq').attr('data-subtitle');
+
+        $('#faqItemModal').find('.modal-body').html(faqSubTitle);
+        $('#faqItemModal').find('#faqItemModalLabel').html(faqTitle);
+    });
+
     if ($('.topSellersSlide').length) {
         $('.topSellersSlide').slick({
             prevArrow: "<button type='button' class='slick-prev'><i class='las la-angle-left'></i></button>",
