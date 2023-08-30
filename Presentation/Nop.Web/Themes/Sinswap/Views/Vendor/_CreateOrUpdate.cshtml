@@ -18,10 +18,12 @@
             <nop-tab asp-name="tab-info" asp-default="true" asp-title="@T("Admin.Vendors.Info")">@await Html.PartialAsync("_CreateOrUpdate.Info", Model)</nop-tab>
             <nop-tab asp-name="tab-products" asp-default="true" asp-title="Products">@await Html.PartialAsync("_CreateOrUpdate.Products", Model)</nop-tab>
 @*            <nop-tab asp-name="tab-seo" class="advanced-setting" asp-title="@T("Admin.Common.SEO")">@await Html.PartialAsync("_CreateOrUpdate.SEO", Model)</nop-tab>
-*@          @if (Model.Id > 0)
+*@          
+            @*@if (Model.Id > 0)
             {
                 <nop-tab asp-name="tab-vendor-notes" class="advanced-setting" asp-title="@T("Admin.Vendors.VendorNotes")">@await Html.PartialAsync("_CreateOrUpdate.Notes", Model)</nop-tab>
-            }
+            }*@
+            <nop-tab asp-name="tab-chats" asp-default="true" asp-title="Chats">@await Html.PartialAsync("_Chats", Model)</nop-tab>
         </nop-tabs>
     </div>
 </div>

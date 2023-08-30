@@ -349,6 +349,16 @@ namespace Nop.Services.Vendors
             return vendorCustomerStories;
         }
 
+        public IEnumerable<VendorCustomerStory> GetVendorChat(int vendorId, int customerId)
+        {
+            var vendorCustomerStories = _vendorCustomerStoryRepository.Table
+                                    .Where(v => v.VendorId == vendorId &&
+                                                v.CustomerId == customerId)
+                                    .ToList();
+
+            return vendorCustomerStories;
+        }
+
         public void SaveVendorStories(int vendorId, int customerId, string questionText, bool isOwnStory)
         {
             var vendorCustomerStories = new VendorCustomerStory

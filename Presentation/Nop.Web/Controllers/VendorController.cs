@@ -461,6 +461,14 @@ namespace Nop.Web.Controllers
             return RedirectToRoute("Vendor", new { SeName = vendorSeName });
         }
 
+        [HttpPost, ActionName("chats")]
+        public virtual IActionResult Chats(int vendorId, int customerId)
+        {
+            var chat = this._vendorService.GetVendorChat(vendorId, customerId);
+
+            return Json(new { Chat = chat });
+        }
+
         [HttpPost, ActionName("followme")]
         [PublicAntiForgery]
         public virtual IActionResult FollowMe(int vendorId, string vendorSeName)

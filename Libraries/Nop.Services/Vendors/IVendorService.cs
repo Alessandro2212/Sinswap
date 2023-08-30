@@ -100,6 +100,8 @@ namespace Nop.Services.Vendors
         IEnumerable<VendorCustomer> GetVendorFavouriteCustomers(int vendorId, int amount);
         IEnumerable<VendorCustomerStory> GetVendorStories(int vendorId, int amount);
 
+        IEnumerable<VendorCustomerStory> GetVendorChat(int vendorId, int customerId);
+
         void SaveVendorStories(int vendorId, int customerId, string questionText, bool isOwnStory);
         void SaveFollower(int vendorId, int customerId);
         int GetNumberOfFollowers(int vendorId);
