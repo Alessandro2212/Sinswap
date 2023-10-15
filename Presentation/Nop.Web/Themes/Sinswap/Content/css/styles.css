@@ -3535,6 +3535,167 @@ header.vendorRegistration .stepIconContainer ul li.active {
     font-size: 14px;
   }
 }
+header.vendorAdmin {
+  min-height: 105px;
+  height: 105px;
+}
+
+.vendorAdminBody {
+  background-color: #ededed;
+}
+.vendorAdminBody .vendorAvatarContainer {
+  border-radius: 5px 5px 0 0;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  background-color: #fff;
+  flex-direction: column;
+}
+.vendorAdminBody .vendorAvatarContainer .avatarContainer {
+  position: relative;
+}
+.vendorAdminBody .vendorAvatarContainer .avatarContainer:before {
+  content: "";
+  height: 20px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);
+}
+.vendorAdminBody .vendorAvatarContainer .vendorName {
+  margin-top: -15px;
+  font-size: 17px;
+  font-weight: 700;
+  z-index: 1;
+}
+.vendorAdminBody .vendorAvatarContainer .shopName {
+  margin-top: -5px;
+  font-size: 15px;
+  color: #d9d9d9;
+}
+.vendorAdminBody .vendorMenu {
+  background-color: #fff;
+}
+.vendorAdminBody .vendorMenu .nav-link {
+  padding: 20px;
+  border-bottom: 2px solid #ededed;
+  font-size: 20px;
+  font-weight: 600;
+  color: #171717;
+  transition: background-color 0.15s;
+}
+.vendorAdminBody .vendorMenu .nav-link:hover {
+  background-color: #ededed;
+  transition: background-color 0.15s;
+}
+.vendorAdminBody .vendorMenu .nav-link.active {
+  color: #d9d9d9;
+}
+.vendorAdminBody .vendorMenu .nav-link.active:after {
+  content: "";
+  position: absolute;
+  margin-right: -15px;
+  width: 0;
+  height: 0;
+  right: 0px;
+  border-width: 17.5px 15px 17.5px 0;
+  border-color: transparent #FFFFFF transparent transparent;
+  border-style: solid;
+}
+.vendorAdminBody .vendorMenu .nav-link i {
+  padding-right: 10px;
+}
+.vendorAdminBody .tab-content {
+  border-radius: 5px;
+  padding-bottom: 15px;
+  margin-top: 15px;
+}
+.vendorAdminBody .tab-content .shopContainer .content-header {
+  padding: 15px 30px;
+  margin-bottom: 5px;
+  border-radius: 5px 5px 0 0;
+  background-color: #fff;
+}
+.vendorAdminBody .tab-content .shopContainer .deleteSelected {
+  background-color: #fff;
+  padding-top: 90px;
+}
+.vendorAdminBody .tab-content .shopContainer .deleteSelected button.btn-grey {
+  color: #fff;
+  margin: 0 15px;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid {
+  background-color: #fff;
+  padding: 0px 20px 0px 20px;
+  border-radius: 0 0 5px 5px;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid.k-widget {
+  border: none;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid table {
+  border: 0px;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid table td {
+  padding: 10px 15px;
+  font-size: 20px;
+  border-width: 0 0 1px 0;
+  border-color: #ededed;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid table td .fa-check {
+  color: #3bb143;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid table td .fa-close {
+  color: #d30000;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid table .k-grid-header .k-header {
+  border-width: 0 0 1px 0;
+  padding: 15px;
+  border-color: #ededed;
+  background-image: none;
+  background-color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  color: #d9d9d9;
+  text-transform: uppercase;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid table .k-alt {
+  background-color: #fff;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid .k-grid-header {
+  background-image: none;
+  background-color: #fff;
+  border-bottom: 5px solid #ededed;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid .k-pager-wrap {
+  background-image: none;
+  background-color: #fff;
+  padding: 15px;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid .k-pager-wrap .k-pager-sizes,
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid .k-pager-wrap .k-pager-refresh,
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid .k-pager-wrap .k-pager-info {
+  display: none;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid .k-pager-wrap .k-pager-nav {
+  border-radius: 4px;
+  color: #666666;
+  border: none;
+  background-color: #f5f5f5;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid .k-pager-wrap .k-pager-numbers {
+  color: #666666;
+}
+.vendorAdminBody .tab-content .shopContainer .tableContainer .k-grid .k-pager-wrap .k-pager-numbers .k-state-selected {
+  padding: 8px 2px;
+  border: none;
+  margin: 2px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  background-color: #666666;
+}
+
 .productModal .modal-content {
   border-radius: 5px;
 }

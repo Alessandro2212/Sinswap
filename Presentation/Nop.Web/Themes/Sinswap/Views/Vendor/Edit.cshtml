@@ -5,12 +5,32 @@
     //ViewBag.Title = T("Admin.Vendors.EditVendorDetails").Text;
     //active menu item (system name)
     //Html.SetActiveMenuItemSystemName("Vendors");
-    Layout = "_ColumnsTwo";
+    Layout = "_ColumnsOne";
 }
+
+<header class="vendorAdmin">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                @await Component.InvokeAsync("Logo")
+            </div>
+            <div class="col-12 col-md-4 titleContainer d-flex align-items-center justify-content-center">
+                <h2>Shop</h2>
+            </div>
+            <div class="col-12 col-md-4 d-flex align-items-center justify-content-end">
+                <img src="https://placehold.co/60x75" />
+            </div>
+        </div>
+
+    </div>
+</header>
+
 
 @using (Html.BeginForm("edit", "vendor", FormMethod.Post))
 {
-    <div class="content-header clearfix">
+    @* <div class="content-header clearfix">
         <h1 class="pull-left">
             @T("Admin.Vendors.EditVendorDetails") - @Model.Name
             <small>
@@ -32,8 +52,10 @@
                 @T("Admin.Common.Delete")
             </span>
         </div>
+    </div> *@
+    <div class="vendorAdminBody">
+        @await Html.PartialAsync("_CreateOrUpdate", Model)
     </div>
-    @await Html.PartialAsync("_CreateOrUpdate", Model)
 }
 
 @*<form asp-controller="Vendor" asp-action="Edit" method="post">
@@ -65,4 +87,3 @@
 </form>
 <nop-delete-confirmation asp-model-id="@Model.Id" asp-button-id="vendor-delete" />
 *@
-

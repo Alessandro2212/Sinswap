@@ -1,0 +1,221 @@
+﻿// Vendor admin
+header.vendorAdmin {
+    min-height: 105px;
+    height: 105px;
+}
+
+.vendorAdminBody {
+    background-color: $grey3;
+
+    .vendorAvatarContainer {
+        border-radius: 5px 5px 0 0;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        background-color: $white;
+        flex-direction: column;
+
+        .avatarContainer {
+            position: relative;
+
+            &:before {
+                content: '';
+                height: 20px;
+                width: 100%;
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+                background: rgb(255,255,255);
+                background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+            }
+        }
+
+        .vendorName {
+            margin-top: -15px;
+            font-size: 17px;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        .shopName {
+            margin-top: -5px;
+            font-size: 15px;
+            color: $grey6;
+        }
+    }
+
+    .vendorMenu {
+        background-color: $white;
+
+        .nav-link {
+            padding: 20px;
+            border-bottom: 2px solid $grey3;
+            font-size: 20px;
+            font-weight: 600;
+            color: $black;
+            transition: background-color .15s;
+
+            &:hover {
+                background-color: $grey3;
+                transition: background-color .15s;
+            }
+
+            &.active {
+                color: $grey6;
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    margin-right: -15px;
+                    width: 0;
+                    height: 0;
+                    right: 0px;
+                    border-width: 17.5px 15px 17.5px 0;
+                    border-color: transparent #FFFFFF transparent transparent;
+                    border-style: solid;
+                }
+            }
+
+            i {
+                padding-right: 10px;
+            }
+        }
+    }
+
+    .tab-content {
+        border-radius: 5px;
+        padding-bottom: 15px;
+        margin-top: 15px;
+
+        .shopContainer {
+            .content-header {
+                padding: 15px 30px;
+                margin-bottom: 5px;
+                border-radius: 5px 5px 0 0;
+                background-color: $white;
+            }
+
+            .deleteSelected {
+                background-color: $white;
+                padding-top: 90px;
+
+                button.btn-grey {
+                    color: $white;
+                    margin: 0 15px;
+                }
+            }
+
+            .tableContainer {
+                .k-grid {
+                    background-color: $white;
+                    padding: 0px 20px 0px 20px;
+                    border-radius: 0 0 5px 5px;
+
+                    &.k-widget {
+                        border: none;
+                    }
+
+                    table {
+                        border: 0px;
+
+                        td {
+                            padding: 10px 15px;
+                            font-size: 20px;
+                            border-width: 0 0 1px 0;
+                            border-color: $grey3;
+
+                            .fa-check {
+                                color: $positive;
+                            }
+
+                            .fa-close {
+                                color: $negative;
+                            }
+                        }
+
+                        .k-grid-header {
+                            .k-header {
+                                border-width: 0 0 1px 0;
+                                padding: 15px;
+                                border-color: $grey3;
+                                background-image: none;
+                                background-color: $white;
+                                font-size: 20px;
+                                font-weight: 600;
+                                color: $grey6;
+                                text-transform: uppercase;
+                            }
+                        }
+
+                        .k-alt {
+                            background-color: $white;
+                        }
+                    }
+
+                    .k-grid-header {
+                        background-image: none;
+                        background-color: $white;
+                        border-bottom: 5px solid $grey3;
+                    }
+
+                    .k-pager-wrap {
+                        background-image: none;
+                        background-color: $white;
+                        padding: 15px;
+
+                        .k-pager-sizes,
+                        .k-pager-refresh,
+                        .k-pager-info {
+                            display: none;
+                        }
+
+                        .k-pager-nav {
+                            border-radius: 4px;
+                            color: $grey22;
+                            border: none;
+                            background-color: $grey4;
+                        }
+
+                        .k-pager-numbers {
+                            color: $grey22;
+
+                            .k-state-selected {
+                                padding: 8px 2px;
+                                border: none;
+                                margin: 2px;
+                                color: $white;
+                                border: none;
+                                border-radius: 4px;
+                                background-color: $grey22;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Extra Super large devices (large desktops, 1660px and up)
+@media (max-width: 1660px) {
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 576px) {
+}
