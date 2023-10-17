@@ -319,6 +319,18 @@ namespace Nop.Services.Customers
             return _customerRepository.GetById(customerId);
         }
 
+        public virtual int GetCustomerIdByVendorId(int vendorId)
+        {
+            if (vendorId == 0)
+                return 0;
+
+            var query = from c in _customerRepository.Table
+                        where c.VendorId == vendorId
+                        select c.Id;
+
+            return query.FirstOrDefault();
+        }
+
         /// <summary>
         /// Get customers by identifiers
         /// </summary>

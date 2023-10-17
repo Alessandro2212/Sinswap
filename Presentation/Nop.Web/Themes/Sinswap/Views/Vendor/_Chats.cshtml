@@ -65,7 +65,7 @@
                     <div class="container p-0">
                         <div class="card">
                             <div class="row g-0">
-                                @await Component.InvokeAsync("ChatUsers", new { userId = Model.Id })
+                                @await Component.InvokeAsync("ChatUsers", new { vendorId = Model.Id })
                                 @* <div class="col-12 col-lg-5 col-xl-3 border-right">
                                 <div class="px-4 d-none d-md-block">
                                 <div class="d-flex align-items-center">
@@ -151,7 +151,7 @@
                                 <hr class="d-block d-lg-none mt-1 mb-0">
                                 </div>*@
 
-                                @await Component.InvokeAsync("ChatConversations", new { vendorId = Model.Id })
+                                @await Component.InvokeAsync("ChatConversations", new { vendorId = Model.Id, partnerId = 33 })
                                 @*<div class="col-12 col-lg-7 col-xl-9">
                                 <div class="py-2 px-4 border-bottom d-none d-lg-block">
                                 <div class="d-flex align-items-center py-1">

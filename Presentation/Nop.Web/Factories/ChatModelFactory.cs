@@ -65,25 +65,41 @@ namespace Nop.Web.Factories
             List<ChatConversationsModel> chatUsersModels = new List<ChatConversationsModel>();
             var ids = chats.Select(x => x.FromId).ToArray();
             var customers = this._customerService.GetCustomersByIds(ids);
-
+            ChatUsersModel chatUsersModel = new ChatUsersModel { Id = partnerId };
             foreach (var chat in chats)
             {
                 ChatConversationsModel chatConversationsModel = new ChatConversationsModel();
                 chatConversationsModel.Message = chat.Message;
+                chatConversationsModel.Time = chat.CreatedOnUtc;
                 var customer = customers.Where(x => x.Id == chat.FromId).FirstOrDefault();
+                if (customer.Id == userId)
+                {
+                    chatConversationsModel.IsCurrentUser = true;
+                }
+
                 if (customer.VendorId > 0)
                 {
                     var vendor = _vendorService.GetVendorById(customer.VendorId);
                     chatConversationsModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 10);
                     chatConversationsModel.Name = vendor.Name;
+                    if (customer.Id == partnerId)
+                    {
+                        chatUsersModel.Name = chatConversationsModel.Name;
+                        chatUsersModel.PictureUrl = chatConversationsModel.PictureUrl;
+                    }
                 }
                 else
                 {
                     chatConversationsModel.Name = customer.Username;
+                    if (customer.Id == partnerId)
+                    {
+                        chatUsersModel.Name = customer.Username;
+                    }
                 }
+                chatUsersModels.Add(chatConversationsModel);
             }
 
-            return new ChatConversationsViewModel() { ChatUsersModels = chatUsersModels };
+            return new ChatConversationsViewModel() { ChatUsersModels = chatUsersModels , ChatUsersModel = chatUsersModel };
         }
     }
 }
