@@ -39,6 +39,10 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapLocalizedRoute("RegisterVerification", "registerverification/",
                 new { controller = "Customer", action = "RegisterVerification" });
 
+            //chatuser (AJAX link)
+            routeBuilder.MapLocalizedRoute("GetChat", "getchat/{vendorId:min(0)}/{partnerId:min(0)}",
+                new { controller = "Customer", action = "GetChat" });
+
             //verifyemail
             routeBuilder.MapLocalizedRoute("VerifyEmail", "verifyemail/",
                 new { controller = "Customer", action = "VerifyEmail" });

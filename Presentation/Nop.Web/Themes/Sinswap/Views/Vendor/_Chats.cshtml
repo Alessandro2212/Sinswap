@@ -151,7 +151,8 @@
                                 <hr class="d-block d-lg-none mt-1 mb-0">
                                 </div>*@
 
-                                @await Component.InvokeAsync("ChatConversations", new { vendorId = Model.Id, partnerId = 33 })
+                                @* @await Component.InvokeAsync("ChatConversations", new { vendorId = Model.Id, partnerId = 33 }) *@
+                                @await Component.InvokeAsync("ChatConversations", new { vendorId = Model.Id, partnerId = 0 })
                                 @*<div class="col-12 col-lg-7 col-xl-9">
                                 <div class="py-2 px-4 border-bottom d-none d-lg-block">
                                 <div class="d-flex align-items-center py-1">

@@ -278,6 +278,15 @@ $(function () {
     });
     //}
 
+    $(".user-chat").click(function (e) {
+        $('.chat-messages').html("");
+        var chatUrl = $(e.delegateTarget).attr('data-url');
+        $.get(chatUrl, function (data) {
+            productContent = $(data);
+            $('.chat-messages').html(productContent);
+        })
+    });
+
     $('#faqItemModal').on('show.bs.modal', function (e) {
         $('#faqItemModal').find('.modal-body').html("");
         $('#faqItemModal').find('#faqItemModalLabel').html("");

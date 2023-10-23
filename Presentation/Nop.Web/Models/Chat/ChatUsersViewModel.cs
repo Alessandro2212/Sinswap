@@ -5,5 +5,6 @@ namespace Nop.Web.Models.Chat
     public class ChatUsersViewModel
     {
         public List<ChatUsersModel> ChatUsersModels { get; set; }
+        public int CustomerId { get; set; }
     }
 }

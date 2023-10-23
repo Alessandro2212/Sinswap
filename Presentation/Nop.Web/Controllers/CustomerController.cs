@@ -20,6 +20,7 @@ using Nop.Core.Domain.Vendors;
 using Nop.Services.Authentication;
 using Nop.Services.Authentication.External;
 using Nop.Services.Catalog;
+using Nop.Services.Chats;
 using Nop.Services.Common;
 using Nop.Services.Customers;
 using Nop.Services.Directory;
@@ -48,6 +49,7 @@ using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework.Security;
 using Nop.Web.Framework.Security.Captcha;
 using Nop.Web.Framework.Validators;
+using Nop.Web.Models.Chat;
 using Nop.Web.Models.Customer;
 
 namespace Nop.Web.Controllers
@@ -104,6 +106,8 @@ namespace Nop.Web.Controllers
         private readonly IUrlRecordService _urlRecordService;
         private readonly IPermissionService _permissionService;
         private readonly IStoreService _storeService;
+        private readonly IChatModelFactory _chatModelFactory;
+        private readonly IChatService _chatService;
 
         #endregion
 
@@ -155,8 +159,10 @@ namespace Nop.Web.Controllers
             IVendorService vendorService,
             ILocalizedEntityService localizedEntityService,
             IUrlRecordService urlRecordService,
-            IPermissionService permissionService, 
-            IStoreService storeService)
+            IPermissionService permissionService,
+            IStoreService storeService,
+            IChatModelFactory chatModelFactory,
+            IChatService chatService)
         {
             this._addressSettings = addressSettings;
             this._captchaSettings = captchaSettings;
@@ -206,6 +212,8 @@ namespace Nop.Web.Controllers
             this._urlRecordService = urlRecordService;
             this._permissionService = permissionService;
             this._storeService = storeService;
+            this._chatModelFactory = chatModelFactory;
+            this._chatService = chatService
         }
 
         #endregion
@@ -2427,6 +2435,35 @@ namespace Nop.Web.Controllers
 
             return customers.Any(c => c.Active && c.Id != customer.Id);
         }
+        #endregion
+
+        #region CustomerChat
+        public virtual IActionResult GetChat(int vendorId, int partnerId)
+        {
+            if (partnerId <= 0)
+            {
+                var mod = new ChatConversationsViewModel() { ChatUsersModels = new List<ChatConversationsModel>(), ChatUsersModel = new ChatUsersModel() };
+                return View(mod);
+            }
+            //try to seek for the customer id given the vendor id. in case is not found it means that we are already supplying the 
+            //correct id (the id is already from a customer) and we don't have to retrieve it
+            var userId = this._customerService.GetCustomerIdByVendorId(vendorId);
+            var pId = this._customerService.GetCustomerIdByVendorId(partnerId);
+            var model = _chatModelFactory.GetChatConversationsViewModel(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId);
+            return View(model);
+        }
+
+        //public virtual IActionResult PostChat(int vendorId, int partnerId, string message)
+        //{
+        //    if (string.IsNullOrEmpty(message))
+        //    {
+        //        //ricostruisci la conversazione e ritornala, senza salvare nulla
+        //    }
+        //    else
+        //    {
+        //        //salva il messaggio e restituisci la conversazione avente anche il nuovo messaggio
+        //    }
+        //}
         #endregion
 
         #endregion

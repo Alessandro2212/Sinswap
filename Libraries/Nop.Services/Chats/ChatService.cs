@@ -1,5 +1,6 @@
 ﻿using Nop.Core.Data;
 using Nop.Core.Domain.Chats;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
@@ -70,6 +71,12 @@ namespace Nop.Services.Chats
                         select chat;
 
             return query.ToList();
+        }
+
+        public void SaveChatMessage(int userId, int partnerId, string message)
+        {
+            Chat chat = new Chat { FromId = userId, ToId= partnerId, Message = message, CreatedOnUtc = DateTime.Now };
+            _chatRepository.Insert(chat);
         }
     }
 }

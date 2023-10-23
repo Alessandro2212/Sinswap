@@ -30,7 +30,7 @@ namespace Nop.Web.Factories
         public ChatUsersViewModel GetChatUsersViewModel(int userId)
         {
             var chats = _chatService.GetLatestChatsByUser(userId);
-            var ids = chats.Select(x => x.FromId).ToArray();
+            var ids = chats.Select(x => x.FromId).Distinct().ToArray();
             var customers = this._customerService.GetCustomersByIds(ids);
 
             List<ChatUsersModel> chatUserModels = new List<ChatUsersModel>();
@@ -55,7 +55,7 @@ namespace Nop.Web.Factories
                 chatUserModels.Add(chatUsersModel);
             }
 
-            return new ChatUsersViewModel() { ChatUsersModels = chatUserModels };
+            return new ChatUsersViewModel() { ChatUsersModels = chatUserModels, CustomerId = userId };
         }
 
 
