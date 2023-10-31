@@ -287,6 +287,20 @@ $(function () {
         })
     });
 
+    $("#chat-send-button").click(function (e) {
+        e.preventDefault();      
+        var msg = $('#chat-text-msg').val();
+        var chatUrl = $(e.delegateTarget).attr('data-url');
+        var userId = $('#currentUserId').val();
+        var pId = $('#partnerUserId').val();
+        $('.chat-messages').html("");
+        $('#chat-text-msg').val('');
+        $.post(chatUrl, { vendorId: userId, partnerId: pId, message: msg }, function (data) {
+            productContent = $(data);
+            $('.chat-messages').html(productContent);
+        })
+    });
+
     $('#faqItemModal').on('show.bs.modal', function (e) {
         $('#faqItemModal').find('.modal-body').html("");
         $('#faqItemModal').find('#faqItemModalLabel').html("");

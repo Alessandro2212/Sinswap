@@ -99,7 +99,7 @@ namespace Nop.Web.Factories
                 chatUsersModels.Add(chatConversationsModel);
             }
 
-            return new ChatConversationsViewModel() { ChatUsersModels = chatUsersModels , ChatUsersModel = chatUsersModel };
+            return new ChatConversationsViewModel() { ChatUsersModels = chatUsersModels , ChatUsersModel = chatUsersModel, CurrentUserId = userId };
         }
     }
 }

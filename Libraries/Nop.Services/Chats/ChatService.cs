@@ -73,10 +73,11 @@ namespace Nop.Services.Chats
             return query.ToList();
         }
 
-        public void SaveChatMessage(int userId, int partnerId, string message)
+        public Chat SaveChatMessage(int userId, int partnerId, string message)
         {
             Chat chat = new Chat { FromId = userId, ToId= partnerId, Message = message, CreatedOnUtc = DateTime.Now };
             _chatRepository.Insert(chat);
+            return chat;
         }
     }
 }

@@ -213,7 +213,7 @@ namespace Nop.Web.Controllers
             this._permissionService = permissionService;
             this._storeService = storeService;
             this._chatModelFactory = chatModelFactory;
-            this._chatService = chatService
+            this._chatService = chatService;
         }
 
         #endregion
@@ -2453,17 +2453,24 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        //public virtual IActionResult PostChat(int vendorId, int partnerId, string message)
-        //{
-        //    if (string.IsNullOrEmpty(message))
-        //    {
-        //        //ricostruisci la conversazione e ritornala, senza salvare nulla
-        //    }
-        //    else
-        //    {
-        //        //salva il messaggio e restituisci la conversazione avente anche il nuovo messaggio
-        //    }
-        //}
+        [HttpPost]
+        public virtual IActionResult PostChat(int vendorId, int partnerId, string message)
+        {
+            if (partnerId <= 0)
+            {
+                return RedirectToAction("GetChat", new { vendorId = vendorId, partnerId = partnerId });
+            }
+
+            var userId = this._customerService.GetCustomerIdByVendorId(vendorId);
+            var pId = this._customerService.GetCustomerIdByVendorId(partnerId);
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                this._chatService.SaveChatMessage(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId, message);
+            }
+
+            return RedirectToAction("GetChat", new { vendorId = vendorId, partnerId = partnerId });
+        }
         #endregion
 
         #endregion

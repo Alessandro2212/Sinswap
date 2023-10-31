@@ -7,6 +7,6 @@ namespace Nop.Services.Chats
     {
         List<Chat> GetLatestChatsByUser(int userId);
         List<Chat> GetChatsOfUser(int userId, int partnerId);
-        void SaveChatMessage(int userId, int partnerId, string message);
+        Chat SaveChatMessage(int userId, int partnerId, string message);
     }
 }
