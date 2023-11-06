@@ -4,7 +4,7 @@
 }
 @if (Model != null)
 {
-    <div class="col-12 col-lg-5 col-xl-3 border-right">
+    <div class="col-12 col-lg-5 col-xl-3 border-right chat-users">
         @* <div class="px-4 d-none d-md-block">
             <div class="d-flex align-items-center">
                 <div class="flex-grow-1">
@@ -21,6 +21,7 @@
                     <div class="flex-grow-1 ml-3">
                         @chatUser.Name
                         @* <div class="small"><span class="fas fa-circle chat-online"></span> Online</div> *@
+                        <button class="btn btn-danger chat-delete-btn" data-url="/deletechat" data-user="@Model.CustomerId" data-partner="@chatUser.Id">X</button>
                     </div>
                 </div>
             </div>

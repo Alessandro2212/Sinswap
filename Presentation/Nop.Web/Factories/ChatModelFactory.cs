@@ -33,6 +33,8 @@ namespace Nop.Web.Factories
             var ids = chats.Select(x => x.FromId).Distinct().ToArray();
             var customers = this._customerService.GetCustomersByIds(ids);
 
+            var vendors = this._vendorService.GetVendorsFromReviewsAndCustomer(userId);
+
             List<ChatUsersModel> chatUserModels = new List<ChatUsersModel>();
             foreach (var customer in customers)
             {
@@ -41,9 +43,16 @@ namespace Nop.Web.Factories
                 if (customer.VendorId > 0)
                 {
                     var vendor = _vendorService.GetVendorById(customer.VendorId);
+
                     chatUsersModel.Id = customer.VendorId;
                     chatUsersModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 10);
                     chatUsersModel.Name = vendor.Name;
+
+                    var vendorToRemove = vendors.ToList().Where(v => v.Id == vendor.Id).FirstOrDefault();
+                    if (vendorToRemove != null)
+                    {
+                        vendors.ToList().Remove(vendorToRemove);
+                    }
                 }
                 else
                 {
@@ -52,6 +61,16 @@ namespace Nop.Web.Factories
                 }
                 chatUsersModel.LatestMessage = chat.Message;
                 chatUsersModel.Time = chat.CreatedOnUtc;
+                chatUserModels.Add(chatUsersModel);
+            }
+
+            //to be tested (extra vendors in chat because of reviews)
+            foreach (var vendor in vendors)
+            {
+                ChatUsersModel chatUsersModel = new ChatUsersModel();
+                chatUsersModel.Id = vendor.Id;
+                chatUsersModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 10);
+                chatUsersModel.Name = vendor.Name;
                 chatUserModels.Add(chatUsersModel);
             }
 
@@ -99,7 +118,7 @@ namespace Nop.Web.Factories
                 chatUsersModels.Add(chatConversationsModel);
             }
 
-            return new ChatConversationsViewModel() { ChatUsersModels = chatUsersModels , ChatUsersModel = chatUsersModel, CurrentUserId = userId };
+            return new ChatConversationsViewModel() { ChatUsersModels = chatUsersModels, ChatUsersModel = chatUsersModel, CurrentUserId = userId };
         }
     }
 }

@@ -47,6 +47,10 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapLocalizedRoute("PostChat", "postchat/",
                 new { controller = "Customer", action = "PostChat" });
 
+            //chatuser (AJAX link)
+            routeBuilder.MapLocalizedRoute("DeleteChat", "deletechat/",
+                new { controller = "Customer", action = "DeleteChat" });
+
             //verifyemail
             routeBuilder.MapLocalizedRoute("VerifyEmail", "verifyemail/",
                 new { controller = "Customer", action = "VerifyEmail" });

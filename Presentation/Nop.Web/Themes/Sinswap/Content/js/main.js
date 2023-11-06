@@ -301,6 +301,18 @@ $(function () {
         })
     });
 
+    $(".chat-delete-btn").click(function (e) {
+        e.preventDefault();
+        var chatUrl = $(e.delegateTarget).attr('data-url');
+        var userId = $(e.delegateTarget).attr('data-user');
+        var pId = $(e.delegateTarget).attr('data-partner');
+        $('.chat-messages').html("");
+        $(this).parent().parent().parent().remove();
+        $.post(chatUrl, { vendorId: userId, partnerId: pId }, function (data) {
+            productContent = $(data);
+        })
+    });
+
     $('#faqItemModal').on('show.bs.modal', function (e) {
         $('#faqItemModal').find('.modal-body').html("");
         $('#faqItemModal').find('#faqItemModalLabel').html("");

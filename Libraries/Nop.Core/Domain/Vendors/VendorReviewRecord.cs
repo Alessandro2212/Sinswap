@@ -11,6 +11,8 @@ namespace Nop.Core.Domain.Vendors
         /// </summary>
         public int VendorId { get; set; }
 
+        public int CustomerId { get; set; }
+
         /// <summary>
         /// Gets or sets the title
         /// </summary>

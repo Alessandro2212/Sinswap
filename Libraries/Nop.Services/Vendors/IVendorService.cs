@@ -38,6 +38,8 @@ namespace Nop.Services.Vendors
 
         IPagedList<Vendor> GetAllVendorsForCategory(int categoryId, string name = "", int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
 
+        IEnumerable<Vendor> GetVendorsFromReviewsAndCustomer(int customerId);
+
         /// <summary>
         /// Gets vendors
         /// </summary>

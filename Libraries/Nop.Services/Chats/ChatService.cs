@@ -79,5 +79,11 @@ namespace Nop.Services.Chats
             _chatRepository.Insert(chat);
             return chat;
         }
+
+        public void DeleteChatMessage(int userId, int partnerId)
+        {
+            var messages = this.GetChatsOfUser(userId, partnerId);
+            _chatRepository.Delete(messages);
+        }
     }
 }

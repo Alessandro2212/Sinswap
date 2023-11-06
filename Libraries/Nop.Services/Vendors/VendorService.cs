@@ -10,6 +10,7 @@ using Nop.Services.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 
 namespace Nop.Services.Vendors
 {
@@ -311,6 +312,18 @@ namespace Nop.Services.Vendors
                                     .Where(v => v.VendorId == vendorId &&
                                            v.IsApproved == true &&
                                            v.IsQuestion == null || v.IsQuestion == false)
+                                    .ToList();
+            return vendorReviews;
+        }
+
+        public IEnumerable<Vendor> GetVendorsFromReviewsAndCustomer(int customerId)
+        {
+            var vendorReviews = _vendorReviewRepository.Table
+                                    .Where(v => v.CustomerId == customerId &&
+                                           v.IsApproved == true &&
+                                           v.IsQuestion == null || v.IsQuestion == false)
+                                    .Select(v => v.Vendor)
+                                    .Distinct()
                                     .ToList();
             return vendorReviews;
         }
