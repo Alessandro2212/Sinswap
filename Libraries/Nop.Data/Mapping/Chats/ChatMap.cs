@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Nop.Core.Domain.Chats;
-using Nop.Core.Domain.Vendors;
 
 namespace Nop.Data.Mapping.Vendors
 {

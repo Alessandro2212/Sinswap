@@ -61,6 +61,7 @@ namespace Nop.Web.Factories
                 }
                 chatUsersModel.LatestMessage = chat.Message;
                 chatUsersModel.Time = chat.CreatedOnUtc;
+                chatUsersModel.IsRead = chat.IsRead;
                 chatUserModels.Add(chatUsersModel);
             }
 
@@ -76,7 +77,6 @@ namespace Nop.Web.Factories
 
             return new ChatUsersViewModel() { ChatUsersModels = chatUserModels, CustomerId = userId };
         }
-
 
         public ChatConversationsViewModel GetChatConversationsViewModel(int userId, int partnerId)
         {
@@ -117,6 +117,10 @@ namespace Nop.Web.Factories
                 }
                 chatUsersModels.Add(chatConversationsModel);
             }
+
+            //set the messages are read
+            chats.ForEach(chat => { chat.IsRead = true; });
+            _chatService.UpdateChatsAsRead(chats);
 
             return new ChatConversationsViewModel() { ChatUsersModels = chatUsersModels, ChatUsersModel = chatUsersModel, CurrentUserId = userId };
         }

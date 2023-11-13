@@ -56,6 +56,7 @@ namespace Nop.Services.Chats
                                     Id = x.Id,
                                     FromId = l.PartnerId,
                                     Message = x.Message,
+                                    IsRead = x.IsRead,
                                     CreatedOnUtc = x.CreatedOnUtc
                                 });
             var chatList = chatListQuery.ToList();
@@ -84,6 +85,11 @@ namespace Nop.Services.Chats
         {
             var messages = this.GetChatsOfUser(userId, partnerId);
             _chatRepository.Delete(messages);
+        }
+
+        public void UpdateChatsAsRead(IEnumerable<Chat> chats)
+        {
+            _chatRepository.Update(chats);
         }
     }
 }
