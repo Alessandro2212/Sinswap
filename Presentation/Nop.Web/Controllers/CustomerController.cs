@@ -2481,15 +2481,13 @@ namespace Nop.Web.Controllers
             ChatUsersViewModel model = null;
             //try to seek for the customer id given the vendor id. in case is not found it means that we are already supplying the 
             //correct id (the id is already from a customer) and we don't have to retrieve it
+            this._chatService.DeleteChatMessage(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId);
             if (userId == 0)
-            {
-                this._chatService.DeleteChatMessage(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId);
+            {              
                 model = _chatModelFactory.GetChatUsersViewModel(vendorId);
             }
             else
             {
-                //delete chat
-                this._chatService.DeleteChatMessage(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId);
                 model = _chatModelFactory.GetChatUsersViewModel(userId);
             }
             return View(model);

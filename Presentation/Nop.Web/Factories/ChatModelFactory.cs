@@ -34,6 +34,7 @@ namespace Nop.Web.Factories
             var customers = this._customerService.GetCustomersByIds(ids);
 
             var vendors = this._vendorService.GetVendorsFromReviewsAndCustomer(userId);
+            var vendorsForPurchasedProducts = this._vendorService.GetVendorsFromCustomerPurchasedItems(userId);
 
             List<ChatUsersModel> chatUserModels = new List<ChatUsersModel>();
             foreach (var customer in customers)
@@ -65,8 +66,8 @@ namespace Nop.Web.Factories
                 chatUserModels.Add(chatUsersModel);
             }
 
-            //to be tested (extra vendors in chat because of reviews)
-            foreach (var vendor in vendors)
+            //to be tested (extra vendors in chat because of reviews or purchased product from)
+            foreach (var vendor in vendors.Union(vendorsForPurchasedProducts).Distinct())
             {
                 ChatUsersModel chatUsersModel = new ChatUsersModel();
                 chatUsersModel.Id = vendor.Id;
