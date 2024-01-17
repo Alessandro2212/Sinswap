@@ -1,220 +1,316 @@
 @model VendorEditModel
 
-<div class="panel-group">
-@*    @await Component.InvokeAsync("AdminWidget", new { widgetZone = AdminWidgetZones.VendorDetailsInfoTop, additionalData = Model })
-*@    <div class="panel panel-default">
-        <div class="panel-body">
-            @(Html.LocalizedEditor<VendorEditModel, VendorLocalizedModel>("vendor-info-localized",
-                @<div>
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            <nop-label asp-for="@Model.Locales[item].Name" />
-                        </div>
-                        <div class="col-md-9">
-                            <nop-editor asp-for="@Model.Locales[item].Name" />
-                            <span asp-validation-for="@Model.Locales[item].Name"></span>
-                        </div>
+<div class="container-fluid shopContainer">
+    <div class="row">
+        <div class="col-12 p-0">
+            <div class="content-header clearfix">
+
+                <div class="settingsMenu nav flex-row" id="v-pills-tab-horz" role="tablist" aria-orientation="vertical">
+                    <div class="col-lg-10 col-xl-8">
+                        <a class="nav-link active" id="v-pills-shopsettings-tab" data-toggle="pill" href="#v-pills-shopsettings" role="tab" aria-controls="v-pills-shopsettings" aria-selected="true">Shop settings</a>
+                        <a class="nav-link" id="v-pills-profilesettings-tab" data-toggle="pill" href="#v-pills-profilesettings" role="tab" aria-controls="v-pills-profilesettings" aria-selected="false">Profile settings</a>
+                        <a class="nav-link" id="v-pills-personalinformation-tab" data-toggle="pill" href="#v-pills-personalinformation" role="tab" aria-controls="v-pills-personalinformation" aria-selected="false">Personal information</a>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            <nop-label asp-for="@Model.Locales[item].Description" />
-                        </div>
-                        <div class="col-md-9">
-                            <nop-editor asp-for="@Model.Locales[item].Description" asp-template="RichEditor" />
-                            <span asp-validation-for="@Model.Locales[item].Description"></span>
-                        </div>
-                    </div>
-                    <input type="hidden" asp-for="@Model.Locales[item].LanguageId" />
-                </div>
-                ,
-                @<div>
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            <nop-label asp-for="ShopName" />
-                        </div>
-                        <div class="col-md-9">
-                            <nop-editor asp-for="ShopName" asp-required="true" />
-                            <span asp-validation-for="ShopName"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            <nop-label asp-for="Name" />
-                        </div>
-                        <div class="col-md-9">
-                            <nop-editor asp-for="Name" asp-required="true" />
-                            <span asp-validation-for="Name"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            <nop-label asp-for="Description" />
-                        </div>
-                        <div class="col-md-9">
-                            <nop-editor asp-for="Description" asp-template="RichEditor" />
-                            <span asp-validation-for="Description"></span>
-                        </div>
+                    <div class="col-2 text-right p-0">
+                        <a href="#" class="btn btn-primary btn-big"><i class="fas fa-cloud-upload-alt"></i> Save</a>
                     </div>
                 </div>
-                ))
-            <div class="form-group">
-                <div class="col-md-3">
-                    <nop-label asp-for="Email" />
-                </div>
-                <div class="col-md-9">
-                    <nop-editor asp-for="Email" asp-required="true" />
-                    <span asp-validation-for="Email"></span>
-                </div>
-            </div>
-            @if (Model.Id > 0)
-            {
-                <div class="form-group">
-                    <div class="col-md-3">
-                        <nop-label asp-for="AssociatedCustomers" />
-                    </div>
-                    <div class="col-md-9">
-                        @if (Model.AssociatedCustomers.Count > 0)
-                        {
-                            for (var i = 0; i < Model.AssociatedCustomers.Count; i++)
-                            {
-                                <a asp-action="Edit" asp-controller="Customer" asp-route-id="@Model.AssociatedCustomers[i].Id">
-                                    @Model.AssociatedCustomers[i].Email
-                                </a>
-                                if (i != Model.AssociatedCustomers.Count - 1)
-                                {
-                                    <text>, </text>
-                                }
-                            }
-                        }
-                        else
-                        {
-                            @T("Admin.Vendors.Fields.AssociatedCustomerEmails.None")
-                        }
-                    </div>
-                </div>
-            }
-            <div class="form-group">
-                <div class="col-md-3">
-                    <nop-label asp-for="Active" />
-                </div>
-                <div class="col-md-9">
-                    <nop-editor asp-for="Active" />
-                    <span asp-validation-for="Active"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    <nop-label asp-for="IsPremium" />
-                </div>
-                <div class="col-md-9">
-                    <nop-editor asp-for="IsPremium" />
-                    <span asp-validation-for="IsPremium"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    <nop-label asp-for="FollowersNumber" />
-                </div>
-                <div class="col-md-9">
-                    <nop-editor asp-for="FollowersNumber" />
-                    <span asp-validation-for="FollowersNumber"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    <nop-label asp-for="BirthDate" />
-                </div>
-                <div class="col-md-9">
-                    <nop-editor asp-for="BirthDate" />
-                    <span asp-validation-for="BirthDate"></span>
-                </div>
-            </div>
-            <div class="form-group advanced-setting">
-                <div class="col-md-3">
-                    <nop-label asp-for="PictureId" />
-                </div>
-                <div class="col-md-9">
-                    <nop-editor asp-for="PictureId" />
-                    <span asp-validation-for="PictureId"></span>
-                </div>
-            </div>
-            <div class="form-group advanced-setting">
-                <div class="col-md-3">
-                    <nop-label asp-for="AdminComment" />
-                </div>
-                <div class="col-md-9">
-                    <nop-textarea asp-for="AdminComment"></nop-textarea>
-                    <span asp-validation-for="AdminComment"></span>
-                </div>
-            </div>
-            <div class="form-group advanced-setting">
-                <div class="col-md-3">
-                    <nop-label asp-for="AllowCustomersToSelectPageSize" />
-                </div>
-                <div class="col-md-9">
-                    <nop-editor asp-for="AllowCustomersToSelectPageSize" />
-                    <span asp-validation-for="AllowCustomersToSelectPageSize"></span>
-                </div>
-            </div>
-            <nop-nested-setting asp-for="AllowCustomersToSelectPageSize">
-                <div class="form-group advanced-setting" id="pnlPageSize">
-                    <div class="col-md-3">
-                        <nop-label asp-for="PageSize" />
-                    </div>
-                    <div class="col-md-9">
-                        <nop-editor asp-for="PageSize" />
-                        <span asp-validation-for="PageSize"></span>
-                    </div>
-                </div>
-                <div class="form-group advanced-setting" id="pnlPageSizeOptions">
-                    <div class="col-md-3">
-                        <nop-label asp-for="PageSizeOptions" />
-                    </div>
-                    <div class="col-md-9">
-                        <nop-editor asp-for="PageSizeOptions" />
-                        <span asp-validation-for="PageSizeOptions"></span>
-                    </div>
-                </div>
-            </nop-nested-setting>
-            <div class="form-group advanced-setting">
-                <div class="col-md-3">
-                    <nop-label asp-for="DisplayOrder" />
-                </div>
-                <div class="col-md-9">
-                    <nop-editor asp-for="DisplayOrder" />
-                    <span asp-validation-for="DisplayOrder"></span>
-                </div>
+
             </div>
         </div>
     </div>
-    @if (Model.VendorAttributes.Count > 0)
-    {
-       @* @await Html.PartialAsync("_VendorAttributes", Model.VendorAttributes)*@
-    }
-    <div class="panel panel-default advanced-setting">
-        <div class="panel-heading">
-            @T("Admin.Vendors.Address")
-        </div>
-        <div class="panel-body">
-            <nop-editor asp-for="Address" asp-template="Address" />
+
+    <div class="row">
+        <div class="col-12 p-0">
+            <div class="content-body clearfix">
+
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade shopSettingContainer show active" id="v-pills-shopsettings" role="tabpanel" aria-labelledby="v-pills-shopsettings-tab">
+
+                        <div class="row">
+                            <div class="col-6">
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <nop-label asp-for="ShopName" />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <nop-editor asp-for="ShopName" asp-required="true" />
+                                        <span asp-validation-for="ShopName"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-6 text-center">
+
+                                <div class="isPremium">
+                                    <div class="badge">
+                                        <div class="badge__label"><i class="fas fa-chess-queen"></i></div>
+                                        <div class="label">
+                                            Premium<br />shop
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade profileInformationContainer" id="v-pills-profilesettings" role="tabpanel" aria-labelledby="v-pills-profilesettings-tab">
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10 completeNotice">
+                                <h4>Important</h4>
+                                <p>
+                                    Your shop can't open up shop untill you have filled out all required fields. Yes, It's that important to create a succesfull Sinswap-shop.
+                                    The success of your business depends heavily on what you fill out here, so please take your time to think about it.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10 mt-5">
+                                <h3>It's all about you</h3>
+                                <p>
+                                    Tell something about yourself that makes you interesting and would trigger someone to buy something from you.<br />
+                                    Keep it short and to the point, yet not too short. Around 70 to 90 words would be ideal.
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+                                <div class="form-group row">
+                                    <div class="col-8">
+                                        <label for="desciption">
+                                            Tell us a little bit about yourself
+                                        </label>
+                                    </div>
+
+                                    <div class="col-4 text-right">
+                                        Words: <strong>96</strong>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <textarea class="form-control" id="description" rows="6"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+                                <div class="form-group">
+                                    <label for="quote">A funny, interesting of maybe naughty quote from you</label>
+                                    <input class="form-control" id="quote" placeholder="For example: 'I love exploring my naughty side in here, join me!'" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10 mt-5">
+                                <h3>Small talk</h3>
+                                <p>
+                                    Answer at least 5 of these questions to give your customers a little insight into you as a person.<br />
+                                    We won't check your answers, so you can be naughty and lie a little if you want...
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+                                <div class="form-group">
+                                    <label for="st1">What are your hobbies?</label>
+                                    <input class="form-control" id="st1" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+                                <div class="form-group">
+                                    <label for="st2">What's your favourite movie or TV show?</label>
+                                    <input class="form-control" id="st2" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+                                <div class="form-group">
+                                    <label for="st3">What do you like to wear while on the couch at home watching TV?</label>
+                                    <input class="form-control" id="st3" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+                                <div class="form-group">
+                                    <label for="st4">Are you in a relationship and if so, does your partner know you have this shop?</label>
+                                    <input class="form-control" id="st4" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+                                <div class="form-group">
+                                    <label for="st5">What's your all-time favourite thing to do?</label>
+                                    <input class="form-control" id="st5" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+                                <div class="form-group">
+                                    <label for="st6">If you could only one eat thing for the rest of your life, what would it be?</label>
+                                    <input class="form-control" id="st6" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+                                <div class="form-group">
+                                    <label for="st6">What is your biggest kink?</label>
+                                    <input class="form-control" id="st6" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+                                <div class="form-group">
+                                    <label for="st7">Tell us something nobody knows about you.</label>
+                                    <input class="form-control" id="st7" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10 text-right pt-3">
+                                <a href="#" class="btn btn-primary btn-big"><i class="fas fa-cloud-upload-alt"></i> Save</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade personalInformationContainer" id="v-pills-personalinformation" role="tabpanel" aria-labelledby="v-pills-personalinformation-tab">
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input class="form-control" id="name" placeholder="First + Last name" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Your e-mail address</label>
+                                            <input class="form-control" id="email" placeholder="Email" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="phone">Phone number</label>
+                                            <input class="form-control" id="phone" placeholder="Phone number" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label>Your picture</label><br />
+                                                <img src="https://placehold.co/240x300">
+                                            </div>
+                                            <div class="col-6 d-flex align-items-end">
+                                                <a href="#" class="btn btn-primary">Upload picture</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-xl-10">
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="address1">What's your address?</label>
+                                            <input class="form-control" id="address1" placeholder="Address1" />
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="address2">&nbsp;</label>
+                                            <input class="form-control" id="address2" placeholder="Address2" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="zipcode">Zip code / Postal code</label>
+                                            <input class="form-control" id="zipcode" placeholder="Zip code" />
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="city">Town / City</label>
+                                            <input class="form-control" id="city" placeholder="City" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10">
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="state">State / Province</label>
+                                            <input class="form-control" id="state" placeholder="State" />
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="country">Country</label>
+                                            <input class="form-control" id="country" placeholder="Country" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-10 text-right pt-3">
+                                <a href="#" class="btn btn-primary btn-big"><i class="fas fa-cloud-upload-alt"></i> Save</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-@*    @await Component.InvokeAsync("AdminWidget", new { widgetZone = AdminWidgetZones.VendorDetailsInfoBottom, additionalData = Model })
-*@</div>
-
-<script>
-    $(document).ready(function () {
-        $("#@Html.IdFor(model => model.AllowCustomersToSelectPageSize)").click(togglePageSize);
-        togglePageSize();
-    });
-
-    function togglePageSize() {
-        if ($('#@Html.IdFor(model => model.AllowCustomersToSelectPageSize)').is(':checked')) {
-            $('#pnlPageSize').hide();
-            $('#pnlPageSizeOptions').show();
-        } else {
-            $('#pnlPageSize').show();
-            $('#pnlPageSizeOptions').hide();
-        }
-    }
-</script>
+</div>

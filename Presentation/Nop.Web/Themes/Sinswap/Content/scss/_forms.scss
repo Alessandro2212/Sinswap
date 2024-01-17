@@ -249,6 +249,10 @@ div.btn-container {
         }
     }
 
+    &.btn-big {
+        font-size: 24px;
+    }
+
     &.btn-primary:not(:disabled):not(.disabled):active:focus {
         box-shadow: none;
     }
@@ -256,6 +260,26 @@ div.btn-container {
     &.btn-primary:not(:disabled):not(.disabled):active {
         background-color: inherit;
         border-color: inherit;
+    }
+}
+
+.shopSettingContainer,
+.profileInformationContainer,
+.personalInformationContainer {
+    .label, label {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        font-size: 24px;
+        line-height: 32px;
+        background-color: $grey1;
+        color: $grey20;
+    }
+
+    textarea {
+        padding: 10px 20px;
     }
 }
 

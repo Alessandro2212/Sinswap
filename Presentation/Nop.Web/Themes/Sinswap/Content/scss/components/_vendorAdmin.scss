@@ -60,7 +60,8 @@ header.vendorAdmin {
             }
 
             &.active {
-                color: $grey6;
+                color: $black;
+                background-color: $grey3;
 
                 &:after {
                     content: '';
@@ -81,6 +82,175 @@ header.vendorAdmin {
         }
     }
 
+    .settingsMenu {
+        .nav-link {
+            float: left;
+            padding: 10px 20px;
+            margin: 0 20px;
+            font-size: 20px;
+            font-weight: 600;
+            color: $black;
+            transition: background-color .15s;
+            display: inline-block;
+            border-radius: 5px;
+
+            &:hover {
+                background-color: $grey3;
+                transition: background-color .15s;
+            }
+
+            &.active {
+                color: $grey6;
+            }
+        }
+    }
+
+    .isPremium {
+        text-align: center;
+
+        .badge {
+            animation: introduceBadge 1s linear 0s 1 both;
+            background: rgba($seller, 0.2);
+            border-radius: 50%;
+            height: 136px;
+            perspective: 900px;
+            position: relative;
+            width: 136px;
+            margin-top: 40px;
+
+            &:before,
+            &:after {
+                animation: pulseBadge 3s cubic-bezier(0.860, 0.000, 0.070, 1.000) 0s infinite both;
+                border: 2px solid $seller;
+                border-radius: inherit;
+                bottom: -16px;
+                content: "";
+                left: -16px;
+                opacity: 0.2;
+                position: absolute;
+                right: -16px;
+                top: -16px;
+            }
+
+            &:after {
+                animation-name: pulseBadge2;
+                bottom: -32px;
+                left: -32px;
+                opacity: 0.1;
+                right: -32px;
+                top: -32px;
+            }
+        }
+
+        .badge__label {
+            animation: introduceLabel 2s cubic-bezier(0.19, 1, 0.22, 1) 1s 1 both, rotateLabel 5s linear 3s infinite;
+            color: $seller;
+            font: 900 88px/1 -apple-system, BlinkMacSystemFont;
+            left: 50%;
+            position: absolute;
+            text-align: center;
+            text-shadow: 0px 4px 8px rgba($seller, 0.2);
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .label {
+            font-size: 20px;
+            text-transform: uppercase;
+            font-weight: 900;
+            position: absolute;
+            bottom: -25px;
+            left: 0px;
+            right: 0px;
+            color: $seller;
+            text-shadow: 0px 4px 8px rgba($seller, 0.2);
+        }
+    }
+
+    @keyframes introduceBadge {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes pulseBadge {
+        0% {
+            transform: scale(1)
+        }
+
+        50% {
+            transform: scale(1.05)
+        }
+
+        100% {
+            transform: scale(1)
+        }
+    }
+
+    @keyframes pulseBadge2 {
+        0% {
+            transform: scale(1)
+        }
+
+        50% {
+            transform: scale(1.1)
+        }
+
+        100% {
+            transform: scale(1)
+        }
+    }
+
+    @keyframes introduceLabel {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.4) rotateY(-1800deg);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1) rotateY(20deg);
+        }
+    }
+
+    @keyframes rotateLabel {
+        0% {
+            transform: translate(-50%, -50%) rotateY(20deg);
+        }
+
+        50% {
+            transform: translate(-50%, -50%) rotateY(-20deg);
+        }
+
+        100% {
+            transform: translate(-50%, -50%) rotateY(20deg);
+        }
+    }
+
+    .completeNotice {
+        background-color: $red;
+        color: $white;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+
+        h4 {
+            font-weight: 600;
+            font-size: 22px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-weight: 600;
+            font-size: 20px;
+            margin: 0px;
+        }
+    }
+
     .tab-content {
         border-radius: 5px;
         padding-bottom: 15px;
@@ -91,6 +261,13 @@ header.vendorAdmin {
                 padding: 15px 30px;
                 margin-bottom: 5px;
                 border-radius: 5px 5px 0 0;
+                background-color: $white;
+            }
+
+            .content-body {
+                padding: 15px 30px;
+                margin-bottom: 5px;
+                border-radius: 0 0 5px 5px;
                 background-color: $white;
             }
 

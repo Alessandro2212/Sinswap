@@ -155,40 +155,40 @@
                     </div>
                 </div>
             }
-        <div class="form-group">
-            <div class="col-md-3">
-                <nop-label asp-for="SelectedCustomerRoleIds"/>
-            </div>
-            <div class="col-md-9">
-                <div class="input-group input-group-required">
-                    <nop-select asp-for="SelectedCustomerRoleIds" asp-items="Model.AvailableCustomerRoles" asp-multiple="true"/>
-                    <div class="input-group-btn">
-                        <nop-required />
-                    </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <nop-label asp-for="SelectedCustomerRoleIds"/>
                 </div>
-                <script>
-                    $(document).ready(function() {
-                        var customerRolesIdsInput = $('#@Html.IdFor(model => model.SelectedCustomerRoleIds)').data("kendoMultiSelect");
-                        customerRolesIdsInput.setOptions({
-                            customerRolesIdsInput: false,
-                            filter: "contains"
-                        });
+                <div class="col-md-9">
+                    <div class="input-group input-group-required">
+                        <nop-select asp-for="SelectedCustomerRoleIds" asp-items="Model.AvailableCustomerRoles" asp-multiple="true"/>
+                        <div class="input-group-btn">
+                            <nop-required />
+                        </div>
+                    </div>
+                    <script>
+                        $(document).ready(function() {
+                            var customerRolesIdsInput = $('#@Html.IdFor(model => model.SelectedCustomerRoleIds)').data("kendoMultiSelect");
+                            customerRolesIdsInput.setOptions({
+                                customerRolesIdsInput: false,
+                                filter: "contains"
+                            });
 
-                        @if (Model.AvailableCustomerRoles.Count == 0)
-                        {
-                            <text>
-                                customerRolesIdsInput.setOptions({
-                                    enable: false,
-                                    placeholder: '@T("Admin.Customers.Customers.Fields.CustomerRoles.NoRoles")'
-                                });
-                                customerRolesIdsInput._placeholder();
-                                customerRolesIdsInput._enable();
-                            </text>
-                        }
-                    });
-                </script>
+                            @if (Model.AvailableCustomerRoles.Count == 0)
+                            {
+                                <text>
+                                    customerRolesIdsInput.setOptions({
+                                        enable: false,
+                                        placeholder: '@T("Admin.Customers.Customers.Fields.CustomerRoles.NoRoles")'
+                                    });
+                                    customerRolesIdsInput._placeholder();
+                                    customerRolesIdsInput._enable();
+                                </text>
+                            }
+                        });
+                    </script>
+                </div>
             </div>
-        </div>
             <div class="form-group">
                 <div class="col-md-3">
                     <nop-label asp-for="VendorId"/>
