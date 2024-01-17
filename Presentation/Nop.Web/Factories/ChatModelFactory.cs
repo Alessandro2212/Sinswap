@@ -1,4 +1,5 @@
 ﻿using Nop.Core.Domain.Customers;
+using Nop.Core.Domain.Vendors;
 using Nop.Services.Chats;
 using Nop.Services.Customers;
 using Nop.Services.Media;
@@ -34,7 +35,8 @@ namespace Nop.Web.Factories
             var customers = this._customerService.GetCustomersByIds(ids);
 
             var vendors = this._vendorService.GetVendorsFromReviewsAndCustomer(userId);
-
+            var vendorsForPurchasedProducts = this._vendorService.GetVendorsFromCustomerPurchasedItems(userId);
+            var visitedVendors = new List<int>();
             List<ChatUsersModel> chatUserModels = new List<ChatUsersModel>();
             foreach (var customer in customers)
             {
@@ -45,14 +47,10 @@ namespace Nop.Web.Factories
                     var vendor = _vendorService.GetVendorById(customer.VendorId);
 
                     chatUsersModel.Id = customer.VendorId;
-                    chatUsersModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 10);
+                    chatUsersModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 100);
                     chatUsersModel.Name = vendor.Name;
 
-                    var vendorToRemove = vendors.ToList().Where(v => v.Id == vendor.Id).FirstOrDefault();
-                    if (vendorToRemove != null)
-                    {
-                        vendors.ToList().Remove(vendorToRemove);
-                    }
+                    visitedVendors.Add(vendor.Id);
                 }
                 else
                 {
@@ -65,14 +63,17 @@ namespace Nop.Web.Factories
                 chatUserModels.Add(chatUsersModel);
             }
 
-            //to be tested (extra vendors in chat because of reviews)
-            foreach (var vendor in vendors)
+            //extra vendors in chat because of reviews or purchased product from
+            foreach (var vendor in vendors.Union(vendorsForPurchasedProducts).Distinct())
             {
-                ChatUsersModel chatUsersModel = new ChatUsersModel();
-                chatUsersModel.Id = vendor.Id;
-                chatUsersModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 10);
-                chatUsersModel.Name = vendor.Name;
-                chatUserModels.Add(chatUsersModel);
+                if (!visitedVendors.Contains(vendor.Id))
+                {
+                    ChatUsersModel chatUsersModel = new ChatUsersModel();
+                    chatUsersModel.Id = vendor.Id;
+                    chatUsersModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 100);
+                    chatUsersModel.Name = vendor.Name;
+                    chatUserModels.Add(chatUsersModel);
+                }
             }
 
             return new ChatUsersViewModel() { ChatUsersModels = chatUserModels, CustomerId = userId };
@@ -89,6 +90,10 @@ namespace Nop.Web.Factories
             {
                 ChatConversationsModel chatConversationsModel = new ChatConversationsModel();
                 chatConversationsModel.Message = chat.Message;
+                if (chat.PictureId > 0)
+                {
+                    chatConversationsModel.MessagePictureUrl = _pictureService.GetPictureUrl(chat.PictureId.Value, 100);
+                }
                 chatConversationsModel.Time = chat.CreatedOnUtc;
                 var customer = customers.Where(x => x.Id == chat.FromId).FirstOrDefault();
                 if (customer.Id == userId)
@@ -99,7 +104,7 @@ namespace Nop.Web.Factories
                 if (customer.VendorId > 0)
                 {
                     var vendor = _vendorService.GetVendorById(customer.VendorId);
-                    chatConversationsModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 10);
+                    chatConversationsModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 100);
                     chatConversationsModel.Name = vendor.Name;
                     if (customer.Id == partnerId)
                     {

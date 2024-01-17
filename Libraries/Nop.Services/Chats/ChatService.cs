@@ -1,5 +1,9 @@
-﻿using Nop.Core.Data;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
+using Nop.Core.Data;
 using Nop.Core.Domain.Chats;
+using Nop.Core.Domain.Media;
+using Nop.Services.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +14,17 @@ namespace Nop.Services.Chats
     public class ChatService : IChatService
     {
         private readonly IRepository<Chat> _chatRepository;
+        private readonly IDownloadService _downloadService;
+        private readonly IPictureService _pictureService;
 
-        public ChatService(IRepository<Chat> chatRepo)
+        public ChatService(
+            IRepository<Chat> chatRepo,
+            IDownloadService downloadService,
+            IPictureService pictureService)
         {
             this._chatRepository = chatRepo;
+            this._downloadService = downloadService;
+            this._pictureService = pictureService;
         }
 
         public List<Chat> GetLatestChatsByUser(int userId)
@@ -70,15 +81,27 @@ namespace Nop.Services.Chats
                               (chat.ToId == userId && chat.FromId == partnerId)
                         orderby chat.CreatedOnUtc
                         select chat;
-
             return query.ToList();
         }
 
-        public Chat SaveChatMessage(int userId, int partnerId, string message)
+        public Chat SaveChatMessage(int userId, int partnerId, string message, IFormFile formFile)
         {
-            Chat chat = new Chat { FromId = userId, ToId= partnerId, Message = message, CreatedOnUtc = DateTime.Now };
+            int? pictureId = null;
+            if (formFile != null)
+            {
+                pictureId = (this.SaveChatMessagePicture(formFile))?.Id;
+            }
+            Chat chat = new Chat { FromId = userId, ToId = partnerId, Message = message, CreatedOnUtc = DateTime.Now, PictureId = pictureId };
             _chatRepository.Insert(chat);
             return chat;
+        }
+
+        public Picture SaveChatMessagePicture(IFormFile formFile)
+        {
+            var contentType = formFile.ContentType;
+            var vendorPictureBinary = _downloadService.GetDownloadBits(formFile);
+            var picture = _pictureService.InsertPicture(vendorPictureBinary, contentType, null);
+            return picture;
         }
 
         public void DeleteChatMessage(int userId, int partnerId)

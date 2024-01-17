@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.ServiceModel.Channels;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Primitives;
 using Nop.Core;
 using Nop.Core.Domain;
@@ -109,6 +114,7 @@ namespace Nop.Web.Controllers
         private readonly IStoreService _storeService;
         private readonly IChatModelFactory _chatModelFactory;
         private readonly IChatService _chatService;
+        private ICompositeViewEngine _viewEngine;
 
         #endregion
 
@@ -163,7 +169,8 @@ namespace Nop.Web.Controllers
             IPermissionService permissionService,
             IStoreService storeService,
             IChatModelFactory chatModelFactory,
-            IChatService chatService)
+            IChatService chatService,
+            ICompositeViewEngine viewEngine)
         {
             this._addressSettings = addressSettings;
             this._captchaSettings = captchaSettings;
@@ -215,6 +222,7 @@ namespace Nop.Web.Controllers
             this._storeService = storeService;
             this._chatModelFactory = chatModelFactory;
             this._chatService = chatService;
+            _viewEngine = viewEngine;
         }
 
         #endregion
@@ -2457,9 +2465,23 @@ namespace Nop.Web.Controllers
         [HttpPost]
         public virtual IActionResult PostChat(int vendorId, int partnerId, string message)
         {
+            IFormFile formFile = null;
+            if (Request.Form.Files.Count > 0)
+            {
+                formFile = Request.Form.Files.FirstOrDefault();
+            }
             if (partnerId <= 0)
             {
-                return RedirectToAction("GetChat", new { vendorId = vendorId, partnerId = partnerId });
+                //return RedirectToAction("GetChat", new { vendorId = vendorId, partnerId = partnerId });
+                var uId = this._customerService.GetCustomerIdByVendorId(vendorId);
+                var paId = this._customerService.GetCustomerIdByVendorId(partnerId);
+                var m = _chatModelFactory.GetChatConversationsViewModel(uId == 0 ? vendorId : uId, paId == 0 ? partnerId : paId);
+                return Json(new
+                {
+                    view = RenderPartialViewToString("GetChat", m),
+                    isValid = true,
+                    description = "Hey!"
+                });
             }
 
             var userId = this._customerService.GetCustomerIdByVendorId(vendorId);
@@ -2467,10 +2489,18 @@ namespace Nop.Web.Controllers
 
             if (!string.IsNullOrEmpty(message))
             {
-                this._chatService.SaveChatMessage(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId, message);
+                this._chatService.SaveChatMessage(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId, message, formFile);
             }
 
-            return RedirectToAction("GetChat", new { vendorId = vendorId, partnerId = partnerId });
+            var model = _chatModelFactory.GetChatConversationsViewModel(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId);
+            return Json(new
+            {
+                view = RenderPartialViewToString("GetChat", model),
+                isValid = true,
+                description = "Hey!"
+            });
+
+            //return RedirectToAction("GetChat", new { vendorId = vendorId, partnerId = partnerId });
         }
 
         [HttpPost]
@@ -2481,21 +2511,44 @@ namespace Nop.Web.Controllers
             ChatUsersViewModel model = null;
             //try to seek for the customer id given the vendor id. in case is not found it means that we are already supplying the 
             //correct id (the id is already from a customer) and we don't have to retrieve it
+            this._chatService.DeleteChatMessage(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId);
             if (userId == 0)
-            {
-                this._chatService.DeleteChatMessage(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId);
+            {              
                 model = _chatModelFactory.GetChatUsersViewModel(vendorId);
             }
             else
             {
-                //delete chat
-                this._chatService.DeleteChatMessage(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId);
                 model = _chatModelFactory.GetChatUsersViewModel(userId);
             }
             return View(model);
         }
         #endregion
+        private string RenderPartialViewToString(string viewName, object model)
+        {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = ControllerContext.ActionDescriptor.ActionName;
 
+            ViewData.Model = model;
+
+            using (var writer = new StringWriter())
+            {
+                ViewEngineResult viewResult =
+                    _viewEngine.FindView(ControllerContext, viewName, false);
+
+                ViewContext viewContext = new ViewContext(
+                    ControllerContext,
+                    viewResult.View,
+                    ViewData,
+                    TempData,
+                    writer,
+                    new HtmlHelperOptions()
+                );
+
+                viewResult.View.RenderAsync(viewContext).ConfigureAwait(false);
+
+                return writer.GetStringBuilder().ToString();
+            }
+        }      
         #endregion
     }
 }

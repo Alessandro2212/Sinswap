@@ -1,8 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using Nop.Core;
 using Nop.Core.Data;
 using Nop.Core.Data.Extensions;
 using Nop.Core.Domain.Catalog;
-using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Vendors;
 using Nop.Core.Html;
 using Nop.Data;
@@ -36,6 +36,7 @@ namespace Nop.Services.Vendors
         private readonly IRepository<Follower> _followerRepository;
         private readonly IRepository<VendorFaq> _vendorFaqRepository;
         private readonly IRepository<Category> _categoryRepository;
+        private readonly IRepository<Core.Domain.Orders.Order> _orderRepository;
 
 
         #endregion
@@ -56,7 +57,8 @@ namespace Nop.Services.Vendors
             IRepository<VendorFaq> vendorFaqRepository,
             IRepository<ProductCategory> productCategoryRepository,
             IRepository<Category> categoryRepository,
-            IRepository<VendorPictureRecord> vendorPictureRepository)
+            IRepository<VendorPictureRecord> vendorPictureRepository,
+            IRepository<Core.Domain.Orders.Order> orderRepository)
         {
             this._eventPublisher = eventPublisher;
             this._vendorRepository = vendorRepository;
@@ -73,6 +75,7 @@ namespace Nop.Services.Vendors
             this._productCategoryRepository = productCategoryRepository;
             this._categoryRepository = categoryRepository;
             this._vendorPictureRepository = vendorPictureRepository;
+            this._orderRepository = orderRepository;
         }
 
         #endregion
@@ -326,6 +329,32 @@ namespace Nop.Services.Vendors
                                     .Distinct()
                                     .ToList();
             return vendorReviews;
+        }
+
+        public IEnumerable<Vendor> GetVendorsFromCustomerPurchasedItems(int customerId)
+        {
+            var orderItems = _orderRepository.Table.Include(o => o.OrderItems)
+                .ThenInclude(v => v.Product)
+                .ThenInclude(v => v.ProductVendors)
+                .ThenInclude(v => v.Vendor)
+                .Where(v => v.CustomerId == customerId)
+                .Select(v => v.OrderItems)
+                .Distinct()
+                .ToList();
+            var productVendors = new List<int>();
+            foreach (var item in orderItems)
+            {
+                foreach (var i in item)
+                {
+                    productVendors.Add(i.Product.VendorId);
+                }
+            }
+
+            var vendors = from v in _vendorRepository.Table
+                          where productVendors.Contains(v.Id)
+                          select v;
+
+            return vendors.Distinct().ToList();   
         }
 
         public IEnumerable<VendorReviewRecord> GetVendorQuestions(int vendorId, int amount)

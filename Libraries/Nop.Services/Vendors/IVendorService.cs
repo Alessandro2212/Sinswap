@@ -40,6 +40,8 @@ namespace Nop.Services.Vendors
 
         IEnumerable<Vendor> GetVendorsFromReviewsAndCustomer(int customerId);
 
+        IEnumerable<Vendor> GetVendorsFromCustomerPurchasedItems(int customerId);
+
         /// <summary>
         /// Gets vendors
         /// </summary>

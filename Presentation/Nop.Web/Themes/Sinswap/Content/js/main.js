@@ -295,10 +295,38 @@ $(function () {
         var pId = $('#partnerUserId').val();
         $('.chat-messages').html("");
         $('#chat-text-msg').val('');
-        $.post(chatUrl, { vendorId: userId, partnerId: pId, message: msg }, function (data) {
-            productContent = $(data);
-            $('.chat-messages').html(productContent);
-        })
+
+
+        var image = document.getElementById("ImgUpload").files[0];
+        var formData = new FormData();
+        formData.append("imageUploadForm", image);
+        formData.append("vendorId", userId);
+        formData.append("partnerId", pId);
+        formData.append("message", msg);
+
+        $.ajax({
+            type: "POST",
+            url: chatUrl,
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                productContent = $(data.view);
+                $('.chat-messages').html(productContent);
+            },
+            //error: function(error) {
+            //    alert("errror");
+            //}
+        });
+        //    .done(function (data) {
+        //    productContent = $(data);
+        //    $('.chat-messages').html(productContent);
+        //});
+        //$.post(chatUrl, { vendorId: userId, partnerId: pId, message: msg }, function (data) {
+        //    productContent = $(data);
+        //    $('.chat-messages').html(productContent);
+        //})
     });
 
     $(".chat-delete-btn").click(function (e) {
