@@ -10,5 +10,6 @@ namespace Nop.Web.Models.Chat
         public string LatestMessage { get; set; }
         public bool? IsRead { get; set; }
         public DateTime Time { get; set; }
+        public int ItemsPurchased { get; set; }
     }
 }

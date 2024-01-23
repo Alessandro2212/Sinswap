@@ -33,7 +33,6 @@ namespace Nop.Web.Factories
             var chats = _chatService.GetLatestChatsByUser(userId);
             var ids = chats.Select(x => x.FromId).Distinct().ToArray();
             var customers = this._customerService.GetCustomersByIds(ids);
-
             var vendors = this._vendorService.GetVendorsFromReviewsAndCustomer(userId);
             var vendorsForPurchasedProducts = this._vendorService.GetVendorsFromCustomerPurchasedItems(userId);
             var visitedVendors = new List<int>();
@@ -49,13 +48,15 @@ namespace Nop.Web.Factories
                     chatUsersModel.Id = customer.VendorId;
                     chatUsersModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 100);
                     chatUsersModel.Name = vendor.Name;
-
                     visitedVendors.Add(vendor.Id);
                 }
                 else
                 {
                     chatUsersModel.Id = customer.Id;
                     chatUsersModel.Name = customer.Username;
+                    //TODO: load the pictures of non vendor users
+                    //add more info about this non vendor profile which im chatting with
+                    chatUsersModel.ItemsPurchased = this._vendorService.GetNumberOfPurchasedItems(customer.Id, userId);
                 }
                 chatUsersModel.LatestMessage = chat.Message;
                 chatUsersModel.Time = chat.CreatedOnUtc;

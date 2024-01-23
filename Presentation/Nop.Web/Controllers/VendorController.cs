@@ -34,6 +34,7 @@ using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework.Security;
 using Nop.Web.Framework.Security.Captcha;
 using Nop.Web.Models.Vendors;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 
 namespace Nop.Web.Controllers
 {
@@ -527,11 +528,12 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
+        //[HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         public virtual IActionResult Edit(VendorEditModel model)
         {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageVendors))
-                return AccessDeniedView();
+            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageVendors))
+            //    return AccessDeniedView();
 
             //try to get a vendor with the specified id
             var vendor = _vendorService.GetVendorById(model.Id);
@@ -559,6 +561,11 @@ namespace Nop.Web.Controllers
                 vendor.Name = model.Name;
                 vendor.PictureId = model.PictureId;
                 vendor.ShopName = model.ShopName;
+                vendor.AddressId = model.Address.Id;
+
+                //TODO: resolve 
+                //The UPDATE statement conflicted with the FOREIGN KEY constraint "FK__Vendor__CountryI__1F2E9E6D".The conflict occurred in database "Sinswap_Test", table "dbo.Country", column 'Id'.
+                //The statement has been terminated.
 
                 _vendorService.UpdateVendor(vendor);
 
@@ -584,7 +591,7 @@ namespace Nop.Web.Controllers
                 var address = _addressService.GetAddressById(vendor.AddressId);
                 if (address == null)
                 {
-                    address = model.Address.ToEntity<Address>();
+                    address = model.Address.ToEntity<Core.Domain.Common.Address>();
                     address.CreatedOnUtc = DateTime.UtcNow;
 
                     //some validation

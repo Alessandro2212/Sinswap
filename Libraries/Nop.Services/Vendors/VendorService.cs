@@ -354,7 +354,33 @@ namespace Nop.Services.Vendors
                           where productVendors.Contains(v.Id)
                           select v;
 
-            return vendors.Distinct().ToList();   
+            return vendors.Distinct().ToList();
+        }
+
+        /// <summary>
+        /// TODO: needs testing
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="vendorId"></param>
+        /// <returns></returns>
+        public int GetNumberOfPurchasedItems(int customerId, int vendorId)
+        {
+            var orderItems = _orderRepository.Table.Include(o => o.OrderItems)
+                .ThenInclude(v => v.Product)
+                .ThenInclude(v => v.ProductVendors)
+                .ThenInclude(v => v.Vendor)
+                .Where(v => v.CustomerId == customerId)
+                .Select(v => v.OrderItems)
+                .Distinct()
+                .ToList();
+            int count = 0;
+            foreach (var item in orderItems)
+            {
+                var itemsFromVendor = item.Where(i => i.Product.VendorId == vendorId).ToList();
+                count += itemsFromVendor.Count();
+            }
+
+            return count;
         }
 
         public IEnumerable<VendorReviewRecord> GetVendorQuestions(int vendorId, int amount)
