@@ -158,6 +158,9 @@ namespace Nop.Core.Domain.Customers
         /// </summary>
         public DateTime? BirthDate { get; set; }
 
+        
+        public string Phone { get; set; }
+
         #region Navigation properties
 
         /// <summary>

@@ -110,6 +110,15 @@ namespace Nop.Core.Domain.Vendors
 
         public string KnownFor { get; set; }
 
+        public string FavouriteHobby { get; set; }
+        public string FavouriteMovie { get; set; }
+        public string FavouriteWear { get; set; }
+        public bool? DoesPartnerKnow { get; set; }
+        public string FavouriteThing { get; set; }
+        public string FavouriteFood { get; set; }
+        public string FavouriteKink { get; set; }
+        public string Secrets { get; set; }
+
         /// <summary>
         /// Gets or sets vendor notes
         /// </summary>

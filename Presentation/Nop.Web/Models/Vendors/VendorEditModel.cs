@@ -62,7 +62,7 @@ namespace Nop.Web.Models.Vendors
         public bool Active { get; set; }
 
         [NopResourceDisplayName("Admin.Vendors.Fields.DisplayOrder")]
-        public int DisplayOrder { get; set; }        
+        public int DisplayOrder { get; set; }
 
         [NopResourceDisplayName("Admin.Vendors.Fields.MetaKeywords")]
         public string MetaKeywords { get; set; }
@@ -113,10 +113,28 @@ namespace Nop.Web.Models.Vendors
 
         public VendorNoteSearchModel VendorNoteSearchModel { get; set; }
 
+        //extra fields for vendor (and customer) (backend) form
+        public string FavouriteHobby { get; set; }
+        public string FavouriteMovie { get; set; }
+        public string FavouriteWear { get; set; }
+        public bool DoesPartnerKnow { get; set; }
+        public string FavouriteThing { get; set; }
+        public string FavouriteFood { get; set; }
+        public string FavouriteKink { get; set; }
+        public string Secrets { get; set; }
+        public string Phone { get; set; }
+        public string PictureUrl { get; set; } = "https://placehold.co/240x300";
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string ZipCode { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
+        public int CustomerId { get; set; }
+
         #endregion
 
         #region Nested classes
-        
+
         public partial class VendorAttributeModel : BaseNopEntityModel
         {
             public VendorAttributeModel()

@@ -349,6 +349,14 @@ namespace Nop.Web.Factories
                 model.Name = vendor.Name;
                 model.PictureId = vendor.PictureId;
                 model.ShopName = vendor.ShopName;
+                model.FavouriteHobby = vendor.FavouriteHobby;
+                model.FavouriteMovie = vendor.FavouriteMovie;
+                model.FavouriteWear = vendor.FavouriteWear;
+                model.DoesPartnerKnow = vendor.DoesPartnerKnow ?? false;
+                model.FavouriteThing = vendor.FavouriteThing;
+                model.FavouriteFood = vendor.FavouriteFood;
+                model.FavouriteKink = vendor.FavouriteKink;
+                model.Secrets = vendor.Secrets;
 
                 //define localized model configuration action
                 localizedModelConfiguration = (locale, languageId) =>
@@ -366,6 +374,8 @@ namespace Nop.Web.Factories
 
                 //prepare nested search models
                 PrepareVendorNoteSearchModel(model.VendorNoteSearchModel, vendor);
+
+                PrepareCustomerFields(model, vendor);
             }
 
             //set default values for the new model
@@ -391,6 +401,13 @@ namespace Nop.Web.Factories
             PrepareAddressModel(model.Address, address);
 
             return model;
+        }
+
+        protected virtual void PrepareCustomerFields(VendorEditModel model, Vendor vendor)
+        {
+            var customer = this._customerService.GetCustomerByVendorId(vendor.Id);
+            model.Phone = customer.Phone;
+            model.CustomerId = customer.Id;
         }
 
         /// <summary>

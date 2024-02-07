@@ -74,6 +74,8 @@ namespace Nop.Services.Customers
 
         int GetCustomerIdByVendorId(int vendorId);
 
+        Customer GetCustomerByVendorId(int vendorId);
+
         /// <summary>
         /// Get customers by identifiers
         /// </summary>
