@@ -100,10 +100,8 @@ namespace Nop.Services.Vendors
             if (string.IsNullOrWhiteSpace(email))
                 return null;
 
-            var query = from v in _vendorRepository.Table
-                        orderby v.Id
-                        where v.Email == email
-                        select v;
+            var query = _vendorRepository.Table.Include(vn => vn.VendorNotes)
+                .Where(v => v.Email == email);
 
             var vendor = query.FirstOrDefault();
             return vendor;

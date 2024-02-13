@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
 using System.Xml;
+using Microsoft.EntityFrameworkCore;
 using Nop.Core;
 using Nop.Core.Caching;
 using Nop.Core.Data;
@@ -336,9 +337,11 @@ namespace Nop.Services.Customers
             if (vendorId == 0)
                 return null;
 
-            var query = from c in _customerRepository.Table
-                        where c.VendorId == vendorId
-                        select c;
+            var query = _customerRepository.Table
+                .Include(add => add.BillingAddress)
+                .ThenInclude(prov => prov.StateProvince)
+                .ThenInclude(country => country.Country)
+                .Where(v => v.VendorId == vendorId);
 
             return query.FirstOrDefault();
         }

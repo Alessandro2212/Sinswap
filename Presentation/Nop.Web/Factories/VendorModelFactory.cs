@@ -331,7 +331,6 @@ namespace Nop.Web.Factories
         public virtual VendorEditModel PrepareVendorModel(VendorEditModel model, Vendor vendor, bool excludeProperties = false)
         {
             Action<VendorLocalizedModel, int> localizedModelConfiguration = null;
-
             if (vendor != null)
             {
                 //fill in model values from the entity
@@ -357,6 +356,8 @@ namespace Nop.Web.Factories
                 model.FavouriteFood = vendor.FavouriteFood;
                 model.FavouriteKink = vendor.FavouriteKink;
                 model.Secrets = vendor.Secrets;
+                model.AddVendorNoteMessage = vendor.VendorNotes?.FirstOrDefault()?.Note ?? string.Empty;
+                model.PictureUrl = _pictureService.GetPictureUrl(model.PictureId);
 
                 //define localized model configuration action
                 localizedModelConfiguration = (locale, languageId) =>
@@ -408,6 +409,12 @@ namespace Nop.Web.Factories
             var customer = this._customerService.GetCustomerByVendorId(vendor.Id);
             model.Phone = customer.Phone;
             model.CustomerId = customer.Id;
+            model.Address1 = customer.BillingAddress?.Address1;
+            model.Address2 = customer.BillingAddress?.Address2;
+            model.ZipCode = customer.BillingAddress?.ZipPostalCode;
+            model.City = customer.BillingAddress?.City;
+            model.State = customer.BillingAddress?.StateProvince?.Name;
+            model.Country = customer.BillingAddress?.Country?.Name;
         }
 
         /// <summary>
