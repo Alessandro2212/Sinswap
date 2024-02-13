@@ -278,6 +278,17 @@ namespace Nop.Services.Vendors
             _eventPublisher.EntityDeleted(vendorNote);
         }
 
+        public virtual void UpdateVendorNote(VendorNote vendorNote)
+        {
+            if (vendorNote == null)
+                throw new ArgumentNullException(nameof(vendorNote));           
+            var vendorNotes = _vendorNoteRepository.Table
+                .Where(v => v.VendorId == vendorNote.VendorId)
+                .ToList();
+            _vendorNoteRepository.Delete(vendorNotes);
+            _vendorNoteRepository.Insert(vendorNote);
+        }
+
         /// <summary>
         /// Formats the vendor note text
         /// </summary>

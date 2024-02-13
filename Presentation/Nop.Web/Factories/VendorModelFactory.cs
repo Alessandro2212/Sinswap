@@ -374,9 +374,7 @@ namespace Nop.Web.Factories
                 PrepareAssociatedCustomerModels(model.AssociatedCustomers, vendor);
 
                 //prepare nested search models
-                PrepareVendorNoteSearchModel(model.VendorNoteSearchModel, vendor);
-
-                PrepareCustomerFields(model, vendor);
+                PrepareVendorNoteSearchModel(model.VendorNoteSearchModel, vendor);                
             }
 
             //set default values for the new model
@@ -401,20 +399,24 @@ namespace Nop.Web.Factories
             //    model.Address = address.ToModel(model.Address);
             PrepareAddressModel(model.Address, address);
 
+            PrepareCustomerFields(model, vendor, address);
+
             return model;
         }
 
-        protected virtual void PrepareCustomerFields(VendorEditModel model, Vendor vendor)
+        protected virtual void PrepareCustomerFields(VendorEditModel model, Vendor vendor, Address address)
         {
             var customer = this._customerService.GetCustomerByVendorId(vendor.Id);
             model.Phone = customer.Phone;
             model.CustomerId = customer.Id;
-            model.Address1 = customer.BillingAddress?.Address1;
-            model.Address2 = customer.BillingAddress?.Address2;
-            model.ZipCode = customer.BillingAddress?.ZipPostalCode;
-            model.City = customer.BillingAddress?.City;
-            model.State = customer.BillingAddress?.StateProvince?.Name;
-            model.Country = customer.BillingAddress?.Country?.Name;
+            model.Address1 = address.Address1;
+            model.Address2 = address.Address2;
+            model.ZipCode = address.ZipPostalCode;
+            model.City = address.City;
+            model.State = address.StateProvince?.Name;
+            //model.Country = address.Country?.Name;
+            model.Country = address.County;
+            model.AddressId = address.Id;
         }
 
         /// <summary>

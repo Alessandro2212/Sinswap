@@ -526,7 +526,6 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        //[HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         public virtual IActionResult Edit(VendorEditModel model)
         {
@@ -540,30 +539,34 @@ namespace Nop.Web.Controllers
 
             //parse vendor attributes
             var vendorAttributesXml = ParseVendorAttributes(model.Form);
-            _vendorAttributeParser.GetAttributeWarnings(vendorAttributesXml).ToList()
-                .ForEach(warning => ModelState.AddModelError(string.Empty, warning));
+            //_vendorAttributeParser.GetAttributeWarnings(vendorAttributesXml).ToList()
+            //    .ForEach(warning => ModelState.AddModelError(string.Empty, warning));
+            foreach(var warning in _vendorAttributeParser.GetAttributeWarnings(vendorAttributesXml).ToList())
+            {
+                if (!warning.Equals("Address"))
+                {
+                    ModelState.AddModelError(string.Empty, warning);
+                }
+                else
+                {
+                    int i = 0;
+                }
+            }
 
+            IFormFile formFile = null;
+            if (Request.Form.Files.Count > 0)
+            {
+                formFile = Request.Form.Files.FirstOrDefault();
+            }
+
+            //evita di fare if (modelstate.isvalid) e cicla suglie errori tranne quelli relativi a indirizzo (l'único che fallisce la validazione)
+            //come in https://stackoverflow.com/questions/15296069/how-to-figure-out-which-key-of-modelstate-has-error
             if (ModelState.IsValid)
             {
                 var prevPictureId = vendor.PictureId;
-                //vendor = model.ToEntity(vendor);
 
-                vendor.Active = model.Active;
-                vendor.BirthDate = model.BirthDate;
-                vendor.City = model.City;
-                vendor.CountryId = model.CountryId;
-                vendor.Description = model.Description;
-                vendor.Email = model.Email;
-                vendor.FollowersNumber = model.FollowersNumber;
-                vendor.Id = model.Id;
-                vendor.Name = model.Name;
-                vendor.PictureId = model.PictureId;
-                vendor.ShopName = model.ShopName;
-                vendor.AddressId = model.Address.Id;
-
-                //TODO: resolve 
-                //The UPDATE statement conflicted with the FOREIGN KEY constraint "FK__Vendor__CountryI__1F2E9E6D".The conflict occurred in database "Sinswap_Test", table "dbo.Country", column 'Id'.
-                //The statement has been terminated.
+                SaveVendorFormFields(vendor, model, formFile);
+                SaveCustomerFormFields(_customerService.GetCustomerByVendorId(vendor.Id), model);
 
                 _vendorService.UpdateVendor(vendor);
 
@@ -604,13 +607,19 @@ namespace Nop.Web.Controllers
                 }
                 else
                 {
-                    address = model.Address.ToEntity(address);
+                    //address = model.Address.ToEntity(address);
 
-                    //some validation
-                    if (address.CountryId == 0)
-                        address.CountryId = null;
-                    if (address.StateProvinceId == 0)
-                        address.StateProvinceId = null;
+                    ////some validation
+                    //if (address.CountryId == 0)
+                    //    address.CountryId = null;
+                    //if (address.StateProvinceId == 0)
+                    //    address.StateProvinceId = null;
+
+                    address.Address1 = model.Address1;
+                    address.Address2 = model.Address2;
+                    address.ZipPostalCode = model.ZipCode;
+                    address.City = model.City;
+                    address.County = model.Country;
 
                     _addressService.UpdateAddress(address);
                 }
@@ -641,6 +650,43 @@ namespace Nop.Web.Controllers
 
             //if we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private void SaveVendorFormFields(Vendor vendor, VendorEditModel model, IFormFile formFile)
+        {
+            vendor.ShopName = model.ShopName;
+            vendor.IsPremium = model.IsPremium;
+            vendor.Description = model.Description;
+
+            if (!string.IsNullOrEmpty(model.AddVendorNoteMessage))
+            {
+                var vendorNote = new VendorNote { Note = model.AddVendorNoteMessage, VendorId = model.Id };
+                _vendorService.UpdateVendorNote(vendorNote);
+            }
+
+            vendor.FavouriteHobby = model.FavouriteHobby;
+            vendor.FavouriteMovie = model.FavouriteMovie;
+            vendor.FavouriteWear = model.FavouriteWear;
+            vendor.DoesPartnerKnow = model.DoesPartnerKnow;
+            vendor.FavouriteThing = model.FavouriteThing;
+            vendor.FavouriteFood = model.FavouriteFood;
+            vendor.FavouriteKink = model.FavouriteKink;
+            vendor.Secrets = model.Secrets;
+            vendor.Name = model.Name;
+            vendor.Email = model.Email;
+
+            //Picture saving
+            var contentType = formFile.ContentType;
+            var vendorPictureBinary = _downloadService.GetDownloadBits(formFile);
+            var picture = _pictureService.InsertPicture(vendorPictureBinary, contentType, null);
+           
+
+        }
+
+        private void SaveCustomerFormFields(Customer customer, VendorEditModel model)
+        {
+            customer.Email = model.Email;
+            customer.Phone = model.Phone;
         }
 
         protected virtual void UpdateLocales(Vendor vendor, VendorEditModel model)

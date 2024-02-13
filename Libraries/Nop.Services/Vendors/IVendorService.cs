@@ -75,6 +75,8 @@ namespace Nop.Services.Vendors
         /// <param name="vendorNote">The vendor note</param>
         void DeleteVendorNote(VendorNote vendorNote);
 
+        void UpdateVendorNote(VendorNote vendorNote);
+
         /// <summary>
         /// Formats the vendor note text
         /// </summary>
