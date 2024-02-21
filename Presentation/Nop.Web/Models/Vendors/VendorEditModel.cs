@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using FluentValidation.Attributes;
+using Microsoft.AspNetCore.Http;
 using Nop.Core.Domain.Catalog;
 using Nop.Web.Framework.Models;
 using Nop.Web.Framework.Mvc.ModelBinding;
@@ -131,7 +132,7 @@ namespace Nop.Web.Models.Vendors
         public string Country { get; set; }
         public int CustomerId { get; set; }
         public int AddressId { get; set; }
-
+        public IFormFile UploadImage { get; set; }
 
         #endregion
 

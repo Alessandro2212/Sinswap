@@ -2,7 +2,10 @@
 
 <div class="container-fluid shopContainer">
 
-    @using (Html.BeginForm("Edit", "Vendor", FormMethod.Post))
+    @using (Html.BeginForm("Edit", "Vendor", FormMethod.Post, new
+    {
+        enctype = "multipart/form-data"
+    }))
     {
         <div class="row">
             <div class="col-12 p-0">
@@ -242,7 +245,7 @@
                                                     <img src="@Model.PictureUrl" class="mr-1" width="240" height="300">
                                                 </div>
                                                 <div class="col-6 d-flex align-items-end">
-                                                    <input type="file" class="btn btn-primary" id="ImgProfileUpload" />
+                                                    <input type="file" name="UploadImage" class="btn btn-primary" id="UploadImage" />
                                                     @* <a href="#" class="btn btn-primary">Upload picture</a> *@
                                                 </div>
                                             </div>

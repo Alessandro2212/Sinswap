@@ -543,32 +543,18 @@ namespace Nop.Web.Controllers
             _vendorAttributeParser.GetAttributeWarnings(vendorAttributesXml).ToList()
                 .ForEach(warning => ModelState.AddModelError(string.Empty, warning));
 
-            //focus on the image upload
-            IFormFile formFile = null;
-            if (Request.Form.Files.Count > 0)
-            {
-                formFile = Request.Form.Files.FirstOrDefault();
-            }
-
             var address = _addressService.GetAddressById(model.AddressId);
             address.Address1 = model.Address1;
             address.Address2 = model.Address2;
             address.ZipPostalCode = model.ZipCode;
             address.City = model.City;
             address.County = model.Country;
-            _addressService.UpdateAddress(address);
-            //model.Address = new Models.Common.AddressModel();
-            //model.Address.Address1 = model.Address1;
-            //model.Address.Address2 = model.Address2;
-            //model.Address.ZipPostalCode = model.ZipCode;
-            //model.Address.City = model.City;
-            //model.Address.County = model.Country;
 
             //if (ModelState.IsValid)
             //{
             var prevPictureId = vendor.PictureId;
 
-            SaveVendorFormFields(vendor, model, formFile);
+            SaveVendorFormFields(vendor, model);
 
             var customer = _customerService.GetCustomerByVendorId(vendor.Id);
             SaveCustomerFormFields(customer, model);
@@ -592,15 +578,6 @@ namespace Nop.Web.Controllers
                 model.SeName = _urlRecordService.ValidateSeName(vendor, model.ShopName, vendor.ShopName, true);
             }
             _urlRecordService.SaveSlug(vendor, model.SeName, 0);
-
-            //address
-            //address.Address1 = model.Address1;
-            //address.Address2 = model.Address2;
-            //address.ZipPostalCode = model.ZipCode;
-            //address.City = model.City;
-            //address.County = model.Country;
-
-            //_addressService.UpdateAddress(address);
 
             //var address = _addressService.GetAddressById(vendor.AddressId);
             //if (address == null)
@@ -665,7 +642,7 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        private void SaveVendorFormFields(Vendor vendor, VendorEditModel model, IFormFile formFile)
+        private void SaveVendorFormFields(Vendor vendor, VendorEditModel model)
         {
             vendor.ShopName = model.ShopName;
             vendor.IsPremium = model.IsPremium;
@@ -689,11 +666,12 @@ namespace Nop.Web.Controllers
             vendor.Email = model.Email;
 
             //Picture saving
-            if (formFile != null)
+            if (model.UploadImage != null)
             {
-                var contentType = formFile.ContentType;
-                var vendorPictureBinary = _downloadService.GetDownloadBits(formFile);
-                _pictureService.InsertPicture(vendorPictureBinary, contentType, null);
+                var contentType = model.UploadImage.ContentType;
+                var vendorPictureBinary = _downloadService.GetDownloadBits(model.UploadImage);
+                var savedPicture = _pictureService.InsertPicture(vendorPictureBinary, contentType, null);
+                vendor.PictureId = savedPicture.Id;
             }
 
             _vendorService.UpdateVendor(vendor);
