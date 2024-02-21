@@ -526,7 +526,8 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+        //[HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+        [HttpPost]
         public virtual IActionResult Edit(VendorEditModel model)
         {
             //if (!_permissionService.Authorize(StandardPermissionProvider.ManageVendors))
@@ -539,111 +540,123 @@ namespace Nop.Web.Controllers
 
             //parse vendor attributes
             var vendorAttributesXml = ParseVendorAttributes(model.Form);
-            //_vendorAttributeParser.GetAttributeWarnings(vendorAttributesXml).ToList()
-            //    .ForEach(warning => ModelState.AddModelError(string.Empty, warning));
-            foreach(var warning in _vendorAttributeParser.GetAttributeWarnings(vendorAttributesXml).ToList())
-            {
-                if (!warning.Equals("Address"))
-                {
-                    ModelState.AddModelError(string.Empty, warning);
-                }
-                else
-                {
-                    int i = 0;
-                }
-            }
+            _vendorAttributeParser.GetAttributeWarnings(vendorAttributesXml).ToList()
+                .ForEach(warning => ModelState.AddModelError(string.Empty, warning));
 
+            //focus on the image upload
             IFormFile formFile = null;
             if (Request.Form.Files.Count > 0)
             {
                 formFile = Request.Form.Files.FirstOrDefault();
             }
 
-            //evita di fare if (modelstate.isvalid) e cicla suglie errori tranne quelli relativi a indirizzo (l'único che fallisce la validazione)
-            //come in https://stackoverflow.com/questions/15296069/how-to-figure-out-which-key-of-modelstate-has-error
-            if (ModelState.IsValid)
+            var address = _addressService.GetAddressById(model.AddressId);
+            address.Address1 = model.Address1;
+            address.Address2 = model.Address2;
+            address.ZipPostalCode = model.ZipCode;
+            address.City = model.City;
+            address.County = model.Country;
+            _addressService.UpdateAddress(address);
+            //model.Address = new Models.Common.AddressModel();
+            //model.Address.Address1 = model.Address1;
+            //model.Address.Address2 = model.Address2;
+            //model.Address.ZipPostalCode = model.ZipCode;
+            //model.Address.City = model.City;
+            //model.Address.County = model.Country;
+
+            //if (ModelState.IsValid)
+            //{
+            var prevPictureId = vendor.PictureId;
+
+            SaveVendorFormFields(vendor, model, formFile);
+
+            var customer = _customerService.GetCustomerByVendorId(vendor.Id);
+            SaveCustomerFormFields(customer, model);
+          
+            SaveAddressFormFields(address, model);
+
+            //vendor attributes
+            _genericAttributeService.SaveAttribute(vendor, NopVendorDefaults.VendorAttributes, vendorAttributesXml);
+
+            //activity log
+            _customerActivityService.InsertActivity("EditVendor",
+                string.Format(_localizationService.GetResource("ActivityLog.EditVendor"), vendor.Id), vendor);
+
+            //search engine name
+            if (string.IsNullOrEmpty(vendor.ShopName))
             {
-                var prevPictureId = vendor.PictureId;
-
-                SaveVendorFormFields(vendor, model, formFile);
-                SaveCustomerFormFields(_customerService.GetCustomerByVendorId(vendor.Id), model);
-
-                _vendorService.UpdateVendor(vendor);
-
-                //vendor attributes
-                _genericAttributeService.SaveAttribute(vendor, NopVendorDefaults.VendorAttributes, vendorAttributesXml);
-
-                //activity log
-                _customerActivityService.InsertActivity("EditVendor",
-                    string.Format(_localizationService.GetResource("ActivityLog.EditVendor"), vendor.Id), vendor);
-
-                //search engine name
-                if (string.IsNullOrEmpty(vendor.ShopName))
-                {
-                    model.SeName = _urlRecordService.ValidateSeName(vendor, model.SeName, vendor.Name, true);
-                }
-                else
-                {
-                    model.SeName = _urlRecordService.ValidateSeName(vendor, model.ShopName, vendor.ShopName, true);
-                }
-                _urlRecordService.SaveSlug(vendor, model.SeName, 0);
-
-                //address
-                var address = _addressService.GetAddressById(vendor.AddressId);
-                if (address == null)
-                {
-                    address = model.Address.ToEntity<Core.Domain.Common.Address>();
-                    address.CreatedOnUtc = DateTime.UtcNow;
-
-                    //some validation
-                    if (address.CountryId == 0)
-                        address.CountryId = null;
-                    if (address.StateProvinceId == 0)
-                        address.StateProvinceId = null;
-
-                    _addressService.InsertAddress(address);
-                    vendor.AddressId = address.Id;
-                    _vendorService.UpdateVendor(vendor);
-                }
-                else
-                {
-                    //address = model.Address.ToEntity(address);
-
-                    ////some validation
-                    //if (address.CountryId == 0)
-                    //    address.CountryId = null;
-                    //if (address.StateProvinceId == 0)
-                    //    address.StateProvinceId = null;
-
-                    address.Address1 = model.Address1;
-                    address.Address2 = model.Address2;
-                    address.ZipPostalCode = model.ZipCode;
-                    address.City = model.City;
-                    address.County = model.Country;
-
-                    _addressService.UpdateAddress(address);
-                }
-
-                //locales
-                UpdateLocales(vendor, model);
-
-                //delete an old picture (if deleted or updated)
-                if (prevPictureId > 0 && prevPictureId != vendor.PictureId)
-                {
-                    var prevPicture = _pictureService.GetPictureById(prevPictureId);
-                    if (prevPicture != null)
-                        _pictureService.DeletePicture(prevPicture);
-                }
-                //update picture seo file name
-                UpdatePictureSeoNames(vendor);
-
-                SuccessNotification(_localizationService.GetResource("Admin.Vendors.Updated"));
-
-                //selected tab
-                SaveSelectedTabName();
-
-                return RedirectToAction("Edit", new { id = vendor.Id });
+                model.SeName = _urlRecordService.ValidateSeName(vendor, model.SeName, vendor.Name, true);
             }
+            else
+            {
+                model.SeName = _urlRecordService.ValidateSeName(vendor, model.ShopName, vendor.ShopName, true);
+            }
+            _urlRecordService.SaveSlug(vendor, model.SeName, 0);
+
+            //address
+            //address.Address1 = model.Address1;
+            //address.Address2 = model.Address2;
+            //address.ZipPostalCode = model.ZipCode;
+            //address.City = model.City;
+            //address.County = model.Country;
+
+            //_addressService.UpdateAddress(address);
+
+            //var address = _addressService.GetAddressById(vendor.AddressId);
+            //if (address == null)
+            //{
+            //    address = model.Address.ToEntity<Core.Domain.Common.Address>();
+            //    address.CreatedOnUtc = DateTime.UtcNow;
+
+            //    //some validation
+            //    if (address.CountryId == 0)
+            //        address.CountryId = null;
+            //    if (address.StateProvinceId == 0)
+            //        address.StateProvinceId = null;
+
+            //    _addressService.InsertAddress(address);
+            //    vendor.AddressId = address.Id;
+            //    _vendorService.UpdateVendor(vendor);
+            //}
+            //else
+            //{
+            //    //address = model.Address.ToEntity(address);
+
+            //    ////some validation
+            //    //if (address.CountryId == 0)
+            //    //    address.CountryId = null;
+            //    //if (address.StateProvinceId == 0)
+            //    //    address.StateProvinceId = null;
+
+            //    address.Address1 = model.Address1;
+            //    address.Address2 = model.Address2;
+            //    address.ZipPostalCode = model.ZipCode;
+            //    address.City = model.City;
+            //    address.County = model.Country;
+
+            //    _addressService.UpdateAddress(address);
+            //}
+
+            //locales
+            UpdateLocales(vendor, model);
+
+            //delete an old picture (if deleted or updated)
+            if (prevPictureId > 0 && prevPictureId != vendor.PictureId)
+            {
+                var prevPicture = _pictureService.GetPictureById(prevPictureId);
+                if (prevPicture != null)
+                    _pictureService.DeletePicture(prevPicture);
+            }
+            //update picture seo file name
+            UpdatePictureSeoNames(vendor);
+
+            SuccessNotification(_localizationService.GetResource("Admin.Vendors.Updated"));
+
+            //selected tab
+            SaveSelectedTabName();
+
+            return RedirectToAction("Edit","Vendor", new { email = vendor.Email });
+            //}
 
             //prepare model
             model = _vendorModelFactory.PrepareVendorModel(model, vendor, true);
@@ -676,17 +689,31 @@ namespace Nop.Web.Controllers
             vendor.Email = model.Email;
 
             //Picture saving
-            var contentType = formFile.ContentType;
-            var vendorPictureBinary = _downloadService.GetDownloadBits(formFile);
-            var picture = _pictureService.InsertPicture(vendorPictureBinary, contentType, null);
-           
+            if (formFile != null)
+            {
+                var contentType = formFile.ContentType;
+                var vendorPictureBinary = _downloadService.GetDownloadBits(formFile);
+                _pictureService.InsertPicture(vendorPictureBinary, contentType, null);
+            }
 
+            _vendorService.UpdateVendor(vendor);
         }
 
         private void SaveCustomerFormFields(Customer customer, VendorEditModel model)
         {
             customer.Email = model.Email;
             customer.Phone = model.Phone;
+            _customerService.UpdateCustomer(customer);
+        }
+
+        private void SaveAddressFormFields(Core.Domain.Common.Address address, VendorEditModel model)
+        {
+            address.Address1 = model.Address1;
+            address.Address2 = model.Address2;
+            address.ZipPostalCode = model.ZipCode;
+            address.City = model.City;
+            address.County = model.Country;
+            _addressService.UpdateAddress(address);
         }
 
         protected virtual void UpdateLocales(Vendor vendor, VendorEditModel model)
