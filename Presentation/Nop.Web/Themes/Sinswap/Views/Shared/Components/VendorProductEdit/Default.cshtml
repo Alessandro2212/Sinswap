@@ -11,7 +11,7 @@
 }
 
 <form asp-controller="Product" asp-action="List" method="post">
-    <div class="container-fluid shopContainer">
+    <div class="container-fluid shopContainer vh-100 d-flex flex-column">
         <div class="row">
             <div class="col-12 p-0">
                 <div class="content-header clearfix">
@@ -38,10 +38,10 @@
                 <nop-action-confirmation asp-button-id="delete-selected" />
             </div>
         </div>
-        <div class="row tableContainer">
+        <div class="row tableContainer flex-grow-1">
             <div class="col-12 p-0">
 
-                <div id="products-grid"></div>
+                <div id="products-grid" class="h-100"></div>
 
                 <script>
                     $(document).ready(function () {

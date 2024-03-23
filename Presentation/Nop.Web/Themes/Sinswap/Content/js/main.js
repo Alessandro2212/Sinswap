@@ -224,6 +224,20 @@ $(function () {
         });
     }
 
+    // message specific
+    if ($('.chat-messages').length) {
+        $(window).resize(function () {
+            setChatMessagesHeight();
+        });
+
+        setChatMessagesHeight();
+    }
+
+    function setChatMessagesHeight() {
+        var messageHeight = $('.chat-users').height() - 93 - 71;
+        $('.chat-messages').css('height', messageHeight);
+    }
+
     function setAffixedElements() {
         if ($('.socialShareContainer').length) {
             $('.socialShareContainer').removeData('bs.affix').removeClass('affix affix-top affix-bottom');

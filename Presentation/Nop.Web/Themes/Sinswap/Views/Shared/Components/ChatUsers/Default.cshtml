@@ -1,0 +1,36 @@
+﻿@model Nop.Web.Models.Chat.ChatUsersViewModel
+@{
+    Html.AppendCssFileParts("~/css/sinswap/vendor_style.css");
+}
+
+@if (Model != null) {
+    <div class="col-12 p-0 chat-users">
+
+        @foreach (var chatUser in Model.ChatUsersModels) {
+            <div class="list-group-item list-group-item-action border-0 user-chat" data-url="/getchat/@Model.CustomerId/@chatUser.Id">
+                <div class="row">
+                    <div class="col-1 p-0 text-center">
+                        @if (chatUser.IsRead == null || chatUser.IsRead == false)
+                        {
+                            <div class="isUnread"></div>
+                        }
+                    </div>
+
+                    <div class="d-none d-md block col-2 p-0 text-center">
+                        <div class="avatar" style="background-image: url('@chatUser.PictureUrl')" alt=""></div>
+                    </div>
+
+                    <div class="col-11 col-md-9">
+                        <div class="username truncate">@chatUser.Name</div>
+                        <div class="excerpt truncate">Lorem ipsum blah blah blah</div>
+                        @* <button class="btn btn-danger chat-delete-btn" data-url="/deletechat" data-user="@Model.CustomerId" data-partner="@chatUser.Id">X</button> *@
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+} else
+{
+    <p>No messages yet</p>
+}

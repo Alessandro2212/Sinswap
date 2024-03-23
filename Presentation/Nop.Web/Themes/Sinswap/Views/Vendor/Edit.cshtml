@@ -12,15 +12,25 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-12 col-md-4 logoContainer">
+            <div class="col-8 col-md-4 logoContainer">
                 <h1>sinswap</h1>
                 @await Component.InvokeAsync("Logo")
             </div>
-            <div class="col-12 col-md-4 titleContainer d-flex align-items-center justify-content-center">
+            <div class="d-none d-md-flex col-6 col-md-4 titleContainer align-items-center justify-content-center">
                 <h2>Shop</h2>
             </div>
-            <div class="col-12 col-md-4 d-flex align-items-center justify-content-end">
-                <img src="https://placehold.co/60x75" />
+            <div class="col-4 col-md-4 d-lg-none d-flex align-items-center justify-content-end">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu--animate" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#v-pills-shop"><i class="fas fa-store-alt d-none d-xl-inline"></i> Shop</a>
+                        <a class="dropdown-item" href="#v-pills-orders"><i class="fas fa-shopping-cart d-none d-xl-inline"></i> Orders</a>
+                        <a class="dropdown-item" href="#v-pills-messages"><i class="fas fa-envelope d-none d-xl-inline"></i> Messages</a>
+                        <a class="dropdown-item" href="#v-pills-settings"><i class="fas fa-cog d-none d-xl-inline"></i> Settings</a>
+                    </div>
+                </div>
             </div>
         </div>
 

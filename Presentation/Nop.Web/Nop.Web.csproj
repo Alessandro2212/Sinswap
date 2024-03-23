@@ -71,6 +71,7 @@
     <None Remove="Themes\Sinswap\Content\js\public.ajaxcart.js" />
     <None Remove="Themes\Sinswap\Content\js\public.common.js" />
     <None Remove="Themes\Sinswap\Content\js\public.onepagecheckout.js" />
+    <None Remove="themes\sinswap\content\js\vendor\popper.min.js" />
     <None Remove="Themes\Sinswap\Content\js\vendor\stellar\stellar.js" />
     <None Remove="Themes\Sinswap\Content\scss\components\_aboutUs.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_blogPost.scss" />
@@ -94,6 +95,7 @@
     <None Remove="Themes\Sinswap\Content\scss\components\_vendorPremiumContent.scss" />
     <None Remove="Themes\Sinswap\Content\scss\components\_vendorRegistration.scss" />
     <None Remove="Themes\Sinswap\Content\scss\_global.scss" />
+    <_ContentIncludedByDefault Remove="themes\sinswap\content\js\vendor\popper.min.js" />
 
     <None Update="Areas\Admin\sitemap.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -103,6 +105,7 @@
   <ItemGroup>
     <Folder Include="Plugins\" />
     <Folder Include="Themes\Sinswap\Views\Home\" />
+    <Folder Include="Themes\Sinswap\Views\Shared\Components\ChatUsers\" />
   </ItemGroup>
 
   <ItemGroup>
