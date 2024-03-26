@@ -675,7 +675,12 @@ namespace Nop.Web.Controllers
 
             //PROD
             string verificationLink = $"http://sinswap.org/en/VerifyEmail/?customerId={customerId}&activationCode={code}";
-            var emailIsSent = _customerService.SendEmailForCustomerVerification(model.Email, verificationLink);
+
+            //TODO: Call the partial view rendering once the page is avalilable, get the string out of it, and that's the body to send to SendEmailForCustomerVerification
+            var emailBody = RenderPartialViewToString("EmailCustomerVerification", null);
+
+            var emailIsSent = _customerService.SendEmailForCustomerVerification(model.Email, verificationLink, "");
+            //var emailIsSent = _customerService.SendEmailForCustomerVerification(model.Email, verificationLink, emailBody);
             //var emailIsSent = _customerService.SendEmailForCustomerVerification("alessandro.zelli87@gmail.com", verificationLink);
 
             if (emailIsSent)
@@ -1049,7 +1054,11 @@ namespace Nop.Web.Controllers
                         return CreateVendor(vendorModel, false, customer);
                     }
 
-                    _customerService.SendEmailForCustomerRegistration(model.Email);
+                    //TODO: Call the partial view rendering once the page is avalilable, get the string out of it, and that's the body to send to SendEmailForCustomerRegistration
+                    var emailBody = RenderPartialViewToString("EmailCustomerRegistration", null);
+
+                    _customerService.SendEmailForCustomerRegistration(model.Email, emailBody);
+                    //_customerService.SendEmailForCustomerRegistration(model.Email, "");
 
                     switch (_customerSettings.UserRegistrationType)
                     {
@@ -1165,8 +1174,12 @@ namespace Nop.Web.Controllers
                 //selected tab
                 SaveSelectedTabName();
 
-                _customerService.SendEmailForCustomerRegistration(model.Email);
+                //TODO: Call the partial view rendering once the page is avalilable, get the string out of it, and that's the body to send to SendEmailForCustomerRegistration
+                var emailBody = RenderPartialViewToString("EmailCustomerRegistration", null);
 
+                //_customerService.SendEmailForCustomerRegistration(model.Email, emailBody);
+                _customerService.SendEmailForCustomerRegistration(model.Email, "");
+                
                 return RedirectToAction("Edit", new { id = vendor.Id });
             }
 

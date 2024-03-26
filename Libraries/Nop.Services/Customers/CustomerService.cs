@@ -584,7 +584,7 @@ namespace Nop.Services.Customers
             return cac;
         }
 
-        public bool SendEmailForCustomerVerification(string email, string verificationLink)
+        public bool SendEmailForCustomerVerification(string email, string verificationLink, string body)
         {
             try
             {
@@ -599,7 +599,8 @@ namespace Nop.Services.Customers
                 mail.To.Add(new MailAddress("alessandro.zelli87@gmail.com")); //for testing purposes
                 mail.Subject = "Registration to SinSwap";
 
-                mail.Body = $"Welcome to SinSwap! here is the link to complete your registration: {verificationLink} !";
+                //mail.Body = $"Welcome to SinSwap! here is the link to complete your registration: {verificationLink} !";
+                mail.Body = body;
 
 
                 smtpClient.Send(mail);
@@ -612,7 +613,7 @@ namespace Nop.Services.Customers
             return true;
         }
 
-        public bool SendEmailForCustomerRegistration(string email)
+        public bool SendEmailForCustomerRegistration(string email, string body)
         {
             try
             {
