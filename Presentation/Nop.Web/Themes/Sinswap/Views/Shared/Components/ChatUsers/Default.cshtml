@@ -16,13 +16,14 @@
                         }
                     </div>
 
-                    <div class="d-none d-md block col-2 p-0 text-center">
+                    @* <div class="d-none d-md block col-2 p-0 text-center">
                         <div class="avatar" style="background-image: url('@chatUser.PictureUrl')" alt=""></div>
-                    </div>
-
+                    </div> *@
+                    <img src="@chatUser.PictureUrl" class="rounded-circle mr-1" alt="@chatUser.Name" width="40" height="40">
                     <div class="col-11 col-md-9">
                         <div class="username truncate">@chatUser.Name</div>
-                        <div class="excerpt truncate">Lorem ipsum blah blah blah</div>
+                        <div class="excerpt truncate">@chatUser.LatestMessage</div>
+                        @* <div class="excerpt truncate">Lorem ipsum blah blah blah</div> *@
                         @* <button class="btn btn-danger chat-delete-btn" data-url="/deletechat" data-user="@Model.CustomerId" data-partner="@chatUser.Id">X</button> *@
                     </div>
                 </div>

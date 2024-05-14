@@ -11,5 +11,7 @@ namespace Nop.Web.Models.Chat
         public bool? IsRead { get; set; }
         public DateTime Time { get; set; }
         public int ItemsPurchased { get; set; }
+        public string Details { get; set; }
+        public double ReviewAvgStars { get; set; }
     }
 }

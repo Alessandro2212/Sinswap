@@ -356,7 +356,7 @@ namespace Nop.Services.Customers
             if (customerIds == null || customerIds.Length == 0)
                 return new List<Customer>();
 
-            var query = from c in _customerRepository.Table
+            var query = from c in _customerRepository.Table.Include(c => c.Country)
                         where customerIds.Contains(c.Id) && !c.Deleted
                         select c;
             var customers = query.ToList();

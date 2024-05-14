@@ -1,4 +1,5 @@
-﻿using Nop.Core.Domain.Customers;
+﻿using Nop.Core.Domain.Chats;
+using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Vendors;
 using Nop.Services.Chats;
 using Nop.Services.Customers;
@@ -16,21 +17,32 @@ namespace Nop.Web.Factories
         private readonly IPictureService _pictureService;
         private readonly ICustomerService _customerService;
         private readonly IVendorService _vendorService;
+        private readonly IVendorProductRatingModelFactory _vendorProductRatingModelFactory;
 
         public ChatModelFactory(IChatService chatService,
             IPictureService pictureService,
             ICustomerService customerService,
-            IVendorService vendorService)
+            IVendorService vendorService,
+            IVendorProductRatingModelFactory vendorProductRatingModelFactory)
         {
             this._chatService = chatService;
             this._pictureService = pictureService;
             this._customerService = customerService;
             this._vendorService = vendorService;
+            this._vendorProductRatingModelFactory = vendorProductRatingModelFactory;
         }
 
-        public ChatUsersViewModel GetChatUsersViewModel(int userId)
+        public ChatUsersViewModel GetChatUsersViewModel(int userId, string chatStatus)
         {
-            var chats = _chatService.GetLatestChatsByUser(userId);
+            List<Chat> chats = new List<Chat>();
+            if (string.IsNullOrEmpty(chatStatus))
+            {
+                chats = _chatService.GetLatestChatsByUser(userId, "All");
+            }
+            else
+            {
+                chats = _chatService.GetLatestChatsByUser(userId, chatStatus);
+            }
             var ids = chats.Select(x => x.FromId).Distinct().ToArray();
             var customers = this._customerService.GetCustomersByIds(ids);
             var vendors = this._vendorService.GetVendorsFromReviewsAndCustomer(userId);
@@ -48,6 +60,8 @@ namespace Nop.Web.Factories
                     chatUsersModel.Id = customer.VendorId;
                     chatUsersModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 100);
                     chatUsersModel.Name = vendor.Name;
+                    var rating = this._vendorProductRatingModelFactory.GetProductRatingByVendor(customer.VendorId);
+                    chatUsersModel.ReviewAvgStars = rating.ReviewAvgStars;
                     visitedVendors.Add(vendor.Id);
                 }
                 else
@@ -61,6 +75,7 @@ namespace Nop.Web.Factories
                 chatUsersModel.LatestMessage = chat.Message;
                 chatUsersModel.Time = chat.CreatedOnUtc;
                 chatUsersModel.IsRead = chat.IsRead;
+                chatUsersModel.Details = $"{customer.GetAge()}, {customer.City}, {customer.Country?.Name}";
                 chatUserModels.Add(chatUsersModel);
             }
 
@@ -87,6 +102,12 @@ namespace Nop.Web.Factories
             var ids = chats.Select(x => x.FromId).ToArray();
             var customers = this._customerService.GetCustomersByIds(ids);
             ChatUsersModel chatUsersModel = new ChatUsersModel { Id = partnerId };
+            //var partnerData = _vendorService.GetVendorById(partnerId);
+            //if (partnerData != null)
+            //{
+            //    chatUsersModel.Name = partnerData.Name;
+            //    chatUsersModel.PictureUrl = _pictureService.GetPictureUrl(partnerData.PictureId, 100);
+            //}
             foreach (var chat in chats)
             {
                 ChatConversationsModel chatConversationsModel = new ChatConversationsModel();
@@ -126,7 +147,7 @@ namespace Nop.Web.Factories
 
             //set the messages are read
             chats.ForEach(chat => { chat.IsRead = true; });
-            _chatService.UpdateChatsAsRead(chats);
+            _chatService.UpdateChats(chats);
 
             return new ChatConversationsViewModel() { ChatUsersModels = chatUsersModels, ChatUsersModel = chatUsersModel, CurrentUserId = userId };
         }

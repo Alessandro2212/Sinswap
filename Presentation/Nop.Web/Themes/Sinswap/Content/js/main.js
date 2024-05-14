@@ -293,11 +293,20 @@ $(function () {
     //}
 
     $(".user-chat").click(function (e) {
-        $('.chat-messages').html("");
+        $('.chat-conversation-body').html("");
+        //$('.chat-messages').html("");
         var chatUrl = $(e.delegateTarget).attr('data-url');
         $.get(chatUrl, function (data) {
             productContent = $(data);
-            $('.chat-messages').html(productContent);
+            $('.chat-conversation-body').html(productContent);
+            //$('.chat-messages').html(productContent);
+            if ($('.chat-messages').length) {
+                $(window).resize(function () {
+                    setChatMessagesHeight();
+                });
+
+                setChatMessagesHeight();
+            }
         })
     });
 

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.ServiceModel.Channels;
 using System.Threading.Tasks;
+using Castle.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -2475,6 +2476,21 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
+        //09/04/2024: We created this method on this date. We need to get the latest from Dave first, and then update main.js to 
+        //react on the change of the message status "All", "Unread" etc and call this method via ajax for testing it.
+        public virtual IActionResult GetChatUsers(int vendorId, int partnerId, string chatStatus)
+        {
+            var uId = this._customerService.GetCustomerIdByVendorId(vendorId);
+            var paId = this._customerService.GetCustomerIdByVendorId(partnerId);
+            var m = _chatModelFactory.GetChatUsersViewModel(uId == 0 ? vendorId : uId, chatStatus);
+            return Json(new
+            {
+                view = RenderPartialViewToString("GetChatUsers", m),
+                isValid = true,
+                description = "Hey!"
+            });
+        }
+
         [HttpPost]
         public virtual IActionResult PostChat(int vendorId, int partnerId, string message)
         {
@@ -2485,7 +2501,6 @@ namespace Nop.Web.Controllers
             }
             if (partnerId <= 0)
             {
-                //return RedirectToAction("GetChat", new { vendorId = vendorId, partnerId = partnerId });
                 var uId = this._customerService.GetCustomerIdByVendorId(vendorId);
                 var paId = this._customerService.GetCustomerIdByVendorId(partnerId);
                 var m = _chatModelFactory.GetChatConversationsViewModel(uId == 0 ? vendorId : uId, paId == 0 ? partnerId : paId);
@@ -2512,12 +2527,11 @@ namespace Nop.Web.Controllers
                 isValid = true,
                 description = "Hey!"
             });
-
-            //return RedirectToAction("GetChat", new { vendorId = vendorId, partnerId = partnerId });
         }
 
+        //09/04/2024: We created this method on this date. We need to get the latest from Dave first, and then update the deletion
         [HttpPost]
-        public virtual IActionResult DeleteChat(int vendorId, int partnerId)
+        public virtual IActionResult DeleteChat(int vendorId, int partnerId, string chatStatus)
         {
             var userId = this._customerService.GetCustomerIdByVendorId(vendorId);
             var pId = this._customerService.GetCustomerIdByVendorId(partnerId);
@@ -2527,14 +2541,34 @@ namespace Nop.Web.Controllers
             this._chatService.DeleteChatMessage(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId);
             if (userId == 0)
             {              
-                model = _chatModelFactory.GetChatUsersViewModel(vendorId);
+                model = _chatModelFactory.GetChatUsersViewModel(vendorId, chatStatus);
             }
             else
             {
-                model = _chatModelFactory.GetChatUsersViewModel(userId);
+                model = _chatModelFactory.GetChatUsersViewModel(userId, chatStatus);
             }
             return View(model);
         }
+
+        //[HttpPost]
+        //public virtual IActionResult DeleteChat(int vendorId, int partnerId)
+        //{
+        //    var userId = this._customerService.GetCustomerIdByVendorId(vendorId);
+        //    var pId = this._customerService.GetCustomerIdByVendorId(partnerId);
+        //    ChatUsersViewModel model = null;
+        //    //try to seek for the customer id given the vendor id. in case is not found it means that we are already supplying the 
+        //    //correct id (the id is already from a customer) and we don't have to retrieve it
+        //    this._chatService.DeleteChatMessage(userId == 0 ? vendorId : userId, pId == 0 ? partnerId : pId);
+        //    if (userId == 0)
+        //    {
+        //        model = _chatModelFactory.GetChatUsersViewModel(vendorId, string.Empty);
+        //    }
+        //    else
+        //    {
+        //        model = _chatModelFactory.GetChatUsersViewModel(userId, string.Empty);
+        //    }
+        //    return View(model);
+        //}
         #endregion
         private string RenderPartialViewToString(string viewName, object model)
         {

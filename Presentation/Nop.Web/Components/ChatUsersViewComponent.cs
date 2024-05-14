@@ -25,11 +25,11 @@ namespace Nop.Web.Components
             //correct id (the id is already from a customer) and we don't have to retrieve it
             if (userId == 0)
             {
-                model = _chatModelFactory.GetChatUsersViewModel(vendorId);
+                model = _chatModelFactory.GetChatUsersViewModel(vendorId, string.Empty);
             }
             else
             {
-                model = _chatModelFactory.GetChatUsersViewModel(userId);
+                model = _chatModelFactory.GetChatUsersViewModel(userId, string.Empty);
             }
             return View(model);
         }

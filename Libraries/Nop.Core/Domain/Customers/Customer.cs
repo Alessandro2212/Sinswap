@@ -158,7 +158,7 @@ namespace Nop.Core.Domain.Customers
         /// </summary>
         public DateTime? BirthDate { get; set; }
 
-        
+
         public string Phone { get; set; }
 
         #region Navigation properties
@@ -229,6 +229,20 @@ namespace Nop.Core.Domain.Customers
         {
             get => _customerAddressMappings ?? (_customerAddressMappings = new List<CustomerAddressMapping>());
             protected set => _customerAddressMappings = value;
+        }
+
+        public int GetAge()
+        {
+            if (this.BirthDate is null)
+                return 0;
+
+            int age = 18;
+
+            age = DateTime.Today.Year - this.BirthDate.Value.Year;
+            // Go back to the year the person was born in case of a leap year
+            if (this.BirthDate.Value.Date > DateTime.Today.AddYears(-age)) age--;
+
+            return age;
         }
 
         #endregion

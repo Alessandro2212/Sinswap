@@ -14,20 +14,23 @@ namespace Nop.Services.Chats
     public class ChatService : IChatService
     {
         private readonly IRepository<Chat> _chatRepository;
+        private readonly IRepository<ChatMessageStatus> _chatStatusRepository;
         private readonly IDownloadService _downloadService;
         private readonly IPictureService _pictureService;
 
         public ChatService(
             IRepository<Chat> chatRepo,
+            IRepository<ChatMessageStatus> chatStatusRepo,
             IDownloadService downloadService,
             IPictureService pictureService)
         {
             this._chatRepository = chatRepo;
+            this._chatStatusRepository = chatStatusRepo;
             this._downloadService = downloadService;
             this._pictureService = pictureService;
         }
 
-        public List<Chat> GetLatestChatsByUser(int userId)
+        public List<Chat> GetLatestChatsByUser(int userId, string status)
         {
             var chatIdsQuery = _chatRepository.Table
                 .Where(o => o.FromId.Equals(userId) || o.ToId.Equals(userId))
@@ -48,19 +51,12 @@ namespace Nop.Services.Chats
                 .AsQueryable();
             //.Distinct(i => i.PartnerId);  // <============= just remove dublicate
 
-            //var chatListQuery = from l in chatIdsQuery
-            //                    join x in _chatRepository.Table on l.Id equals x.Id
-            //                    orderby x.CreatedOnUtc descending
-            //                    select (new
-            //                    {
-            //                        x.Id,
-            //                        l.PartnerId,
-            //                        x.Message,
-            //                        x.CreatedOnUtc
-            //                    });
-
-            var chatListQuery = from l in chatIdsQuery
+            IQueryable<Chat> chatListQuery = null;
+            if (status == "All")
+            {
+                chatListQuery = from l in chatIdsQuery
                                 join x in _chatRepository.Table on l.Id equals x.Id
+                                where (x.IsDeleted == null || x.IsDeleted == false)
                                 orderby x.CreatedOnUtc descending
                                 select (new Chat
                                 {
@@ -68,8 +64,43 @@ namespace Nop.Services.Chats
                                     FromId = l.PartnerId,
                                     Message = x.Message,
                                     IsRead = x.IsRead,
+                                    IsDeleted = x.IsDeleted,
                                     CreatedOnUtc = x.CreatedOnUtc
                                 });
+            }
+            else if (status == "Unread")
+            {
+                chatListQuery = from l in chatIdsQuery
+                                join x in _chatRepository.Table on l.Id equals x.Id
+                                where x.IsRead == false && (x.IsDeleted == false || x.IsDeleted == null)
+                                orderby x.CreatedOnUtc descending
+                                select (new Chat
+                                {
+                                    Id = x.Id,
+                                    FromId = l.PartnerId,
+                                    Message = x.Message,
+                                    IsRead = x.IsRead,
+                                    IsDeleted = x.IsDeleted,
+                                    CreatedOnUtc = x.CreatedOnUtc
+                                });
+            }
+            else if (status == "Trash")
+            {
+                chatListQuery = from l in chatIdsQuery
+                                join x in _chatRepository.Table on l.Id equals x.Id
+                                where x.IsDeleted == true
+                                orderby x.CreatedOnUtc descending
+                                select (new Chat
+                                {
+                                    Id = x.Id,
+                                    FromId = l.PartnerId,
+                                    Message = x.Message,
+                                    IsRead = x.IsRead,
+                                    IsDeleted = x.IsDeleted,
+                                    CreatedOnUtc = x.CreatedOnUtc
+                                });
+            }
+
             var chatList = chatListQuery.ToList();
             return chatList;
         }
@@ -91,7 +122,7 @@ namespace Nop.Services.Chats
             {
                 pictureId = (this.SaveChatMessagePicture(formFile))?.Id;
             }
-            Chat chat = new Chat { FromId = userId, ToId = partnerId, Message = message, CreatedOnUtc = DateTime.Now, PictureId = pictureId };
+            Chat chat = new Chat { FromId = userId, ToId = partnerId, Message = message, CreatedOnUtc = DateTime.Now, PictureId = pictureId, IsRead = true };
             _chatRepository.Insert(chat);
             return chat;
         }
@@ -107,12 +138,25 @@ namespace Nop.Services.Chats
         public void DeleteChatMessage(int userId, int partnerId)
         {
             var messages = this.GetChatsOfUser(userId, partnerId);
-            _chatRepository.Delete(messages);
+            foreach (var message in messages)
+            {
+                message.IsDeleted = true;
+            }
+            //_chatRepository.Delete(messages);
+            this.UpdateChats(messages);
         }
 
-        public void UpdateChatsAsRead(IEnumerable<Chat> chats)
+        public void UpdateChats(IEnumerable<Chat> chats)
         {
             _chatRepository.Update(chats);
+        }
+
+        public int GetChatMessageStatusId(string chatStatus)
+        {
+            var query = from cs in _chatStatusRepository.Table
+                        where cs.Status == chatStatus
+                        select cs;
+            return query.FirstOrDefault()?.Id ?? 0;
         }
     }
 }

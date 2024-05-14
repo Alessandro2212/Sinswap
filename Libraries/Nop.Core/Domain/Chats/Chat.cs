@@ -11,10 +11,13 @@ namespace Nop.Core.Domain.Chats
         public string Message { get; set; }
         public DateTime CreatedOnUtc { get; set; }
         public bool? IsRead { get; set; }
+        public bool? IsDeleted { get; set; }
         public int? PictureId { get; set; }
+        public int? ChatMessageStatusId { get; set; }
 
         public virtual Customer From { get; set; }
         public virtual Customer To { get; set; }
         public virtual Picture Picture { get; set; }
+        public virtual ChatMessageStatus ChatMessageStatus { get; set; }
     }
 }
