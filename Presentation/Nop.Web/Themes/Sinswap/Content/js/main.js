@@ -292,33 +292,58 @@ $(function () {
     });
     //}
 
-    $(".user-chat").click(function (e) {
-        $('.chat-conversation-body').html("");
-        //$('.chat-messages').html("");
+    $("#chat-all").click(function (e) {
+        e.preventDefault();
         var chatUrl = $(e.delegateTarget).attr('data-url');
-        $.get(chatUrl, function (data) {
-            productContent = $(data);
-            $('.chat-conversation-body').html(productContent);
-            //$('.chat-messages').html(productContent);
-            if ($('.chat-messages').length) {
-                $(window).resize(function () {
-                    setChatMessagesHeight();
-                });
-
-                setChatMessagesHeight();
-            }
-        })
+        postChatUsers(chatUrl, "All");
     });
 
+    $("#chat-unread").click(function (e) {
+        e.preventDefault();
+        var chatUrl = $(e.delegateTarget).attr('data-url');
+        postChatUsers(chatUrl, "Unread");
+    });
+
+    $("#chat-trash").click(function (e) {
+        e.preventDefault();
+        var chatUrl = $(e.delegateTarget).attr('data-url');
+        postChatUsers(chatUrl, "Trash");
+    });
+
+    function postChatUsers(chatUrl, chatStatus) {
+        var userId = $('#currentChatUserId').val();
+        $('.chat-users').html("<h3>Loading...</h3>");
+
+        var formData = new FormData();
+        formData.append("chatStatus", chatStatus);
+        formData.append("vendorId", userId);
+
+        $.ajax({
+            type: "POST",
+            url: chatUrl,
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {           
+                productContent = $(data.view);
+                $('.chat-users').html(productContent);
+                $('#load-chatuser').hide();
+            },
+        });
+    }
+
+    $('#load-chat').hide();
+    
     $("#chat-send-button").click(function (e) {
-        e.preventDefault();      
+        e.preventDefault();
         var msg = $('#chat-text-msg').val();
         var chatUrl = $(e.delegateTarget).attr('data-url');
         var userId = $('#currentUserId').val();
         var pId = $('#partnerUserId').val();
-        $('.chat-messages').html("");
+        //$('.chat-messages').html("");
+        //$('.chat-conversation-body').html("");
         $('#chat-text-msg').val('');
-
 
         var image = document.getElementById("ImgUpload").files[0];
         var formData = new FormData();
@@ -336,7 +361,15 @@ $(function () {
             processData: false,
             success: function (data) {
                 productContent = $(data.view);
-                $('.chat-messages').html(productContent);
+                //$('.chat-messages').html(productContent);
+                $('.chat-conversation-body').html(productContent);
+                if ($('.chat-messages').length) {
+                    $(window).resize(function () {
+                        setChatMessagesHeight();
+                    });
+
+                    setChatMessagesHeight();
+                }
             },
             //error: function(error) {
             //    alert("errror");
@@ -352,17 +385,10 @@ $(function () {
         //})
     });
 
-    $(".chat-delete-btn").click(function (e) {
-        e.preventDefault();
-        var chatUrl = $(e.delegateTarget).attr('data-url');
-        var userId = $(e.delegateTarget).attr('data-user');
-        var pId = $(e.delegateTarget).attr('data-partner');
-        $('.chat-messages').html("");
-        $(this).parent().parent().parent().remove();
-        $.post(chatUrl, { vendorId: userId, partnerId: pId }, function (data) {
-            productContent = $(data);
-        })
-    });
+    function setChatMessagesHeight() {
+        var messageHeight = $('.chat-users').height() - 93 - 71;
+        $('.chat-messages').css('height', messageHeight);
+    }
 
     $('#faqItemModal').on('show.bs.modal', function (e) {
         $('#faqItemModal').find('.modal-body').html("");

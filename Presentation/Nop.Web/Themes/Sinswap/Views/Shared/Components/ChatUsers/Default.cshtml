@@ -23,15 +23,106 @@
                     <div class="col-11 col-md-9">
                         <div class="username truncate">@chatUser.Name</div>
                         <div class="excerpt truncate">@chatUser.LatestMessage</div>
-                        @* <div class="excerpt truncate">Lorem ipsum blah blah blah</div> *@
-                        @* <button class="btn btn-danger chat-delete-btn" data-url="/deletechat" data-user="@Model.CustomerId" data-partner="@chatUser.Id">X</button> *@
+                        @if (Model.isTrash)
+                        {
+                            <button class="btn btn-success chat-resume-btn" data-url="/resumechat" data-user="@Model.CustomerId" data-partner="@chatUser.Id">Untrash</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger chat-delete-btn" data-url="/deletechat" data-user="@Model.CustomerId" data-partner="@chatUser.Id">Trash</button>
+                        }                   
                     </div>
                 </div>
             </div>
-        }
-
+        }      
     </div>
-} else
+    <input type="hidden" id="chatStatusId" name="chatStatusId" value="@Model.isTrash">
+} 
+else
 {
     <p>No messages yet</p>
 }
+<script>
+    $(".user-chat").click(function (e) {
+        $('.chat-conversation-body').html("");
+        $('#load-chat').show();
+        //$('.chat-messages').html("");
+        var chatUrl = $(e.delegateTarget).attr('data-url');
+        $.get(chatUrl, function (data) {
+            productContent = $(data);
+            $('#load-chat').hide();
+            $('.chat-conversation-body').html(productContent);
+            //$('.chat-messages').html(productContent);
+            if ($('.chat-messages').length) {
+                $(window).resize(function () {
+                    setChatMessagesHeight();
+                });
+
+                setChatMessagesHeight();
+            }
+        })
+    });
+    
+    $(".chat-delete-btn").click(function (e) {
+        setChatStatus(e);
+    });
+
+    $(".chat-resume-btn").click(function (e) {
+        setChatStatus(e);
+    });
+
+    // function setChatStatus(e) {
+    //     e.preventDefault();
+    //     var chatUrl = $(e.delegateTarget).attr('data-url');
+    //     var userId = $(e.delegateTarget).attr('data-user');
+    //     var pId = $(e.delegateTarget).attr('data-partner');
+    //     $('.chat-messages').html("");
+    //     $(this).parent().parent().parent().remove();
+    //     $.post(chatUrl, { vendorId: userId, partnerId: pId }, function (data) {
+    //         productContent = $(data);
+    //         //$('.chat-conversation-body').html(productContent);
+    //     })
+    // }
+
+    function setChatStatus(e) {
+        e.preventDefault();
+        var chatUrl = $(e.delegateTarget).attr('data-url');
+        var userId = $(e.delegateTarget).attr('data-user');
+        var pId = $(e.delegateTarget).attr('data-partner');
+        $('.chat-messages').html("");
+        $(this).parent().parent().parent().remove();
+        $('.chat-users').html("<h3>Loading...</h3>");
+        var formData = new FormData();
+        //formData.append("chatStatus", chatStatus);
+        formData.append("vendorId", userId);
+        formData.append("partnerId", pId);
+
+        $.ajax({
+            type: "POST",
+            url: chatUrl,
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                productContent = $(data.view);
+                $('.chat-users').html(productContent);
+                
+            },
+        });
+    }
+
+    if ($('.chat-messages').length) {
+        $(window).resize(function () {
+            setChatMessagesHeight();
+        });
+
+        setChatMessagesHeight();
+    }  
+
+    function setChatMessagesHeight() {
+        var messageHeight = $('.chat-users').height() - 93 - 71;
+        $('.chat-messages').css('height', messageHeight);
+    }
+
+</script>

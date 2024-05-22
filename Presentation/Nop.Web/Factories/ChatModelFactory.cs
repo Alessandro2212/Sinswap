@@ -80,19 +80,23 @@ namespace Nop.Web.Factories
             }
 
             //extra vendors in chat because of reviews or purchased product from
-            foreach (var vendor in vendors.Union(vendorsForPurchasedProducts).Distinct())
+            if (string.IsNullOrEmpty(chatStatus) || chatStatus == "All")
             {
-                if (!visitedVendors.Contains(vendor.Id))
+                foreach (var vendor in vendors.Union(vendorsForPurchasedProducts).Distinct())
                 {
-                    ChatUsersModel chatUsersModel = new ChatUsersModel();
-                    chatUsersModel.Id = vendor.Id;
-                    chatUsersModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 100);
-                    chatUsersModel.Name = vendor.Name;
-                    chatUserModels.Add(chatUsersModel);
+                    if (!visitedVendors.Contains(vendor.Id))
+                    {
+                        ChatUsersModel chatUsersModel = new ChatUsersModel();
+                        chatUsersModel.Id = vendor.Id;
+                        chatUsersModel.PictureUrl = _pictureService.GetPictureUrl(vendor.PictureId, 100);
+                        chatUsersModel.Name = vendor.Name;
+                        chatUserModels.Add(chatUsersModel);
+                    }
                 }
             }
 
-            return new ChatUsersViewModel() { ChatUsersModels = chatUserModels, CustomerId = userId };
+            bool isTrash = chatStatus == "Trash";
+            return new ChatUsersViewModel() { ChatUsersModels = chatUserModels, CustomerId = userId, isTrash = isTrash };
         }
 
         public ChatConversationsViewModel GetChatConversationsViewModel(int userId, int partnerId)

@@ -117,13 +117,17 @@ namespace Nop.Services.Chats
 
         public Chat SaveChatMessage(int userId, int partnerId, string message, IFormFile formFile)
         {
+            var isTrashed = this.GetChatsOfUser(userId, partnerId).FirstOrDefault()?.IsDeleted == true;
             int? pictureId = null;
             if (formFile != null)
             {
                 pictureId = (this.SaveChatMessagePicture(formFile))?.Id;
             }
             Chat chat = new Chat { FromId = userId, ToId = partnerId, Message = message, CreatedOnUtc = DateTime.Now, PictureId = pictureId, IsRead = true };
-            _chatRepository.Insert(chat);
+            if (!isTrashed)
+            {
+                _chatRepository.Insert(chat);
+            }
             return chat;
         }
 
@@ -141,6 +145,17 @@ namespace Nop.Services.Chats
             foreach (var message in messages)
             {
                 message.IsDeleted = true;
+            }
+            //_chatRepository.Delete(messages);
+            this.UpdateChats(messages);
+        }
+
+        public void ResumeChatMessage(int userId, int partnerId)
+        {
+            var messages = this.GetChatsOfUser(userId, partnerId);
+            foreach (var message in messages)
+            {
+                message.IsDeleted = false;
             }
             //_chatRepository.Delete(messages);
             this.UpdateChats(messages);

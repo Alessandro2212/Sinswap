@@ -10,6 +10,7 @@ namespace Nop.Services.Chats
         List<Chat> GetChatsOfUser(int userId, int partnerId);
         Chat SaveChatMessage(int userId, int partnerId, string message, IFormFile formFile);
         void DeleteChatMessage(int userId, int partnerId);
+        void ResumeChatMessage(int userId, int partnerId);
         void UpdateChats(IEnumerable<Chat> chats);
         int GetChatMessageStatusId(string chatStatus);
     }

@@ -69,7 +69,8 @@
                         <div class="col-12 p-0">
                             <div class="content-header clearfix p-0">
 
-                                <a href="#">All</a><a href="#">Unread</a><a href="#">Trash</a>
+                                @* <a href="#">All</a><a href="#">Unread</a><a href="#">Trash</a> *@
+                                <button id="chat-all" data-url="/getchatusers">All</button><button id="chat-trash" data-url="/getchatusers">Trash</button>
 
                             </div>
                         </div>
@@ -89,3 +90,5 @@
         </div>
     </div>
 </div>
+
+<input type="hidden" id="currentChatUserId" name="currentChatUserId" value="@Model.Id">

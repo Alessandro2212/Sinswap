@@ -6,5 +6,6 @@ namespace Nop.Web.Models.Chat
     {
         public List<ChatUsersModel> ChatUsersModels { get; set; }
         public int CustomerId { get; set; }
+        public bool isTrash { get; set; }
     }
 }

@@ -44,12 +44,20 @@ namespace Nop.Web.Infrastructure
                 new { controller = "Customer", action = "GetChat" });
 
             //chatuser (AJAX link)
+            routeBuilder.MapLocalizedRoute("GetChatUsers", "getchatusers/",
+                new { controller = "Customer", action = "GetChatUsers" });
+
+            //chatuser (AJAX link)
             routeBuilder.MapLocalizedRoute("PostChat", "postchat/",
                 new { controller = "Customer", action = "PostChat" });
 
             //chatuser (AJAX link)
             routeBuilder.MapLocalizedRoute("DeleteChat", "deletechat/",
                 new { controller = "Customer", action = "DeleteChat" });
+
+            //chatuser (AJAX link)
+            routeBuilder.MapLocalizedRoute("ResumeChat", "resumechat/",
+                new { controller = "Customer", action = "ResumeChat" });
 
             //verifyemail
             routeBuilder.MapLocalizedRoute("VerifyEmail", "verifyemail/",
