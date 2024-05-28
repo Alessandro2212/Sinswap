@@ -2606,5 +2606,53 @@ namespace Nop.Web.Controllers
             }
         }
         #endregion
+
+        #region Email
+        [HttpGet]
+        public virtual IActionResult EmailProductsInCart()
+        {
+            return View();
+        }
+        [HttpGet]
+        public virtual IActionResult EmailCustomerVerification()
+        {
+            return View();
+        }
+        [HttpGet]
+        public virtual IActionResult EmailCustomerRegistration()
+        {
+            return View();
+        }
+        [HttpGet]
+        public virtual IActionResult WelcomeEmail()
+        {
+            return View();
+        }
+        [HttpGet]
+        public virtual IActionResult PurchaseEmail()
+        {
+            return View();
+        }
+        [HttpGet]
+        public virtual IActionResult ProfileSetupEmail()
+        {
+            return View();
+        }
+        [HttpGet]
+        public virtual IActionResult WelcomeOfferEmail()
+        {
+            return View();
+        }
+        [HttpGet]
+        public virtual IActionResult NewOrderEmail()
+        {
+            return View();
+        }
+        [HttpGet]
+        public virtual IActionResult AccountActivationPageVendorEmail()
+        {
+            return View();
+        }
+        #endregion
     }
 }

@@ -1,0 +1,23 @@
+@model RegisterModel
+@using System.Text.Encodings.Web
+@using System.Net
+@using Nop.Core
+@inject IWebHelper webHelper
+
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Register").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-registration-page");
+
+    //login URL with return URL (if specified)
+    var loginUrl = Url.RouteUrl("Login", null, webHelper.CurrentRequestProtocol);
+    if (!string.IsNullOrEmpty(this.Context.Request.Query["returnUrl"]))
+    {
+        loginUrl = webHelper.ModifyQueryString(loginUrl, "returnurl", this.Context.Request.Query["returnUrl"]);
+    }
+}
+
+<h1>Email Products in cart Sent!</h1>

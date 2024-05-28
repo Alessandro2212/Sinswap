@@ -404,6 +404,42 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapLocalizedRoute("CheckGiftCardBalance", "customer/CheckGiftCardBalance",
                 new { controller = "Customer", action = "CheckGiftCardBalance" });
 
+            //customer EmailProductsInCart 
+            routeBuilder.MapLocalizedRoute("EmailProductsInCart", "customer/EmailProductsInCart",
+                new { controller = "Customer", action = "EmailProductsInCart" });
+
+            //customer EmailCustomerVerification 
+            routeBuilder.MapLocalizedRoute("EmailCustomerVerification", "customer/EmailCustomerVerification",
+                new { controller = "Customer", action = "EmailCustomerVerification" });
+
+            //customer EmailCustomerRegistration 
+            routeBuilder.MapLocalizedRoute("EmailCustomerRegistration", "customer/EmailCustomerRegistration",
+                new { controller = "Customer", action = "EmailCustomerRegistration" });
+
+            //customer WelcomeEmail 
+            routeBuilder.MapLocalizedRoute("WelcomeEmail", "customer/WelcomeEmail",
+                new { controller = "Customer", action = "WelcomeEmail" });
+
+            //customer PurchaseEmail 
+            routeBuilder.MapLocalizedRoute("PurchaseEmail", "customer/PurchaseEmail",
+                new { controller = "Customer", action = "PurchaseEmail" });
+
+            //customer ProfileSetupEmail 
+            routeBuilder.MapLocalizedRoute("ProfileSetupEmail", "customer/ProfileSetupEmail",
+                new { controller = "Customer", action = "ProfileSetupEmail" });
+
+            //customer WelcomeOfferEmail 
+            routeBuilder.MapLocalizedRoute("WelcomeOfferEmail", "customer/WelcomeOfferEmail",
+                new { controller = "Customer", action = "WelcomeOfferEmail" });
+
+            //customer NewOrderEmail 
+            routeBuilder.MapLocalizedRoute("NewOrderEmail", "customer/NewOrderEmail",
+                new { controller = "Customer", action = "NewOrderEmail" });
+
+            //customer AccountActivationPageVendorEmail 
+            routeBuilder.MapLocalizedRoute("AccountActivationPageVendorEmail", "customer/AccountActivationPageVendorEmail",
+                new { controller = "Customer", action = "AccountActivationPageVendorEmail" });
+
             //poll vote AJAX link
             routeBuilder.MapLocalizedRoute("PollVote", "poll/vote",
 				new { controller = "Poll", action = "Vote" });

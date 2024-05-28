@@ -9,17 +9,31 @@
             </div>
         </div>
 
-        @foreach (var item in Model.Where(m=>string.IsNullOrEmpty(m.ParentCategoryName)))
-        {          
+        @foreach (var item in Model.Where(m => string.IsNullOrEmpty(m.ParentCategoryName)))
+        {
             <div class="row @item.SeName">
                 <div class="col-2 col-lg-1 label">@item.Name</div>
                 <div class="col-10 col-lg-11">
-                    @foreach(var subItem in @item.SubCategories)
+                    @foreach (var subItem in @item.SubCategories)
                     {
-                      <a href="@Url.RouteUrl("Category", new { SeName = subItem.SeName })">@subItem.Name</a>
+                        <a href="@Url.RouteUrl("Category", new { SeName = subItem.SeName })">@subItem.Name</a>
                     }
                 </div>
             </div>
         }
+        <div class="row">
+            <div class="col-2 col-lg-1 label">Emails</div>
+            <div class="col-10 col-lg-11">
+                <a href="@Url.Action("EmailProductsInCart", "Customer")">Products left in cart</a>
+                <a href="@Url.Action("EmailCustomerVerification", "Customer")">Step 1: Email Verification</a>
+                <a href="@Url.Action("EmailCustomerRegistration", "Customer")">Step 2: Account Activation Page</a>
+                <a href="@Url.Action("WelcomeEmail","Customer")">Welcome Email</a>
+                <a href="@Url.Action("PurchaseEmail", "Customer")">Thank you for your purchase</a>                
+                <a href="@Url.Action("ProfileSetupEmail","Customer")">Step 3: Profile Setup</a>
+                <a href="@Url.Action("WelcomeOfferEmail", "Customer")">Welcome Offer</a>
+                <a href="@Url.Action("NewOrderEmail", "Customer")">New Order</a>
+                <a href="@Url.Action("AccountActivationPageVendorEmail", "Customer")">Step 2: Account Activation Vendor Page</a>
+            </div>
+        </div>
     </div>
 }
