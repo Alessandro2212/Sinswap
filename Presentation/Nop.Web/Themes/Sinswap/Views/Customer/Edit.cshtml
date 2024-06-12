@@ -52,7 +52,7 @@
             }
             @if (Model.GdprEnabled)
             {
-                
+
                 <div class="btn-group">
                     <button type="button" class="btn btn-success">
                         <i class="fa fa-download"></i>
@@ -88,7 +88,37 @@
     @await Html.PartialAsync("_CreateOrUpdate", Model)
 </form>
 *@
+<header class="vendorAdmin">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8 col-md-4 logoContainer">
+                <h1>sinswap</h1>
+                @await Component.InvokeAsync("Logo")
+            </div>
+            <div class="d-none d-md-flex col-6 col-md-4 titleContainer align-items-center justify-content-center">
+                <h2>Shop</h2>
+            </div>
+            <div class="col-4 col-md-4 d-lg-none d-flex align-items-center justify-content-end">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu--animate" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#v-pills-messages"><i class="fas fa-envelope d-none d-xl-inline"></i> Messages</a>
+                        <a class="dropdown-item" href="#v-pills-settings"><i class="fas fa-cog d-none d-xl-inline"></i> Settings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 @using (Html.BeginForm("edit", "customer", FormMethod.Post))
+{
+    <div class="vendorAdminBody">
+        @await Html.PartialAsync("_CreateOrUpdate", Model)
+    </div>
+}
+@* @using (Html.BeginForm("edit", "customer", FormMethod.Post))
 {
     <div class="content-header clearfix">
         <h1 class="pull-left">
@@ -102,7 +132,7 @@
         </div>
     </div>
     @await Html.PartialAsync("_CreateOrUpdate", Model)
-}
+} *@
 @*<nop-delete-confirmation asp-model-id="@Model.Id" asp-button-id="customer-delete" />
 @if (Model.GdprEnabled)
 {

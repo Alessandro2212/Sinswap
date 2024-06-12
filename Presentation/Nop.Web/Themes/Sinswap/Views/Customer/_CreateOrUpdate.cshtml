@@ -5,28 +5,66 @@
 <div asp-validation-summary="All"></div>
 <input asp-for="Id" type="hidden" />
 
-<div class="content">
+<div asp-validation-summary="All" class="d-none"></div>
+<input asp-for="Id" type="hidden" />
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none col-2 d-lg-flex flex-column">
+            <div class="vendorAvatarContainer d-flex align-items-center justify-content-center p-3">
+                <div class="avatarContainer">
+                    @* <img src="https://placehold.co/120x150" /> *@
+                    @* <img src="@Model.PictureUrl" class="mr-1" width="120" height="150"> *@
+                </div>
+                <div class="vendorName">@Model.Username</div>
+                <div class="shopName">@Model.Email</div>
+            </div>
+
+            <div class="vendorMenu nav flex-column flex-grow-1" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fas fa-envelope d-none d-xl-inline"></i> Messages</a>
+                <a class="nav-link nav-settings" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-cog d-none d-xl-inline"></i> Settings</a>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-10">
+
+            <div class="tab-content" id="v-pills-tabContent">
+                
+                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                   @*  @await Html.PartialAsync("_Chats", Model) *@
+                </div>
+
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                    @await Html.PartialAsync("_CreateOrUpdate.Info", Model)
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@* <div class="content">
     <div class="form-horizontal">
         <nop-tabs id="customer-edit">
             <nop-tab asp-name="tab-info" asp-title="@T("Admin.Customers.Customers.Info")" asp-default="true">@await Html.PartialAsync("_CreateOrUpdate.Info", Model)</nop-tab>
             @if (Model.Id > 0)
             {
                 <nop-tab asp-name="tab-orders" asp-title="@T("Admin.Customers.Customers.Orders")">@await Html.PartialAsync("_CreateOrUpdate.Orders", Model)</nop-tab>
-                @*<nop-tab asp-name="tab-address" asp-title="@T("Admin.Customers.Customers.Addresses")">@await Html.PartialAsync("_CreateOrUpdate.Addresses", Model)</nop-tab>
+                <nop-tab asp-name="tab-address" asp-title="@T("Admin.Customers.Customers.Addresses")">@await Html.PartialAsync("_CreateOrUpdate.Addresses", Model)</nop-tab>
                 <nop-tab asp-name="tab-cart" asp-title="@T("Admin.Customers.Customers.ShoppingCartAndWishlist")">@await Html.PartialAsync("_CreateOrUpdate.CurrentShoppingCart", Model)</nop-tab>
                 <nop-tab asp-name="tab-activitylog" asp-title="@T("Admin.Customers.Customers.ActivityLog")">@await Html.PartialAsync("_CreateOrUpdate.ActivityLog", Model)</nop-tab>
                 <nop-tab asp-name="tab-impersonate" asp-title="@T("Admin.Customers.Customers.Impersonate")">@await Html.PartialAsync("_CreateOrUpdate.Impersonate", Model)</nop-tab>
-                <nop-tab asp-name="tab-backinstock" asp-title="@T("Admin.Customers.Customers.BackInStockSubscriptions")">@await Html.PartialAsync("_CreateOrUpdate.BackInStockSubscriptions", Model)</nop-tab>*@
+                <nop-tab asp-name="tab-backinstock" asp-title="@T("Admin.Customers.Customers.BackInStockSubscriptions")">@await Html.PartialAsync("_CreateOrUpdate.BackInStockSubscriptions", Model)</nop-tab>
             }
-            @*@if (Model.DisplayRewardPointsHistory)
+            @if (Model.DisplayRewardPointsHistory)
             {
                 <nop-tab asp-name="tab-rewardpoints" asp-title="@T("Admin.Customers.Customers.RewardPoints")">@await Html.PartialAsync("_CreateOrUpdate.RewardPoints", Model)</nop-tab>
-            }*@
+            }
         </nop-tabs>
     </div>
-</div>
-
-@*@{
+</div> 
+{
     //custom tabs
     var eventMessage = new AdminTabStripCreated(this.Html, "customer-edit");
     eventPublisher.Publish(eventMessage);
@@ -34,4 +72,5 @@
     {
         @eventBlock
     }
-}*@
+    }
+    *@
