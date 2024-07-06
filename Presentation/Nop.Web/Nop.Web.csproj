@@ -104,6 +104,7 @@
 
   <ItemGroup>
     <Folder Include="Plugins\" />
+    <Folder Include="Themes\Sinswap\emailTemplates\" />
     <Folder Include="Themes\Sinswap\Views\Home\" />
     <Folder Include="Themes\Sinswap\Views\Shared\Components\ChatUsers\" />
   </ItemGroup>
